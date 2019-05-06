@@ -1,0 +1,48 @@
+**`正文`**
+[TOC]
+
+## 解决Spring Boot不依赖父parent打包 不包含依赖的问题
+**背景**：
+由于项目需要继承自己平台的parent，所以与父parent的依赖不共存，可在打包的过程中，`出现依赖包没有打进去`，jar包才有几百kb。
+**官网文档**：
+https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#using-boot-maven-without-a-parent
+```xml
+<dependencyManagement>
+	<dependencies>
+		<!-- Override Spring Data release train provided by Spring Boot -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-releasetrain</artifactId>
+			<version>Fowler-SR2</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>2.1.1.BUILD-SNAPSHOT</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+	</dependencies>
+</dependencyManagement>
+```
+**解决方案**：
+参考链接：https://memorynotfound.com/spring-boot-create-executable-using-maven-without-parent-pom/
+```xml
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration>
+        <mainClass>com.junbaor.test.App</mainClass>
+    </configuration>
+    <executions>
+        <execution>
+            <goals>
+                <goal>repackage</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+添加后，一切打包正常

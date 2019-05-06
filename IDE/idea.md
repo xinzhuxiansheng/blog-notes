@@ -1,0 +1,27 @@
+**`正文`**
+[TOC]
+
+### 快捷键
+
+ctrl+alt+方向键： 在IDEA中可以使用快捷键返回
+
+alt + 7 ：（可以查看类的字段、属性、方法，是否继承等）
+
+ctrl+F12 :查类的所有方法
+
+ctrl+Y : 删除一行
+
+ctrl+shift+alt+n : 类名查找
+
+ctrl+H : 查看继承关系(不包括接口)
+
+ctrl+alt+B ： 查看跟接口有关系的类
+
+ctrl+alt+u : 查看类的关系图(包括接口)
+
+### BookMark
+F11 插入一个断点书签
+shift+f11 ：查看书签
+Alt+上/下 ：可以将某个书签以Y轴移动
+
+### devtools jar包使用
