@@ -108,7 +108,7 @@ GET /_cat
 
 
 **详细介绍下，下面几个命令**
-1. GET /_cat/segments?v
+### 1. GET /_cat/segments?v
 ```shell
 #执行结果
 index                           shard prirep ip           segment generation docs.count docs.deleted     size size.memory committed searchable version compound
@@ -157,8 +157,7 @@ generation数值代表当前段每次有内容写入的时候都会递增.段的
 **compound**
 说明该段内容是否存储在复合文件中.如果该值为true,则意味着Lucene将所有段文件合并成一个单独的段文件,这样能够节省文件描述符.
 
-s
-2. GET /_cat/thread_pool?v
+##### 2. GET /_cat/thread_pool?v
 ```shell
 #执行结果
 node_name      name                active queue rejected
