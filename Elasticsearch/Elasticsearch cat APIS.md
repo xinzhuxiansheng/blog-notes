@@ -182,6 +182,7 @@ cat thread pool 允许在请求URL中接受一个thread_pool_patterns来指定�
 GET /_cat/thread_pool/generic?v&h=id,name,active,rejected,completed
 ```
 **线程池字段说明**
+
 | 字段      |    描述 |
 | :-------- | --------:| 
 | type  | 线程池的当前类型(fixed或scaling) | 
@@ -197,6 +198,7 @@ GET /_cat/thread_pool/generic?v&h=id,name,active,rejected,completed
 | keep_alive    |    线程存活时间配置  | 
 
 **其他字段**
+
 | 字段      |    描述 |
 | :-------- | --------:| 
 | node_id  | 唯一的节点ID | 
