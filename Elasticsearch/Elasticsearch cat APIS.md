@@ -7,7 +7,7 @@
 这里，我们重点说下，利用RESTful api 我们可以干什么？
 在了解api 之前，我们先知道kibana的Dev Tools？
 
-### kibana Dev Tools
+## kibana Dev Tools
 官网参考地址：https://www.elastic.co/guide/en/kibana/current/devtools-kibana.html
 1. Console
     能简化我们的RESTful api的请求工作，及返回结果能自动格式化。有利于我们查看
@@ -36,7 +36,7 @@ curl -XGET "http://localhost:9200/_search" -d'
 
 下面内容，是基于 __Dev Tools工具__ 操作的。
 
-### cat APIS
+## cat APIS
 >cat的一波操作，对了解Elasticsearch集群的健康，节点统计等等有一些帮助，比如 能找出内存使用偏高,查看每个节点磁盘，分片等等基础信息。
 
 官网参考链接：https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html
@@ -74,7 +74,7 @@ GET /_cat
 /_cat/templates
 ```
 
-#### 下面就介绍 `上面api` 的含义
+### 下面就介绍 `上面api` 的含义
 
 | cat api      |    描述 |
 | :-------- | --------:|
@@ -108,7 +108,7 @@ GET /_cat
 
 
 **详细介绍下，下面几个命令**
-1. __GET /_cat/segments?v__
+1. GET /_cat/segments?v
 ```shell
 #执行结果
 index                           shard prirep ip           segment generation docs.count docs.deleted     size size.memory committed searchable version compound
@@ -158,7 +158,7 @@ generation数值代表当前段每次有内容写入的时候都会递增.段的
 说明该段内容是否存储在复合文件中.如果该值为true,则意味着Lucene将所有段文件合并成一个单独的段文件,这样能够节省文件描述符.
 
 
-2. __GET /_cat/thread_pool?v__
+2. GET /_cat/thread_pool?v
 ```shell
 #执行结果
 node_name      name                active queue rejected
