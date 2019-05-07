@@ -157,24 +157,24 @@ generation数值代表当前段每次有内容写入的时候都会递增.段的
 **compound**
 说明该段内容是否存储在复合文件中.如果该值为true,则意味着Lucene将所有段文件合并成一个单独的段文件,这样能够节省文件描述符.
 
-
+s
 2. GET /_cat/thread_pool?v
 ```shell
 #执行结果
 node_name      name                active queue rejected
-rack1_252.48_1 analyze                  0     0        0
-rack1_252.48_1 fetch_shard_started      0     0        0
-rack1_252.48_1 fetch_shard_store        0     0        0
-rack1_252.48_1 flush                    0     0        0
-rack1_252.48_1 force_merge              0     0        0
-rack1_252.48_1 generic                  0     0        0
-rack1_252.48_1 get                      0     0        0
-rack1_252.48_1 index                    0     0        0
-rack1_252.48_1 listener                 0     0        0
-rack1_252.48_1 management               1     0        0
-rack1_252.48_1 ml_autodetect            0     0        0
-rack1_252.48_1 ml_datafeed              0     0        0
-rack1_252.48_1 ml_utility               0     0        0
+rack1_xxx_1 analyze                  0     0        0
+rack1_xxx_1 fetch_shard_started      0     0        0
+rack1_xxx_1 fetch_shard_store        0     0        0
+rack1_xxx_1 flush                    0     0        0
+rack1_xxx_1 force_merge              0     0        0
+rack1_xxx_1 generic                  0     0        0
+rack1_xxx_1 get                      0     0        0
+rack1_xxx_1 index                    0     0        0
+rack1_xxx_1 listener                 0     0        0
+rack1_xxx_1 management               1     0        0
+rack1_xxx_1 ml_autodetect            0     0        0
+rack1_xxx_1 ml_datafeed              0     0        0
+rack1_xxx_1 ml_utility               0     0        0
 ```
 
 cat thread pool 允许在请求URL中接受一个thread_pool_patterns来指定一个逗号分隔符隔开的列表来匹配获取哪些线程池的名称
