@@ -157,7 +157,7 @@ generation数值代表当前段每次有内容写入的时候都会递增.段的
 **compound**
 说明该段内容是否存储在复合文件中.如果该值为true,则意味着Lucene将所有段文件合并成一个单独的段文件,这样能够节省文件描述符.
 
-#### 2. GET /_cat/thread_pool?v
+### 2. GET /_cat/thread_pool?v
 ```shell
 #执行结果
 node_name      name                active queue rejected
