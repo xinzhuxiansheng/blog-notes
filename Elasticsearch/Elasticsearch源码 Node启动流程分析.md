@@ -103,7 +103,7 @@ private void setup(boolean addShutdownHook, Environment environment) throws Boot
         }
 
         try {
-            // look for jar hell
+            // 检查jar冲突，发现冲突则退出进程
             JarHell.checkJarHell();
         } catch (IOException | URISyntaxException e) {
             throw new BootstrapException(e);
