@@ -43,6 +43,7 @@ jar:http://www.foo.com/bar/baz.jar!/COM/foo/
 `!/`  被称为分隔符
 
 >通过URL 构建JAR URL时，请参考以下规则：
+
 1.如果没有上下文URL，并且传递给URL构造函数的规范不包含分隔符，则认为该URL引用了JAR文件
 2.如果存在上下文URL，则假定上下文URL引用JAR文件或目录
 3.如果规范以"/"开头，则忽略JAR目录，并且规范被认为是JAR文件的根目录
