@@ -80,6 +80,23 @@ docker commit <containerId|containerName> <imagesName>
 ```
 
 
+## docker打包镜像
+
+```shell
+# 注意后面 .  不能忘了
+docker build -t="centos-jdk" .
+```
+
+docker run -it centos-jdk /bin/bash
+
+
+## 删除docker镜像
+```shell
+docker iamges
+
+docker rmi <image id>
+```
+
 
 ## Q&A
 1. 

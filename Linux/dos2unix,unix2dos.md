@@ -15,3 +15,5 @@ unix2dos [options] [-c convmode] [-o file ...] [-n infile outfile ...]
 ```java
 yum install dos2unix
 ```
+
+eg: dos2unix   xxxx.要转的文件     xxxx.要转的文件    xxxx.要转的文件 
