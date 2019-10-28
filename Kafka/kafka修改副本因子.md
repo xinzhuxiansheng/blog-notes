@@ -1,5 +1,7 @@
 **正文**
 
+<!-- TOC -->autoauto- [修改副本因子](#修改副本因子)auto- [扩展思路 (**重点**)](#扩展思路-重点)autoauto<!-- /TOC -->
+
 >kafka的高可用 很大程度上基于副本选择，所以集群性能(网络，磁盘io，其他 一些都重要的机器指标)来决定一些topic的副本数,kafka的默认副本数是3.
 在开发中经常会遇到修改副本(多数情况时增加)
 
@@ -116,7 +118,7 @@ Reassignment of partition topic_name-34 completed successfully
 Reassignment of partition topic_name-7 is still in progress
 ```
 
-## 扩展思路 **重点**
+## 扩展思路 (**重点**)
 任何分区的leader也是副本，那添加副本的时候，是否要进行Leader 重新选举，当然这个选举是通过动手设置副本的顺序进行，那么就拿上面的操作举例：
 ```shell
 vim  increase-replication-factor.json
