@@ -15,3 +15,15 @@ systemctl disable firewalld.service #禁止firewall开机启动
 ```shell
 firewall-cmd  --state
 ```
+
+## firewall-cmd
+```shell
+#例如 查询9200端口是否打开
+firewall-cmd    --query-port=9200/tcp
+#返回yes 表示打开
+#打开9300端口
+firewall-cmd   --add-port=9300/tcp
+#返回success表示打开成功
+#移除端口
+--remove-port=12/tcp
+```

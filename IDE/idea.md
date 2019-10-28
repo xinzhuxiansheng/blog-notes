@@ -27,3 +27,10 @@ shift+f11 ：查看书签
 Alt+上/下 ：可以将某个书签以Y轴移动
 
 ### devtools jar包使用
+
+
+
+
+### idea密钥
+打开，里面有idea code的下载地址
+http://idea.medeming.com/jetbrains/
