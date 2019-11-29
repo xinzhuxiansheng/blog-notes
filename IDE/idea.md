@@ -19,6 +19,7 @@ ctrl+alt+B ： 查看跟接口有关系的类
 
 ctrl+alt+u : 查看类的关系图(包括接口)
 
+ctrl+G : 行号查找
 
 
 ### BookMark
@@ -34,3 +35,8 @@ Alt+上/下 ：可以将某个书签以Y轴移动
 ### idea密钥
 打开，里面有idea code的下载地址
 http://idea.medeming.com/jetbrains/
+
+
+
+### 乱码
+-Dfile.encoding=UTF-8

@@ -11,3 +11,6 @@
 -Dmaven.test.skip=true
 -DskipTests=true
 ```
+
+
+mvn clean  install package -Papache-release  -DskipTests  -Dgpg.skip  -Dmaven.javadoc.skip=true -Dcheckstyle.skip

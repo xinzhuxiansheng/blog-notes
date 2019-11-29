@@ -106,5 +106,13 @@ git remote show origin
 git remote prune origin
 ```
 
+## tag相关操作
+```shell
+git tag -a v1.0 -m 'tagging Version 1.0'
+git checkout tags/v1.0
+git checkout tags/v1.0 -b NewBranch
+```
+
+
 # tag 相关操作
 https://blog.csdn.net/DinnerHowe/article/details/79082769
