@@ -63,3 +63,59 @@
 
 ```
 
+
+## scala-maven-plugin
+
+* 使用：
+```xml
+<plugin>
+    <groupId>org.scala-tools</groupId>
+    <artifactId>maven-scala-plugin</artifactId>
+    <version>2.15.2</version>
+    <executions>
+        <execution>
+            <id>scala-compile</id>
+            <goals>
+                <goal>compile</goal>
+            </goals>
+            <configuration>
+                <!--includes是一个数组，包含要编译的code-->
+                <includes>
+                    <include>**/*.scala</include>
+                </includes>
+            </configuration>
+        </execution>
+        <execution>
+            <id>scala-test-compile</id>
+            <goals>
+                <goal>testCompile</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+
+
+
+
+
+<plugin>
+    <groupId>com.lightbend.akka.grpc</groupId>
+    <artifactId>akka-grpc-maven-plugin</artifactId>
+    <version>0.5.0</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>generate</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <language>Java</language>
+        <generateClient>true</generateClient>
+        <generateServer>true</generateServer>
+        <generatorSettings>
+            <serverPowerApis>true</serverPowerApis>
+        </generatorSettings>
+    </configuration>
+</plugin>
+```

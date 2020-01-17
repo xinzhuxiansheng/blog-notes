@@ -116,3 +116,29 @@ git checkout tags/v1.0 -b NewBranch
 
 # tag 相关操作
 https://blog.csdn.net/DinnerHowe/article/details/79082769
+
+
+
+# git 从远程仓库获取所有分支
+
+git clone xxx
+git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
+git fetch --all
+git pull --all
+
+
+# git 修改remote
+
+方式1、直接修改：
+
+git remote set-url origin xxxxx.git
+
+方式2、先删后加 ：
+
+git remote rm origin
+git remote add origin xxxxx.git
+
+修改默认pull和push分支：
+
+git branch --set-upstream-to=origin/develop develop
+origin/develop develop为要设置的默认分支

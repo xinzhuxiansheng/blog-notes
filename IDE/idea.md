@@ -21,6 +21,8 @@ ctrl+alt+u : 查看类的关系图(包括接口)
 
 ctrl+G : 行号查找
 
+ctrl+o : 查看override方法
+
 
 ### BookMark
 F11 插入一个断点书签

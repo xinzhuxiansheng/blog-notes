@@ -72,7 +72,7 @@ Successfully started reassignment of partitions.
 ./kafka-reassign-partitions.sh --zookeeper xxx.xxx.xxx.xxx:2181/testdocker --reassignment-json-file increase-replication-factor.json --verify
 
 `执行结果`：
-[root@realtime-kafka-2 bin]# ./kafka-reassign-partitions.sh --zookeeper 10.27.72.160:2181/testdocker --reassignment-json-file increase-replication-factor.json --verify
+[root@realtime-kafka-2 bin]# ./kafka-reassign-partitions.sh --zookeeper vm01.com:2181/testdocker --reassignment-json-file increase-replication-factor.json --verify
 Status of partition reassignment: 
 Reassignment of partition topic_name-22 is still in progress
 Reassignment of partition topic_name-35 is still in progress
