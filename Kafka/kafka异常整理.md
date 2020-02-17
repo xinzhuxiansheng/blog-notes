@@ -39,8 +39,8 @@ java.lang.NullPointerException
   at org.apache.flink.streaming.api.operators.AbstractStreamOperator$CountingOutput.collect(AbstractStreamOperator.java:718)
   at org.apache.flink.streaming.api.operators.AbstractStreamOperator$CountingOutput.collect(AbstractStreamOperator.java:696)
   at org.apache.flink.streaming.api.operators.TimestampedCollector.collect(TimestampedCollector.java:51)
-  at com.autohome.uas.job.AppLogJob$1.processElement(AppLogJob.java:74)
-  at com.autohome.uas.job.AppLogJob$1.processElement(AppLogJob.java:71)
+  at com.xinzhuxiansheng.uas.job.AppLogJob$1.processElement(AppLogJob.java:74)
+  at com.xinzhuxiansheng.uas.job.AppLogJob$1.processElement(AppLogJob.java:71)
   at org.apache.flink.streaming.api.operators.ProcessOperator.processElement(ProcessOperator.java:66)
   at org.apache.flink.streaming.runtime.tasks.OperatorChain$CopyingChainingOutput.pushToOperator(OperatorChain.java:579)
   at org.apache.flink.streaming.runtime.tasks.OperatorChain$CopyingChainingOutput.collect(OperatorChain.java:554)
@@ -54,8 +54,8 @@ java.lang.NullPointerException
   at org.apache.flink.streaming.api.operators.AbstractStreamOperator$CountingOutput.collect(AbstractStreamOperator.java:718)
   at org.apache.flink.streaming.api.operators.AbstractStreamOperator$CountingOutput.collect(AbstractStreamOperator.java:696)
   at org.apache.flink.streaming.api.operators.TimestampedCollector.collect(TimestampedCollector.java:51)
-  at com.autohome.uas.entity.impl.AppLogEntity$Flater.flatMap(AppLogEntity.java:87)
-  at com.autohome.uas.entity.impl.AppLogEntity$Flater.flatMap(AppLogEntity.java:61)
+  at com.xinzhuxiansheng.uas.entity.impl.AppLogEntity$Flater.flatMap(AppLogEntity.java:87)
+  at com.xinzhuxiansheng.uas.entity.impl.AppLogEntity$Flater.flatMap(AppLogEntity.java:61)
   at org.apache.flink.streaming.api.operators.StreamFlatMap.processElement(StreamFlatMap.java:50)
   at org.apache.flink.streaming.runtime.tasks.OperatorChain$CopyingChainingOutput.pushToOperator(OperatorChain.java:579)
   at org.apache.flink.streaming.runtime.tasks.OperatorChain$CopyingChainingOutput.collect(OperatorChain.java:554)
@@ -69,7 +69,12 @@ java.lang.NullPointerException
 ## 客户端
 1. Caused by: org.apache.kafka.common.errors.TimeoutException: Expiring 18 record(s) for nginx_test-18: 30053 ms has passed since batch creation plus linger time
 
-9. java.lang.Exception: Failed to send data to Kafka: This server is not the leader for that topic-partition.
+2. java.lang.Exception: Failed to send data to Kafka: This server is not the leader for that topic-partition.
+
+
+3. Group coordinator vm01.com:9092 (id: 2147483647 rack: null) is unavailable or invalid, will attempt rediscovery
+
+
 
 
 

@@ -47,7 +47,8 @@ eg：
 //1.构建producer 注意参数
 //...
 //2 初始化事务
-producer.initRransactions();
+producer.initTransactions();
+
 //3 开启事务
 producer.beginTranscation();
 

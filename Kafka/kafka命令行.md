@@ -37,6 +37,11 @@ bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic topic名称 --describe
 ```
 
 
+## 查看 __consumer_offsets
+```shell
+./kafka-console-consumer.sh --topic __consumer_offsets --bootstrap-server localhost:9092 --formatter "kafka.coordinator.group.GroupMetadataManager\$OffsetsMessageFormatter"  --from-beginning
+```
+
 
 
 ## 如何指定consumer参数消费
