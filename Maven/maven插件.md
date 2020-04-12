@@ -118,4 +118,27 @@
         </generatorSettings>
     </configuration>
 </plugin>
+
+
+
+
+jar包上传私服的时候，将源码也上传上去 ，请添加这个插件
+<!-- 要将源码放上去，需要加入这个插件 -->
+<plugin>
+    <artifactId>maven-source-plugin</artifactId>
+    <version>3.0.1</version>
+    <configuration>
+        <attach>true</attach>
+    </configuration>
+    <executions>
+        <execution>
+            <phase>compile</phase>
+            <goals>
+                <goal>jar</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+
+
 ```

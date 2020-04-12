@@ -4,6 +4,9 @@
 ## 创建 topic
 ```shell
 bin/kafka-topics.sh --create --zookeeper 127.0.0.1:2181 --replication-factor 1 --partitions 2 --topic topic名称
+
+创建topic 可以指定配置:
+示例：--config cleanup.policy=compact --config retention.ms=500
 ```
 
 ## 新建 consumer
@@ -51,6 +54,12 @@ bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic topic名称 --describe
 #执行kafka-console-consumer.sh  添加 --consumer.config参数 并指定consuemr.properties的目录地址
 ./kafka-console-consumer.sh --bootstrap-server xxx.xxx.xxx.xxx:9092  --zookeeper xxx.xxx.xxx.xxx:2181/kafka-local  --topic top --consumer.config  consumer.properties
 ```
+
+## 查看topic 是否具有权限
+```shell
+./kafka-acls.sh  --authorizer-properties zookeeper.connect=10.22.240.196:2181,10.22.240.197:2181,10.22.240.199:2181/kafka-sjz  --list  --topic 'test_create_form_api_01'  --username kafka --password xxxx@Kafka2016
+```
+
 
 
 earliest

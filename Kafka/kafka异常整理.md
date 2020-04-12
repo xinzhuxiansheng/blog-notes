@@ -65,6 +65,8 @@ java.lang.NullPointerException
   at org.apache.flink.streaming.api.operators.StreamMap.processElement(StreamMap.java:41)
 
 
+9. [2020-04-11 22:16:39,746] ERROR [ReplicaFetcherThread-0-0], Error for partition [mis_attention_700031_online,1] to broker 0:org.apache.kafka.common.errors.UnknownServerException: The server experienced an unexpected error when processing the request (kafka.server.ReplicaFetcherThread)
+
 
 ## 客户端
 1. Caused by: org.apache.kafka.common.errors.TimeoutException: Expiring 18 record(s) for nginx_test-18: 30053 ms has passed since batch creation plus linger time

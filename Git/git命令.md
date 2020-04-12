@@ -111,6 +111,16 @@ git remote prune origin
 git tag -a v1.0 -m 'tagging Version 1.0'
 git checkout tags/v1.0
 git checkout tags/v1.0 -b NewBranch
+
+
+#新建tag
+git tag tag_name
+#删除本地tag
+git tag -d tag_name
+#删除远程tag
+git push origin :refs/tags/tag_name
+
+
 ```
 
 
@@ -142,3 +152,7 @@ git remote add origin xxxxx.git
 
 git branch --set-upstream-to=origin/develop develop
 origin/develop develop为要设置的默认分支
+
+
+# git stash
+
