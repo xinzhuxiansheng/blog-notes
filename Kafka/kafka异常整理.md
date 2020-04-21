@@ -67,6 +67,42 @@ java.lang.NullPointerException
 
 9. [2020-04-11 22:16:39,746] ERROR [ReplicaFetcherThread-0-0], Error for partition [mis_attention_700031_online,1] to broker 0:org.apache.kafka.common.errors.UnknownServerException: The server experienced an unexpected error when processing the request (kafka.server.ReplicaFetcherThread)
 
+10. kafka.common.KafkaStorageException: I/O exception in append to log 'REQUEST_REC-2'
+	at kafka.log.Log.append(Log.scala:329)
+	at kafka.server.ReplicaFetcherThread.processPartitionData(ReplicaFetcherThread.scala:125)
+	at kafka.server.ReplicaFetcherThread.processPartitionData(ReplicaFetcherThread.scala:42)
+	at kafka.server.AbstractFetcherThread$$anonfun$processFetchRequest$2$$anonfun$apply$mcV$sp$1$$anonfun$apply$2.apply(AbstractFetcherThread.scala:143)
+	at kafka.server.AbstractFetcherThread$$anonfun$processFetchRequest$2$$anonfun$apply$mcV$sp$1$$anonfun$apply$2.apply(AbstractFetcherThread.scala:127)
+	at scala.Option.foreach(Option.scala:236)
+	at kafka.server.AbstractFetcherThread$$anonfun$processFetchRequest$2$$anonfun$apply$mcV$sp$1.apply(AbstractFetcherThread.scala:127)
+	at kafka.server.AbstractFetcherThread$$anonfun$processFetchRequest$2$$anonfun$apply$mcV$sp$1.apply(AbstractFetcherThread.scala:125)
+	at scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:98)
+	at scala.collection.mutable.HashMap$$anonfun$foreach$1.apply(HashMap.scala:98)
+	at scala.collection.mutable.HashTable$class.foreachEntry(HashTable.scala:226)
+	at scala.collection.mutable.HashMap.foreachEntry(HashMap.scala:39)
+	at scala.collection.mutable.HashMap.foreach(HashMap.scala:98)
+	at kafka.server.AbstractFetcherThread$$anonfun$processFetchRequest$2.apply$mcV$sp(AbstractFetcherThread.scala:125)
+	at kafka.server.AbstractFetcherThread$$anonfun$processFetchRequest$2.apply(AbstractFetcherThread.scala:125)
+	at kafka.server.AbstractFetcherThread$$anonfun$processFetchRequest$2.apply(AbstractFetcherThread.scala:125)
+	at kafka.utils.CoreUtils$.inLock(CoreUtils.scala:231)
+	at kafka.server.AbstractFetcherThread.processFetchRequest(AbstractFetcherThread.scala:123)
+	at kafka.server.AbstractFetcherThread.doWork(AbstractFetcherThread.scala:98)
+	at kafka.utils.ShutdownableThread.run(ShutdownableThread.scala:63)
+Caused by: java.io.IOException: Map failed
+	at sun.nio.ch.FileChannelImpl.map(FileChannelImpl.java:940)
+	at kafka.log.OffsetIndex.<init>(OffsetIndex.scala:75)
+	at kafka.log.LogSegment.<init>(LogSegment.scala:58)
+	at kafka.log.Log.roll(Log.scala:659)
+	at kafka.log.Log.maybeRoll(Log.scala:630)
+	at kafka.log.Log.append(Log.scala:383)
+	... 19 more
+Caused by: java.lang.OutOfMemoryError: Map failed
+	at sun.nio.ch.FileChannelImpl.map0(Native Method)
+	at sun.nio.ch.FileChannelImpl.map(FileChannelImpl.java:937)
+	... 24 more
+
+`解决`： vm.max_map_count
+
 
 ## 客户端
 1. Caused by: org.apache.kafka.common.errors.TimeoutException: Expiring 18 record(s) for nginx_test-18: 30053 ms has passed since batch creation plus linger time

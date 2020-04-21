@@ -154,5 +154,3 @@ git branch --set-upstream-to=origin/develop develop
 origin/develop develop为要设置的默认分支
 
 
-# git stash
-
