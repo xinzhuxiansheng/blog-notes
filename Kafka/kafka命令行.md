@@ -57,9 +57,18 @@ bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic topic名称 --describe
 
 ## 查看topic 是否具有权限
 ```shell
-./kafka-acls.sh  --authorizer-properties zookeeper.connect=10.22.240.196:2181,10.22.240.197:2181,10.22.240.199:2181/kafka-sjz  --list  --topic 'test_create_form_api_01'  --username kafka --password xxxx@Kafka2016
+./kafka-acls.sh  --authorizer-properties zookeeper.connect=xx.xx.240.196:2181,xx.xx.240.197:2181,xx.xx.240.199:2181/kafka-sjz  --list  --topic 'test_create_form_api_01'  --username kafka --password xxxx@Kafka2016
 ```
 
+## 查看consumer groupid 偏移量
+```shell
+./kafka-consumer-groups.sh --bootstrap-server xx.xx.4.167:9092 --describe --group yzhou2_app_sight_show_rcm_lf_202003300941  --command-config consumer.properties
+```
+
+## 查看 xxxxxxxxx.log消息文件
+```shell
+./kafka-run-class.sh kafka.tools.DumpLogSegments --files /data1/00000000001506204448.log --print-data-log
+```
 
 
 earliest

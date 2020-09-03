@@ -13,4 +13,12 @@
 ```
 
 
+## 将本地jar 安装到本地仓库
+```shell
+mvn install:install-file -DgroupId=com.xinzhuxiansheg -DartifactId=demo -Dversion=1.0.2 -Dpackaging=jar -Dfile=H:\demo-1.0.2.jar
+```
+说明: -Dfile值第三方jar的路径，其它的注意要确保maven命令中groupId，artifactId，version与pom.xml中的配置相同，-Dpackaging表示加载的文件类型
+
+
+
 mvn clean  install package -Papache-release  -DskipTests  -Dgpg.skip  -Dmaven.javadoc.skip=true -Dcheckstyle.skip

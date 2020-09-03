@@ -51,6 +51,8 @@ git checkout test  #切换本地分支
 ## 将远程某个分支拉到本地
 ```shell
 git checkout -b dev origin/dev ，作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支
+
+git fetch orgxxx:localxxx   orgxxx表示远程分支名，localxxx表示是本地的分支名
 ```
 
 ## 删除本地分支
@@ -154,3 +156,14 @@ git branch --set-upstream-to=origin/develop develop
 origin/develop develop为要设置的默认分支
 
 
+# git 只提交部分文件
+ git 只提交部分修改文件
+
+git status //查看修改文件状态
+git add  //将想要提交的文件add到本地库
+git status  //查看修改文件状态
+git commit  //提交add到本地库的文件
+git  stash //将其他修改文件
+git pull  origin dev //拉取远程代码合并到本地
+git push  提交commit的文件
+git stash pop //回复存储区的文件

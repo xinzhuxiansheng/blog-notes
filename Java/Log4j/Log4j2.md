@@ -12,3 +12,12 @@ onMatch="NEUTRAL" 表示该级别及以上的，由下一个filter处理，如�
 onMismatch="ACCEPT" 表示匹配该级别以下
 onMismatch="NEUTRAL" 表示该级别及以下的，由下一个filter处理，如果当前是最后一个，则不匹配该级别以下的
 onMismatch="DENY" 表示不匹配该级别以下的
+
+
+
+## 关闭Kafka在log4j的 不必要的输出
+
+```xml
+<logger name="org.apache.kafka.clients.consumer.ConsumerConfig" level="off" />
+
+```
