@@ -104,6 +104,11 @@ Caused by: java.lang.OutOfMemoryError: Map failed
 `解决`： vm.max_map_count
 
 
+11. 2020-09-08 11:24:46,050                           INFO (org.apache.kafka.clients.FetchSessionHandler.handleResponse:381) - [Consumer clientId=b7a632d0a1fc435685404779e6929d53, groupId=liqian_app_index_ip_20200617085711] Node 5 was unable to process the fetch request with (sessionId=651474473, epoch=4): FETCH_SESSION_ID_NOT_FOUND
+
+
+
+
 ## 客户端
 1. Caused by: org.apache.kafka.common.errors.TimeoutException: Expiring 18 record(s) for nginx_test-18: 30053 ms has passed since batch creation plus linger time
 

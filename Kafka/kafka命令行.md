@@ -70,6 +70,18 @@ bin/kafka-topics.sh --zookeeper 127.0.0.1:2181 --topic topic名称 --describe
 ./kafka-run-class.sh kafka.tools.DumpLogSegments --files /data1/00000000001506204448.log --print-data-log
 ```
 
+## 设置某个consumerGroupId offset 从某个时间点消费
+```shell
+./kafka-consumer-groups.sh --bootstrap-server xx.xx.4.167:9092 --command-config consumer.properties --group yzhoutestgroupid01 --reset-offsets --topic uas_rcm_fst --to-datetime 2020-09-07T00:00:00.000 --execute
+```
+
+## 设置broker 参数
+
+
+##
+
+
+
 
 earliest
 
