@@ -18,12 +18,21 @@ follower.reassignment.throttled.rate
 shell命令: 
 ```shell
 #broker整体限制
+<<<<<<< HEAD
 ./kafka-configs.sh --zookeeper 10.27.241.214:2181,10.27.241.216:2181,10.27.241.218:2181/virtual-kafka --alter --add-config 'leader.replication.throttled.rate=1048576,follower.replication.throttled.rate=1048576' --entity-type brokers --entity-name 0
 
 
 ./kafka-configs.sh --describe --zookeeper 10.27.241.214:2181,10.27.241.216:2181,10.27.241.218:2181/virtual-kafka --entity-type brokers
 
 kafka-configs.sh --zookeeper 10.27.241.214:2181,10.27.241.216:2181,10.27.241.218:2181/virtual-kafka  --entity-type brokers --entity-name 0 --alter --delete-config follower.replication.throttled.rate,leader.replication.throttled.rate
+=======
+./kafka-configs.sh --zookeeper xx.xx.241.214:2181,xx.xx.241.216:2181,xx.xx.241.218:2181/virtual-kafka --alter --add-config 'leader.replication.throttled.rate=10485760,follower.replication.throttled.rate=10485760' --entity-type brokers --entity-name 0
+
+
+./kafka-configs.sh --describe --zookeeper xx.xx.241.214:2181,xx.xx.241.216:2181,xx.xx.241.218:2181/virtual-kafka --entity-type brokers
+
+kafka-configs.sh --zookeeper xx.xx.241.214:2181,xx.xx.241.216:2181,xx.xx.241.218:2181/virtual-kafka  --entity-type brokers --entity-name 0 --alter --delete-config follower.replication.throttled.rate,leader.replication.throttled.rate
+>>>>>>> 10f63303adffc2aa0b46a8eba8dde2a7bc8d8e23
 ```
 
 ### zk查看config存储路径

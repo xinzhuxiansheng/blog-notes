@@ -1,0 +1,614 @@
+<!DOCTYPE html><html><head>
+      <title>&#x5B89;&#x88C5;&#x53CA;&#x6E90;&#x7801;&#x73AF;&#x5883;&#x642D;&#x5EFA;01</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\yzhou\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.13\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <p><strong><code>&#x6B63;&#x6587;</code></strong></p>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85kafka">&#x5B89;&#x88C5;kafka</a>
+<ul>
+<li><a href="#%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">&#x6E90;&#x7801;&#x73AF;&#x5883;&#x642D;&#x5EFA;</a></li>
+</ul>
+</li>
+<li><a href="#log4jproperties">log4j.properties</a>
+<ul>
+<li><a href="#debug-%E8%BF%87%E7%A8%8B">debug &#x8FC7;&#x7A0B;</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%8D%E7%8E%B0">&#x5F02;&#x5E38;&#x590D;&#x73B0;</a></li>
+</ul>
+</li>
+<li><a href="#replicafetchbackoffms100000">replica.fetch.backoff.ms=100000</a></li>
+<li><a href="#replicasockettimeoutms100000">replica.socket.timeout.ms=100000</a></li>
+</ul>
+<h2 class="mume-header" id="%E5%AE%89%E8%A3%85kafka">&#x5B89;&#x88C5;kafka</h2>
+
+<ul>
+<li>&#x5B89;&#x88C5;zookeeper&#x96C6;&#x7FA4;</li>
+<li>&#x5C06;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x591A;&#x4EFD;</li>
+</ul>
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token function">cp</span> config/server.properties config/server-1.properties
+<span class="token function">cp</span> config/server.properties config/server-2.properties
+<span class="token function">cp</span> config/server.properties config/server-3.properties
+</pre><ul>
+<li>&#x914D;&#x7F6E;server-x.properties</li>
+</ul>
+<pre data-role="codeBlock" data-info="xml" class="language-xml">broker.id=0  #&#x5F53;&#x524D;&#x673A;&#x5668;&#x5728;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#xFF0C;&#x548C;zookeeper&#x7684;myid&#x6027;&#x8D28;&#x4E00;&#x6837;
+port=19092 #&#x5F53;&#x524D;kafka&#x5BF9;&#x5916;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x7684;&#x7AEF;&#x53E3;&#x9ED8;&#x8BA4;&#x662F;9092
+host.name=&#x673A;&#x5668;ip #&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x9ED8;&#x8BA4;&#x662F;&#x5173;&#x95ED;&#x7684;&#xFF0C;&#x5728;0.8.1&#x6709;&#x4E2A;bug&#xFF0C;DNS&#x89E3;&#x6790;&#x95EE;&#x9898;&#xFF0C;&#x5931;&#x8D25;&#x7387;&#x7684;&#x95EE;&#x9898;&#x3002;
+num.network.threads=3 #&#x8FD9;&#x4E2A;&#x662F;borker&#x8FDB;&#x884C;&#x7F51;&#x7EDC;&#x5904;&#x7406;&#x7684;&#x7EBF;&#x7A0B;&#x6570;
+num.io.threads=8 #&#x8FD9;&#x4E2A;&#x662F;borker&#x8FDB;&#x884C;I/O&#x5904;&#x7406;&#x7684;&#x7EBF;&#x7A0B;&#x6570;
+log.dirs=/opt/kafka/kafkalogs/ #&#x6D88;&#x606F;&#x5B58;&#x653E;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x4E3A;&#x201C;&#xFF0C;&#x201D;&#x9017;&#x53F7;&#x5206;&#x5272;&#x7684;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x4E0A;&#x9762;&#x7684;num.io.threads&#x8981;&#x5927;&#x4E8E;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x7684;&#x4E2A;&#x6570;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x5982;&#x679C;&#x914D;&#x7F6E;&#x591A;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x65B0;&#x521B;&#x5EFA;&#x7684;topic&#x4ED6;&#x628A;&#x6D88;&#x606F;&#x6301;&#x4E45;&#x5316;&#x7684;&#x5730;&#x65B9;&#x662F;&#xFF0C;&#x5F53;&#x524D;&#x4EE5;&#x9017;&#x53F7;&#x5206;&#x5272;&#x7684;&#x76EE;&#x5F55;&#x4E2D;&#xFF0C;&#x90A3;&#x4E2A;&#x5206;&#x533A;&#x6570;&#x6700;&#x5C11;&#x5C31;&#x653E;&#x90A3;&#x4E00;&#x4E2A;
+socket.send.buffer.bytes=102400 #&#x53D1;&#x9001;&#x7F13;&#x51B2;&#x533A;buffer&#x5927;&#x5C0F;&#xFF0C;&#x6570;&#x636E;&#x4E0D;&#x662F;&#x4E00;&#x4E0B;&#x5B50;&#x5C31;&#x53D1;&#x9001;&#x7684;&#xFF0C;&#x5148;&#x56DE;&#x5B58;&#x50A8;&#x5230;&#x7F13;&#x51B2;&#x533A;&#x4E86;&#x5230;&#x8FBE;&#x4E00;&#x5B9A;&#x7684;&#x5927;&#x5C0F;&#x540E;&#x5728;&#x53D1;&#x9001;&#xFF0C;&#x80FD;&#x63D0;&#x9AD8;&#x6027;&#x80FD;
+socket.receive.buffer.bytes=102400 #kafka&#x63A5;&#x6536;&#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;&#xFF0C;&#x5F53;&#x6570;&#x636E;&#x5230;&#x8FBE;&#x4E00;&#x5B9A;&#x5927;&#x5C0F;&#x540E;&#x5728;&#x5E8F;&#x5217;&#x5316;&#x5230;&#x78C1;&#x76D8;
+socket.request.max.bytes=104857600 #&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x5411;kafka&#x8BF7;&#x6C42;&#x6D88;&#x606F;&#x6216;&#x8005;&#x5411;kafka&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7684;&#x8BF7;&#x8BF7;&#x6C42;&#x7684;&#x6700;&#x5927;&#x6570;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x4E0D;&#x80FD;&#x8D85;&#x8FC7;java&#x7684;&#x5806;&#x6808;&#x5927;&#x5C0F;
+num.partitions=1 #&#x9ED8;&#x8BA4;&#x7684;&#x5206;&#x533A;&#x6570;&#xFF0C;&#x4E00;&#x4E2A;topic&#x9ED8;&#x8BA4;1&#x4E2A;&#x5206;&#x533A;&#x6570;
+log.retention.hours=168 #&#x9ED8;&#x8BA4;&#x6D88;&#x606F;&#x7684;&#x6700;&#x5927;&#x6301;&#x4E45;&#x5316;&#x65F6;&#x95F4;&#xFF0C;168&#x5C0F;&#x65F6;&#xFF0C;7&#x5929;
+message.max.byte=5242880  #&#x6D88;&#x606F;&#x4FDD;&#x5B58;&#x7684;&#x6700;&#x5927;&#x503C;5M
+default.replication.factor=2  #kafka&#x4FDD;&#x5B58;&#x6D88;&#x606F;&#x7684;&#x526F;&#x672C;&#x6570;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#x5931;&#x6548;&#x4E86;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x8FD8;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x63D0;&#x4F9B;&#x670D;&#x52A1;
+replica.fetch.max.bytes=5242880  #&#x53D6;&#x6D88;&#x606F;&#x7684;&#x6700;&#x5927;&#x76F4;&#x63A5;&#x6570;
+log.segment.bytes=1073741824 #&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#xFF1A;&#x56E0;&#x4E3A;kafka&#x7684;&#x6D88;&#x606F;&#x662F;&#x4EE5;&#x8FFD;&#x52A0;&#x7684;&#x5F62;&#x5F0F;&#x843D;&#x5730;&#x5230;&#x6587;&#x4EF6;&#xFF0C;&#x5F53;&#x8D85;&#x8FC7;&#x8FD9;&#x4E2A;&#x503C;&#x7684;&#x65F6;&#x5019;&#xFF0C;kafka&#x4F1A;&#x65B0;&#x8D77;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;
+log.retention.check.interval.ms=300000 #&#x6BCF;&#x9694;300000&#x6BEB;&#x79D2;&#x53BB;&#x68C0;&#x67E5;&#x4E0A;&#x9762;&#x914D;&#x7F6E;&#x7684;log&#x5931;&#x6548;&#x65F6;&#x95F4;&#xFF08;log.retention.hours=168 &#xFF09;&#xFF0C;&#x5230;&#x76EE;&#x5F55;&#x67E5;&#x770B;&#x662F;&#x5426;&#x6709;&#x8FC7;&#x671F;&#x7684;&#x6D88;&#x606F;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x5220;&#x9664;
+log.cleaner.enable=false #&#x662F;&#x5426;&#x542F;&#x7528;log&#x538B;&#x7F29;&#xFF0C;&#x4E00;&#x822C;&#x4E0D;&#x7528;&#x542F;&#x7528;&#xFF0C;&#x542F;&#x7528;&#x7684;&#x8BDD;&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x6027;&#x80FD;
+zookeeper.connect=zk&#x5730;&#x5740;  #&#x8BBE;&#x7F6E;zookeeper&#x7684;&#x8FDE;&#x63A5;&#x7AEF;&#x53E3;&#xFF0C;&#x591A;&#x4E2A;ip&#x7528;&quot;,&quot; &#x9694;&#x5F00;
+delete.topic.enable=true #&#x53EF;&#x5220;&#x9664;topic
+</pre><p>&#x91CD;&#x70B9;&#x914D;&#x7F6E;&#x9879;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info="shell" class="language-shell">broker.id<span class="token operator">=</span>1
+port<span class="token operator">=</span>9092
+host.name<span class="token operator">=</span>xxx.xxx.xxx.xxx
+
+log.dirs<span class="token operator">=</span> &#x522B;&#x5FD8;&#x8BB0;&#x914D;&#x7F6E;&#x591A;&#x4E2A;&#x5730;&#x5740;
+zookeeper.connect<span class="token operator">=</span>zk&#x5730;&#x5740;,zk&#x5730;&#x5740;
+
+<span class="token comment"># &#x53EF;&#x5220;&#x9664;topic</span>
+delete.topic.enable<span class="token operator">=</span>true
+</pre><ul>
+<li>&#x542F;&#x52A8;&#x96C6;&#x7FA4;<br>
+<code>kafka&#x540E;&#x53F0;&#x542F;&#x52A8;&#x65B9;&#x5F0F;</code>: JMX_PORT=9999 bin/kafka-server-start.sh -daemon config/server.properties</li>
+</ul>
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token function">cd</span> /data/apps/kafka/kafka_2.10-0.10.0.0
+bin/kafka-server-start.sh -daemon config/server-1.properties
+bin/kafka-server-start.sh -daemon config/server-2.properties
+bin/kafka-server-start.sh -daemon config/server-3.properties
+</pre><h3 class="mume-header" id="%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">&#x6E90;&#x7801;&#x73AF;&#x5883;&#x642D;&#x5EFA;</h3>
+
+<pre data-role="codeBlock" data-info="shell" class="language-shell"><span class="token comment">#1. git&#x5730;&#x5740;&#xFF1A;https://github.com/apache/kafka    2.3&#x5206;&#x652F;</span>
+<span class="token comment">#2. &#x9605;&#x8BFB; kafka&#x7684;README.md</span>
+Kafka requires Gradle 5.0 or higher
+Java 8 should be used <span class="token keyword">for</span> building <span class="token keyword">in</span> order to support both Java 8 and Java 11 at runtime
+Scala 2.12 is used by default, see below <span class="token keyword">for</span> how to use a different Scala version or all of the supported Scala versions
+
+<span class="token comment">#3. &#x914D;&#x7F6E;scala &#xFF0C; java  &#xFF0C; gradle</span>
+<span class="token comment">#4. &#x5BFC;&#x5165;idea&#x4E2D;&#x5373;&#x53EF;,&#x5E76;&#x4E14;&#x5B89;&#x88C5;scala&#x63D2;&#x4EF6;&#x548C;&#x914D;&#x7F6E;gradle</span>
+<span class="token comment">#5. &#x914D;&#x7F6E;&#x542F;&#x52A8;&#x73AF;&#x5883;</span>
+&#x914D;&#x7F6E;log4j.properties&#xFF0C;&#x5C06;config&#x76EE;&#x5F55;&#x4E0B;&#x7684;log4j.properties&#x6587;&#x4EF6;&#x590D;&#x5236;&#x5230; core/src/main/scala&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x8BA9;kafka&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x80FD;&#x591F;&#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x4FE1;&#x606F;
+&#x914D;&#x7F6E;server.properties&#x6587;&#x4EF6;&#xFF0C;&#x4E00;&#x822C;&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x4E00;&#x4E0B;&#x914D;&#x7F6E;&#x9879;&#xFF1A;
+
+
+&#x914D;&#x7F6E;Main.class&#x4E3A; kafka.kafka&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x542F;&#x52A8;&#x65F6;&#x9700;&#x8981;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5730;&#x5740;&#xFF0C;&#x5373;config/server.properties&#x3002;&#x5E76;&#x4E14;&#x8FD8;&#x5728;vm options&#x4E2D;&#x914D;&#x7F6E; 
+-Dcom.sun.management.jmxremote.port<span class="token operator">=</span>9999
+-Dcom.sun.management.jmxremote.ssl<span class="token operator">=</span>false
+-Dcom.sun.management.jmxremote.authenticate<span class="token operator">=</span>false
+-Dfile.encoding<span class="token operator">=</span>UTF-8
+</pre><p><code>SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder</code></p>
+<p><img src="..\images\%E5%AE%89%E8%A3%85%E5%8F%8A%E6%BA%90%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA01.png" alt="&#x5B89;&#x88C5;&#x53CA;&#x6E90;&#x7801;&#x73AF;&#x5883;&#x642D;&#x5EFA;01"></p>
+<p>&apos;SLF4J: Failed to load class &quot;org.slf4j.impl.StaticLoggerBinder&quot;&apos;</p>
+<p>&#x5728;build.gradle&#x7684;&#x5B50;&#x9879;&#x76EE;core&#x4E2D;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x8FD9;&#x4E24;&#x4E2A;&#x4F9D;&#x8D56;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>project(&apos;:core&apos;) {
+  println &quot;Building project &apos;core&apos; with Scala version ${versions.scala}&quot;
+  ...
+
+  dependencies {
+    ...
+    // &#x6DFB;&#x52A0;&#x4EE5;&#x4E0B;&#x4E24;&#x4E2A;&#x4F9D;&#x8D56;
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    compile group: &apos;org.slf4j&apos;, name: &apos;slf4j-api&apos;, version: &apos;1.7.25&apos;
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12
+    compile group: &apos;org.slf4j&apos;, name: &apos;slf4j-log4j12&apos;, version: &apos;1.7.25&apos;
+}
+</code></pre><p>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code># Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the &quot;License&quot;); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# see kafka.server.KafkaConfig for additional details and defaults
+
+############################# Server Basics #############################
+
+# The id of the broker. This must be set to a unique integer for each broker.
+broker.id=0
+port=9093
+############################# Socket Server Settings #############################
+
+# The address the socket server listens on. It will get the value returned from 
+# java.net.InetAddress.getCanonicalHostName() if not configured.
+#   FORMAT:
+#     listeners = security_protocol://host_name:port
+#   EXAMPLE:
+#     listeners = PLAINTEXT://your.host.name:9092
+listeners=PLAINTEXT://:9093
+
+# Hostname and port the broker will advertise to producers and consumers. If not set, 
+# it uses the value for &quot;listeners&quot; if configured.  Otherwise, it will use the value
+# returned from java.net.InetAddress.getCanonicalHostName().
+advertised.listeners=PLAINTEXT://localpc.com:9093
+
+# The number of threads handling network requests
+num.network.threads=3
+
+# The number of threads doing disk I/O
+num.io.threads=8
+
+# The send buffer (SO_SNDBUF) used by the socket server
+socket.send.buffer.bytes=102400
+
+# The receive buffer (SO_RCVBUF) used by the socket server
+socket.receive.buffer.bytes=102400
+
+# The maximum size of a request that the socket server will accept (protection against OOM)
+socket.request.max.bytes=104857600
+
+
+############################# Log Basics #############################
+
+# A comma seperated list of directories under which to store log files
+log.dirs=D:\\data\\kafkakafka-logs010
+
+# The default number of log partitions per topic. More partitions allow greater
+# parallelism for consumption, but this will also result in more files across
+# the brokers.
+num.partitions=1
+
+# The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
+# This value is recommended to be increased for installations with data dirs located in RAID array.
+num.recovery.threads.per.data.dir=1
+
+############################# Log Flush Policy #############################
+
+# Messages are immediately written to the filesystem but by default we only fsync() to sync
+# the OS cache lazily. The following configurations control the flush of data to disk.
+# There are a few important trade-offs here:
+#    1. Durability: Unflushed data may be lost if you are not using replication.
+#    2. Latency: Very large flush intervals may lead to latency spikes when the flush does occur as there will be a lot of data to flush.
+#    3. Throughput: The flush is generally the most expensive operation, and a small flush interval may lead to exceessive seeks.
+# The settings below allow one to configure the flush policy to flush data after a period of time or
+# every N messages (or both). This can be done globally and overridden on a per-topic basis.
+
+# The number of messages to accept before forcing a flush of data to disk
+#log.flush.interval.messages=10000
+
+# The maximum amount of time a message can sit in a log before we force a flush
+#log.flush.interval.ms=1000
+
+############################# Log Retention Policy #############################
+
+# The following configurations control the disposal of log segments. The policy can
+# be set to delete segments after a period of time, or after a given size has accumulated.
+# A segment will be deleted whenever *either* of these criteria are met. Deletion always happens
+# from the end of the log.
+
+# The minimum age of a log file to be eligible for deletion
+log.retention.hours=168
+
+# A size-based retention policy for logs. Segments are pruned from the log as long as the remaining
+# segments don&apos;t drop below log.retention.bytes.
+#log.retention.bytes=1073741824
+
+# The maximum size of a log segment file. When this size is reached a new log segment will be created.
+log.segment.bytes=1073741824
+
+# The interval at which log segments are checked to see if they can be deleted according
+# to the retention policies
+log.retention.check.interval.ms=300000
+
+############################# Zookeeper #############################
+
+# Zookeeper connection string (see zookeeper docs for details).
+# This is a comma separated host:port pairs, each corresponding to a zk
+# server. e.g. &quot;127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002&quot;.
+# You can also append an optional chroot string to the urls to specify the
+# root directory for all kafka znodes.
+zookeeper.connect=vm01.com:2181/vmkafka010
+
+# Timeout in ms for connecting to zookeeper
+zookeeper.connection.timeout.ms=6000
+
+delete.topic.enable=true
+auto.create.topics.enable=false
+
+replica.fetch.backoff.ms=100000
+
+</code></pre><p>//******************************************************************</p>
+<h1 class="mume-header" id="log4jproperties">log4j.properties</h1>
+
+<pre data-role="codeBlock" data-info class="language-"><code># Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the &quot;License&quot;); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, softwarekafka.logs.dir
+# distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Unspecified loggers and loggers with additivity=true output to server.log and stdout
+# Note that INFO only applies to unspecified loggers, the log level of the child logger is used otherwise
+log4j.rootLogger=INFO, stdout, kafkaAppender
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+log4j.appender.kafkaAppender=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.kafkaAppender.DatePattern=&apos;.&apos;yyyy-MM-dd-HH
+log4j.appender.kafkaAppender.File=D:\\data\\kafka\\applogs\\server.log
+log4j.appender.kafkaAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.kafkaAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+log4j.appender.stateChangeAppender=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.stateChangeAppender.DatePattern=&apos;.&apos;yyyy-MM-dd-HH
+log4j.appender.stateChangeAppender.File=D:\\data\\kafka\\applogs\\state-change.log
+log4j.appender.stateChangeAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.stateChangeAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+log4j.appender.requestAppender=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.requestAppender.DatePattern=&apos;.&apos;yyyy-MM-dd-HH
+log4j.appender.requestAppender.File=D:\\data\\kafka\\applogs\\kafka-request.log
+log4j.appender.requestAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.requestAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+log4j.appender.cleanerAppender=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.cleanerAppender.DatePattern=&apos;.&apos;yyyy-MM-dd-HH
+log4j.appender.cleanerAppender.File=D:\\data\\kafka\\applogs\\log-cleaner.log
+log4j.appender.cleanerAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.cleanerAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+log4j.appender.controllerAppender=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.controllerAppender.DatePattern=&apos;.&apos;yyyy-MM-dd-HH
+log4j.appender.controllerAppender.File=D:\\data\\kafka\\applogs\\controller.log
+log4j.appender.controllerAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.controllerAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+log4j.appender.authorizerAppender=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.authorizerAppender.DatePattern=&apos;.&apos;yyyy-MM-dd-HH
+log4j.appender.authorizerAppender.File=D:\\data\\kafka\\applogs\\kafka-authorizer.log
+log4j.appender.authorizerAppender.layout=org.apache.log4j.PatternLayout
+log4j.appender.authorizerAppender.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+# Change the two lines below to adjust ZK client logging
+log4j.logger.org.I0Itec.zkclient.ZkClient=INFO
+log4j.logger.org.apache.zookeeper=INFO
+
+# Change the two lines below to adjust the general broker logging level (output to server.log and stdout)
+log4j.logger.kafka=INFO
+log4j.logger.org.apache.kafka=INFO
+
+# Change to DEBUG or TRACE to enable request logging
+log4j.logger.kafka.request.logger=WARN, requestAppender
+log4j.additivity.kafka.request.logger=false
+
+# Uncomment the lines below and change log4j.logger.kafka.network.RequestChannel$ to TRACE for additional output
+# related to the handling of requests
+#log4j.logger.kafka.network.Processor=TRACE, requestAppender
+#log4j.logger.kafka.server.KafkaApis=TRACE, requestAppender
+#log4j.additivity.kafka.server.KafkaApis=false
+log4j.logger.kafka.network.RequestChannel$=WARN, requestAppender
+log4j.additivity.kafka.network.RequestChannel$=false
+
+log4j.logger.kafka.controller=TRACE, controllerAppender
+log4j.additivity.kafka.controller=false
+
+log4j.logger.kafka.log.LogCleaner=INFO, cleanerAppender
+log4j.additivity.kafka.log.LogCleaner=false
+
+log4j.logger.state.change.logger=TRACE, stateChangeAppender
+log4j.additivity.state.change.logger=false
+
+# Access denials are logged at INFO level, change to DEBUG to also log allowed accesses
+log4j.logger.kafka.authorizer.logger=INFO, authorizerAppender
+log4j.additivity.kafka.authorizer.logger=false
+</code></pre><p>No such property: useAnt for class: org.gradle.api.tasks.scala.ScalaCompileOptions</p>
+<p>ScalaCompileOptions.metaClass.daemonServer = true<br>
+ScalaCompileOptions.metaClass.fork = true<br>
+ScalaCompileOptions.metaClass.useAnt = false<br>
+ScalaCompileOptions.metaClass.useCompileDaemon = false</p>
+<h3 class="mume-header" id="debug-%E8%BF%87%E7%A8%8B">debug &#x8FC7;&#x7A0B;</h3>
+
+<p>./kafka-topics.sh --create --zookeeper <a href="http://vm01.com:2181/vmkafka010">vm01.com:2181/vmkafka010</a> --replication-factor 2 --partitions 3 --topic yzhoutest01</p>
+<p>./kafka-topics.sh --zookeeper <a href="http://vm01.com:2181/vmkafka010">vm01.com:2181/vmkafka010</a> --topic yzhoutest01 --describe</p>
+<h3 class="mume-header" id="%E5%BC%82%E5%B8%B8%E5%A4%8D%E7%8E%B0">&#x5F02;&#x5E38;&#x590D;&#x73B0;</h3>
+
+<h1 class="mume-header" id="replicafetchbackoffms100000">replica.fetch.backoff.ms=100000</h1>
+
+<p>replica.fetch.wait.max.ms=30000</p>
+<h1 class="mume-header" id="replicasockettimeoutms100000">replica.socket.timeout.ms=100000</h1>
+
+<p>replica.lag.time.max.ms=30000</p>
+<p>java.io.IOException: Connection to 1 was disconnected before the response was read</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
