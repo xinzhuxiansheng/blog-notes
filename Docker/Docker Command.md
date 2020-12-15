@@ -20,11 +20,14 @@ docker ps
 #查看全部container
 docker ps -a
 
+#删除container id
+docker rm <container id>
+
 #根据<image id> 创建container
 docker run -it --privileged=true  <image id> 
 
 #先启动docker container
-docker start <container id>
+docker start/stop <container id>
 
 #进入container内（进入centos）
 docker exec -it <containerid> /bin/bash 
@@ -34,9 +37,12 @@ docker exec -it <containerid> /bin/bash
 -t                                          进入终端
 -d	                                        后台运行容器，并返回容器ID
 --privileged=true                           使用root用户登陆
--v D:\docker-data\exchange\:/data           利用本地磁盘路径挂载到容器路径
+-v D:\docker-data\exchange\:/data           利用本地磁盘D:\docker-data\exchange路径挂载到容器 /data路径
 
 #eg:  
-docker run -dit --privileged=true -v D:\docker-data\exchange\:/dataa <image id> 
+# step01 创建container id
+docker run -dit --privileged=true -v D:\docker-data\exchange\:/data <image id> 
+# step02 进入container id
+docker exec -it <containerid> /bin/bash
 ```
 

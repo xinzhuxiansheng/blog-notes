@@ -29,7 +29,7 @@ docker run -dit --privileged=true  <image id>
 docker run -it -v D:\docker-data\exchange\:/data centos
 
 
-#进入container内（进入centos）
+#进入container id内
 docker exec -it <containerid> /bin/bash 
 
 #查看正在运行的container
