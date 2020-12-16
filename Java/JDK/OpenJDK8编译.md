@@ -13,7 +13,8 @@ OpenJDK的 Source code的下载方式
 
 ## 编译环境搭建
 > 一定要阅读我下面分享得链接文档 (前期别在Baidu，Google上面浪费过多时间,当然出现问题了，你再搜也来的及)
-1) README-builds.html (https://github.com/openjdk/jdk/blob/jdk8-b120/README-builds.html ,若查看不方便，`请将文件保存成HTML即可本地浏览`)
+
+**1.** README-builds.html (https://github.com/openjdk/jdk/blob/jdk8-b120/README-builds.html ,若查看不方便，`请将文件保存成HTML即可本地浏览`)
 README-builds.html 是OpenJDK的Build文档，`没有什么比这更详细的，请一定一定要好好阅读一遍，甚至多遍，对于后期编译，有更深层次理解`；
 特别注意 **THIS IS A MAJOR RE-WRITE of this document.**" 特别强调`编译OpenJDK已经不在需要Ant`，`不在支持配置ALT_* 环境变量`；
 
@@ -28,7 +29,7 @@ Use of ALT_* environment variables for configuring the build is no longer suppor
 
 再重点阅读下 `Building` Linux方面的部分
 
-2) Supported Build Platforms (https://wiki.openjdk.java.net/display/Build/Supported+Build+Platforms )
+**2.** Supported Build Platforms (https://wiki.openjdk.java.net/display/Build/Supported+Build+Platforms )
 `我们总是站在巨人的肩膀上,干更伟大的事`，wiki中特么强调了，已经在 哪些OS Type,哪些 Compiler 编译支持是否ok.
 迅速拉到页面最下面:  Other JDK 8 build platforms:
 Linux x86 and x86_64	(green star)	Ubuntu 14.04	gcc 4.8.2	Works flawlessly
@@ -37,13 +38,13 @@ Linux x86 and x86_64	(green star)	Ubuntu 14.04	gcc 4.8.2	Works flawlessly
 * OS Type: Ubuntu 14.04
 * Compiler: gcc 4.8.2
 
-3) Docker构建编译环境
+**3.** Docker构建编译环境
 我想这个时候，没有比Docker再合适不过了。
 
 请参考 Docker常用命令[Docker](http://xinzhuxiansheng.com/articleDetail?id=2)
 
-4) 其他帮助文档
-Adopt OpenJDK的giitbook:
+**4.** 其他帮助文档
+Adopt OpenJDK的gitbook:
 https://adoptopenjdk.gitbooks.io/adoptopenjdk-getting-started-kit/content/en/
 
 ## 编译
