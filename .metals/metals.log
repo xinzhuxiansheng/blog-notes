@@ -88,3 +88,7 @@
 十二月 21, 2020 9:51:28 下午 org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
 信息: Unsupported notification method: $/setTraceNotification
 2020.12.21 21:51:29 INFO  shutting down Metals
+2020.12.23 15:14:12 INFO  Started: Metals version 0.9.8 in workspace 'C:\Users\zhouyang0627\Desktop\blog-md' for client vscode.
+2020.12.23 15:14:13 INFO  time: initialize in 0.48s
+2020.12.23 15:14:14 WARN  Build server is not auto-connectable.
+2020.12.23 15:14:14 WARN  no build tool detected in workspace 'C:\Users\zhouyang0627\Desktop\blog-md'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
