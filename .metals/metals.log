@@ -92,3 +92,12 @@
 2020.12.23 15:14:13 INFO  time: initialize in 0.48s
 2020.12.23 15:14:14 WARN  Build server is not auto-connectable.
 2020.12.23 15:14:14 WARN  no build tool detected in workspace 'C:\Users\zhouyang0627\Desktop\blog-md'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.12.23 17:16:15 INFO  shutting down Metals
+2020.12.24 10:30:57 INFO  Started: Metals version 0.9.8 in workspace 'C:\Users\zhouyang0627\Desktop\blog-md' for client vscode.
+2020.12.24 10:30:58 INFO  time: initialize in 0.83s
+2020.12.24 10:30:59 WARN  Build server is not auto-connectable.
+2020.12.24 10:30:59 WARN  no build tool detected in workspace 'C:\Users\zhouyang0627\Desktop\blog-md'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+2020.12.29 12:36:16 INFO  Started: Metals version 0.9.8 in workspace 'C:\Users\zhouyang0627\Desktop\blog-md' for client vscode.
+2020.12.29 12:36:17 INFO  time: initialize in 1.32s
+2020.12.29 12:36:23 WARN  Build server is not auto-connectable.
+2020.12.29 12:36:23 WARN  no build tool detected in workspace 'C:\Users\zhouyang0627\Desktop\blog-md'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
