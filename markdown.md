@@ -8,6 +8,8 @@
 ![avatar](Bloom_Filter_Delete.png)
 ```
 
+![Gradle配置](http://118.126.116.71/blogimgs/kafka/GradleSetting.png)
+
 
 ## 表格
 | Item      |    Value | Qty  |

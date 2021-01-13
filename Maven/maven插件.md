@@ -71,7 +71,7 @@
 <plugin>
     <groupId>org.scala-tools</groupId>
     <artifactId>maven-scala-plugin</artifactId>
-    <version>2.15.2</version>
+    <version>3.4.6</version>
     <executions>
         <execution>
             <id>scala-compile</id>
@@ -141,4 +141,33 @@ jar包上传私服的时候，将源码也上传上去 ，请添加这个插件
 </plugin>
 
 
+```
+
+
+## maven-assembly-plugin
+```xml
+<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0<version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- 绑定到package生命周期 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 只运行一次 -->
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 配置描述符文件 -->
+                    <descriptor>src/main/assembly/assembly.xml</descriptor>
+                    <!-- 也可以使用Maven预配置的描述符-->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
 ```
