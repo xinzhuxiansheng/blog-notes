@@ -21,4 +21,11 @@ fi
 
 **2. Idea配置远程调试参数**
 
+![avatar](images/kafka/../Idea配置kafka远程调试参数.png)
 
+
+**3. 启动**
+```mermaid
+graph LR
+step1_broker启动 --> step2_idea启动
+```
