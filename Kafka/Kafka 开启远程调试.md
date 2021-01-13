@@ -20,8 +20,7 @@ fi
 ```
 
 **2. Idea配置远程调试参数**
-
-![avatar](images/kafka/../Idea配置kafka远程调试参数.png)
+![Idea配置kafka远程调试参数.png](http://118.126.116.71/blogimgs/kafka/Idea配置kafka远程调试参数.png)
 
 
 **3. 启动**
