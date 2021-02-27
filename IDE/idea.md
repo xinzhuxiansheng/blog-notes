@@ -42,3 +42,9 @@ http://idea.medeming.com/jetbrains/
 
 ### 乱码
 -Dfile.encoding=UTF-8
+
+
+
+### 将重复代码提取成方法
+1. 快捷键: ctrl+alt+m
+2. 
