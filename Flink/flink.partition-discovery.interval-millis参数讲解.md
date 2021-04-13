@@ -1,5 +1,7 @@
 # flink.partition-discovery.interval-millis参数在Flink的工作原理
 
+* 
+
 ```java
 private FlinkKafkaConsumer(
     List<String> topics,
@@ -46,7 +48,7 @@ private FlinkKafkaConsumer(
 * 至于 FlinkKafkaConsumerBase从哪里被执行 run(), 这个目前还没了解这块（？？？）
 
 **以下方法执行过程，已本人debug为主**
-FlinkKafkaConsumerBase.java  run()方法为入口
+`FlinkKafkaConsumerBase.java  run()方法为入口`
 
 ```java
 //因为createFetcher是抽象方法，所以调用的是FlinkKafkaConsumer.java的 createFetcher()方法

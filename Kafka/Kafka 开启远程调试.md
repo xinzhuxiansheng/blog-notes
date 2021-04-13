@@ -8,6 +8,9 @@
 ```shell
 -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=8080,server=y,suspend=y 
 ```
+>请注意 suspend=y:是否在调试客户端建立连接之后启动JVM 
+suspend=n 就是 y的反义词，不是在调试客户端建立连接之后启动JVM
+
 
 `kafka-run-class.sh`
 ```shell
