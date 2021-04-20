@@ -1,7 +1,7 @@
 --In Blog
 --Tags: Kafka
 
-# Kafka Producer-拦截器,序列化器,分区器?
+# Kafka Producer-消息累加器?
 
 >涉及Kafka是2.2.1版本
 
