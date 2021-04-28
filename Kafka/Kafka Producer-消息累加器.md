@@ -1,249 +1,234 @@
 --In Blog
 --Tags: Kafka
 
-# Kafka Producer-消息累加器?
+# Kafka Producer-消息累加器
 
 >涉及Kafka是2.2.1版本
 
-`关键字`
-**1.** retries：重试次数    
-**2.** batch.size: 发送批次的最大字节数     
-**3.** compression.type：消息压缩格式   
-**4.** linger.ms：延迟发送毫秒数    
-**5.** buffer.memory：消息缓冲区的字节大小      
-**6.** request.timeout.ms：发送消息的超时时间   
-**7.** max.block.ms：缓存区申请内存块的阻塞时间     
-**8** max.inflight.requests：socket发送管道最大个数     
+在没有说到消息累加器之前，这里先阐述一个经常会用到的场景"异步处理"或者"削峰"
+## 异步处理
+![异步处理](images/producer_accumulator01.png)
+这里有两个线程分别是ProducerThread、ConsumerThread，有一个队列是BlockingQueue，ProducerThread的任务是将接受到的数据丢到队列中而ConsumerThread的任务消费队列中的数据去做逻辑处理。   
+假设这个队列足够大，并且不阻塞，这样的话，ProducerThread只会把时间消耗在接受到更多的数据，并不会让上游一直处于阻塞状态，由于ConsumerThread是独立的线程并不会阻塞ProducerThread，所以我们只要提高ConsumerThread处理能力，尽可能让队列处理`未满`状态。写和读是并行处理的，所以这种方式也叫做`削峰`。     
 
-Kafka的send Record(s)是由Producer来完成的， 而Producer的架构"详细"讲解对于我来说，确实还无法面面俱到，但同时了解Producer的工作原理对于我优化及排查问题是最好的方法，接下来我通过"示例"作为引线来介绍Producer。
+**其实，Kafka的Producer也不例外**   
 
-`示例`
+## 容器-消息累加器(Accumulator)
+![Producer Accumulator示意图](images/producer_accumulator02.png)
+Producer线程的doSend()与Sender线程的sendProducerData()也是同样并行的处理，Producer的Accumulator作用于上面的BlockQueue的一样都是`数据容器`。只是Accumulator的比BlockingQueue的结构要复杂的多。   
+`下面就探讨下 数据是如何存储在Accumulator里面的？`
+
+![Producer Accumulator流程图](images/producer_accumulator03.png)
+**Accumulator追加消息的流程图**      
+
+`说明点`    
+**1.** 发送数据时，创建的ProducerRecord对象经过拦截器，序列化，分区器后拆分 key，value，headers。tp对象存储的数据要发送的Topic和分区号。    
+**2.** Acumulator用到的队列是 Deque<T> dp = new ArrayDeque();   
+**3.** 流程图中的4,5 是如何申请的内存？ 
+假设ByteBuffer足够大或者Sender线程消费数据足够快？ 看来现实与`骨感`。
+
+![Producer Accumulator结构图](images/producer_accumulator05.png)
+**Accumulator结构图**      
+
+`首先讨论下几个问题？`        
+**3.1** 向free申请ByteBuffer的时候，为什么要计算batchSize与消息两者的最大字节数？       
+**3.2** RecordAccumulator中的append()的形参maxTimeToBlock作用？     
+**3.3** RecordAccumulator中的append()调用了3次 tryAppend()， 如果第一的tryAppend()返回空间不够，但是已经申请好了ByteBuffer，第二次的调用是为了什么？            
+
+下面是申请ByteBuffer的方法调用：
 ```java
-public static void main(String[] args) throws InterruptedException {
-    Properties properties = new Properties();
-    properties.put("bootstrap.servers", "xxxxxxxx");
-    properties.put("retries", 2); 
-    properties.put("batch.size", "1048576"); 
-    properties.put("compression.type", "snappy");
-    properties.put("linger.ms", "5"); 
-    properties.put("buffer.memory", "67108864"); 
-    properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-    properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-    Producer<String, String> producer = new KafkaProducer<String, String>(properties);
-    Long i = 0L;
-    while (true) {
-        producer.send(new ProducerRecord<String, String>("test01", i.toString()), new Callback() {
-            @Override
-            public void onCompletion(RecordMetadata recordMetadata, Exception e) {
-                if (null == recordMetadata) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        Thread.currentThread().sleep(1000L);
-        System.out.println(i);
-        i++;
-    }
-}
-```
->面向对象编程，类的职责单一
-
-## 发送消息的整体流程
-通过示例代码了解发送消息整体流程是：        
-**1.** 通过Producer的properties参数，构造KafkaProducer      
-**2.** 将要发送的消息构建成 ProducerRecord      
-**3.** 调用send()方法，并且增加异步回调方法来处理消息发送返回结果状态       
-
-###  通过Producer的properties参数，构造KafkaProducer + 将发送消息构建成 ProducerRecord
-先利用IDEA的"Diagram"了解KafkaProducer有哪些field   
-`重要的field`
+//获取 batchSize和消息两者最大的字节数
+//maxTimeToBlock是 max.block.ms的参数值
+int size = Math.max(this.batchSize, AbstractRecords.estimateSizeInBytesUpperBound(maxUsableMagic, compression, key, value, headers));
+log.trace("Allocating a new {} byte message buffer for topic {} partition {}", size, tp.topic(), tp.partition());
+buffer = free.allocate(size, maxTimeToBlock);
+```     
+下面是free相关的类的类图
+![Accumulator free类图](images/producer_accumulator04.png)
+有free相关类的依赖关系，接着看 free.allocate()方法  
 ```java
-private final Partitioner partitioner;
-private final RecordAccumulator accumulator;
-private final Serializer<K> keySerializer;
-private final Serializer<V> valueSerializer;
-private final ProducerInterceptors<K, V> interceptors;
-private final Sender sender;
-private final Thread ioThread;
-private final CompressionType compressionType;
-private final TransactionManager transactionManager;(事务相关后面对详细介绍)
-```
+public ByteBuffer allocate(int size, long maxTimeToBlockMs) throws InterruptedException {
+    if (size > this.totalMemory)
+        throw new IllegalArgumentException("Attempt to allocate " + size
+                                            + " bytes, but there is a hard limit of "
+                                            + this.totalMemory
+                                            + " on memory allocations.");
 
-![KafkaProducer field UML](images/Producer讲解01.png)
+    ByteBuffer buffer = null;
+    this.lock.lock();
+    try {
+        // 标记点@1
+        // check if we have a free buffer of the right size pooled
+        if (size == poolableSize && !this.free.isEmpty())
+            return this.free.pollFirst();
 
-KafkaProducer在构造方法中创建 "拦截器"、"序列化器"、"分区器"、"消息累加器"、"NetworkClient + Send线程" 等等
-
-**1.** ProducerInterceptors 拦截器  
-**2.** Serializer Key，Value的序列化器
-**3.** Partitioner partitioner
-
-
-1.1 拦截器的用法
-```java
-properties.put("interceptor.classes","定义拦截器的class的路径名")
-```
-
-
-1.2 producer执行send()方式，会将ProducerRecord先去执行配置的拦截器集合的onSend()方法，并且返回重新装配的ProducerRecord(若没有，则什么都不做)        
-```java
-@Override
-public Future<RecordMetadata> send(ProducerRecord<K, V> record, Callback callback) {
-    ProducerRecord<K, V> interceptedRecord = this.interceptors.onSend(record);
-    return doSend(interceptedRecord, callback);
-}
-```
-
-1.3 这里拿Kafka源码中的单元测试 `MockProducerInterceptor.java`来说明        
-```java
-@Override
-public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
-    //记录发送的条数
-    ONSEND_COUNT.incrementAndGet();
-    //并且在原来的消息中 追加 appendStr的值("mock.interceptor.append"),这样的话，后面要发给Kafka Broker的消息都统一的加上了 "mock.interceptor.append"后缀
-    return new ProducerRecord<>(
-            record.topic(), record.partition(), record.key(), record.value().concat(appendStr));
-}
-```
-**2.** 序列化器
-
-2.1 将要发送的ProducerRecord对象中的Key，Value序列化,并append到 ProducerBatch中
->注意 ProducerRecord类是提供给用户封装消息的，但Producer只是简单取值，无其他用处
-
-2.2 Kafka自身提供诸如String、ByteArray、ByteBuffer、Bytes、Double、Integer、Long这些类型的Serializer， 若用户不能满足需求也可以选择如Avro、Json、Thrift、ProtoBuf或者Protostuff等通用的序列化工具来实现，也可以使用自定义类型的Serializer来实现。
-
-2.3 序列化 一方面是为了存储在磁盘中，另一个作用是Clients将消息传输给Brokers， 优秀的序列化方式可以减少网络传输的字节大小和节省文件存储大小
-
-**3.** 分区器   
-
-3.1 分区器的用法
-```java
-properties.put("partitioner.class","定义拦截器的class的路径名")
-```   
-
-`分区流程图`
-![分区器流程](images/Producer讲解02.png)
-
-3.2 Partitioner的处理逻辑(默认实现DefaultPartitioner.java)   
-Partitioner会根据ProducerRecord的Key是否为null，使用随机数+1对分区个数取余获取指定的Partition， 将Partition值放入新的TopicPartition对象，再根据Partition存储到指定的队列的累加器中。 分区器其实是`软负载`的一种实现方式,Kafka分区写入负载默认是`RoundRobin`(轮询)算法
-```java
-//DefaultPartitioner.java  partition()方法
-public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-    List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
-    int numPartitions = partitions.size();
-    if (keyBytes == null) {
-        int nextValue = nextValue(topic);
-        List<PartitionInfo> availablePartitions = cluster.availablePartitionsForTopic(topic);
-        if (availablePartitions.size() > 0) {
-            int part = Utils.toPositive(nextValue) % availablePartitions.size();
-            return availablePartitions.get(part).partition();
+        // now check if the request is immediately satisfiable with the
+        // memory on hand or if we need to block
+        // 标记点@2
+        int freeListSize = freeSize() * this.poolableSize;
+        if (this.nonPooledAvailableMemory + freeListSize >= size) {
+            // we have enough unallocated or pooled memory to immediately
+            // satisfy the request, but need to allocate the buffer
+            freeUp(size);
+            this.nonPooledAvailableMemory -= size;
         } else {
-            // no partitions are available, give a non-available partition
-            return Utils.toPositive(nextValue) % numPartitions;
+            // 标记点@3
+            // we are out of memory and will have to block
+            int accumulated = 0;
+            Condition moreMemory = this.lock.newCondition();
+            try {
+                long remainingTimeToBlockNs = TimeUnit.MILLISECONDS.toNanos(maxTimeToBlockMs);
+                this.waiters.addLast(moreMemory);
+                // loop over and over until we have a buffer or have reserved
+                // enough memory to allocate one
+                while (accumulated < size) {
+                    long startWaitNs = time.nanoseconds();
+                    long timeNs;
+                    boolean waitingTimeElapsed;
+                    try {
+                        waitingTimeElapsed = !moreMemory.await(remainingTimeToBlockNs, TimeUnit.NANOSECONDS);
+                    } finally {
+                        long endWaitNs = time.nanoseconds();
+                        timeNs = Math.max(0L, endWaitNs - startWaitNs);
+                        recordWaitTime(timeNs);
+                    }
+
+                    if (waitingTimeElapsed) {
+                        throw new TimeoutException("Failed to allocate memory within the configured max blocking time " + maxTimeToBlockMs + " ms.");
+                    }
+
+                    remainingTimeToBlockNs -= timeNs;
+
+                    // check if we can satisfy this request from the free list,
+                    // otherwise allocate memory
+                    if (accumulated == 0 && size == this.poolableSize && !this.free.isEmpty()) {
+                        // just grab a buffer from the free list
+                        buffer = this.free.pollFirst();
+                        accumulated = size;
+                    } else {
+                        // we'll need to allocate memory, but we may only get
+                        // part of what we need on this iteration
+                        freeUp(size - accumulated);
+                        int got = (int) Math.min(size - accumulated, this.nonPooledAvailableMemory);
+                        this.nonPooledAvailableMemory -= got;
+                        accumulated += got;
+                    }
+                }
+                // Don't reclaim memory on throwable since nothing was thrown
+                accumulated = 0;
+            } finally {
+                // When this loop was not able to successfully terminate don't loose available memory
+                this.nonPooledAvailableMemory += accumulated;
+                this.waiters.remove(moreMemory);
+            }
         }
-    } else {
-        // hash the keyBytes to choose a partition
-        return Utils.toPositive(Utils.murmur2(keyBytes)) % numPartitions;
+    } finally {
+        // signal any additional waiters if there is more memory left
+        // over for them
+        try {
+            if (!(this.nonPooledAvailableMemory == 0 && this.free.isEmpty()) && !this.waiters.isEmpty())
+                this.waiters.peekFirst().signal();
+        } finally {
+            // Another finally... otherwise find bugs complains
+            lock.unlock();
+        }
+    }
+
+    if (buffer == null)
+        return safeAllocateByteBuffer(size);
+    else
+        return buffer;
+}
+```
+**@1** 判断要申请的size与`poolableSize`是否相等，并且free队列是否存在可用空间。        
+从free类图及下面两个类的构造函数知晓 poolableSize= ProducerConfig.BATCH_SIZE_CONFIG的值，也就是batch.size的参数值       
+```java
+//RecordAccumulator的构造函数
+this.accumulator = new RecordAccumulator(logContext,
+                    //...省略无用代码
+                    new BufferPool(this.totalMemorySize, config.getInt(ProducerConfig.BATCH_SIZE_CONFIG), metrics, time, PRODUCER_METRIC_GROUP_NAME));
+//BufferPool的构造函数
+public BufferPool(long memory, int poolableSize, Metrics metrics, Time time, String metricGrpName) {
+        this.poolableSize = poolableSize;
+        //...省略无用代码
+    }
+```
+BufferPool的free是Deque<ByteBuffer> free = new ArrayDeque(); free队列指的是大小已经申请好了，但是没有用的队列。重点：这里一定要结合上面提到3次的tryAppend()的第二次。当ByteBuffer空间申请好了，还是tryAppend()，若第二次成功后，那么申请的空间就存在free队列中，用于下一次的使用。注意看 finally逻辑，当buffer!=null时，并且判断buffer的size等于batchSize时候，就添加到free队列中去，为了空间最大化复用。       
+`这里解答了3.3 提出来的问题`
+
+```java
+public RecordAppendResult append(TopicPartition tp,
+                                     long timestamp,
+                                     byte[] key,
+                                     byte[] value,
+                                     Header[] headers,
+                                     Callback callback,
+                                     long maxTimeToBlock) throws InterruptedException {
+    //...省略代码
+    try {
+        //...省略代码
+        // we don't have an in-progress record batch try to allocate a new batch
+        byte maxUsableMagic = apiVersions.maxUsableProduceMagic();
+        int size = Math.max(this.batchSize, AbstractRecords.estimateSizeInBytesUpperBound(maxUsableMagic, compression, key, value, headers));
+        log.trace("Allocating a new {} byte message buffer for topic {} partition {}", size, tp.topic(), tp.partition());
+        buffer = free.allocate(size, maxTimeToBlock);
+        synchronized (dq) {
+            // Need to check if producer is closed again after grabbing the dequeue lock.
+            if (closed)
+                throw new KafkaException("Producer closed while send in progress");
+
+            RecordAppendResult appendResult = tryAppend(timestamp, key, value, headers, callback, dq);
+            if (appendResult != null) {
+                // Somebody else found us a batch, return the one we waited for! Hopefully this doesn't happen often...
+                return appendResult;
+            }
+        //...省略代码
+        }
+    } finally {
+        if (buffer != null)
+            free.deallocate(buffer);
+        appendsInProgress.decrementAndGet();
     }
 }
+```
 
-//将获取的partition，放入TopicPartition对象 "tp"中
-int partition = partition(record, serializedKey, serializedValue, cluster);
-tp = new TopicPartition(record.topic(), partition);
-
-//"tp"追加到accumulator，追加到指定分区号的队列中
-RecordAccumulator.RecordAppendResult result = accumulator.append(tp, timestamp, serializedKey,
-                    serializedValue, headers, interceptCallback, remainingWaitMs);
-
-Deque<ProducerBatch> dq = getOrCreateDeque(tp);
-
-private Deque<ProducerBatch> getOrCreateDeque(TopicPartition tp) {
-    Deque<ProducerBatch> d = this.batches.get(tp);
-    if (d != null)
-        return d;
-    d = new ArrayDeque<>();
-    Deque<ProducerBatch> previous = this.batches.putIfAbsent(tp, d);
-    if (previous == null)
-        return d;
-    else
-        return previous;
+**@2** 剩余空间和 = freeListSize+nonPooledAvailableMemory,若 nonPooledAvailableMemory空间大小无法装下ByteBuffer的size，就将free队列的空间释放，而this.free.pollLast()是删除队列末尾，一直到free空间为空或者 nonPooledAvailableMemory空间大小大于申请ByteBuffer的size
+```java
+if (this.nonPooledAvailableMemory + freeListSize >= size) {
+    // we have enough unallocated or pooled memory to immediately
+    // satisfy the request, but need to allocate the buffer
+    freeUp(size);
+    this.nonPooledAvailableMemory -= size;
 }
 
-```
-
-3.3 单元测试 DefaultPartitionerTest.java
-测试用例提供了3个方法：testKeyPartitionIsStable() 测试固定Key值，固定分区发送、testRoundRobinWithUnavailablePartitions() 存在不可用分区，发送时候，如何保证发送的是可用分区、testRoundRobin() 测试RoundRobin(轮询算法)
-
-
-### 调用send()方法，并且增加异步回调方法来处理消息发送返回结果状态(先忽略开启事务)
-在KafkaProducer.doSend()方法中 `核心`代码涉及以下核心类：       
-
-**1.** RecordAccumulator accumulator 消息累加器     
-**2.** Sender sender (包含NetworkClient)        
-**3.** Thread ioThread 发送线程     
-
-```java
-RecordAccumulator.RecordAppendResult result = accumulator.append(tp, timestamp, serializedKey,
-                    serializedValue, headers, interceptCallback, remainingWaitMs);
-if (result.batchIsFull || result.newBatchCreated) {
-    log.trace("Waking up the sender since topic {} partition {} is either full or getting a new batch", record.topic(), partition);
-    this.sender.wakeup();
+//this.free.pollLast() 删除队列末尾，一直free空间为空或者 nonPooledAvailableMemory空间大小大于ByteBuffer的size
+private void freeUp(int size) {
+    while (!this.free.isEmpty() && this.nonPooledAvailableMemory < size)
+        this.nonPooledAvailableMemory += this.free.pollLast().capacity();
 }
-return result.future;
 ```
 
-1.1 RecordAccumulator的数据结构
-先利用IDEA的"Diagram"了解RecordAccumulator有哪些field   
-`重要的field`
+**@3** 剩余空间和 < ByteBuffer的size，这里使用重入锁ReentrantLock，它是一种递归无阻塞的同步机制，不过具体细节还请自行了解，这里不过多篇幅介绍。这里只是比 @2 增加了锁和while (accumulated < size), 而while循环的break有2个条件，第一个是 accumulated>size ,第二个是 等待时间超过 maxTimeToBlockMs，会报出 `throw new TimeoutException`  。      
+`这里解答了3.2 提出来的问题`
+
 ```java
-private final AtomicInteger flushesInProgress;
-private final AtomicInteger appendsInProgress;
-private final int batchSize;
-private final CompressionType compression;
-private final int lingerMs;
-private final long retryBackoffMs;
-private final int deliveryTimeoutMs;
-private final BufferPool free;
-private final Time time;
-private final ConcurrentMap<TopicPartition, Deque<ProducerBatch>> batches;
-private final IncompleteBatches incomplete;
-// The following variables are only accessed by the sender thread, so we don't need to protect them.
-private final Map<TopicPartition, Long> muted;
-private int drainIndex;
+if (waitingTimeElapsed) {
+    throw new TimeoutException("Failed to allocate memory within the configured max blocking time " + maxTimeToBlockMs + " ms.");
+}
 ```
 
-![RecordAccumulator field UML](images/Producer讲解03.png)
-
-RecordAccumulator是消息的累加器，所以fields中更在意的数据存储的容器:       
-**1.** free = new BufferPool(...);  
-```java
-this.free=new BufferPool(this.totalMemorySize, config.getInt(ProducerConfig.BATCH_SIZE_CONFIG), metrics, time, PRODUCER_METRIC_GROUP_NAME)
-```
-
-1.2 BufferPool的数据结构
-先利用IDEA的"Diagram"了解BufferPool有哪些field   
-`重要的field`
-```java
-private final long totalMemory;
-private final int poolableSize;
-private final ReentrantLock lock;
-private final Deque<ByteBuffer> free;
-private final Deque<Condition> waiters;
-/** Total available memory is the sum of nonPooledAvailableMemory and the number of byte buffers in free * poolableSize.  */
-private long nonPooledAvailableMemory;
-private final Metrics metrics;
-private final Time time;
-private final Sensor waitTime;
-```
-
-![BufferPool的数据结构 field UML](images/Producer讲解03.png)
-
-Deque容器为一个给定类型的元素进行线性处理，像向量一样，它能够快速地随机访问任一个元素，并且能够高效地插入和删除容器的尾部元素。但它又与vector不同，deque支持高效插入和删除容器的头部元素，因此也叫做双端队列
+经过上面的代码分析，至于 3.1的问题:向free申请ByteBuffer的时候，为什么要计算batchSize与消息两者的最大字节数？ 
+`下面是本人的理解，若有不同，请留言告诉我`      
+这里的目的是： 增设一个标准的ByteBuffer的大小，最好是能容纳下多条消息。这样会2个好处：1 不用每条消息都去申请ByteBuffer，毕竟申请内存是耗时的；2 第二次的tryAppend()，毕竟申请内存是阻塞的方法，发送消息是并行的，必然会经常出现申请好内存后，数据队列的数据已经发送了，队列是空闲的。所以又重新tryAppend()
+                
 
 
-**2.** ConcurrentMap<TopicPartition, Deque<ProducerBatch>> batches容器
 
 
-## 
+
+
+
+
 
 
 

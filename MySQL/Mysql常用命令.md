@@ -1,5 +1,7 @@
 # 常用命令
 
+## Mysql远程连接
+mysql -h localhost -P 3306 -u root -p
 
 ## 创建数据库
 mysql>create databse [库名];
