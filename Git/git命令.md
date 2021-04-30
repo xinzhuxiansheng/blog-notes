@@ -117,6 +117,8 @@ git checkout tags/v1.0 -b NewBranch
 
 #新建tag
 git tag tag_name
+#将本地tag推送到远程仓库
+git push origin tagname
 #删除本地tag
 git tag -d tag_name
 #删除远程tag
