@@ -42,7 +42,7 @@ ClientRequest clientRequest = client.newClientRequest(nodeId, requestBuilder, no
 client.send(clientRequest, now);
 ```
 
-**3** Broker接受发送过来的数据，分析和校验数据需要它
+**3.** Broker接受发送过来的数据，分析和校验数据需要它
 ```java
 //这是MemoryRecords, 但 MemoryRecordsBuilder.build()会返回MemoryRecords
 //MemoryRecordsBuilder.build()
@@ -70,12 +70,12 @@ Producer端的消息最终都已ByteBuffer类型存储，这里必须了解它�
 >以下逻辑基于kafka-clients版本是2.2.1       
 
 **下面展示的关于"容器"的类**        
-![memoryrecordsbuilder 类图](images/producer_memoryrecordsbuilder02.png)
+![memoryrecordsbuilder 类图](http://118.126.116.71/blogimgs/kafka/producer/producer_memoryrecordsbuilder02.png)
   
 ### ProducerRequest的结构及Record的结构
 Producer会将消息构建出一个ProducerRequest对象，虽然数据的key，value，headers都写入ByteBuffer中，如果写入这个动作是有DefaultRecord类写入，那用户会很容易理解。它是怎么做的。请体会 `万物皆对象,面向对象编程`    
 **ProducerRequest的类图**   
-![ProducerRequest 类图](images/producer_memoryrecordsbuilder03.png) 
+![ProducerRequest 类图](http://118.126.116.71/blogimgs/kafka/producer/producer_memoryrecordsbuilder03.png) 
 
 **Record结构**
 请参考DefaultRecord writeTo()方法和它的类注释.       
@@ -126,7 +126,7 @@ private void appendDefaultRecord(long offset, long timestamp, ByteBuffer key, By
 MemoryRecords对象的创建，在Sender线程发送数据时，会将消息累加器中的ProducerBatch的 memoryRecordsBuilder中的appendStream对象给close(),确保它不能再接受写入新的消息了。 然后才会将ByteBuffer用来创建一个新的MemoryRecords对象。 `后面会详细介绍`
 
 ## MemoryRecordsBuilder的流程图
-![memoryrecordsbuilder 流程图](images/producer_memoryrecordsbuilder01.png)
+![memoryrecordsbuilder 流程图](http://118.126.116.71/blogimgs/kafka/producer/producer_memoryrecordsbuilder01.png)
 
 * MemoryRecordsBuilder.append() 只会给消息分配相对Offset，并且每个ProducerPath的BaseOffset 就是起点Offset是 0         
 * 消息的批次对象是ProducerBatch，所以 每个MemoryRecordsBuilder的lastOffset，也就是这批次的消息的lastOffset。        
@@ -138,15 +138,15 @@ int sizeInBytes = DefaultRecord.writeTo(appendStream, offsetDelta, timestampDelt
 ```
 
 ## 构建ProducerRequest
-![构建ProducerRequest](images/producer_memoryrecordsbuilder04.png)
+![构建ProducerRequest](http://118.126.116.71/blogimgs/kafka/producer/producer_memoryrecordsbuilder04.png)
 
 Sender线程在读取ProducerBatch数据，才会将MemoryRecordsBuilder 转换成MemoryRecords。 `MemoryRecords records = batch.records()`。     
 ```java
-        for (ProducerBatch batch : batches) {
-            TopicPartition tp = batch.topicPartition;
-            MemoryRecords records = batch.records();
-            //...省略部分
-        }
+for (ProducerBatch batch : batches) {
+    TopicPartition tp = batch.topicPartition;
+    MemoryRecords records = batch.records();
+    //...省略部分
+}
 ```
 
 build()方法调用close()。这个处理过程包含:       
