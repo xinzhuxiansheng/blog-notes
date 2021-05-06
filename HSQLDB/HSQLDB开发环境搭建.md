@@ -11,7 +11,10 @@ HSQLDB（HyperSQL数据库）是用`Java`编写的领先的SQL关系数据库系
 HSQLDB支持在任何开源数据库引擎中看到的最广泛的SQL Standard功能：SQL：2016核心语言功能和SQL：2016可选功能的广泛列表。它支持完整的Advanced ANSI-92 SQL，只有两个例外。还支持标准的许多扩展，包括语法兼容模式和其他流行的数据库引擎的功能。    
 
 HyperSQL是完全多线程的，并支持高性能2PL和MVCC（多版本并发控制）事务控制模型。请参阅最新版本的功能列表。     
-HSQLDB经过20多年的不断发展，已在1700多个开源软件项目和许多商业产品中用作数据库和持久性引擎。最新版本非常稳定和可靠。它以其小巧的尺寸，完全或部分在内存中执行的能力，灵活性和速度而著称。        
+HSQLDB经过20多年的不断发展，已在1700多个开源软件项目和许多商业产品中用作数据库和持久性引擎。最新版本非常稳定和可靠。它以其小巧的尺寸，完全或部分在内存中执行的能力，灵活性和速度而著称。    
+
+`以下操作步骤，也可以参考官方文档`
+http://hsqldb.org/doc/2.0/guide/building-app.html   
 
 ## 源码下载
 SOURCEFORGE: https://sourceforge.net/projects/hsqldb/files/hsqldb/    hsqldb_2_5
@@ -21,7 +24,7 @@ SOURCEFORGE: https://sourceforge.net/projects/hsqldb/files/hsqldb/    hsqldb_2_5
 **src** 源码目录    
 **lib** 包含客户端连接工具，这里可以先将lib重命名为 `libtools`  
 
-> 注意: hsqldb项目是Ant编译，忽略项目中build关于Gradle的环境，因为它所依赖的Gradle版本过低，若使用Gradle作为编译环境，在导入项目过程中，会出现很多棘手的问题。
+> 注意: hsqldb项目是Ant编译，忽略项目中build关于Gradle的环境，因为它所依赖的Gradle版本过低，若使用Gradle作为编译环境，在导入项目过程中，会出现IDEA高版本不支持 Gradle太低的版本。   
 
 ## 导入IDEA
 **1.** Open项目
