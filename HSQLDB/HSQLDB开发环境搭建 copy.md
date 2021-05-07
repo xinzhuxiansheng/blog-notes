@@ -110,6 +110,13 @@ select * from user;
 ![查看user数据](images/ideaCodeDebugger06.png)      
 
 
+## Ivy In IDEA
+Ivy管理项目的依赖项
+**1.** IDEA 安装 IvyIDEA插件
+**2.** 根据 `build`文件夹下的 `ivy.xml`,`ivysettings-sample.xml` 配置 IvyIDEA插件
+**3.** 
+
+
 >开发环境已经搭建完成并验证了。 从现在开始，让我们开始探索数据库相关的技术吧 :)。         
 
 从阅读官网文档开始
