@@ -1,7 +1,7 @@
 --In Blog
 --Tags: Kafka
 
-# Kafka Producer的Sender线程
+# Kafka Producer的Sender线程讲解
 
 >涉及Kafka是2.2.1版本
 
@@ -67,7 +67,8 @@ Cluster cluster = metadata.fetch();
 RecordAccumulator.ReadyCheckResult result = this.accumulator.ready(cluster, now);
 ```
 
-**Step01**: 根据RecordAccumulator的batches集合，遍历判断是否存在分区副本的Leader为unknow的集合和ProducerBatch数据已经准备好可以发送的Nodes。    
+**Step01**:     
+根据RecordAccumulator的batches集合，遍历判断是否存在分区副本的Leader为unknow的集合和ProducerBatch数据已经准备好可以发送的Nodes。    
 *5.1.1.* batches的数据结构是 ConcurrentMap<TopicPartition, Deque<ProducerBatch>>， so batches的Keys包含了topic和partition信息  
 *5.1.2.* 子项中的value，都读取Deque队列中的第一个元素，根据多种因素来判断第一个元素是否可以发送。   
 它判断的标准是：是否存在数据或者buffer满了、ProducerBatch延迟发送时间linger.ms或者重试间隔、RecordAccumulator关闭状态等     
@@ -130,7 +131,7 @@ if (guaranteeMessageOrder) {  // yzhou max.in.flight.requests.per.connection 判
 
 **Step04**:     
 **drain()流程图**      
-![drain()](images/producer_sender06.png)
+![drain()](http://118.126.116.71/blogimgs/kafka/producer/producer_sender06.png)
 *5.4.1.* drain()方法根据已经准备好Nodes来获取消息累加器中的数据集，这里传入的maxRequestSize是Producer的max.request.size参数值。     
 * RecordAccumulator.drainBatchesForOneNode(Cluster cluster, Node node, int maxSize, long now)方法 首先获取Node下的所有分区的Leader，遍历每个Leader的PartitionInfo构造TopicPartition获取消息累加器的Deque数据集，这里特别注意 deque.peekFirst()和deque.pollFirst()。peekFirst()获取队列的第一个元素，若队列是空是返回null，但不会删除元素，它是用来判断当前ProducerBatch发生重试时，是否达到重试间隔时间和判断已经读取队列的数据大小+当前ProducerBatch字节的和是否大于要求的maxRequestSize。pollFirst()将经过之前的判断可以读取队列的第一个元素并且从队列删除它，添加到ready队列中。 size变量是用来累加发送的ProducerBatch集合的字节大小。
 
@@ -152,8 +153,9 @@ List<ProducerBatch> expiredBatches = this.accumulator.expiredBatches(now);
 expiredBatches.addAll(expiredInflightBatches);
 ```
 
-**Step05**:  从待发送的数据集inflightBatches中获取过期数据集，从消息累加器中获取过期数据集。在2.2.x版本中，Producer默认的重试次数为Long.MAX_VALUE,其实这样的数值不合理，所以在这里引入了"delivery.timeout.ms"参数，它默认时间是120s。 这里可以参考`Kafka KIP-91` https://cwiki.apache.org/confluence/display/KAFKA/KIP-91+Provide+Intuitive+User+Timeouts+in+The+Producer
-![delivery.timeout.ms](images/producer_sender02.png)
+**Step05**:     
+从待发送的数据集inflightBatches中获取过期数据集，从消息累加器中获取过期数据集。在2.2.x版本中，Producer默认的重试次数为Long.MAX_VALUE,其实这样的数值不合理，所以在这里引入了"delivery.timeout.ms"参数，它默认时间是120s。 这里可以参考`Kafka KIP-91` https://cwiki.apache.org/confluence/display/KAFKA/KIP-91+Provide+Intuitive+User+Timeouts+in+The+Producer
+![delivery.timeout.ms](http://118.126.116.71/blogimgs/kafka/producer/producer_sender02.png)
 
 --- 
 *5.6 Sender.sendProducerData() : step06* 
@@ -193,7 +195,8 @@ if (!result.readyNodes.isEmpty()) {
 }
 ```
 
-**Step07**: 当node节点已准备，就会立即发送数据，若没有就等待，具体等待时间要比较 connection重新建联的等待时间，消息累加器的数据过期时间，以及边界值问题。 `这里的逻辑 请参考Selector.select()`  
+**Step07**:     
+当node节点已准备，就会立即发送数据，若没有就等待，具体等待时间要比较 connection重新建联的等待时间，消息累加器的数据过期时间，以及边界值问题。 `这里的逻辑 请参考Selector.select()`  
 *5.7.1 Selector.select()*
 在kafka的源码，这样的时间大小判断，在经常不过了，它存在不同维度的数据时间临界值。 当上面的 pollTimeout=0时，会告诉nioSelector立即发送，其他则通过等待node节点建立连接。所以这里提出等待时间重叠，减少因为等待时间不合理问题，导致其他数据过期问题。 
 ```java
@@ -222,7 +225,8 @@ private int select(long timeoutMs) throws IOException {
 sendProduceRequests(batches, now);
 ```
 
-**Step08**: batches的数据结构是Map<Integer,List<ProducerBatch>> ，key是node id(brokerId) value是每个节点待发送的数据集，sendProducerRequests方法遍历节点集合，根据List<ProducerBatch>数据集以Topic+Parition为key，将ProducerBatch的MemoryRecordsBuilder用来构建MemoryRecords对象，存入Map<TopicPartition, MemoryRecords> produceRecordsByPartition对象中; 这里可以参考之前的推文 [Kafka Producer的MemoryRecordsBuilder 别忽略它](https://mp.weixin.qq.com/s/Bb1rtJwFRWw7YyCwA66E0w) ,这里面介绍了 MemoryRecordsBuilder构建ProducerRequest的过程。
+**Step08**:     
+batches的数据结构是Map<Integer,List<ProducerBatch>> ，key是node id(brokerId) value是每个节点待发送的数据集，sendProducerRequests方法遍历节点集合，根据List<ProducerBatch>数据集以Topic+Parition为key，将ProducerBatch的MemoryRecordsBuilder用来构建MemoryRecords对象，存入Map<TopicPartition, MemoryRecords> produceRecordsByPartition对象中; 这里可以参考之前的推文 [Kafka Producer的MemoryRecordsBuilder 别忽略它](https://mp.weixin.qq.com/s/Bb1rtJwFRWw7YyCwA66E0w) ,这里面介绍了 MemoryRecordsBuilder构建ProducerRequest的过程。
 
 >博主对java NIO知识缺乏，对Kafka的网络通信梳理不够仔细，这里避免误导大家，先跳过这块介绍，后面会补充这里。  
 
@@ -254,17 +258,17 @@ private void doSend(ClientRequest clientRequest, boolean isInternalRequest, long
 }
 ```
 
-#### RequestHeader  
-**RequestHeader类图**    
-![RequestHeader](images/producer_sender03.png)
+#### RequestHeader      
+**RequestHeader类图**      
+![RequestHeader](http://118.126.116.71/blogimgs/kafka/producer/producer_sender03.png)
 * API_KEY_FIELD_NAME: 请求类型,请参考 `AbstractRequest类`中的parseRequest()方法, 发送数据所定义的apikey=PRODUCE;
 * API_VERSION_FIELD_NAME: 发送数据的日志版本；
 * CLIENT_ID_FIELD_NAME: Producer的client.id参数或者producer 生成的clientId "producer-" + PRODUCER_CLIENT_ID_SEQUENCE.getAndIncrement();
 * CORRELATION_ID_FIELD_NAME: 它是这次请求的id，broker端在处理完请求后会把同样的CorrelationId返回，这样Clients端可以把这次的响应与请求对应起来;
 
-#### NetworkSend
-**NetworkSend类图**
-![NetworkSend](images/producer_sender04.png)    
+#### NetworkSend    
+**NetworkSend类图** 
+![NetworkSend](http://118.126.116.71/blogimgs/kafka/producer/producer_sender04.png)    
 下面是NetworkSend对象创建:  
 ```java
 Send send = request.toSend(destination, header);
@@ -274,9 +278,9 @@ NetworkSend继承了ByteBufferSend类，
 * 将新创建的4个字节的ByteBuffer与header ByteBuffer组成 ByteBuffer[]。并且累计两个ByteBuffer剩余的字节大小和(remaining += buffer.remainning)。
 * destination是nodeId
 
-#### InFlightRequests
-**InFlightRequests类图**    
-![InFlightRequests](images/producer_sender05.png)    
+#### InFlightRequests   
+**InFlightRequests类图**     
+![InFlightRequests](http://118.126.116.71/blogimgs/kafka/producer/producer_sender05.png)    
 
 * maxInFlightRequestsPerConnection 它是Producer的`max.in.flight.requests.per.connection`参数值，默认是5。 根据node节点获取待发送的InFlightRequest数据，
 * queue.peekFirst().send.completed()是为了确定队列中的第一个元素的请求是否已经发送完成，如果没有则不继续向这个node发送消息
