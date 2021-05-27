@@ -48,20 +48,20 @@ private ProduceRequest(short version, short acks, int timeout, Map<TopicPartitio
 ```   
 所以 `handleProduceRequest(request)` 是处理Produce请求的方法。 
 *接下来，重点分析handleProduceRequest(),它是处理的过程*         
-![broker_handleproducerequest01](images/broker_handleproducerequest01.png)
+![broker_handleproducerequest01](http://118.126.116.71/blogimgs/kafka/broker/broker_handleproducerequest01.png)
 
 ## 3. Magic Value
 Kafka在开源发展过程中，它的消息格式从开始V0,经过V1 到现在的V2版本。Kafka Broker通过**RecordBatch**中的MAGIC_VALUE_V0、MAGIC_VALUE_V1、MAGIC_VALUE_V2分别表示V0,V1,V2日志格式的消息。 鉴于0.11 Released June 28, 2017，并且推文中的Producer是2.2.1版本,**所以推文针对Broker处理逻辑基于Magic Value =2的**。  
 它的具体介绍请查看[Kafka官网DOCS-Message Format](http://kafka.apache.org/22/documentation.html#messageformat)  
 `下面是不同消息格式的发布版本图：`   
-![broker_handleproducerequest03](images/broker_handleproducerequest03.png)
+![broker_handleproducerequest03](http://118.126.116.71/blogimgs/kafka/broker/broker_handleproducerequest03.png)
  
 
 >其实 Magic Value就类似于在接口定义版本 例如： http://xxx.com/v1/queryUserInfo/ 这样的比较，希望读者对它会有熟悉的概念了解。 
 
 ## 4. 处理流程图
 下面的 5 ~ 10 编号会对处理过程做阐述。每个编号代表某个类的处理方法
-![broker_handleproducerequest02](images/broker_handleproducerequest02.png)
+![broker_handleproducerequest02](http://118.126.116.71/blogimgs/kafka/broker/broker_handleproducerequest02.png)
 
 ## 5. KafkaApis.handleProduceRequest()
 
@@ -237,7 +237,7 @@ leaderReplicaIfLocal match {
 
 **2.** 了解MutableRecordBatch
 DefaultRecordBatch是MutableRecordBatch的实现类，并且MutableRecordBatch也继承了RecordBatch。 
-![broker_handleproducerequest04](images/broker_handleproducerequest04.png) 
+![broker_handleproducerequest04](http://118.126.116.71/blogimgs/kafka/broker/broker_handleproducerequest04.png) 
 
 **3.** LogAppendInfo的构造方法。
 `参数`  
@@ -418,7 +418,7 @@ def append(largestOffset: Long,
 **2.** LogAppendInfo对象，它是通过解析records对象获取很多重要的信息，例如baseOffset、lastOffset等等。
 **3.** 从OffsetMeta获取下一条消息的Offset，是加了lock。
 **4.** RecordBatch与Record的关系，在代码中经常出现` for (batch <- records.batches.asScala)` 与`for (record <- batch.asScala)` 请知晓它们遍历谁。
-![broker_handleproducerequest05](images/broker_handleproducerequest05.png)
+![broker_handleproducerequest05](http://118.126.116.71/blogimgs/kafka/broker/broker_handleproducerequest05.png)
 
 
 
