@@ -47,7 +47,7 @@ private ProduceRequest(short version, short acks, int timeout, Map<TopicPartitio
         ... 省略部分代码
 ```   
 所以 `handleProduceRequest(request)` 是处理Produce请求的方法。 
-*接下来，重点分析handleProduceRequest(),它是处理的过程*         
+*接下来，重点分析handleProduceRequest()方法处理的过程*         
 ![broker_handleproducerequest01](http://118.126.116.71/blogimgs/kafka/broker/broker_handleproducerequest01.png)
 
 ## 3. Magic Value
@@ -217,7 +217,7 @@ leaderReplicaIfLocal match {
 * isFromClient: 从Clients的Producer发起请求 这里默认是true
 * interBrokerProtocolVersion: Kafka Broker版本 例如: 2.2-IV1
 * assignOffsets: 分配Offset, 默认 true
-* leaderEpoch:  待补充！！！
+* leaderEpoch:  写入数据的Leader版本
 
 ### *9.1 Log.append() : step01*     
 ```java
