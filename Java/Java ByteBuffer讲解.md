@@ -58,7 +58,7 @@ Mark : 标记缓冲区的position索引值。 当缓冲区调用reset()方法时
 
 下面图3-1是ByteBuffer的继承关系。
 `图3-1`   
-![Java_bytebuffer03](images/Java_bytebuffer03.png)
+![Java_bytebuffer03](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer03.png)
 
 `图3-2`   
 ![Java_bytebuffer05](images/Java_bytebuffer05.png)
@@ -67,7 +67,7 @@ Mark : 标记缓冲区的position索引值。 当缓冲区调用reset()方法时
 ## 4. 创建字节缓冲区
 根据Java8 doc的ByteBuffer可知(https://docs.oracle.com/javase/8/docs/api/index.html), ByteBuffer的创建方式有2种：一种是直接缓冲期，另一种非直接缓冲区。 直接与非直接缓冲区的区别在于缓冲区的存储位置不同。直接缓冲区是直接存储在操作系统的内存中（非JVM的堆内存中）， 非直接缓冲区是存储在JVM的堆内存中。为了确保最高性能而不影响JVM堆，可以利用创建直接缓冲区，尽管直接缓冲区具有更高的分配成本，但使用它们读取和写入数据的效率更高，因为不想产生GC的干扰。
 `图4-1`   
-![Java_bytebuffer04](images/Java_bytebuffer04.png)
+![Java_bytebuffer04](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer04.png)
 ```java
 // 非直接缓冲区
 int size = 1024*1024*20;
@@ -106,7 +106,7 @@ ByteBuffer bf01 = ByteBuffer.allocate(size);
 logger.info("position: {} , limit: {} , capacity: {}",bf01.position(),bf01.limit(),bf01.capacity());
 ```
 
-![Java_bytebuffer01](images/Java_bytebuffer01.png)
+![Java_bytebuffer01](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer01.png)
 
 >结果： Java堆内存溢出，JVM最大10M堆内存
 
@@ -119,7 +119,7 @@ ByteBuffer bf01 = ByteBuffer.allocateDirect(size);
 logger.info("position: {} , limit: {} , capacity: {}",bf01.position(),bf01.limit(),bf01.capacity());
 ```
 
-![Java_bytebuffer02](images/Java_bytebuffer02.png)
+![Java_bytebuffer02](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer02.png)
 
 >结果： 当JVM配置堆的最大存储参数-Xmx，而应用所能分配的直接堆内存默认是`Runtime.getRuntime().maxMemory()`值。 也可以通过在JVM的启动参数-XX:MaxDirectMemorySize=xxxx 设置直接堆内存大小。
 
@@ -145,7 +145,7 @@ logger.info("read position: {} , limit: {} , capacity: {}",bf01.position(),bf01.
 
 
 `图5-1`
-![Java_bytebuffer05](images/Java_bytebuffer05.png)
+![Java_bytebuffer05](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer05.png)
 
 `Buffer.flip()`
 ```java
@@ -253,7 +253,7 @@ Exception in thread "main" java.nio.BufferUnderflowException
 slice()方法会创建一个共享该缓冲区内容的**新**字节缓冲区。它以position与limit之间的buffer数据为内容，position=0，并且limit，capacity等于(limit - position)        
 
 `图9-2`
-![Java_bytebuffer07](images/Java_bytebuffer07.png)
+![Java_bytebuffer07](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer07.png)
 
 ```java
 int size01 = 6;
@@ -283,10 +283,30 @@ public final Buffer clear() {
 缓冲区当前的position和limit之间的字节被复制到**新**缓冲区的开头。字节在position与limit之间的数据会复制到position为0的新缓冲区中，然后将capacity的值赋值给新缓冲区的limit。
 
 `图9-4`
-![Java_bytebuffer08](images/Java_bytebuffer08.png)
+![Java_bytebuffer08](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer08.png)
+
+```java
+int size01 = 6;
+//以size为空间大小的创建ByteBuffer对象
+ByteBuffer bf01 = ByteBuffer.allocate(size01);
+bf01.put((byte) 0);
+bf01.put((byte) 1);
+bf01.put((byte) 2);
+bf01.put((byte) 3);
+logger.info("bf01 position: {} , limit: {} , capacity: {}", bf01.position(), bf01.limit(), bf01.capacity());
+logger.info("bf01 value: {}", Arrays.toString(bf01.array()));
+ByteBuffer bf02 = bf01.compact();
+logger.info("bf02 position: {} , limit: {} , capacity: {}", bf02.position(), bf02.limit(), bf02.capacity());
+logger.info("bf02 value: {}", Arrays.toString(bf02.array()));
+```
+`日志输出:` 
+2021-06-06 03:17:25  [ ByteBufferDebuger.java:111 ] - [ INFO ]  bf01 position: 4 , limit: 6 , capacity: 6
+2021-06-06 03:17:25  [ ByteBufferDebuger.java:112 ] - [ INFO ]  bf01 value: [0, 1, 2, 3, 0, 0]
+2021-06-06 03:17:25  [ ByteBufferDebuger.java:114 ] - [ INFO ]  bf02 position: 2 , limit: 6 , capacity: 6
+2021-06-06 03:17:25  [ ByteBufferDebuger.java:115 ] - [ INFO ]  bf02 value: [0, 0, 2, 3, 0, 0]
 
 
-## 案例实战
+## 10. 案例实战
 请参考学习 **creating-a-java-off-heap-in-memory-database**(https://blogs.oracle.com/javamagazine/creating-a-java-off-heap-in-memory-database),这篇Blog的代码中存在一些问题，但是不影响读者阅读。 @ericjbruno的Blog说的挺详细的，它是构建直接缓冲区的K-V数据库。
 
 >如果对ByteBuffer还不清楚的读者，希望能细品，再细品。 
@@ -360,7 +380,7 @@ private static final Logger logger = LoggerFactory.getLogger(NoHeapDBTest.class)
 ```
 
 
-## 9. 总结
+## 11. 总结
 ByteBuffer针对字节处理的缓冲区，它继承了Buffer的4个重要对象(capacity,limit,position,mark), 针对Buffer操作的时候，需要特别区分是写入还是读取，因为position、limit需要使用flip()做翻转。 Buffer的读写操作非常类似不可变数组。 直接缓冲区虽使用系统内存，也同样有空间大小边界值，也有可能出现OOM情况，不管直接缓冲区还是非直接缓冲区，它们的创建也是消耗性能的。 所以缓冲区的池化可以很大的优化性能，请参考Kafka Producer的BufferPool缓冲池，它避免重复创建非直接缓冲区。
 
 
