@@ -195,7 +195,7 @@ while (buffer.hasRemaining())
     System.out.println(buffer.get());
 ```
 
-> Buffer中很多方法会对buffer的position和limit两个属性值调整大小， 希望读者能意识到，buffer的读写索引位置都与position和limit有关 ，若在不清楚方法作用的情况随意调用，可能会导致数据读写出现混乱导致`数据丢失`。
+> Buffer中很多方法会对buffer的position和limit两个属性值调整大小， 希望读者能意识到，buffer的读写索引位置都与position和limit有关 ，若在不清楚方法作用的情况随意调用，可能会导致数据读写出现混乱导致`数据丢失`或者`数据重复读取`。
 
 ## 8. mark()和reset()
 Buffer提供mark()方法用于标记当前 Buffer的position，reset()方法根据mark重置position。当我们操作Buffer之后，有可能需要回到以前的位置，这个时候，只需要先mark() 再操作，操作完之后再reset()即可。
@@ -214,7 +214,7 @@ logger.info("read position: {} , limit: {} , capacity: {}",bf01.position(),bf01.
 
 ## 9. 其他重要的方法
 ### 9.1 duplicate()
-duplicate()方法 会创建一个共享该缓冲区内容的**新**字节缓冲区。  
+duplicate()方法会创建一个共享该缓冲区内容的**新**字节缓冲区。Buffer的四个属性值都是相同的。  
 `示例 9.1`
 ```java
 int size01 = 6;
@@ -250,6 +250,23 @@ Exception in thread "main" java.nio.BufferUnderflowException
 
 
 ### 9.2 slice()
+slice()方法会创建一个共享该缓冲区内容的**新**字节缓冲区。它以position与limit之间的buffer数据为内容，position=0，并且limit，capacity等于(limit - position)        
+
+`图9-2`
+![Java_bytebuffer07](images/Java_bytebuffer07.png)
+
+```java
+int size01 = 6;
+//以size为空间大小的创建ByteBuffer对象
+ByteBuffer bf01 = ByteBuffer.allocate(size01);
+bf01.putInt(5);
+bf01.put((byte) 1);
+logger.info("bf01 position: {} , limit: {} , capacity: {}",bf01.position(),bf01.limit(),bf01.capacity());
+bf01.position(4);
+ByteBuffer bf02 = bf01.slice();
+logger.info("bf02 position: {} , limit: {} , capacity: {}",bf02.position(),bf02.limit(),bf02.capacity());
+logger.info("bf02 value: {}",bf02.get());
+```
 
 ### 9.3 clear()
 是重置Buffer的position=0和limit=capacity，与reset()不同的。
@@ -263,9 +280,10 @@ public final Buffer clear() {
 ```
 
 ### 9.4 compact()
+缓冲区当前的position和limit之间的字节被复制到**新**缓冲区的开头。字节在position与limit之间的数据会复制到position为0的新缓冲区中，然后将capacity的值赋值给新缓冲区的limit。
 
-
-
+`图9-4`
+![Java_bytebuffer08](images/Java_bytebuffer08.png)
 
 
 ## 案例实战
@@ -348,5 +366,3 @@ ByteBuffer针对字节处理的缓冲区，它继承了Buffer的4个重要对象
 
 # Reference 
 https://docs.oracle.com/javase/8/docs/api/index.html
-https://blog.csdn.net/mrliuzhao/article/details/89453082
-[create](https://blogs.oracle.com/javamagazine/creating-a-java-off-heap-in-memory-database)
