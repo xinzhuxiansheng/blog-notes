@@ -102,7 +102,7 @@ private void completeFutureAndFireCallbacks(long baseOffset, long logAppendTime,
         //... 省略部分代码
 ```
 
-RecordAccumulator的ready()方法 它会判断重试间隔，linger.ms是否达到，batch.size是否达到，消息是否过期等等。 它仍然要经历这些判断，当然这里最容易达到的条件是 linger.ms。
+RecordAccumulator的ready()方法 它会判断重试间隔，linger.ms是否达到，batch.size是否达到，消息是否过期等等。 它仍然要经历这些判断，当然这里最容易达到的条件是 linger.ms。  我想这里也解释出，为什么kafka producer的linger.ms 默认0 含义是立即发送 ，这个参数对于数据量大，想通过批量发送减少网络次数及提高压缩比，会将linger.ms 参数设置大一些。
 ```java
 boolean backingOff = batch.attempts() > 0 && waitedTimeMs < retryBackoffMs;
 long timeToWaitMs = backingOff ? retryBackoffMs : lingerMs;
@@ -111,3 +111,8 @@ boolean expired = waitedTimeMs >= timeToWaitMs;
 boolean sendable = full || expired || exhausted || closed || flushInProgress();
 ```
 
+这里你可以做个有趣的测试， 让producer 同步发送，并且在不同值 linger.ms ，并且打印每条消息发送等待的时间。 
+
+
+
+5. 总结:  producer的异步，同步 ，对于sender线程是否要发送它，它们条件是对等的。 所以 若producer需要同步发送时候，需要将linger.ms设置为0
