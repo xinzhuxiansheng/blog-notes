@@ -19,6 +19,9 @@ kafkaController.startup()
 
 
 
+
+
+
 val brokerInfo = createBrokerInfo
 val brokerEpoch = zkClient.registerBroker(brokerInfo)
 
