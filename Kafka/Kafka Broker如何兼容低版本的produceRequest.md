@@ -1,11 +1,18 @@
 --In Blog
 --Tags: Kafka
 
-# Kafka Broker处理ProduceRequest的过程
+# Kafka Broker如何兼容低版本的produceRequest
 
-> 涉及Kafka是2.2.1版本
+> 涉及Kafka是2.2.1版本，Producer(kafka-clients)是0.10.0.0版本
 
-## 1.引言
+## 1. 前言
+在之前的推文["Kafka Broker处理ProduceRequest的过程"](https://mp.weixin.qq.com/s/4siSxGScg1wqI6H7NKLVCw) 中第三章节 **Magic Value**中介绍了Kafka的消息格式的版本发布历程，这篇推文介绍不同版本的差异化。 **所以这里提出一个很有价值的issue：高版本Kafka Broker如何兼容低版本的produceRequest?** 
+
+## 2. Kafka Message和Message Format
+
+
+
+
 `KafkaApis`是Broker处理各种请求类型的入口，这里可以把它当作Spring boot的`Controller`来看。所以它足以引起你的重视了。关于接受的数据是通过`val produceRequest = request.body[ProduceRequest]`解析出来，而ProduceRequest处理过程会涉及到的`ReplicaManager、Partition、Log、LogSegment`相关类，经过它们处理后"数据落盘到 xxxxxx.log文件中"。
 
 > Broker处理ProduceRequest的过程较复杂，这里先列出一些疑惑点：
