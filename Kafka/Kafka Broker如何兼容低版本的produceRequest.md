@@ -11,6 +11,139 @@
 ## 2. Kafka Message和Message Format
 
 
+## 3. Log.append(...)
+请阅读之前的推文["Kafka Broker处理ProduceRequest的过程"](https://mp.weixin.qq.com/s/4siSxGScg1wqI6H7NKLVCw) ，快速了解它的上下文。
+`下图标识出起始点：`  
+![起始点](images/broker_oldmessageformat01.png)
+
+>接下来主要说明的地方是： LogValidator.validateMessagesAndAssignOffsets(...)
+![validateMessagesAndAssignOffsets](images/broker_oldmessageformat02.png)
+
+### 3.1 LogValidator.validateMessagesAndAssignOffsets(...)
+
+**3.1.1 入口**
+```java
+/**
+   * Update the offsets for this message set and do further validation on messages including:
+   * 1. Messages for compacted topics must have keys
+   * 2. When magic value >= 1, inner messages of a compressed message set must have monotonically increasing offsets
+   *    starting from 0.
+   * 3. When magic value >= 1, validate and maybe overwrite timestamps of messages.
+   * 4. Declared count of records in DefaultRecordBatch must match number of valid records contained therein.
+   *
+   * This method will convert messages as necessary to the topic's configured message format version. If no format
+   * conversion or value overwriting is required for messages, this method will perform in-place operations to
+   * avoid expensive re-compression.
+   *
+   * Returns a ValidationAndOffsetAssignResult containing the validated message set, maximum timestamp, the offset
+   * of the shallow message with the max timestamp and a boolean indicating whether the message sizes may have changed.
+   */
+  private[kafka] def validateMessagesAndAssignOffsets(records: MemoryRecords,
+                                                      offsetCounter: LongRef,
+                                                      time: Time,
+                                                      now: Long,
+                                                      sourceCodec: CompressionCodec,
+                                                      targetCodec: CompressionCodec,
+                                                      compactedTopic: Boolean,
+                                                      magic: Byte,
+                                                      timestampType: TimestampType,
+                                                      timestampDiffMaxMs: Long,
+                                                      partitionLeaderEpoch: Int,
+                                                      isFromClient: Boolean,
+                                                      interBrokerProtocolVersion: ApiVersion): ValidationAndOffsetAssignResult = {
+    if (sourceCodec == NoCompressionCodec && targetCodec == NoCompressionCodec) {
+     // ...省略部分代码， 假定Producer的压缩格式是snappy
+    } else {
+      validateMessagesAndAssignOffsetsCompressed(records, offsetCounter, time, now, sourceCodec, targetCodec, compactedTopic,
+        magic, timestampType, timestampDiffMaxMs, partitionLeaderEpoch, isFromClient, interBrokerProtocolVersion)
+    }
+  }
+```
+
+
+### 3.2 LogValidator.validateMessagesAndAssignOffsetsCompressed(...)
+
+```java
+val validatedRecords = new mutable.ArrayBuffer[Record]
+
+for (batch <- records.batches.asScala) {  // AbstractLegacyRecordBatch$BasicLegacyRecordBatch
+    // 省略部分代码
+
+    for (record <- batch.asScala) {  // AbstractLegacyRecordBatch$BasicLegacyRecordBatch
+      // 省略部分代码
+
+      // No in place assignment situation 4
+      if (!record.hasMagic(toMagic))  //AbstractLegacyRecordBatch$BasicLegacyRecordBatch
+        inPlaceAssignment = false
+
+      validatedRecords += record
+    }
+  }
+```
+
+`图3-2 for循环` 
+![for循环](images/broker_oldmessageformat03.png)
+
+>**图3-2**涉及到的2次for循环， 第一次的for是实现Iterator<T>接口, 第二次的for是实现Iterable<T>接口。
+
+#### 3.2.1 batch <- records.batches.asScala
+因为Producer(kafka-clients)是0.10.0.0版本 所以 batch的类型是 `AbstractLegacyRecordBatch.ByteBufferLegacyRecordBatch`
+```java
+
+// records: MemoryRecords
+private final Iterable<MutableRecordBatch> batches = this::batchIterator;
+
+//--------------------------------------------------------------------------
+
+// records.batches
+@Override
+public AbstractIterator<MutableRecordBatch> batchIterator() {
+    return new RecordBatchIterator<>(new ByteBufferLogInputStream(buffer.duplicate(), Integer.MAX_VALUE));
+}
+
+//--------------------------------------------------------------------------
+
+// logInputStream的派生类 ByteBufferLogInputStream, 重写makeNext()方法。
+RecordBatchIterator(LogInputStream<T> logInputStream) {
+    this.logInputStream = logInputStream;
+}
+
+@Override
+protected T makeNext() {
+    try {
+        T batch = logInputStream.nextBatch(); // ByteBufferLogInputStream
+        if (batch == null)
+            return allDone();
+        return batch;
+    } catch (IOException e) {
+        throw new KafkaException(e);
+    }
+}
+
+//--------------------------------------------------------------------------
+
+// 根据nextBatchSize的字节大小，读取ByteBuffer数据并且根据Magic Value值创建 MutableRecordBatch的派生类。
+public MutableRecordBatch nextBatch() {
+    int remaining = buffer.remaining();
+
+    Integer batchSize = nextBatchSize();
+    if (batchSize == null || remaining < batchSize)
+        return null;
+
+    byte magic = buffer.get(buffer.position() + MAGIC_OFFSET);
+
+    ByteBuffer batchSlice = buffer.slice();
+    batchSlice.limit(batchSize);
+    buffer.position(buffer.position() + batchSize);
+
+    if (magic > RecordBatch.MAGIC_VALUE_V1)
+        return new DefaultRecordBatch(batchSlice);
+    else 
+        return new AbstractLegacyRecordBatch.ByteBufferLegacyRecordBatch(batchSlice);
+}
+```
+
+#### 3.2.2 record <- batch.asScala
 
 
 `KafkaApis`是Broker处理各种请求类型的入口，这里可以把它当作Spring boot的`Controller`来看。所以它足以引起你的重视了。关于接受的数据是通过`val produceRequest = request.body[ProduceRequest]`解析出来，而ProduceRequest处理过程会涉及到的`ReplicaManager、Partition、Log、LogSegment`相关类，经过它们处理后"数据落盘到 xxxxxx.log文件中"。
