@@ -144,7 +144,7 @@ public MutableRecordBatch nextBatch() {
 ```
 
 #### 3.2.2 record <- batch.asScala
-
+由**章节3.2.2**可知 batch的类型是 `AbstractLegacyRecordBatch.ByteBufferLegacyRecordBatch`， 并且 ByteBufferLegacyRecordBatch
 
 `KafkaApis`是Broker处理各种请求类型的入口，这里可以把它当作Spring boot的`Controller`来看。所以它足以引起你的重视了。关于接受的数据是通过`val produceRequest = request.body[ProduceRequest]`解析出来，而ProduceRequest处理过程会涉及到的`ReplicaManager、Partition、Log、LogSegment`相关类，经过它们处理后"数据落盘到 xxxxxx.log文件中"。
 
