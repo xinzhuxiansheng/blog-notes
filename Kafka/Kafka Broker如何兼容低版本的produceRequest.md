@@ -77,7 +77,7 @@ for (batch <- records.batches.asScala) {  // AbstractLegacyRecordBatch$BasicLega
 `图3-2-2 for循环` 
 ![for循环](images/broker_oldmessageformat03.png)
 
-* 第一个for循环 *records.batches* 将MemoryRecords的ByteBuffer类型的buffer，根据Records.java中 buffer当前的position + SIZE的偏移量(OFFSET_OFFSET+OFFSET_LENGTH)，通过buffer.getInt()固定读取4个长度(SIZE_LENGTH)，。并根据Magic Value判断是创建DefaultRecrdBatch或者ByteBufferLegacyRecordBatch对象，直到将ByteBuffer读取完。 
+**3.2.1** 第一个for循环 *records.batches* 将MemoryRecords的ByteBuffer类型的buffer，根据Records.java中(**参考代码3-2-3**) buffer当前的position + SIZE的偏移量(OFFSET_OFFSET+OFFSET_LENGTH)，通过buffer.getInt()固定读取4个长度(SIZE_LENGTH)，。并根据Magic Value判断若大于V1创建DefaultRecrdBatch否则ByteBufferLegacyRecordBatch对象，直到将ByteBuffer读取完(**参考代码3-2-4**)。  
 
 `代码3-2-3 Records`
 ```java
@@ -95,10 +95,7 @@ public interface Records extends BaseRecords {
     int HEADER_SIZE_UP_TO_MAGIC = MAGIC_OFFSET + MAGIC_LENGTH;
 ```
 
-* 
-
-
-`代码3-2-1 ByteBufferLogInputStream.nextBatch()`
+`代码3-2-4 ByteBufferLogInputStream.nextBatch()`
 ```java
 public MutableRecordBatch nextBatch() {
     int remaining = buffer.remaining();
@@ -116,11 +113,17 @@ public MutableRecordBatch nextBatch() {
     if (magic > RecordBatch.MAGIC_VALUE_V1)
         return new DefaultRecordBatch(batchSlice);
     else {
-        System.out.println(String.format("0626 yzhou ByteBufferLogInputStream batchSize: "+ batchSize));
         return new AbstractLegacyRecordBatch.ByteBufferLegacyRecordBatch(batchSlice);
     }
 }
 ```
+
+>在本文的第一行就已经特别说明Producer的version是0.10.0.0 且Magic Value=1
+
+**3.2.2** 根据章节3.2.1 第一个for循环会得到**ByteBufferLegacyRecordBatch类型的 batch**, 在第二个for循环 *batch.asScala*，batch继承了AbstractLegacyRecordBatch
+
+
+
 
 `源码3.2.1`
 ```java
