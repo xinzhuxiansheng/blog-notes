@@ -1,7 +1,7 @@
 --In Blog
 --Tags: Kafka
 
-# Kafka Broker关于处理ProduceRequest的MessageConversions(别忽略它)
+# Kafka Broker关于处理ProduceRequest的MessageConversions(非常重要)
 
 > 涉及Kafka是2.2.1版本，Producer(kafka-clients)是0.10.0.0版本并且配置压缩格式为**snappy**
 
@@ -15,19 +15,19 @@
 ## 2. 转换
 * 在业务代码中，有时会遇到ClassA的对象使用Fastjson转换成JSONObject temp对象，再将temp转成ClassB(参考图2-1)， 若ClassA的对象字节**较大**，这对于Fastjson的转换来说是耗时的。     
 `图2-1`
-![fastjson转换](images/broker_oldmessageformat04.png)
+![fastjson转换](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat04.png)
 
 * 这里可以引出Kafka针对ProduceRequest的消息转换(参考图2-2)，对于Producer来说消息的发送   很多情况下都是批量+压缩，所以若V2以下的消息集**较大**进行解压遍历再压缩转换V2格式的消息集，这同样也是耗时。    
 `图2-2`
-![messageConversions](images/broker_oldmessageformat05.png)
+![messageConversions](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat05.png)
 
 ## 3. LogValidator.validateMessagesAndAssignOffsets(...)
 请阅读之前的推文["Kafka Broker处理ProduceRequest的过程"](https://mp.weixin.qq.com/s/4siSxGScg1wqI6H7NKLVCw) ，快速了解它的上下文。 图3-1给出了MessageConversions处理逻辑的地方 **Log.append()方法**，它涉及主要的3个步骤如图3-2，其中 LogValidator.validateMessagesAndAssignOffsets(...)方法，它会涉及到消息的解压和转换。  下面会详细说明validateMessagesAndAssignOffsets()方法的处理过程。    
 `图3-1`
-![起始点](images/broker_oldmessageformat01.png)
+![起始点](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat01.png)
 
 `图3-2`
-![validateMessagesAndAssignOffsets](images/broker_oldmessageformat02.png)
+![validateMessagesAndAssignOffsets](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat02.png)
 
 ### 3.1 LogValidator.validateMessagesAndAssignOffsets(...)
 
@@ -77,7 +77,7 @@ for (batch <- records.batches.asScala) {  // AbstractLegacyRecordBatch$BasicLega
 ```
 
 `图3-2-2 for循环` 
-![for循环](images/broker_oldmessageformat03.png)
+![for循环](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat03.png)
 
 **3.2.1**   
 外层for循环 *records.batches* 将MemoryRecords的ByteBuffer类型的buffer，根据Records.java中(**参考代码3-2-3**) buffer当前的position + SIZE的偏移量(OFFSET_OFFSET+OFFSET_LENGTH)，通过buffer.getInt()固定读取4个长度(SIZE_LENGTH)，。并根据Magic Value判断若大于V1创建DefaultRecrdBatch否则ByteBufferLegacyRecordBatch对象，直到将ByteBuffer读取完(**参考代码3-2-4**)。  
@@ -256,7 +256,7 @@ public AbstractLegacyRecordBatch nextBatch() throws IOException {
     }
 ```
 
-### 4. 重点！！！ LogValidator.buildRecordsAndAssignOffsets() 
+## 4. 重点！！！ LogValidator.buildRecordsAndAssignOffsets() 
 在章节3中花了较多的篇幅来说明嵌套for循环，它并不是那么简单。 下面该到我们的重点：buildRecordsAndAssignOffsets()方法。 在代码4-1中，我添加**@标记4.1**，我从这里开始说起。 record的Magic Vlue = 1，toMiagic表示的是Broker的Magic Value，所以inPlaceAssignment始终等于false。 当执行完嵌套循环，会调用 buildRecordsAndAssignOffsets()方法。  
 
 在代码4-2中，若熟悉Producer的send()代码的话 ，这里会非常的熟悉。    
@@ -266,7 +266,8 @@ public AbstractLegacyRecordBatch nextBatch() throws IOException {
 4. 最后调用build()方法，构建MemoryRecords类型的消息批次     
 
 在**代码4-2**中@标记4.2会涉及到三个非常重要的指标，指标项： TemporaryMemoryBytes，MessageConversionsTimeMs，MessageConversionsTimeMs，
-请参考Kafka官网[6.6 Monitoring](http://kafka.apache.org/22/documentation.html#monitoring)
+请参考Kafka官网[6.6 Monitoring](http://kafka.apache.org/22/documentation.html#monitoring)    
+
 | No. | DESCRIPTION      |    MBEAN NAME | NORMAL VALUE  |
 | --- | :-------- | --------:| :--: |
 | 1. | Temporary memory size in bytes  | kafka.network:type=RequestMetrics,name=TemporaryMemoryBytes,request={Produce\Fetch} |  Temporary memory used for message format conversions and decompression.  |
@@ -374,5 +375,5 @@ private def buildRecordsAndAssignOffsets(magic: Byte,
 ```
 
 
-### 5. 总结
+## 5. 总结
 对于低版本ProduceRequest请求，高版本Broker会经历解压遍历且重新构建V2的格式的消息batch ，这种情况对于大数据量来说，性能的损耗较大，所以非常建议将kafka-clients也升级至V2格式，也就是0.11版本以上。 对于Broker监控来说，请随时关注`章节4`提到的三个非常重要指标。 每次的较长的处理速度都有可能会拖累Broker的请求队列。
