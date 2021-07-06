@@ -268,11 +268,11 @@ public AbstractLegacyRecordBatch nextBatch() throws IOException {
 在**代码4-2**中@标记4.2会涉及到三个非常重要的指标，指标项： TemporaryMemoryBytes，MessageConversionsTimeMs，MessageConversionsTimeMs，
 请参考Kafka官网[6.6 Monitoring](http://kafka.apache.org/22/documentation.html#monitoring)    
 
-| No. | DESCRIPTION      |    MBEAN NAME | NORMAL VALUE  |
-| --- | :-------- | --------:| :--: |
-| 1. | Temporary memory size in bytes  | kafka.network:type=RequestMetrics,name=TemporaryMemoryBytes,request={Produce\Fetch} |  Temporary memory used for message format conversions and decompression.  |
-| 2. | Message conversion time     |   	kafka.network:type=RequestMetrics,name=MessageConversionsTimeMs,request={Produce\Fetch} |  Time in milliseconds spent on message format conversions.  |
-| 3. | Message conversion rate      | kafka.server:type=BrokerTopicMetrics,name={Produce|Fetch}MessageConversionsPerSec,topic=([-.\w]+) | Number of records which required message format conversion.  |
+| DESCRIPTION      |    MBEAN NAME | NORMAL VALUE  |
+| :-------- | --------:| :--: |
+| Temporary memory size in bytes  | kafka.network:type=RequestMetrics,name=TemporaryMemoryBytes,request={Produce\Fetch} |  Temporary memory used for message format conversions and decompression.  |
+| Message conversion time     |   	kafka.network:type=RequestMetrics,name=MessageConversionsTimeMs,request={Produce\Fetch} |  Time in milliseconds spent on message format conversions.  |
+| Message conversion rate      | kafka.server:type=BrokerTopicMetrics,name={Produce|Fetch}MessageConversionsPerSec,topic=([-.\w]+) | Number of records which required message format conversion.  |
 
 
 `代码4-1 LogValidator.validateMessagesAndAssignOffsetsCompressed()`
