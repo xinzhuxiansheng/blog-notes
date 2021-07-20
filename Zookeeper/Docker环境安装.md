@@ -8,10 +8,10 @@ docker pull zookeeper
 
 ## 2. 启动新容器
 ```java
-docker run -d -p 2181:2181 --name zookeeper370 --restart=always <image id>
+docker run -d -p 2181:2181 --name zookeeper370 --restart=always 50d238989423
 ```
 
 ## 3. sh命令进入容器
 ```java
-
+ docker exec -it zookeeper /bin/bash
 ```
