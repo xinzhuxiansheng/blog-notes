@@ -125,26 +125,26 @@ public CountDownLatch(int count) {
 }
 ```
 
-`2.1 Sync UML图`
+`2.1 Sync UML图`      
 ![Work Thread](images/JUC_CountDownLatch03.png)
 
 
 ## 3. await()
 `3.1 await()流程图`, 显示await()方法调用`AbstractQueuedSynchronizer的tryAcquireShared(arg)和doAcquireSharedInterruptibly(arg)`。 **接下来分析这两个方法**。
 
-`3.1 await()流程图`
+`3.1 await()流程图`     
 ![Work Thread](images/JUC_CountDownLatch04.png)
 
 ### 3.1 tryAcquireShared(arg)
-getState()方法返回的是`state`字段值，由`章节2`可知，state的值是通过CountDownLatch的构造方法赋值的。
+getState()方法返回的是`state`字段值，由`章节2`可知，state的值是通过CountDownLatch的构造方法赋值的。 在`章节1 1.1代码中` 传入的Count是3，state=3; 可知**tryAcquireShared()仅是判断state值是否等于0，若等于返回1,否则返回-1**。 所以将state=3，代入方法返回的是-1，因为小于0，所以会继续调用doAcquireSharedInterruptibly(arg)。
 `AbstractQueuedSynchronizer.tryAcquireShared(arg)`
 ```java
 protected int tryAcquireShared(int acquires) {
     return (getState() == 0) ? 1 : -1;
 }
 ```
-
-
+### 3.2 doAcquireSharedInterruptibly(arg)
+在doAcquireSharedInterruptibly()方法中
 `AbstractQueuedSynchronizer.doAcquireSharedInterruptibly(arg)`
 ```java
 private void doAcquireSharedInterruptibly(int arg)
@@ -214,5 +214,3 @@ private Node enq(final Node node) {
 ## CountDown()
 
 
-
-https://blog.csdn.net/qq_34978129/article/details/106863621?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0.control&spm=1001.2101.3001.4242
