@@ -133,7 +133,7 @@ public CountDownLatch(int count) {
 `3.1 await()流程图`, 显示await()方法调用`AbstractQueuedSynchronizer的tryAcquireShared(arg)和doAcquireSharedInterruptibly(arg)`。 **接下来分析这两个方法**。
 
 `3.1 await()流程图`     
-![Work Thread](images/JUC_CountDownLatch04.png)
+![await()流程图](images/JUC_CountDownLatch04.png)
 
 ### 3.1 tryAcquireShared(arg)
 getState()方法返回的是`state`字段值，由`章节2`可知，state的值是通过CountDownLatch的构造方法赋值的。 在`章节1 1.1代码中` 传入的Count是3，state=3; 可知**tryAcquireShared()仅是判断state值是否等于0，若等于返回1,否则返回-1**。 所以将state=3，代入方法返回的是-1，因为小于0，所以会继续调用doAcquireSharedInterruptibly(arg)。
@@ -144,8 +144,63 @@ protected int tryAcquireShared(int acquires) {
 }
 ```
 ### 3.2 doAcquireSharedInterruptibly(arg)
-在doAcquireSharedInterruptibly()方法中
-`AbstractQueuedSynchronizer.doAcquireSharedInterruptibly(arg)`
+
+`3.2 doAcquireSharedInterruptibly()流程图`  
+![Work Thread](images/JUC_CountDownLatch05.png)
+
+#### 3.2.1 addWaiter(Node.SHARED)
+addWaiter()通过自旋+CAS创建一个以空节点为head的队列，并且将新节点每次都添加到队尾。会将当前线程赋值给Node， 为了说明addWaiter(Node mode), 根据章节1中的**1.1代码** 会在Main Thread中调用`countDownLatch.await();`，利用参数代入法
+![addWaiter()](images/JUC_CountDownLatch07.png)
+
+```java
+private Node addWaiter(Node mode) {
+    //注意 mode会赋值给node.nextWaiter
+    Node node = new Node(Thread.currentThread(), mode);
+    // Try the fast path of enq; backup to full enq on failure
+    // 
+    Node pred = tail;
+    if (pred != null) {
+        node.prev = pred;
+        // CAS 队尾添加新节点，返回新节点，这里不能保证原子性，所以不符合预期值时，
+        // 调用enq()方法，利用for(;;) 自旋一直循环达到预期值，在进行赋值
+        if (compareAndSetTail(pred, node)) { 
+            pred.next = node;
+            return node;
+        }
+    }
+    // 自旋 + CAS将新节点添加到队尾
+    enq(node); 
+    return node;
+}
+
+private Node enq(final Node node) {
+    // for(;;) 表示CAS自旋，直到队尾成功添加新节点
+    for (;;) {
+        Node t = tail;
+        if (t == null) { // Must initialize
+            // CAS 若队列为空则创建空节点，作为head，tail
+            if (compareAndSetHead(new Node()))
+                tail = head;
+        } else {
+            node.prev = t;
+            // CAS 队尾添加新节点，并且返回node节点
+            if (compareAndSetTail(t, node)) {
+                t.next = node;
+                return t;
+            }
+        }
+    }
+}
+```
+
+#### 3.2.2 predecessor() 
+predecessor()方法获取的是当前node节点的前置节点，由`章节3.2.1`可知，假设一共只调用一次addWaiter(),那么队列中会存在2个节点，head是空节点，tail是新增加的节点, 所以node的prev节点总是head节点
+![一共只调用一次addWaiter()](images/JUC_CountDownLatch08.png)
+
+
+
+
+`AbstractQueuedSynchronizer.doAcquireSharedInterruptibly(arg)`  
 ```java
 private void doAcquireSharedInterruptibly(int arg)
     throws InterruptedException {
@@ -173,41 +228,7 @@ private void doAcquireSharedInterruptibly(int arg)
     }
 }
 
-private Node addWaiter(Node mode) {
-    //注意 mode会赋值给node.nextWaiter
-    Node node = new Node(Thread.currentThread(), mode);
-    // Try the fast path of enq; backup to full enq on failure
-    Node pred = tail;
-    if (pred != null) {
-        node.prev = pred;
-        if (compareAndSetTail(pred, node)) { // CAS 队尾添加新节点，返回新节点
-            pred.next = node;
-            return node;
-        }
-    }
-    // 自旋 + CAS将新节点添加到队尾
-    enq(node); 
-    return node;
-}
 
-private Node enq(final Node node) {
-    // for(;;) 表示CAS自旋，直到队尾成功添加新节点
-    for (;;) {
-        Node t = tail;
-        if (t == null) { // Must initialize
-            // CAS 若队列为空则直接将新节点赋值head，返回head
-            if (compareAndSetHead(new Node()))
-                tail = head;
-        } else {
-            node.prev = t;
-            // CAS 队尾添加新节点 返回添加之前的tail
-            if (compareAndSetTail(t, node)) {
-                t.next = node;
-                return t;
-            }
-        }
-    }
-}
 ```
 
 
