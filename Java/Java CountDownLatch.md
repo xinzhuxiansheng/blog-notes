@@ -194,7 +194,7 @@ private Node enq(final Node node) {
 ```
 
 #### 3.2.2 predecessor() 
-predecessor()方法获取的是当前node节点的前置节点，由`章节3.2.1`可知，假设一共只调用一次addWaiter(),那么队列中会存在2个节点，head是空节点，tail是新增加的节点, 所以node的prev节点总是head节点,当addWaiter()方法被**并行**调用，所以`p==head`也不是总成立， 这里若队列node都已添加到队尾，在不再动态修改这段期间，也就有且仅有1个node的前置节点才能等于head， 希望大家也注意到`3.2 doAcquireSharedInterruptibly()流程图` 整个 doAcquireSharedInterruptibly()的自旋(for(;;)), 也只有2个两地方才能break； 这里希望读者细想, addWaiter()方法应该会从`返回点1`处，return。**那么预期的现象是head会变**。 
+predecessor()方法获取的是当前node节点的前置节点，由`章节3.2.1`可知，假设一共只调用一次addWaiter(),那么队列中会存在2个节点，head是空节点，tail是新增加的节点, 所以node的prev节点总是head节点,当addWaiter()方法被**并行**调用，所以`p==head`也不是总成立， 这里若队列node都已添加到队尾，在不再动态修改这段期间，也就有且仅有1个node的前置节点才能等于head， 希望大家也注意到`3.2 doAcquireSharedInterruptibly()流程图` 整个 doAcquireSharedInterruptibly()的自旋(for(;; )), 也只有2个两地方才能break； 这里希望读者细想, addWaiter()方法应该会从`返回点1`处，return。**那么预期的现象是head会变**。 
 
 `addWaiter() 返回点`
 **返回点1.** p == head && r >=0 才能return
@@ -219,14 +219,27 @@ if (shouldParkAfterFailedAcquire(p, node) &&
 ![一共只调用一次addWaiter()](images/JUC_CountDownLatch08.png)
 
 
-#### 3.2.3 setHeadAndPropagate(node,r)
+#### 3.2.3 shouldParkAfterFailedAcquire(p, node)
+所有node的waitStatus默认是0， shouldParkAfterFailedAcquire()将node的pre节点，初始化waitStatus赋值为Node.SIGNAL，再下一次循环将当前线程阻塞。
+
+#### 3.2.4 parkAndCheckInterrupt()
+```java
+private final boolean parkAndCheckInterrupt() {
+    //将shouldParkAfterFailedAcquire()将waitStatus=Node.SIGNAL线程睡眠
+    LockSupport.park(this);
+    //若线程唤醒时，需要判断当前线程是否中断。若中断则抛出InterruptedException异常
+    return Thread.interrupted();
+}
+```
+
+#### 3.2.5 setHeadAndPropagate(node,r)
 *node*： addWaiter()方法返回的`是当时最新(不代表一定是当前最新)`的tail节点  
 *r*： tryAcquireShared(arg)，因为r>=0, 所以r =1, state一定等于0   
-根据`源码3.2.3.1`，node会赋值给head，p是node的pre节点, 当node的pre节点等于head节点，node被重新指向head， 所以在doAcquireSharedInterruptibly()的自旋情况下，head在变，也总有一个node.pre == head ，一直到head==tail。   
+根据`源码3.2.5.1`，node会赋值给head，p是node的pre节点, 当node的pre节点等于head节点，node被重新指向head， 所以在doAcquireSharedInterruptibly()的自旋情况下，head在变，也总有一个node.pre == head ，一直到head==tail。   
 
 ![addWaiter()](images/JUC_CountDownLatch09.png)
 
-`代码3.2.3.1 setHeadAndPropagate()`
+`代码3.2.5.1 setHeadAndPropagate()`
 ```java
 // doAcquireSharedInterruptibly()
 final Node p = node.predecessor();
@@ -235,17 +248,15 @@ if (p == head) {
     setHeadAndPropagate(node, r);
     ...
 }
-
 // setHeadAndPropagate()
 Node h = head; // Record old head for check below
 setHead(node);
 ```
 
-#### 3.2.4 doReleaseShared()
+#### 3.2.6 doReleaseShared()
 propagate = r = 1, 这里if(propagate>0)一直是true，后面的判断逻辑都不会执行。node也仅仅是`当时最新的tail`，node.next可能是null, 若node.next不为null，根据`章节3.2.1 addWaiter(Node.SHARED)`,除初始化head为空节点外，其他node都是共享节点，`nextWaiter == SHARED`, 所以doReleaseShared()会一定执行。
 
-
-`代码3.2.4.1`
+`代码3.2.6.1`
 ```java
 private void setHeadAndPropagate(Node node, int propagate) {
     Node h = head; // Record old head for check below
@@ -259,20 +270,14 @@ private void setHeadAndPropagate(Node node, int propagate) {
 }
 ```
 
-`代码3.2.4.2`
+doReleaseShared()方法主要作用是为了将挂起的线程释放，让其继续执行， 由`章节3.2.3`可知，Node.SIGNAL会被阻塞。 `compareAndSetWaitStatus(h, Node.SIGNAL, 0)`保证后续逻辑处理原子性，一定是Node.SIGNAL节点,unparkSuccessors()方法，先将node.waitStatus赋值为0，再通过LockSupport.unpark(s.thread)，将node.next继续执行。
+
+`doReleaseShared流程图` 
+![doReleaseShared流程图](images/JUC_CountDownLatch10.png)
+
+`代码3.2.6.2`
 ```java
 private void doReleaseShared() {
-    /*
-        * Ensure that a release propagates, even if there are other
-        * in-progress acquires/releases.  This proceeds in the usual
-        * way of trying to unparkSuccessor of head if it needs
-        * signal. But if it does not, status is set to PROPAGATE to
-        * ensure that upon release, propagation continues.
-        * Additionally, we must loop in case a new node is added
-        * while we are doing this. Also, unlike other uses of
-        * unparkSuccessor, we need to know if CAS to reset status
-        * fails, if so rechecking.
-        */
     for (;;) {
         Node h = head;
         if (h != null && h != tail) {
@@ -292,48 +297,46 @@ private void doReleaseShared() {
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
-`AbstractQueuedSynchronizer.doAcquireSharedInterruptibly(arg)`  
+`unparkSuccessors()`
 ```java
-private void doAcquireSharedInterruptibly(int arg)
-    throws InterruptedException {
-    final Node node = addWaiter(Node.SHARED);
-    boolean failed = true;
-    try {
-        for (;;) {
-            final Node p = node.predecessor();
-            if (p == head) {
-                int r = tryAcquireShared(arg);
-                if (r >= 0) {
-                    setHeadAndPropagate(node, r);
-                    p.next = null; // help GC
-                    failed = false;
-                    return;
-                }
-            }
-            if (shouldParkAfterFailedAcquire(p, node) &&
-                parkAndCheckInterrupt())
-                throw new InterruptedException();
-        }
-    } finally {
-        if (failed)
-            cancelAcquire(node);
+private void unparkSuccessor(Node node) {
+    int ws = node.waitStatus;
+    if (ws < 0)
+        compareAndSetWaitStatus(node, ws, 0);
+
+    Node s = node.next;
+    //这段逻辑，无需关心，CountDownLatch不会执行
+    if (s == null || s.waitStatus > 0) {
+        s = null;
+        for (Node t = tail; t != null && t != node; t = t.prev)
+            if (t.waitStatus <= 0)
+                s = t;
     }
+    if (s != null)
+        LockSupport.unpark(s.thread);
 }
-
-
 ```
 
 
-## CountDown()
+## 4. CountDown()
+tryReleaseShared()方法利用自旋+CAS，获取当前state-1。 若递减成功判断state是否 == 0，再根据`章节3.2.6`提到的doReleaseShared() 判断ws==Node.SIGNAL的线程唤醒。
 
+```java
+public final boolean releaseShared(int arg) {
+    if (tryReleaseShared(arg)) {
+        doReleaseShared();
+        return true;
+    }
+    return false;
+}
+```
+
+
+## 5. 总结
+以上逻辑，阐述了await()和countDown()的底层逻辑实现 ；
+1. await()方法会构建一个已空节点为head的队列，await()会在state !=0的情况下，将队列中节点的waitStatus由默认值0设置为Node.SIGNAL,通过自旋判断将初始化后的waitStatus为Node.SIGNAL线程挂起。
+这里的挂起不是用的Thread.Sleep()， 而是 `LockSupport.park(this);`。 
+2. countDown() 将state在原子性情况下 -1，当state=0时，，先将head.next.waitStatus设置为0，再执行LockSupport.unpark(s.thread); 唤醒head.next线程。 
+3. 唤醒的Node线程会继续执行await()方法，`Thread.interrupted()` 判断线程状态是否中断，若不中断，会根据await()方法中的for(;; ) 依次head=node，依次唤醒head以后的node线程。
+4. 若出现线程中断，则在finally中cancelAcquire() 跳过中断的线程，继续唤醒剩余节点线程。 
 
