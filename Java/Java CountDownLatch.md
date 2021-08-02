@@ -146,7 +146,7 @@ protected int tryAcquireShared(int acquires) {
 ### 3.2 doAcquireSharedInterruptibly(arg)
 
 `3.2 doAcquireSharedInterruptibly()流程图`  
-![Work Thread](images/JUC_CountDownLatch05.png)
+![doAcquireSharedInterruptibly](images/JUC_CountDownLatch05.png)
 
 #### 3.2.1 addWaiter(Node.SHARED)
 addWaiter()通过自旋+CAS创建一个以空节点为head的队列，并且将新节点每次都添加到队尾。会将当前线程赋值给Node， 为了说明addWaiter(Node mode), 根据章节1中的**1.1代码** 会在Main Thread中调用`countDownLatch.await();`，利用参数代入法
@@ -194,8 +194,110 @@ private Node enq(final Node node) {
 ```
 
 #### 3.2.2 predecessor() 
-predecessor()方法获取的是当前node节点的前置节点，由`章节3.2.1`可知，假设一共只调用一次addWaiter(),那么队列中会存在2个节点，head是空节点，tail是新增加的节点, 所以node的prev节点总是head节点
+predecessor()方法获取的是当前node节点的前置节点，由`章节3.2.1`可知，假设一共只调用一次addWaiter(),那么队列中会存在2个节点，head是空节点，tail是新增加的节点, 所以node的prev节点总是head节点,当addWaiter()方法被**并行**调用，所以`p==head`也不是总成立， 这里若队列node都已添加到队尾，在不再动态修改这段期间，也就有且仅有1个node的前置节点才能等于head， 希望大家也注意到`3.2 doAcquireSharedInterruptibly()流程图` 整个 doAcquireSharedInterruptibly()的自旋(for(;;)), 也只有2个两地方才能break； 这里希望读者细想, addWaiter()方法应该会从`返回点1`处，return。**那么预期的现象是head会变**。 
+
+`addWaiter() 返回点`
+**返回点1.** p == head && r >=0 才能return
+```java
+if (p == head) {
+    int r = tryAcquireShared(arg);
+    if (r >= 0) {
+        setHeadAndPropagate(node, r);
+        p.next = null; // help GC
+        failed = false;
+        return;
+    }
+}
+```
+**返回点2.** 抛出InterruptedException()异常
+```java
+if (shouldParkAfterFailedAcquire(p, node) &&
+                    parkAndCheckInterrupt())
+                    throw new InterruptedException();
+```
+
 ![一共只调用一次addWaiter()](images/JUC_CountDownLatch08.png)
+
+
+#### 3.2.3 setHeadAndPropagate(node,r)
+*node*： addWaiter()方法返回的`是当时最新(不代表一定是当前最新)`的tail节点  
+*r*： tryAcquireShared(arg)，因为r>=0, 所以r =1, state一定等于0   
+根据`源码3.2.3.1`，node会赋值给head，p是node的pre节点, 当node的pre节点等于head节点，node被重新指向head， 所以在doAcquireSharedInterruptibly()的自旋情况下，head在变，也总有一个node.pre == head ，一直到head==tail。   
+
+![addWaiter()](images/JUC_CountDownLatch09.png)
+
+`代码3.2.3.1 setHeadAndPropagate()`
+```java
+// doAcquireSharedInterruptibly()
+final Node p = node.predecessor();
+if (p == head) {
+    ...
+    setHeadAndPropagate(node, r);
+    ...
+}
+
+// setHeadAndPropagate()
+Node h = head; // Record old head for check below
+setHead(node);
+```
+
+#### 3.2.4 doReleaseShared()
+propagate = r = 1, 这里if(propagate>0)一直是true，后面的判断逻辑都不会执行。node也仅仅是`当时最新的tail`，node.next可能是null, 若node.next不为null，根据`章节3.2.1 addWaiter(Node.SHARED)`,除初始化head为空节点外，其他node都是共享节点，`nextWaiter == SHARED`, 所以doReleaseShared()会一定执行。
+
+
+`代码3.2.4.1`
+```java
+private void setHeadAndPropagate(Node node, int propagate) {
+    Node h = head; // Record old head for check below
+    setHead(node);
+    if (propagate > 0 || h == null || h.waitStatus < 0 ||
+        (h = head) == null || h.waitStatus < 0) {
+        Node s = node.next;
+        if (s == null || s.isShared())
+            doReleaseShared();
+    }
+}
+```
+
+`代码3.2.4.2`
+```java
+private void doReleaseShared() {
+    /*
+        * Ensure that a release propagates, even if there are other
+        * in-progress acquires/releases.  This proceeds in the usual
+        * way of trying to unparkSuccessor of head if it needs
+        * signal. But if it does not, status is set to PROPAGATE to
+        * ensure that upon release, propagation continues.
+        * Additionally, we must loop in case a new node is added
+        * while we are doing this. Also, unlike other uses of
+        * unparkSuccessor, we need to know if CAS to reset status
+        * fails, if so rechecking.
+        */
+    for (;;) {
+        Node h = head;
+        if (h != null && h != tail) {
+            int ws = h.waitStatus;
+            if (ws == Node.SIGNAL) {
+                if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))
+                    continue;            // loop to recheck cases
+                unparkSuccessor(h);
+            }
+            else if (ws == 0 &&
+                        !compareAndSetWaitStatus(h, 0, Node.PROPAGATE))
+                continue;                // loop on failed CAS
+        }
+        if (h == head)                   // loop if head changed
+            break;
+    }
+}
+```
+
+
+
+
+
+
+
 
 
 
