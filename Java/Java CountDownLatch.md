@@ -1,15 +1,14 @@
-
-# CountDownLatch
+# CountDownLatch原理讲解
 
 ## 1. CountDownLatch使用
 以下章节1.1和章节1.2提供了CountDownLatch的使用。    
 **1.1代码** 利用Main Thread执行await()，等待Work线程执行完成，在HandleWork类的run()，处理完Work线程逻辑后调用countDown()。
-![Main Thread](images/JUC_CountDownLatch01.png)
+![Main Thread](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch01.png)
 
 > 这里模拟了主线程等待所有工作线程执行完成后，再执行主线程后续逻辑。
 
 **1.2代码** 利用Work Thread执行await()，等待Main线程执行它的逻辑后，再通知所有Work线程开始执行逻辑。
-![Work Thread](images/JUC_CountDownLatch02.png)
+![Work Thread](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch02.png)
 
 > 注意 Main Thread是非守护线程，并且Work Thread没有设置守护线程，所以主线程执行完成，工作线程仍然可以执行。
 
@@ -126,14 +125,14 @@ public CountDownLatch(int count) {
 ```
 
 `2.1 Sync UML图`      
-![Work Thread](images/JUC_CountDownLatch03.png)
+![Work Thread](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch03.png)
 
 
 ## 3. await()
 `3.1 await()流程图`, 显示await()方法调用`AbstractQueuedSynchronizer的tryAcquireShared(arg)和doAcquireSharedInterruptibly(arg)`。 **接下来分析这两个方法**。
 
 `3.1 await()流程图`     
-![await()流程图](images/JUC_CountDownLatch04.png)
+![await()流程图](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch04.png)
 
 ### 3.1 tryAcquireShared(arg)
 getState()方法返回的是`state`字段值，由`章节2`可知，state的值是通过CountDownLatch的构造方法赋值的。 在`章节1 1.1代码中` 传入的Count是3，state=3; 可知**tryAcquireShared()仅是判断state值是否等于0，若等于返回1,否则返回-1**。 所以将state=3，代入方法返回的是-1，因为小于0，所以会继续调用doAcquireSharedInterruptibly(arg)。
@@ -146,11 +145,11 @@ protected int tryAcquireShared(int acquires) {
 ### 3.2 doAcquireSharedInterruptibly(arg)
 
 `3.2 doAcquireSharedInterruptibly()流程图`  
-![doAcquireSharedInterruptibly](images/JUC_CountDownLatch05.png)
+![doAcquireSharedInterruptibly](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch05.png)
 
 #### 3.2.1 addWaiter(Node.SHARED)
 addWaiter()通过自旋+CAS创建一个以空节点为head的队列，并且将新节点每次都添加到队尾。会将当前线程赋值给Node， 为了说明addWaiter(Node mode), 根据章节1中的**1.1代码** 会在Main Thread中调用`countDownLatch.await();`，利用参数代入法
-![addWaiter()](images/JUC_CountDownLatch07.png)
+![addWaiter()](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch07.png)
 
 ```java
 private Node addWaiter(Node mode) {
@@ -216,7 +215,7 @@ if (shouldParkAfterFailedAcquire(p, node) &&
                     throw new InterruptedException();
 ```
 
-![一共只调用一次addWaiter()](images/JUC_CountDownLatch08.png)
+![一共只调用一次addWaiter()](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch08.png)
 
 
 #### 3.2.3 shouldParkAfterFailedAcquire(p, node)
@@ -237,7 +236,7 @@ private final boolean parkAndCheckInterrupt() {
 *r*： tryAcquireShared(arg)，因为r>=0, 所以r =1, state一定等于0   
 根据`源码3.2.5.1`，node会赋值给head，p是node的pre节点, 当node的pre节点等于head节点，node被重新指向head， 所以在doAcquireSharedInterruptibly()的自旋情况下，head在变，也总有一个node.pre == head ，一直到head==tail。   
 
-![addWaiter()](images/JUC_CountDownLatch09.png)
+![addWaiter()](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch09.png)
 
 `代码3.2.5.1 setHeadAndPropagate()`
 ```java
@@ -273,7 +272,7 @@ private void setHeadAndPropagate(Node node, int propagate) {
 doReleaseShared()方法主要作用是为了将挂起的线程释放，让其继续执行， 由`章节3.2.3`可知，Node.SIGNAL会被阻塞。 `compareAndSetWaitStatus(h, Node.SIGNAL, 0)`保证后续逻辑处理原子性，一定是Node.SIGNAL节点,unparkSuccessors()方法，先将node.waitStatus赋值为0，再通过LockSupport.unpark(s.thread)，将node.next继续执行。
 
 `doReleaseShared流程图` 
-![doReleaseShared流程图](images/JUC_CountDownLatch10.png)
+![doReleaseShared流程图](http://118.126.116.71/blogimgs/jdk/countdownlatch/JUC_CountDownLatch10.png)
 
 `代码3.2.6.2`
 ```java
@@ -334,9 +333,9 @@ public final boolean releaseShared(int arg) {
 
 ## 5. 总结
 以上逻辑，阐述了await()和countDown()的底层逻辑实现 ；
-1. await()方法会构建一个已空节点为head的队列，await()会在state !=0的情况下，将队列中节点的waitStatus由默认值0设置为Node.SIGNAL,通过自旋判断将初始化后的waitStatus为Node.SIGNAL线程挂起。
+1. await()方法会构建一个已空节点为head的队列，await()会在state !=0的情况下，将队列中节点的waitStatus由默认值0设置为Node.SIGNAL,通过自旋判断将初始化后的waitStatus为Node.SIGNAL线程挂起。    
 这里的挂起不是用的Thread.Sleep()， 而是 `LockSupport.park(this);`。 
-2. countDown() 将state在原子性情况下 -1，当state=0时，，先将head.next.waitStatus设置为0，再执行LockSupport.unpark(s.thread); 唤醒head.next线程。 
-3. 唤醒的Node线程会继续执行await()方法，`Thread.interrupted()` 判断线程状态是否中断，若不中断，会根据await()方法中的for(;; ) 依次head=node，依次唤醒head以后的node线程。
-4. 若出现线程中断，则在finally中cancelAcquire() 跳过中断的线程，继续唤醒剩余节点线程。 
+2. countDown() 将state在原子性情况下 -1，当state=0时，，先将head.next.waitStatus设置为0，再执行LockSupport.unpark(s.thread); 唤醒head.next线程。    
+3. 唤醒的Node线程会继续执行await()方法，`Thread.interrupted()` 判断线程状态是否中断，若不中断，会根据await()方法中的for(;; ) 依次head=node，依次唤醒head以后的node线程。    
+4. 若出现线程中断，则在finally中cancelAcquire() 跳过中断的线程，继续唤醒剩余节点线程。  
 
