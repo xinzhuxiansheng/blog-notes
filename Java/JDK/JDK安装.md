@@ -13,8 +13,8 @@
     ```
     也可以使用`yum groupremove java` 命令全部删除(`不过有时不好用`)  
 <br/>
-* 安装jdk 并且配置环境变量
-```shell
+* 安装jdk 并且配置环境变量  
+```shell    
 vim /etc/profile
 
 #set java environment
