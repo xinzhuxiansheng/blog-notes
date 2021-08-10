@@ -61,7 +61,7 @@ Mark : 标记缓冲区的position索引值。 当缓冲区调用reset()方法时
 ![Java_bytebuffer03](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer03.png)
 
 `图3-2`   
-![Java_bytebuffer05](images/Java_bytebuffer05.png)
+![Java_bytebuffer05](http://118.126.116.71/blogimgs/jdk/bytebuffer/Java_bytebuffer05.png)
 
 
 ## 4. 创建字节缓冲区
