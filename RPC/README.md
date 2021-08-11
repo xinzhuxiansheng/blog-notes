@@ -139,3 +139,5 @@ private void loadResource(Map<String, Class<?>> extensionClasses, ClassLoader cl
 }
 
 ```
+
+### 1.4 Netty心跳机制

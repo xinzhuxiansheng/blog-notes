@@ -229,6 +229,8 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 ### 2.3 remove()处理流程
 
+![HashMap remove()](images/HashMap02.png)
+
 ```java
 public V remove(Object key) {
     Node<K,V> e;
