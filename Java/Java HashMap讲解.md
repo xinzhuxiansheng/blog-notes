@@ -131,8 +131,8 @@ final Node<K,V>[] resize() {
 
 **step04.** 如果p不为空，判断当前的hash、key所引用的内存地址或者key的值是否相等。 若相等，则将p赋值给临时节点e  
 
-**step05.** 判断p是否是红黑树则插入树中，如果p是链表则插入队尾  
-因为e=p.next， for循环最后一行又将e赋值给p, 所以这是一个从head遍历到队尾的操作。 遍历过程中会判断是否到队尾`p.next == null`，或者当前节点的hash值、key的内存引用地址、key的值是否与即将添加的key的hash以及key是否相等。
+**step05.** 判断p是否是红黑树则插入树中，如果p是链表则插入队尾，因为e=p.next， for循环最后一行又将e赋值给p, 所以这是一个从head遍历到队尾的操作。 遍历过程中会判断是否到队尾`p.next == null`，或者当前节点的hash值、key的内存引用地址、key的值是否与即将添加的key的hash以及key是否相等。
+
 `新节点插入队尾`
 ```java
 for (int binCount = 0; ; ++binCount) {
@@ -228,7 +228,12 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 ```
 
 ### 2.3 remove()处理流程
+**step01.** removeNode()方法，判断table是否为null或者为空，且table[index=(n-1)&hash]是否为null。 
+**step02.** 参考`2.1 HashMap结构图`，根据key的hash，分别在3种不同数据结构情况(1. table[index]; 2. 编译以table[index]为head的链表; 3. 红黑树查找)下，查找与key，value相同的节点。   
+**step03.** 参考`2.3 remove()处理图`查找到对应节点，同样在3种不同数据结构情况下，删除节点。 这里特别说明链表结构，若遍历链表,根据while的赋值 e=e.next,而每次赋值前都会将p=e所以新赋值的e是p的next节点。根据链表删除规则，只需要将删除节点的next节点，指向删除节点的前置节点p.next即可。 
+**step04.** modCount+1，容器size-1，并且返回node。
 
+`2.3 remove()处理图`
 ![HashMap remove()](images/HashMap02.png)
 
 ```java
@@ -241,12 +246,9 @@ public V remove(Object key) {
 final Node<K,V> removeNode(int hash, Object key, Object value,
                             boolean matchValue, boolean movable) {
     Node<K,V>[] tab; Node<K,V> p; int n, index;
-    // table不为null或者不为空及index=(n-1)&hash, table[index]不为null
-    // 最外层if 若是true，则说明key计算的hash是存在的，但不代表key，value是相同的
     if ((tab = table) != null && (n = tab.length) > 0 &&
         (p = tab[index = (n - 1) & hash]) != null) {
         Node<K,V> node = null, e; K k; V v;
-        // 参考`2.1 HashMap结构图`,这里几个if是在查找与要remove的key相同的节点。
         if (p.hash == hash &&
             ((k = p.key) == key || (key != null && key.equals(k))))
             node = p;
