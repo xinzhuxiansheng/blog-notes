@@ -285,7 +285,10 @@ final Node<K,V> removeNode(int hash, Object key, Object value,
 }
 ```
 
-## 3. HashMap注解
+## 3. resize()扩容
+
+
+## 4. HashMap注解
 
 `HashMap 注解`
 ```java
@@ -473,9 +476,9 @@ final Node<K,V> removeNode(int hash, Object key, Object value,
 通过www.DeepL.com/Translator（免费版）翻译
 ```
 
-## 4. Q&A
+## 5. Q&A
 
-### 4.1 为什么要转红黑树
+### 5.1 为什么要转红黑树
 根据`2.1 HashMap结构图`, table[index=(n-1)&hash]发生碰撞，会将新节点数据添加到链表队尾， 若要从链表读取元素的话是head节点一直遍历比较，直到查找到需要的节点，这个过程它的复杂度是O(n), 而红黑树是近似二叉查找树，它的复杂度为O(logN),所以，当碰撞hash过多时，用红黑树存储节点可以提高查询效率。     
 
 > 需要注意得是： 红黑树虽然增加了查询效率，根据HashMap注解( TreeNodes are about twice the size of regular nodes) ,TreeNode节点存储大小是普通节点的2倍。 
@@ -490,10 +493,10 @@ public int hashCode() {
 }
 ```
 
-### 4.2 节点遵循泊松分布(链表长度达到8，转红黑树)
+### 5.2 节点遵循泊松分布(链表长度达到8，转红黑树)
 这里对于博主来说，此处省略`Integer.MAX_VALUE`字。 hash()值得分布均匀度的话，会遵循`泊松分布`,导致红黑树转换的机率低。根据注解标明的`8: 0.00000006`概率。    
 
-### 4.3 红黑树转变成链表
+### 5.3 红黑树转变成链表
 根据HashMap中的`UNTREEIFY_THRESHOLD`值=6，若树的节点个数<=6时则将红黑树转变成链表，这里读者是参考别人理解:"假设阈值是7的话，删除一个节点红黑树则变成链表，若新增一个节点又会转变成红黑树，这样频繁的转换会降低性能，所以默认设置为6。           
 **感觉说的很有道理**    
 这里博主联想到 二叉搜索树中`AVL树`和`红黑树`，两者最大的不同是 红黑树没有遵守AVL树的`每个节点存 balance factor = {-1,0,1}`，它放弃追求完全平衡，避免二叉树旋转所带来的性能损耗(四种基本旋转: 左旋，右旋，左右旋，右左旋)。   
@@ -503,8 +506,8 @@ if (lc <= UNTREEIFY_THRESHOLD)
     //省略部分代码
 ```
 
-### 4.4 为什么容量总是2的次幂   
-https://blog.csdn.net/u010841296/article/details/82832166
+### 5.4 为什么容量总是2的次幂   
+参考这篇 https://caoju.blog.csdn.net/article/details/116293664
 
 
 

@@ -107,3 +107,9 @@ while(keyIterator.hasNext()) {
 * 零拷贝是网络编程的关键，很多性能优化都离不开  
 * 在Java程序中，常用的零拷贝有mmap(内存映射)和sendFile，那么他们在OS里，到底是怎么样的一个的设计？ 我们分析mmap和sendFile这两个零拷贝   
 * NIO中如何使用零拷贝   
+
+
+
+
+# AIO
+
