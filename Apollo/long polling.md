@@ -1,5 +1,5 @@
 
-# Long Poll
+# Long Poll 长轮询
 
 ## 1. Long Poll介绍
 长轮询是服务器应用程序用来保持客户端连接直到信息可用的一种方法。当服务器必须调用下游服务以获取信息并等待结果时，通常会使用这种方法。
@@ -7,7 +7,7 @@
 
 ## 2. 结构图
 `结构图`    
-![long polling结构图](images/longpolling01.png)
+![long polling结构图](http://img.xinzhuxiansheng.com/blogimgs/apollo/longpolling01.png)
 
 ## 3. Apollo实现讲解
 根据Apollo的官网文档实现细节（https://www.apolloconfig.com/#/zh/design/apollo-design），下面会从代码中分析
@@ -28,9 +28,64 @@
 在doLongPollingRefresh()方法中利用while(true)循环发起Http请求，然后处理接口逻辑即可。
 
 `流程图` 
-![在doLongPollingRefresh()流程图](images/longpolling02.png)
+![在doLongPollingRefresh()流程图](http://img.xinzhuxiansheng.com/blogimgs/apollo/longpolling02.png)
 
 >请阅读 RemoteConfigLongPollService.java
+```java
+while (!m_longPollingStopped.get() && !Thread.currentThread().isInterrupted()) {
+  if (!m_longPollRateLimiter.tryAcquire(5, TimeUnit.SECONDS)) {
+    //wait at most 5 seconds
+    try {
+      TimeUnit.SECONDS.sleep(5);
+    } catch (InterruptedException e) {
+    }
+  }
+  Transaction transaction = Tracer.newTransaction("Apollo.ConfigService", "pollNotification");
+  String url = null;
+  try {
+    if (lastServiceDto == null) {
+      List<ServiceDTO> configServices = getConfigServices();
+      lastServiceDto = configServices.get(random.nextInt(configServices.size()));
+    }
+
+    url =
+        assembleLongPollRefreshUrl(lastServiceDto.getHomepageUrl(), appId, cluster, dataCenter,
+            m_notifications);
+
+    logger.debug("Long polling from {}", url);
+
+    HttpRequest request = new HttpRequest(url);
+    request.setReadTimeout(LONG_POLLING_READ_TIMEOUT);
+    if (!StringUtils.isBlank(secret)) {
+      Map<String, String> headers = Signature.buildHttpHeaders(url, appId, secret);
+      request.setHeaders(headers);
+    }
+
+    transaction.addData("Url", url);
+
+    final HttpResponse<List<ApolloConfigNotification>> response =
+        m_httpClient.doGet(request, m_responseType);
+
+    logger.debug("Long polling response: {}, url: {}", response.getStatusCode(), url);
+    if (response.getStatusCode() == 200 && response.getBody() != null) {
+      updateNotifications(response.getBody());
+      updateRemoteNotifications(response.getBody());
+      transaction.addData("Result", response.getBody().toString());
+      notify(lastServiceDto, response.getBody());
+    }
+
+    //try to load balance
+    if (response.getStatusCode() == 304 && random.nextBoolean()) {
+      lastServiceDto = null;
+    }
+
+    m_longPollFailSchedulePolicyInSecond.success();
+    transaction.addData("StatusCode", response.getStatusCode());
+    transaction.setStatus(Transaction.SUCCESS);
+
+    // 省略部分代码
+}
+```
 
 ### 3.2 Server
 服务端使用Spring DeferredResult实现了请求`异步化`， 利用临时容器保存异步请求上下文，可以参考`deferredResults`变量, 利用DeferredResult注册onTimeout()和onCompletion() 处理挂起的异步请求的上下文。
@@ -40,6 +95,65 @@ private final Multimap<String, DeferredResultWrapper> deferredResults =
       Multimaps.synchronizedSetMultimap(TreeMultimap.create(String.CASE_INSENSITIVE_ORDER, Ordering.natural()));
 ```
 >请阅读 NotificationControllerV2.java
+```java
+@GetMapping
+public DeferredResult<ResponseEntity<List<ApolloConfigNotification>>> pollNotification(
+    @RequestParam(value = "appId") String appId,
+    @RequestParam(value = "cluster") String cluster,
+    @RequestParam(value = "notifications") String notificationsAsString,
+    @RequestParam(value = "dataCenter", required = false) String dataCenter,
+    @RequestParam(value = "ip", required = false) String clientIp) {
+  List<ApolloConfigNotification> notifications = null;
+
+  try {
+    notifications =
+        gson.fromJson(notificationsAsString, notificationsTypeReference);
+  } catch (Throwable ex) {
+    Tracer.logError(ex);
+  }
+
+  if (CollectionUtils.isEmpty(notifications)) {
+    throw new BadRequestException("Invalid format of notifications: " + notificationsAsString);
+  }
+  
+  Map<String, ApolloConfigNotification> filteredNotifications = filterNotifications(appId, notifications);
+
+  if (CollectionUtils.isEmpty(filteredNotifications)) {
+    throw new BadRequestException("Invalid format of notifications: " + notificationsAsString);
+  }
+  
+  DeferredResultWrapper deferredResultWrapper = new DeferredResultWrapper(bizConfig.longPollingTimeoutInMilli());
+  Set<String> namespaces = Sets.newHashSetWithExpectedSize(filteredNotifications.size());
+  Map<String, Long> clientSideNotifications = Maps.newHashMapWithExpectedSize(filteredNotifications.size());
+  
+  // 省略部分代码
+
+    */
+  deferredResultWrapper
+        .onTimeout(() -> logWatchedKeys(watchedKeys, "Apollo.LongPoll.TimeOutKeys"));
+
+  deferredResultWrapper.onCompletion(() -> {
+    //unregister all keys
+    for (String key : watchedKeys) {
+      deferredResults.remove(key, deferredResultWrapper);
+    }
+    logWatchedKeys(watchedKeys, "Apollo.LongPoll.CompletedKeys");
+  });
+
+  // 省略部分代码
+
+  List<ApolloConfigNotification> newNotifications =
+      getApolloConfigNotifications(namespaces, clientSideNotifications, watchedKeysMap,
+          latestReleaseMessages);
+
+  if (!CollectionUtils.isEmpty(newNotifications)) {
+    deferredResultWrapper.setResult(newNotifications);
+  }
+
+  return deferredResultWrapper.getResult();
+}
+```
+
 
 ## 4. Long Polling实现
 
