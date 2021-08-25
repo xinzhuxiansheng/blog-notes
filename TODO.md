@@ -1,3 +1,35 @@
+
+## JDK
+- [x] HashMap
+- [x] CountDownLatch
+
+
+## MQ
+- [x] Kafka
+- [x] RocketMQ
+
+## 分布式
+- [x] RPC
+- [x] CAP
+- [ ] 分布式事务
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 框架清单
 
 
