@@ -159,7 +159,7 @@ zoo_create(...) 操作创建一个新节点。acl 参数是与节点关联的 AC
 ## 可插入的ZooKeeper身份验证
 ZooKeeper 运行在各种不同的环境中，具有各种不同的身份验证方案，因此它具有完全可插拔的身份验证框架。甚至内置的身份验证方案也使用可插入的身份验证框架。
 
-要了解身份验证框架的工作原理，首先必须了解两个主要的身份验证操作。框架首先必须对客户端进行身份验证。这通常在客户端连接到服务器后立即完成，包括验证从客户端发送或收集的有关客户端的信息并将其与连接相关联。框架处理的第二个操作是在 ACL 中查找对应于客户端的条目。ACL 条目是 < idspec, permissions > 对。该idspec可以是与连接关联的身份验证信息匹配的简单字符串，也可以是针对该信息进行评估的表达式。由身份验证插件的实现来进行匹配。这是身份验证插件必须实现的接口：
+要了解身份验证框架的工作原理，首先必须了解两个主要的身份验证操作。框架首先必须对客户端进行身份验证。这通常在客户端连接到服务器后立即完成，包括验证从客户端发送或收集的有关客户端的信息并将其与连接相关联。框架处理的第二个操作是在 ACL 中查找对应于客户端的条目。`ACL entries是 < idspec, permissions > 对`。该*idspec*可以是与连接关联的身份验证信息匹配的简单字符串，也可以是针对该信息进行评估的表达式。由身份验证插件的实现来进行匹配。这是身份验证插件必须实现的接口：
 ```java
 public interface AuthenticationProvider {
     String getScheme();
@@ -169,33 +169,39 @@ public interface AuthenticationProvider {
     boolean isAuthenticated();
 }
 ```
-第一个方法getScheme返回标识插件的字符串。由于我们支持多种身份验证方法，因此身份验证凭据或idspec将始终以scheme:为前缀。ZooKeeper 服务器使用身份验证插件返回的方案来确定该方案适用于哪些 id。
+第一个方法`getScheme()`返回标识插件的字符串。由于我们支持多种身份验证方法，因此身份验证凭据或idspec将始终以scheme:为前缀。ZooKeeper 服务器使用身份验证插件返回的方案来确定该方案适用于哪些 id。
 
-当客户端发送与连接相关联的身份验证信息时，将调用handleAuthentication。客户端指定信息对应的方案。ZooKeeper 服务器将信息传递给身份验证插件，其getScheme与客户端传递的方案相匹配。handleAuthentication的实现者通常会在确定信息错误时返回错误，或者使用cnxn.getAuthInfo().add(new Id(getScheme(), data))将信息与连接相关联。
+当客户端发送与连接相关联的身份验证信息时，将调用`handleAuthentication()`。客户端指定信息对应的scheme。ZooKeeper 服务器将信息传递给身份验证插件，其getScheme与客户端传递的方案相匹配。handleAuthentication的实现者通常会在确定信息错误时返回错误，或者使用cnxn.getAuthInfo().add(new Id(getScheme(), data))将信息与连接相关联。
 
-身份验证插件涉及设置和使用 ACL。当为 znode 设置 ACL 时，ZooKeeper 服务器会将条目的 id 部分传递给isValid(String id)方法。由插件来验证 id 是否具有正确的形式。例如，ip:172.16.0.0/16是一个有效的 id，但ip:host.com不是。如果新 ACL 包含“auth”条目，则使用isAuthenticated来查看是否应将与连接关联的此方案的身份验证信息添加到 ACL。某些方案不应包含在 auth. 例如，如果指定了 auth，则客户端的 IP 地址不被视为应添加到 ACL 的 id。
+身份验证插件涉及设置和使用 ACL。当为 znode 设置 ACL 时，ZooKeeper服务器会将entry的 id 部分传递给isValid(String id)方法。由插件来验证 id 是否具有正确的形式。例如，ip:172.16.0.0/16是一个有效的 id，但ip:host.com不是。如果新 ACL 包含“auth”entry，则使用isAuthenticated来查看是否应将与连接关联的此方案的身份验证信息添加到 ACL。某些方案不应包含在 auth. 例如，如果指定了auth，则客户端的IP地址不被视为应添加到ACL的id。
 
-ZooKeeper在检查 ACL 时调用matches(String id, String aclExpr)。它需要将客户端的认证信息与相关的 ACL 条目进行匹配。为了找到适用于客户端的条目，ZooKeeper 服务器将找到每个条目的方案，如果该方案有来自该客户端的身份验证信息，则将调用matches(String id, String aclExpr)并将id设置为身份验证先前由handleAuthentication添加到连接的信息，并将aclExpr设置为 ACL 条目的 id。身份验证插件使用自己的逻辑和匹配方案来确定id是否包含在aclExpr 中。
+ZooKeeper在检查 ACL 时调用matches(String id, String aclExpr)。它需要将客户端的认证信息与相关的 ACL entries进行匹配。为了找到适用于客户端的entries，ZooKeeper服务器将找到每个entry的scheme，如果该方案有来自该客户端的身份验证信息，则将调用matches(String id, String aclExpr)并将id设置为身份验证先前由handleAuthentication添加到连接的信息，并将aclExpr设置为 ACL 条目的 id。身份验证插件使用自己的逻辑和匹配方案来确定id是否包含在aclExpr中。
 
 有两个内置的身份验证插件：ip和digest。可以使用系统属性添加其他插件。在启动时，ZooKeeper 服务器将查找以“zookeeper.authProvider”开头的系统属性。并将这些属性的值解释为身份验证插件的类名。可以使用-Dzookeeeper.authProvider.X=com.f.MyAuth或在服务器配置文件中添加如下条目来设置这些属性：
-
+``` 
 authProvider.1=com.f.MyAuth
 authProvider.2=com.f.MyAuth2
+```
 应注意确保属性上的后缀是唯一的。如果存在重复项，例如-Dzookeeeper.authProvider.X=com.f.MyAuth -Dzookeeper.authProvider.X=com.f.MyAuth2，则只会使用一个。此外，所有服务器都必须定义相同的插件，否则使用插件提供的身份验证方案的客户端将无法连接到某些服务器。
 
-在 3.6.0 中添加：替代抽象可用于可插拔身份验证。它提供了额外的参数。
+>在 3.6.0 中添加：替代抽象可用于可插拔身份验证。它提供了额外的参数。    
 
+```java
 public abstract class ServerAuthenticationProvider implements AuthenticationProvider {
     public abstract KeeperException.Code handleAuthentication(ServerObjs serverObjs, byte authData[]);
     public abstract boolean matches(ServerObjs serverObjs, MatchValues matchValues);
 }
+```
 不是实现 AuthenticationProvider，而是扩展 ServerAuthenticationProvider。然后您的 handleAuthentication() 和matches() 方法将接收额外的参数（通过ServerObjs 和MatchValues）。
 
-ZooKeeperServer ZooKeeperServer 实例
-ServerCnxn当前连接
-path正在操作的 ZNode 路径（如果未使用，则为 null）
-perm操作值或 0
-setAcls当 setAcl() 方法被操作时，正在设置的 ACL 列表
+* `ZooKeeperServer`       ZooKeeperServer 实例
+* `ServerCnxn`            当前连接
+* `path`                  正在操作的 ZNode 路径（如果未使用，则为 null）
+* `perm`                  操作值或 0
+* `setAcls`               当 setAcl() 方法被操作时，正在设置的 ACL 列表
+
+
+
 
 
 
