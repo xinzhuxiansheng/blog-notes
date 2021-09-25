@@ -158,3 +158,11 @@ docker rmi $(docker images -q)    删除所有镜像
     解决办法是将环境变量设置在：/root/.bashrc
 
 
+
+
+
+
+
+
+
+## Kafka on Docker
