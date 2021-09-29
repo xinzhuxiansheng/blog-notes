@@ -124,6 +124,8 @@ git tag -d tag_name
 #删除远程tag
 git push origin :refs/tags/tag_name
 
+#将分支推送到origin
+git push origin remote_name --tags
 
 ```
 
