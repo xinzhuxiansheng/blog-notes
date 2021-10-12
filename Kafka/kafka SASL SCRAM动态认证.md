@@ -32,7 +32,16 @@ Kafka集群认证3种关系：
 ### 2.1 ZooKeeper集群配置
 ZooKeeper version:3.5.9, 针对集群提供SASL/SCRAM认证机制，并且用户的SCRAM存储在ZooKeeper中(The default SCRAM implementation in Kafka stores SCRAM credentials in Zookeeper and is suitable for use in Kafka installations where Zookeeper is on a private network.)。很多时候ZooKeeper集群是内部访问，所以ZooKeeper集群可以不用开启SASL认证访问。   
 
->ZooKeeper集群无需SASL配置    
+>ZooKeeper集群无需SASL配置  
+
+
+注意： 在Broker的server.log日志中启动日志中，有一条ZooKeeper错误信息：
+[2021-09-29 20:41:19,154] WARN SASL configuration failed: javax.security.auth.login.LoginException: No JAAS configuration section named 'Client' was found in specified JAAS configuration file: '/data/installDirs/kafka_2.13-2.7.1/kafka_server_jaas.conf'. Will continue connection to Zookeeper server without SASL authentication, if Zookeeper server allows it. (org.apache.zookeeper.ClientCnxn)
+[2021-09-29 20:41:19,155] INFO Opening socket connection to server 192.168.70.34/192.168.70.34:2181 (org.apache.zookeeper.ClientCnxn)
+[2021-09-29 20:41:19,155] ERROR [ZooKeeperClient ACL authorizer] Auth failed. (kafka.zookeeper.ZooKeeperClient)
+
+查看后，有且只有1条，不影响集群
+
 
 **若需要配置ZooKeeper的SASL，请参考以下操作:** 
 
@@ -88,8 +97,7 @@ if [ -z "$KAFKA_JMX_OPTS" ]; then
   KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=xxx.xxx.xxx.xxx  -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false "
 fi
 ```
-
-**启动各个Broker节点**
+**注意启动顺序，先将集群配置的ZK Path设置好，将admin用户配置密码，再启动集群各个节点。**
 
 ### 2.3 根据SCRAM创建admin用户及密码
 ```shell
@@ -160,3 +168,102 @@ fi
 
 ```
 
+
+## 4. SCRAM和ACL的测试用例
+针对不同的SCRAM和ACL授权情况，了解Producer，Consumer 写入和消费情况  
+
+### Producer
+
+* 4.1 Producer没有启动，yzhou：不存在，Acl：Write
+```shell
+# 删除yzhou
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
+
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-512' --entity-type users --entity-name yzhou
+
+# 查看ACL
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --list --topic yzhoutp01
+```
+测试结果：
+org.apache.kafka.common.errors.SaslAuthenticationException: Authentication failed during authentication due to invalid credentials with SASL mechanism SCRAM-SHA-256
+
+
+* 4.2 Producer已启动，yzhou：Producer启动时存在，启动后删除，Acl：Write
+```shell
+# 创建yzhou
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --add-config 'SCRAM-SHA-256=[password=yzhoupwd],SCRAM-SHA-512=[password=yzhoupwd]'  --entity-type users --entity-name yzhou
+
+# 删除yzhou
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
+```
+测试结果：
+Producer is running，没有影响，It will if you restart it.
+
+
+* 4.3 Producer已启动，yzhou：存在，Acl：Producer启动时，授权为Write, 启动后删除 Write
+```shell
+# 创建yzhou
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --add-config 'SCRAM-SHA-256=[password=yzhoupwd],SCRAM-SHA-512=[password=yzhoupwd]'  --entity-type users --entity-name yzhou
+
+# 删除yzhou
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
+
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-512' --entity-type users --entity-name yzhou
+```
+测试结果：
+Producer is running，没有影响，It will if you restart it.
+
+### Consumer
+
+* 4.4 Consumer没有启动，yzhou：不存在，Acl：Read
+```shell
+# 删除yzhou
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
+
+./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-512' --entity-type users --entity-name yzhou
+```
+测试结果
+Exception in thread "main" org.apache.kafka.common.errors.SaslAuthenticationException: Authentication failed during authentication due to invalid credentials with SASL mechanism SCRAM-SHA-256
+
+* 4.5 Consumer启动，yzhou：Consumer启动时存在，启动后删除，Acl：Read
+
+测试结果：
+Consumer is running，没有影响，It will if you restart it.
+
+
+
+
+
+**********************************************************************************
+
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --remove --allow-principal User:yzhou --operation Read --topic yzhoutp01 --group '*'
+
+
+
+./kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --add --allow-principal User:yzhou --operation Write --topic yzhoutp01
+
+
+
+
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --remove --allow-principal User:yzhou --operation Write --topic yzhoutp01
+
+
+
+
+
+
+./kafka-configs.sh --zookeeper localhost:2181/devtest2 --alter --add-config 'SCRAM-SHA-256=[password=yzhoupwd],SCRAM-SHA-512=[password=yzhoupwd]'  --entity-type users --entity-name yzhou
+
+
+
+
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest2 --list --topic yzhoutp01
+
+
+
+
+
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest2 --add --allow-principal User:yzhou --operation Write --topic yzhoutp01
+
+
+./kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=localhost:2181/devtest2 --remove --allow-principal User:yzhou --operation Write --topic yzhoutp01

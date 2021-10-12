@@ -171,3 +171,7 @@ git  stash //将其他修改文件
 git pull  origin dev //拉取远程代码合并到本地
 git push  提交commit的文件
 git stash pop //回复存储区的文件
+
+
+# 查看当前分支从哪个分支或者tag checkout的
+git log --oneline --graph --decorate
