@@ -1,6 +1,8 @@
 > 以下操作，参考 https://github.com/ben1234560/k8s_PaaS/blob/master/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E2%80%94%E2%80%94%E4%BC%81%E4%B8%9A%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98_K8S.md  
 以Windows操作系统为宿主机系统 
 
+# VMware Wrokstation配置虚拟机的静态IP
+
 ## VMware Workstation相关配置
 VM配置静态IP
 
