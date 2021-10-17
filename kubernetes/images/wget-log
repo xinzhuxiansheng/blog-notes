@@ -1,0 +1,8 @@
+--2021-10-15 00:29:13--  https://raw.githubusercontent.com/ben1234560/k8s_PaaS/master/assets/1582188308711.png
+正在解析主机 raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133
+正在连接 raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 读取文件头错误 (Operation timed out)。
+重试中。
+
+--2021-10-15 09:44:08--  (尝试次数： 2)  https://raw.githubusercontent.com/ben1234560/k8s_PaaS/master/assets/1582188308711.png
+正在连接 raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... 已连接。

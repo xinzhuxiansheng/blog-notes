@@ -54,3 +54,4 @@ http://idea.medeming.com/jetbrains/
 
 ## Mac Idea
  最大化编辑窗口: Shift + F12
+ 优化无效import: control + option + o
