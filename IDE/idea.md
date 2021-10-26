@@ -53,5 +53,8 @@ http://idea.medeming.com/jetbrains/
 
 
 ## Mac Idea
- 最大化编辑窗口: Shift + F12
+ 最大化编辑窗口: Shift + command + F12
  优化无效import: control + option + o
+ Structure窗口: command + 7
+ Structure窗口（弹出窗口，查看类结构）: command + F12
+
