@@ -78,7 +78,7 @@ git reset HEAD xxx/xxx/x.java 就是对某个文件进行撤销了
 ## 删除已经跟踪的文件或者文件夹
 ```shell
 git rm --cached 文件名
-git rm --cached -r 文件夹
+git rm --cached -r 文件夹    
 
 删除之后，重新提交代码即可
 ```
