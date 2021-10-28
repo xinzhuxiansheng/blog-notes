@@ -31,3 +31,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 .metals
+
+# 文件较大
+Kafka/dockerimage/
