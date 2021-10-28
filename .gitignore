@@ -33,4 +33,4 @@ yarn-error.log*
 .metals
 
 # 文件较大
-Kafka/dockerimage/
+#Kafka/dockerimage/
