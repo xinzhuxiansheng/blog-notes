@@ -20,27 +20,28 @@
 `对比信息来自`[该blog](https://blog.csdn.net/Smallc0de/article/details/113866633)   
 
 
-## 2. 部署基于SASL/SCRAM(-SHA-256/-SHA-512)Kafka集群(v2.7.1)
-**集群认证脉络**  
-![集群认证脉络](images/认证_集群认证脉络.jpg)   
+## 2. 部署基于SASL/SCRAM(-SHA-256/-SHA-512)Kafka集群 (v2.7.1)
+**集群认证脉络**    
+![集群认证脉络](http://118.126.116.71/blogimgs/kafka/SASL_SCRAM/认证_集群认证脉络.jpg)    
 
 Kafka集群认证3种关系：   
-1.Client与Broker之间  
-2.Broker与ZooKeeper之间   
+1.Client与Broker之间      
+2.Broker与ZooKeeper之间     
 3.Broker与Broker之间      
 
 ### 2.1 ZooKeeper集群配置
 ZooKeeper version:3.5.9, 针对集群提供SASL/SCRAM认证机制，并且用户的SCRAM存储在ZooKeeper中(The default SCRAM implementation in Kafka stores SCRAM credentials in Zookeeper and is suitable for use in Kafka installations where Zookeeper is on a private network.)。很多时候ZooKeeper集群是内部访问，所以ZooKeeper集群可以不用开启SASL认证访问。   
 
->ZooKeeper集群无需SASL配置  
+>ZooKeeper集群无需SASL配置,但是会出现以下异常日志
 
-
+```
 注意： 在Broker的server.log日志中启动日志中，有一条ZooKeeper错误信息：
 [2021-09-29 20:41:19,154] WARN SASL configuration failed: javax.security.auth.login.LoginException: No JAAS configuration section named 'Client' was found in specified JAAS configuration file: '/data/installDirs/kafka_2.13-2.7.1/kafka_server_jaas.conf'. Will continue connection to Zookeeper server without SASL authentication, if Zookeeper server allows it. (org.apache.zookeeper.ClientCnxn)
 [2021-09-29 20:41:19,155] INFO Opening socket connection to server 192.168.70.34/192.168.70.34:2181 (org.apache.zookeeper.ClientCnxn)
 [2021-09-29 20:41:19,155] ERROR [ZooKeeperClient ACL authorizer] Auth failed. (kafka.zookeeper.ZooKeeperClient)
+```
 
-查看后，有且只有1条，不影响集群
+查看后，不影响集群
 
 
 **若需要配置ZooKeeper的SASL，请参考以下操作:** 
@@ -52,18 +53,18 @@ ZooKeeper version:3.5.9, 针对集群提供SASL/SCRAM认证机制，并且用户
 
 ### 2.2 kafka集群配置
 
-**Broker配置kafka_server_jaas.conf**  
+**在Broker目录下配置kafka_server_jaas.conf**  
 在每个broker的服务器上创建jaas文件，尽量将文件放在Kafka的安装包路径内。一定要注意password后面的`;`号不能少。   
 `kafka_server_jaas.conf:`  
 ```shell
 kafkaServer {
    org.apache.kafka.common.security.scram.ScramLoginModule required
    username="admin"     // super:user
-   password="adminpwd"; // super:user passwordß
+   password="adminpwd"; // super:user password
 };
 ```
 
-**修改server.properties配置文件**
+**修改conf目录下server.properties配置**
 ```shell
 #监听地址
 listeners=SASL_PLAINTEXT://hostname:9092
@@ -74,30 +75,33 @@ sasl.enabled.mechanisms=SCRAM-SHA-256
 sasl.mechanism.inter.broker.protocol=SCRAM-SHA-256
 #inter.broker.listener.name 只能配置一个，否则报错
 security.inter.broker.protocol=SASL_PLAINTEXT
-authorizer.class.name=kafka.security.auth.SimpleAclAuthorizer
+authorizer.class.name=kafka.security.authorizer.AclAuthorizer
 #此处必须设置false，否则用户直接可以访问
 allow.everyone.if.no.acl.found=false
 #super.users设置admin，可密码是Kafka管理员自定义的，所以不用担心
 super.users=User:admin
-```
+``` 
 
-**修改kafka-server-start.sh启动脚本**   
+>注意: AclAuthorizer是开箱即用， 请不要使用SimpleAclAuthorizer,它从2.4版本开始标记@deprecated
+
+**修改bin目录下kafka-server-start.sh启动脚本**   
 在kafka-server-start.sh脚本中添加`kafka_server_jaas.conf`文件路径,这里就类似于开启Kafka的JMX_PORT一样
 ```shell
+# kafka_server_jaas.conf的路径
 export KAFKA_OPTS=-Djava.security.auth.login.config=/data/installDirs/kafka_2.13-2.7.1/kafka_server_jaas.conf
 export JMX_PORT="9999"
-```
+```  
 
->需要注意，针对很多情况需要手动指定jmx的hostname: -Djava.rmi.server.hostname=xxx.xxx.xxx.xxx  
-
-具体修改参考`JMX settings`
+**配置JMX**
+针对在使用CMAK工具时候，出现看不到JMX PORT及监控数据，则需要手动在`bin目录下的kafka-run-class.sh`脚本中指定jmx的hostname: -Djava.rmi.server.hostname=xxx.xxx.xxx.xxx 。具体修改参考`JMX settings`项
 ```shell
 # JMX settings
 if [ -z "$KAFKA_JMX_OPTS" ]; then
   KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote -Djava.rmi.server.hostname=xxx.xxx.xxx.xxx  -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false "
 fi
-```
-**注意启动顺序，先将集群配置的ZK Path设置好，将admin用户配置密码，再启动集群各个节点。**
+``` 
+以上操作完，即可启动集群， 启动后会发现每个Broker节点会有Auth Faild相关的日志 ...
+所以接下来，配置集群admin账户权限即可 ...
 
 ### 2.3 根据SCRAM创建admin用户及密码
 ```shell
@@ -109,6 +113,10 @@ fi
 ```
 
 **此时配置的super:users已配置好**
+
+
+> 以上操作，代表基于SASL/SCRAM动态认证集群部署已经完成...
+
 
 ## 3. 用户及授权相关脚本操作
 
