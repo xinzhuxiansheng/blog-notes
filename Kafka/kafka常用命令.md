@@ -92,3 +92,6 @@
 ```shell
 ./kafka-run-class.sh kafka.tools.DumpLogSegments --files /data1/00000000001506204448.log --print-data-log
 ```
+
+
+## Kafka 压测脚本使用

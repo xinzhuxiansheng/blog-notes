@@ -175,3 +175,18 @@ git stash pop //回复存储区的文件
 
 # 查看当前分支从哪个分支或者tag checkout的
 git log --oneline --graph --decorate
+
+
+
+# Git 上传过大文件后，影响后续提交
+```
+remote: error: See http://git.io/iEPt8g for more information.
+remote: error: File Kafka/dockerimage/jdk-8u212-linux-x64.tar.gz is 185.98 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+To github.com:xinzhuxiansheng/blog-notes.git
+ ! [remote rejected] master -> master (pre-receive hook declined)
+error: 推送一些引用到 'github.com:xinzhuxiansheng/blog-notes.git' 失败
+```
+
+将 大文件删除，光使用 	
+git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch YOUR-FILE'
