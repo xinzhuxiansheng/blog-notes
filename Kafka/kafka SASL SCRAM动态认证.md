@@ -8,13 +8,14 @@
 * SASL/SCRAM-SHA-256 and SASL/SCRAM-SHA-512 - starting at version 0.10.2.0
 * SASL/OAUTHBEARER - starting at version 2.0
 
-**对比表格**   
-| 认证方式    |   说明 |
+**对比表格**    
+
+| 认证方式   |   说明 |
 | -------- | -------- |
-| SASL/GSSAPI  | 主要是给 Kerberos 用户使用的，如果当前已经有了Kerberos认证，只需要给集群中每个Broker和访问用户申请Principals，然后在Kafka的配置文件中开启Kerberos的支持即可 官方参考：[Authentication using SASL/Kerberos](http://kafka.apache.org/documentation/#security_sasl_kerberos) |
-| SASL/PLAIN     |  是一种简单的用户名/密码身份验证机制，通常与TLS/SSL一起用于加密，以实现安全身份验证。是一种比较容易使用的方式，但是有一个很明显的缺点，这种方式会把用户账户文件配置到一个静态文件中，每次想要添加新的账户都需要重启Kafka去加载静态文件，才能使之生效，十分的不方便，官方参考：[Authentication using SASL/PLAIN](http://kafka.apache.org/documentation/#security_sasl_plain) |
-| SASL/SCRAM(-SHA-256/-SHA-512)      | 通过将认证用户信息保存在 ZooKeeper 里面，从而动态的获取用户信息，相当于把ZK作为一个认证中心使用了。这种认证可以在使用过程中，使用 Kafka 提供的命令动态地创建和删除用户，无需重启整个集群，十分方便。官方参考：[Authentication using SASL/SCRAM](http://kafka.apache.org/documentation/#security_sasl_scram) |
-| SASL/OAUTHBEARER      |  kafka 2.0 版本引入的新认证机制，主要是为了实现与 OAuth 2 框架的集成。Kafka 不提倡单纯使用 OAUTHBEARER，因为它生成的不安全的 Json Web Token，必须配以 SSL 加密才能用在生产环境中。官方参考：[Authentication using SASL/OAUTHBEARER](http://kafka.apache.org/documentation/#security_sasl_oauthbearer) |
+| SASL/GSSAPI  | 主要是给 Kerberos 用户使用的，如果当前已经有了Kerberos认证，只需要给集群中每个Broker和访问用户申请Principals，然后在Kafka的配置文件中开启Kerberos的支持即可 官方参考：[Authentication using SASL/Kerberos](http://kafka.apache.org/documentation/#security_sasl_kerberos) |  
+| SASL/PLAIN     |  是一种简单的用户名/密码身份验证机制，通常与TLS/SSL一起用于加密，以实现安全身份验证。是一种比较容易使用的方式，但是有一个很明显的缺点，这种方式会把用户账户文件配置到一个静态文件中，每次想要添加新的账户都需要重启Kafka去加载静态文件，才能使之生效，十分的不方便，官方参考：[Authentication using SASL/PLAIN](http://kafka.apache.org/documentation/#security_sasl_plain) |  
+| SASL/SCRAM(-SHA-256/-SHA-512)      | 通过将认证用户信息保存在 ZooKeeper 里面，从而动态的获取用户信息，相当于把ZK作为一个认证中心使用了。这种认证可以在使用过程中，使用 Kafka 提供的命令动态地创建和删除用户，无需重启整个集群，十分方便。官方参考：[Authentication using SASL/SCRAM](http://kafka.apache.org/documentation/#security_sasl_scram) |  
+| SASL/OAUTHBEARER      |  kafka 2.0 版本引入的新认证机制，主要是为了实现与 OAuth 2 框架的集成。Kafka 不提倡单纯使用 OAUTHBEARER，因为它生成的不安全的 Json Web Token，必须配以 SSL 加密才能用在生产环境中。官方参考：[Authentication using SASL/OAUTHBEARER](http://kafka.apache.org/documentation/#security_sasl_oauthbearer) | 
 
 如果使用SASL/GSSAPI那么需要新搭建Kerberos不太划算；SASL/PLAIN的方式可能会在使用过程中频繁的重启，非常的繁琐；而SASL/OAUTHBEARER属于Kafka新提供的，而且也没有这方面的需求，可以等等市场反应再说。因此综合来说最终选择了SASL/SCRAM的认证方法增强Kafka的安全功能  
 `对比信息来自`[该blog](https://blog.csdn.net/Smallc0de/article/details/113866633)   
@@ -136,142 +137,46 @@ fi
 # 在创建用户时，分别指定了256/512机密,所以也要注意Client的sasl.mechanism参数是否对应上。
 # 若针对即将要删除的用户已经设置ACL权限，这里需要区分认证和授权是独立的，即使设置该用户的授权也可以删除该用户。
 ./kafka-configs.sh --zookeeper localhost:2181/devtest --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name [用户名]
-
-
-# 查看所有用户
-
-```
+``` 
 
 **以上执行结果会在zookeeper上创建/config/users/[用户名]路径**   
 内容：  
 {"version":1,"config":{"SCRAM-SHA-512":"salt=MTcxbDF6aGNxOWgwajB2ZG1uOW83c3h6bm4=,stored_key=cmc413tGXiD7hFkdZHiVS7WzAUsC+mRQGyazJnC7S4a/w8ZrFuk/0cCsVtvWT13qob3QKJpk/pdWq2ODRMQEHw==,server_key=bcXtlsvRZGNqRBUai1TLWe2BIsOLHhTrunVt1OciDRvX2ZccDxFP7uxVZAa8NAInMkciqFyZB6KS9SxfX1XBug==,iterations=4096","SCRAM-SHA-256":"salt=a3N5aG4xcTRlc2JieGZ6azZzZHAxMmpmZQ==,stored_key=AWAeqyMrcJZfKwk1OD0VeKA63sd6h1IHPLBPhtpqhmg=,server_key=QR8pt51dmlL08Oqp/s2lo7YtqQXofYIN6pACn8eAdog=,iterations=4096"}}
 
 ### 3.2 ACL操作
-注意`[]`表示参数占位符，针对具体各个参数的含义及设值范围，请详细查看 **./kafka-acls.sh --help**
+注意`[]`表示参数占位符，针对具体各个参数的含义及设值范围，请详细查看 **./kafka-acls.sh --help** 
 ```shell
 # 查看所有权限
 ./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest --list
 
-
 # 写权限
-./kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=localhost:2181/devtest --add --allow-principal User:[用户] --operation [操作] --topic [Topic名称]
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest --add --allow-principal User:[用户] --operation [操作] --topic [Topic名称]
 
-# 读权限 区分Topic维度/Group维度
-
-
+# 读权限 Topic维度
 # 1. Topic维度，针对某个用户授权该Topic的读权限，不限制Group，用'*'进行模糊匹配即可
 # 此处特别注意 脚本参数 --group ‘*’, 在shell中*需要特殊处理。 一定要注意，要注意，要注意
-./kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=localhost:2181/devtest --add --allow-principal User:[用户] --operation Read --topic [Topic名称] --group '*'
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest --add --allow-principal User:[用户] --operation Read --topic [Topic名称] --group '*'
 
 
-# 2. Group维度 指定明确的消费组名称即可
-./kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=localhost:2181/devtest --add --allow-principal User:[用户] --operation Read --topic [Topic名称] --group [GroupId]
-
+# 读权限 Group维度 指定明确的消费组名称即可
+./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest --add --allow-principal User:[用户] --operation Read --topic [Topic名称] --group [GroupId]
 
 # 删除权限 
 ./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest --remove --allow-principal User:[用户] --operation [操作] --topic [Topic名称] 
 
 # 若删除读权限，请加上 --group参数
 --group '*' / --group '[明确的Group名称]'
-
 ```
 
 
-## 4. SCRAM和ACL的测试用例
-针对不同的SCRAM和ACL授权情况，了解Producer，Consumer 写入和消费情况  
+## 4.FAQ
 
-### Producer
+* 4.1 同一个用户对某个Topic Producer，Consumer已授权，若程序运行中将权限收回，Producer，Consumer是否会写不进去或者读不到数据  
+不会，需要程序停止后，才可以  
 
-* 4.1 Producer没有启动，yzhou：不存在，Acl：Write
-```shell
-# 删除yzhou
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
+* 4.2 同一个用户对某个Topic Producer，Consumer其中1个已授权，另一个会怎么样？ 
+博主测试过的案例：  
 
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-512' --entity-type users --entity-name yzhou
+前提Client程序的Log是INFO级别，当Consumer已授权，Producer未权限情况下，启动Producer写入数据，发现根本没有提示Fail Auth相关异常，此时，将Producer的Client程序的Log改成Trace，就会打印出权限校验失败... 
 
-# 查看ACL
-./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --list --topic yzhoutp01
-```
-测试结果：
-org.apache.kafka.common.errors.SaslAuthenticationException: Authentication failed during authentication due to invalid credentials with SASL mechanism SCRAM-SHA-256
-
-
-* 4.2 Producer已启动，yzhou：Producer启动时存在，启动后删除，Acl：Write
-```shell
-# 创建yzhou
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --add-config 'SCRAM-SHA-256=[password=yzhoupwd],SCRAM-SHA-512=[password=yzhoupwd]'  --entity-type users --entity-name yzhou
-
-# 删除yzhou
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
-```
-测试结果：
-Producer is running，没有影响，It will if you restart it.
-
-
-* 4.3 Producer已启动，yzhou：存在，Acl：Producer启动时，授权为Write, 启动后删除 Write
-```shell
-# 创建yzhou
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --add-config 'SCRAM-SHA-256=[password=yzhoupwd],SCRAM-SHA-512=[password=yzhoupwd]'  --entity-type users --entity-name yzhou
-
-# 删除yzhou
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
-
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-512' --entity-type users --entity-name yzhou
-```
-测试结果：
-Producer is running，没有影响，It will if you restart it.
-
-### Consumer
-
-* 4.4 Consumer没有启动，yzhou：不存在，Acl：Read
-```shell
-# 删除yzhou
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-256' --entity-type users --entity-name yzhou
-
-./kafka-configs.sh --zookeeper localhost:2181/ofhy01 --alter --delete-config 'SCRAM-SHA-512' --entity-type users --entity-name yzhou
-```
-测试结果
-Exception in thread "main" org.apache.kafka.common.errors.SaslAuthenticationException: Authentication failed during authentication due to invalid credentials with SASL mechanism SCRAM-SHA-256
-
-* 4.5 Consumer启动，yzhou：Consumer启动时存在，启动后删除，Acl：Read
-
-测试结果：
-Consumer is running，没有影响，It will if you restart it.
-
-
-
-
-
-**********************************************************************************
-
-./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --remove --allow-principal User:yzhou --operation Read --topic yzhoutp01 --group '*'
-
-
-
-./kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --add --allow-principal User:yzhou --operation Write --topic yzhoutp01
-
-
-
-
-./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/ofhy01 --remove --allow-principal User:yzhou --operation Write --topic yzhoutp01
-
-
-
-
-
-
-./kafka-configs.sh --zookeeper localhost:2181/devtest2 --alter --add-config 'SCRAM-SHA-256=[password=yzhoupwd],SCRAM-SHA-512=[password=yzhoupwd]'  --entity-type users --entity-name yzhou
-
-
-
-
-./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest2 --list --topic yzhoutp01
-
-
-
-
-
-./kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181/devtest2 --add --allow-principal User:yzhou --operation Write --topic yzhoutp01
-
-
-./kafka-acls.sh --authorizer kafka.security.auth.SimpleAclAuthorizer --authorizer-properties zookeeper.connect=localhost:2181/devtest2 --remove --allow-principal User:yzhou --operation Write --topic yzhoutp01
+> 针对4.2的疑惑，博主后续会跟进这个现象(不应该的设计呀)及向社区沟通。
