@@ -190,3 +190,12 @@ error: 推送一些引用到 'github.com:xinzhuxiansheng/blog-notes.git' 失败
 
 将 大文件删除，光使用 	
 git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch YOUR-FILE'
+
+
+
+# Git 撤销更改
+我查了下有两个相关的命令：
+1. git clean -df
+2. git reset --hard
+但问题是第一个命令只删除所有untracked的文件，如果文件已经被tracked, 修改过的文件不会被回退。而第二个命令只把tracked的文件revert到前一个版本，对于untracked的文件(比如编译的临时文件)都不会被删除。
+

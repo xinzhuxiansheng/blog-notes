@@ -57,4 +57,4 @@ http://idea.medeming.com/jetbrains/
  优化无效import: control + option + o
  Structure窗口: command + 7
  Structure窗口（弹出窗口，查看类结构）: command + F12
-
+ 跳转到某行: command + l

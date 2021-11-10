@@ -142,13 +142,28 @@ taskmanager.numberOfTaskSlots: 10()
 **访问Flink Dashboard**
 Dashboard默认端口是8081， localhost:8081  
 
-`提交Flink作业` 
+`提交Flink作业 方式一` 
+Dashboard提交   
 * 打开终端执行 nc -lk 7777 (nc没有安装，centos：yum install -y nc)
 * 打开`Submit New Job` ,上传jar包，配置运行参数
 Entry class: main方法的全限定类名   
 Parallelism: 1 (不能大于taskmanager.numberOfTaskSlots参数值)
 Program Arguments: --host localhost --port 7777 
 * 提交作业，点击 Submit按钮 
+
+`提交Flink作业 方式二`
+flink脚本提交   
+```shell
+# 启动作业
+bin/flink run -c 全限定类名 -p 并发数  jar包路径  --host localhost --port 7777
+
+# 作业列表
+bin/flink list
+
+# 取消作业 根据flink list查找对应的作业Id
+bin/flink cancel flinkjobId
+```
+
 
 `作业运行`  
 ![idea搭建入门Flink程序04](images/idea搭建入门Flink程序04.jpg)  
