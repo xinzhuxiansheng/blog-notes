@@ -9,7 +9,7 @@ JavaCC（Java Compiler Compiler）是一个开源的语法分析器生成器和�
 JavaCC官网: https://javacc.github.io/javacc/
 
 
-## 安装
+## 本地安装
 以下按照官网步骤: https://javacc.github.io/javacc/#download 
 ```
 Download & Installation
@@ -63,6 +63,17 @@ source .bash_profile
 
 以上步骤操作完，即可在终端输入`javacc` 
 
-### 本地安装
+>在官网特别介绍：在基于UNIX的系统上，脚本可能无法立即执行，通过 chmod +x scripts/javacc授权 
 
 ### Idea插件安装
+
+Idea安装JavaCC插件，请以下参考官网内容:  
+```
+IntelliJ IDEA
+
+The IntelliJ IDE supports Maven out of the box and offers a plugin for JavaCC development. 
+
+* IntelliJ download: https://www.jetbrains.com/idea/
+* IntelliJ JavaCC Plugin: https://plugins.jetbrains.com/plugin/11431-javacc/
+``` 
+
