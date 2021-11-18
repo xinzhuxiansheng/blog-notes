@@ -1,6 +1,14 @@
 
 
+## 创建命名空间
+```shell
+kubectl create namespace [namespace]
+```
 
+## 删除命名空间
+```shell
+kubectl delete namespace [namespace]
+```
 
 ## 查看日志
 ```shell
