@@ -100,7 +100,7 @@ docker push xxxxxx/flinkperf:v1
   -Dtaskmanager.memory.process.size=4096m \
   -Dkubernetes.taskmanager.cpu=2 \
   -Dtaskmanager.numberOfTaskSlots=4 \
-  -Dkubernetes.container.image=hub.bitautotech.com/library/yzhouflinkperf:v1.2 \
+  -Dkubernetes.container.image=hub.xxxxx.com/library/yzhouflinkperf:v1.2 \
   local:///opt/flink/usrlib/flink-perf-1.0-SNAPSHOT.jar 
 ``` 
 
