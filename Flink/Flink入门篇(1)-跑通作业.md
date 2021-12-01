@@ -1,5 +1,7 @@
 > 若没有特殊说明,Flink的默认版本是1.14.0        
 
+## Flink入门篇(1)-跑通作业
+
 ## Idea搭建入门Flink程序        
 
 ### pom.xml添加依赖包
@@ -111,13 +113,13 @@ public static class MyFlatMapper implements FlatMapFunction<String, Tuple2<Strin
 ```
 
 **项目整理结构如图:**   
-![idea搭建入门Flink程序01](images/idea搭建入门Flink程序01.jpg)  
+![idea搭建入门Flink程序01](http://img.xinzhuxiansheng.com/blogimgs/flink/idea搭建入门Flink程序01.jpg)  
 
 > 这里特别需要说明 maven dependency的scope(生命周期) ，在Flink作业部署在FLink环境中，有些Flink jar不需要打入包中(具体哪些jar不需要打入包中，后续文章会说明)，所以会将scope设置为provided。
 但也存在特殊情况，例如在Idea本地运行Flink程序，仍然需要将jar设置为runtime生命周期中，这里有个Idea的 tips
 
 操作：添加Main方法的 `Run/Debug Configurations` --> `Modify options` ---> `Add dependencies with "provided" scope to classpath`;        
-![idea搭建入门Flink程序02](images/idea搭建入门Flink程序02.jpg)
+![idea搭建入门Flink程序02](http://img.xinzhuxiansheng.com/blogimgs/flink/idea搭建入门Flink程序02.jpg)
 
 >通过maven打包即可: mvn clean package
 
@@ -166,13 +168,13 @@ bin/flink cancel flinkjobId
 
 
 `作业运行`  
-![idea搭建入门Flink程序04](images/idea搭建入门Flink程序04.jpg)  
+![idea搭建入门Flink程序04](http://img.xinzhuxiansheng.com/blogimgs/flink/idea搭建入门Flink程序04.jpg)  
 
 `终端输入`  
-![idea搭建入门Flink程序05](images/idea搭建入门Flink程序05.jpg)  
+![idea搭建入门Flink程序05](http://img.xinzhuxiansheng.com/blogimgs/flink/idea搭建入门Flink程序05.jpg)  
 
 `Stdout输出(日志查看)`  
-![idea搭建入门Flink程序06](images/idea搭建入门Flink程序06.jpg) 
+![idea搭建入门Flink程序06](http://img.xinzhuxiansheng.com/blogimgs/flink/idea搭建入门Flink程序06.jpg) 
 
 
 

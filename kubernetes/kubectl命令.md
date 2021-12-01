@@ -20,3 +20,9 @@ kubectl logs [podname] -n [namespace]
 ```shell
 kubectl -n [namespace] describe pods [podname]
 ```
+
+
+## 扩展查看(ip)
+```
+ kubectl -n [namespace] get all -o wide
+```

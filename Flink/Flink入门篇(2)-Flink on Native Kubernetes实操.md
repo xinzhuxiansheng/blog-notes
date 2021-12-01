@@ -1,6 +1,9 @@
-## Flink on Native Kubernetes   
+## Flink入门篇(2)-Flink on Native Kubernetes实操 
 
 > 若没有特殊说明,Flink的默认版本是1.14.0
+
+**以下操作可参考官网**
+Native Kubernetes https://nightlies.apache.org/flink/flink-docs-release-1.14/docs/deployment/resource-providers/native_kubernetes/
 
 ### Flink 对 Kubernetes环境的要求
 ```
@@ -56,7 +59,7 @@ kubectl create clusterrolebinding flink-role-binding-flink -n yzhou  --clusterro
 
 >注意，这里创建的信息，会在后面的 Application Mode提交Flink Job用到
 
-
+### Application Mode方式提交作业  
 ### 打包Flink作业镜像
 请参考: https://nightlies.apache.org/flink/flink-docs-release-1.14/zh/docs/deployment/resource-providers/native_kubernetes/#application-mode    
 这里对官网文档做出一些补充：    
