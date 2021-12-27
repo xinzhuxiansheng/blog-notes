@@ -26,3 +26,5 @@ kubectl -n [namespace] describe pods [podname]
 ```
  kubectl -n [namespace] get all -o wide
 ```
+
+## 删除deploymet

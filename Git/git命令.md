@@ -161,16 +161,25 @@ origin/develop develop为要设置的默认分支
 
 
 # git 只提交部分文件
- git 只提交部分修改文件
+ 
 
-git status //查看修改文件状态
-git add  //将想要提交的文件add到本地库
-git status  //查看修改文件状态
-git commit  //提交add到本地库的文件
-git  stash //将其他修改文件
-git pull  origin dev //拉取远程代码合并到本地
-git push  提交commit的文件
-git stash pop //回复存储区的文件
+1、git status //查看修改文件状态
+
+2、git add  //将想要提交的文件add到本地库
+
+4、git status  //查看修改文件状态
+
+3、git commit  //提交add到本地库的文件
+
+5、git  stash //将其他修改文件
+
+6、git pull  origin dev //拉取远程代码合并到本地
+
+7、git push  提交commit的文件
+
+8、git stash pop //回复存储区的文件
+
+
 
 
 # 查看当前分支从哪个分支或者tag checkout的
@@ -199,3 +208,15 @@ git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch YOUR-FILE'
 2. git reset --hard
 但问题是第一个命令只删除所有untracked的文件，如果文件已经被tracked, 修改过的文件不会被回退。而第二个命令只把tracked的文件revert到前一个版本，对于untracked的文件(比如编译的临时文件)都不会被删除。
 
+## PR的提交记录，之前如何清楚
+
+//在每次提完PR之后，checkout到源分支上reset head，再push -f
+git checkout origin/2.0   //我得源分支
+git log                   //查看最初的head
+git reset commitId --hard //强制reset
+git push -f               //强制提交
+
+
+
+### 修改分支 
+https://www.jianshu.com/p/cc740394faf5

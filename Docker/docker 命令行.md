@@ -61,6 +61,12 @@ systemctl start sshd
 # JDK环境中问题 不要配置在 /etc/profile ， 配置在 /root/.bashrc  （特别注意）
 
 ```
+
+## 删除 containerid
+```
+docker rm containerid
+```
+
 ## 配置docker内部 与 外部的端口映射
 `动态绑定端口`
 
@@ -103,6 +109,16 @@ docker stop $(docker ps -a -q)      停止所有容器
 docker rm $(docker ps -a -q)        删除所有容器
 
 docker rmi $(docker images -q)    删除所有镜像
+
+## 容器和本机互传文件
+docker容器向本机传送文件
+
+docker cp container_id:docker容器内的文件全路径 本机保存文件的全路径
+例如：docker cp 4a2f08d2c1f8:/data1/configure.txt E:\PHP\configure.txt
+本机向docker容器传送文件
+
+docker cp 本机保存文件的全路径 container_id:docker容器内的文件全路径
+例如：docker cp E:\PHP\configure.txt 4a2f08d2c1f8:/data1/configure.txt
 
 
 

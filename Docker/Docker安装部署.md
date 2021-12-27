@@ -31,7 +31,8 @@ systemctl start docker
 exec-opts参数一定要配置
 ```
 {
-  "exec-opts": ["native.cgroupdriver=systemd"]
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "insecure-registries": ["hub.xxxxx.com"]
 }
 ```
 然后重启Docker
