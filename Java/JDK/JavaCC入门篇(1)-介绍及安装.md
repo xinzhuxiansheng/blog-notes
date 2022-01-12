@@ -53,7 +53,7 @@ cp bootstrap/javacc.jar target/
 sudo vim .bash_profile
 # 以下是添加内容
 #set javacc environment
-JAVACC_HOME=/Users/yiche/Software/javacc-javacc-7.0.10
+JAVACC_HOME=/Users/yc/Software/javacc-javacc-7.0.10
 PATH=$PATH:$JAVACC_HOME/scripts
 export JAVACC_HOME PATH
 

@@ -66,11 +66,11 @@ systemctl enable docker
 systemctl start docker
 ```
 
-配置docker的镜像源  
-exec-opts参数一定要配置
+配置docker的镜像源 
+在/etc/docker/daemon.json文件（没有请自行创建）添加如下配置： 
+//一般不需要配置 ：   "exec-opts": ["native.cgroupdriver=systemd"],
 ```
 {
-  "exec-opts": ["native.cgroupdriver=systemd"],
   "insecure-registries": ["hub.xxxxx.com"]
 }
 ```

@@ -190,7 +190,7 @@ docker pull centos:7
 #1.配置本地目录挂在作为安装包
 #2.解压安装
 #3.mac terminal直接进入shell
-docker run -it -v /Users/yiche/DockerFile:/data eeb6ee3f44bd
+docker run -it -v /Users/yc/DockerFile:/data eeb6ee3f44bd
 
 #重新进去
 docker exec -it [containerId] /bin/bash 
