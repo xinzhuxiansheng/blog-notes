@@ -12,7 +12,7 @@ metadata:
   namespace: yzhou
 spec:
   rules:
-  - host: flink-yzhoutest-cluster0003.ark-tke-8215.bitxxxxx.com
+  - host: flink-yzhoutest-cluster0003.xxxx-8215.bitxxxxx.com
     http:
       paths:
       - backend:

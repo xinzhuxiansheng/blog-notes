@@ -58,3 +58,7 @@ http://idea.medeming.com/jetbrains/
  Structure窗口: command + 7
  Structure窗口（弹出窗口，查看类结构）: command + F12
  跳转到某行: command + l
+
+`Bookmark`
+添加Bookmark: F3
+查看Bookmark list: fn + command + F3
