@@ -1,4 +1,8 @@
 
+## 查看命令空间
+```shell
+kubectl get namespaces
+```
 
 ## 创建命名空间
 ```shell
