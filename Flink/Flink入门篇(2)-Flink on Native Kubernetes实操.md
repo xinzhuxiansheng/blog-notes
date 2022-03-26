@@ -116,7 +116,7 @@ kubectl get all -n yzhou
 >根据以下示例： 8081:31548/TCP ,所以访问 IP:31548 即可  
 
 ```
-[root@l82-15-p-pbs flink-1.14.0]# kubectl get all -n yzhou
+[root@l82-15-p-xxx flink-1.14.0]# kubectl get all -n yzhou
 NAME                                           READY   STATUS    RESTARTS   AGE
 pod/flink-yzhoutest-cluster-67774ff55c-stfbn   1/1     Running   0          71m
 pod/flink-yzhoutest-cluster-taskmanager-1-1    1/1     Running   0          70m
