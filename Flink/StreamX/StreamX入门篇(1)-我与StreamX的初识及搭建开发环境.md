@@ -58,3 +58,5 @@ StreamX提供两种sql（streamx/streamx-console/streamx-console-service/src/ass
 
 剩下的就是测试StreamX即可
 
+
+### StreamX跑通Flink on Kubernetes
