@@ -26,6 +26,72 @@ https://blog.csdn.net/qq_31866793/article/details/121373178
 3. DataStream实现Mysql同步
 
 
+4. Mysql同步timestamp 快了8小时
+
+https://blog.csdn.net/weixin_44762298/article/details/110198809
+
+增加server-time-zone
+" 'database-name' = 'db_test'," +
+" 'table-name' = 'yzhou_tb_flink_job'," +
+" 'server-time-zone' = 'Asia/Shanghai' " +
+")");
+
+
+5. 设置起始点
+使用.startupOptions()
+
+databaseList("otc_uat") // set captured database
+.tableList("otc_uat.deposits") // set captured table
+.username("qa")
+.password("twJLNzbA1JNm7PEiQYi9kMdN")
+.startupOptions(StartupOptions.latest())
+.deserializer(new JsonDebeziumDeserializationSchema()) // converts SourceRecord to JSON String
+.build();
+
+也可以参考 https://github.com/fideism/gitee/blob/486a9b01267bba4e9941c7950bf998c0648c3ca7/DataLinkDC/Dinky/dlink-client/dlink-client-1.11/src/main/java/com/dlink/cdc/FlinkCDCMergeBuilder.java
+
+
+6. 设置chunk.size
+private static MySqlSource<JSONObject> getSource(String tableName) {
+    //Properties properties = new Properties();
+    //properties.setProperty("scan.incremental.snapshot.chunk.size", "777770");
+    return MySqlSource.<JSONObject>builder()
+            .hostname("114.67.101.133")
+            .port(3306)
+            .username("root")
+            .password("jd@gmh#mysql")
+            // 读取哪个库，可以读取多个库，默认监控库下所有表
+            .databaseList("fangao")
+            // 监控库下的某些表 test_jdbc1.table,test_jdbc1.table1
+            .tableList("fangao."+tableName)
+            // 反序列化  用的是 Debezium 的 StringDebeziumDeserializationSchema() 格式不方便，所以要自定义
+            .deserializer(new JsonDebeziumDeserializationSchema())
+            // 启动参数 提供了如下几个静态方法
+            // StartupOptions.initial() 第一次启动的时候，会把历史数据读过来（全量）做快照，后续读取binlog加载新的数据，如果不做 chackpoint 会存在重启又全量一遍。
+            // StartupOptions.earliest() 只从binlog开始的位置读（源头），这里注意，如果binlog开启的时间比你建库时间晚，可能会读不到建库语句会报错，earliest要求能读到建表语句
+            // StartupOptions.latest() 只从binlog最新的位置开始读
+            // StartupOptions.specificOffset() 自指定从binlog的什么位置开始读
+            // StartupOptions.timestamp() 自指定binlog的开始时间戳
+            .startupOptions(StartupOptions.initial())
+            //.debeziumProperties(properties)
+            .build();
+}
+
+7. Mysql CDC DataSteam API 这篇文章，要好好读
+https://blog.csdn.net/qq_31866793/article/details/121373178
+
+8. 动态Scheme 
+https://blog.csdn.net/cloudbigdata/article/details/122935333
+
+
+
+
+
+
+
+
+
+
 
 4. 完整的CDC DEMO
 

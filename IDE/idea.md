@@ -62,3 +62,7 @@ http://idea.medeming.com/jetbrains/
 `Bookmark`
 添加Bookmark: F3
 查看Bookmark list: fn + command + F3
+
+
+## ATOM 
+格式化JSON  🔼 + command + p
