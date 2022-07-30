@@ -224,3 +224,9 @@ git push -f               //强制提交
 
 ### 修改分支 
 https://www.jianshu.com/p/cc740394faf5
+
+
+### 清空stash
+```
+git stash clear
+```

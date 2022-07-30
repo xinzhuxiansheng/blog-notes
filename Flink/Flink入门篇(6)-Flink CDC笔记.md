@@ -84,11 +84,19 @@ https://blog.csdn.net/qq_31866793/article/details/121373178
 https://blog.csdn.net/cloudbigdata/article/details/122935333
 
 
+9. 水平扩展
+
+Chunk 切分
+
+分别设置 source ，sink的并行度 
+
+blog： https://www.aboutyun.com/thread-31961-1-1.html
+video： https://www.bilibili.com/video/BV1wL4y1Y7Xu?p=15&spm_id_from=pageDriver
 
 
+10. 扩展
 
-
-
+https://www.jianshu.com/p/6e5178dcd70c
 
 
 

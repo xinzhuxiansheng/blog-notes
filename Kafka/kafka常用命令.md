@@ -55,7 +55,7 @@
 ./kafka-console-consumer.sh --bootstrap-server [bootstrapservers]  --zookeeper [zkurl] --topic top --consumer.config  consumer.properties
 ```
 
-## 设置某个consumerGroupId offset 从某个时间点消费
+## 设置某个consumerGroupId offset 从某个时间点消费(注意 --to-datetime 需要)
 
 ```shell
 ./kafka-consumer-groups.sh --bootstrap-server [bootstrapservers] --command-config consumer.properties --group [groupid] --reset-offsets --topic [topic名称] --to-datetime 2020-09-07T00:00:00.000 --execute

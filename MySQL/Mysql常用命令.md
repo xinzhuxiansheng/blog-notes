@@ -20,3 +20,6 @@ mysql>source C:\test.sql 或者 \. C:\test.sql
 
 ## 删除数据库
 msql>drop database [库名]
+
+## 导出sql文件
+mysql -h localhost -P 3306 -u root -p --default-character-set=utf8

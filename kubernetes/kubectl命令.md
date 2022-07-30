@@ -32,3 +32,7 @@ kubectl -n [namespace] describe pods [podname]
 ```
 
 ## 删除deploymet
+
+
+
+## ephemeral-storage 临时存储

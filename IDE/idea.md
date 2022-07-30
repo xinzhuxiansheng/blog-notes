@@ -58,6 +58,8 @@ http://idea.medeming.com/jetbrains/
  Structure窗口: command + 7
  Structure窗口（弹出窗口，查看类结构）: command + F12
  跳转到某行: command + l
+ 展开所有代码块: command + shift + 加号
+ 折叠所有代码块: command + shift + 减号
 
 `Bookmark`
 添加Bookmark: F3
@@ -66,3 +68,7 @@ http://idea.medeming.com/jetbrains/
 
 ## ATOM 
 格式化JSON  🔼 + command + p
+
+
+
+idea mac 快捷键 可以参考 https://juejin.cn/post/6844903849631678478
