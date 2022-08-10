@@ -170,7 +170,7 @@ systemctl enable kubelet
 
 ## 部署Kubernetes Master(Master节点)
 ```
-kubeadm init --apiserver-advertise-address=10.4.7.151 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.22.3 --service-cidr=10.96.0.0/12  --pod-network-cidr=10.244.0.0/16
+kubeadm init --apiserver-advertise-address=10.4.7.151 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.22.3 --service-cidr=10.96.0.0/12  --pod-network-cidr=xx.xx4.0.0/16
 ```
 
 配置Kubectl工具   

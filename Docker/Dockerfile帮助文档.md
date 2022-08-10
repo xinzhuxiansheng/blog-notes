@@ -14,3 +14,16 @@ docker run -d -p xxxx:xxxx --log-driver json-file --log-opt max-size=10m --log-o
 1. --log-driver 设置日志驱动
 2. --log-opt 设置日志参数  max-size=10m 表示 json文件最大为10MB (超过10MB就会自动生成新文件) ， max-file=3表示json文件最多为3个(超过3个就会自动删除多余的旧文件) 。
 
+
+## 指定工作目录
+WORKDIR 目录
+
+## 执行cmd
+CMD ["bash",""]
+
+## 在Dockerfile指定端口
+EXPOSE port
+
+
+
+ docker build -t yearning-juno .

@@ -8,10 +8,10 @@
      jobId          : 09ef11931e3f05df66b2b89e1ed8142c
 -------------------------------------------------------------------------------------------
 
-2021-12-13 02:58:42 | INFO  | streamx-deploy-executor-0 | org.apache.flink.kubernetes.KubernetesClusterDescriptor ] Retrieve flink cluster streamx-yzhou-consumer003 successfully, JobManager Web Interface: http://10.24.212.25:31425
+2021-12-13 02:58:42 | INFO  | streamx-deploy-executor-0 | org.apache.flink.kubernetes.KubernetesClusterDescriptor ] Retrieve flink cluster streamx-yzhou-consumer003 successfully, JobManager Web Interface: http://xx.xx.212.25:31425
 2021-12-13 02:58:43 | INFO  | streamx-deploy-executor-0 | com.streamxhub.streamx.console.core.service.impl.ApplicationServiceImpl ] savePoint path:
 2021-12-13 02:58:43 | INFO  | streamx-deploy-executor-0 | com.streamxhub.streamx.console.core.service.impl.ApplicationServiceImpl ] savePoint path:
-2021-12-13 02:58:43 | INFO  | ForkJoinPool-1-worker-29 | org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec ] Recoverable I/O exception (org.apache.hc.core5.http.NoHttpResponseException) caught when processing request to {}->http://10.24.212.25:31425
+2021-12-13 02:58:43 | INFO  | ForkJoinPool-1-worker-29 | org.apache.hc.client5.http.impl.classic.HttpRequestRetryExec ] Recoverable I/O exception (org.apache.hc.core5.http.NoHttpResponseException) caught when processing request to {}->http://xx.xx.212.25:31425
 uu^H^H
 
 java.lang.NullPointerException
