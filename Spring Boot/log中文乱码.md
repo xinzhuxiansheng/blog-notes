@@ -1,5 +1,5 @@
 
-## Log中文乱码处理
+## Spring Boot Log中文乱码处理
 
 ```shell
 # 删除乱码file，等程序启动，自动生成新的file
