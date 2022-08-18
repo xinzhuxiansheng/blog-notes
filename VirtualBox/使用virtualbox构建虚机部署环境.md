@@ -5,7 +5,7 @@
 * 虚机能访问宿主机
 * 虚机能访问网络
 * 宿主机能访问虚机
-* 虚机固定IP
+* 固定虚机IP
 
 
 ### VirtualBox安装Centos7系统
@@ -53,9 +53,9 @@ vboxnet0: flags=8943<UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
 网卡2： 选择“NAT”
 ![add_adapter02](images/add_adapter02.jpg)
 
-* 重启虚拟机，此时在虚机ping www.baidu.com判断是否可以访问网络    
+* 重启虚拟机，此时在虚机执行“ping www.baidu.com”判断是否可以访问网络    
 
-* 配置固定ip
+* 配置固定虚机ip
 ```shell
 vi /etc/sysconfig/network-scripts/ifcfg-enp0s3  
 ```
