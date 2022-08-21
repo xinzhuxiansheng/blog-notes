@@ -33,3 +33,7 @@ JRE_HOME=/usr/local/java-se-8u42-ri/jre
 PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
 export JAVA_HOME JRE_HOME PATH CLASSPATH
+
+
+
+docker run --name kubeblog  -p 5000:5000  --link mysql57 -e MYSQL_SERVER=mysql75 

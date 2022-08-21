@@ -61,6 +61,7 @@ docker login hub.xxxxx.com
 
 
 ```shell
-
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum install -y yum-utils device-mapper-persistent-data lvm2 wget
 
 ```
