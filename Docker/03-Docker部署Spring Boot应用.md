@@ -127,6 +127,24 @@ ff02::2 ip6-allrouters
 172.17.0.3      6f6fe7742858
 ```
 
+>另一种 参数配置
+利用docker -e 参数
+```shell
+docker run --name xxxx -p 5000:5000 -d --link mysql57 xxxx:1.0 -e "xxxx" -e "xxxx"
+```
 
+在Dockerfile中定义环境变量
+```
+FROM openjdk:8-jdk-alpine3.7
+MAINTAINER ZhouYang
+VOLUME /tmp
 
+#设置变量 
+ENV username=""
+ENV password=""
+ENV url=""
 
+ADD target/spring-boot.jar /spring-boot.jar
+EXPOSE 5000
+ENTRYPOINT ["sh","-c","java -jar xxxx.jar --spring.datasource.username=$username --spring.datasource.url=$url --spring.datasource.password=$password"]
+```
