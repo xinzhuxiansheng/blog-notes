@@ -1,6 +1,3 @@
-**`正文`**
-[TOC]
-
 ## git new pull request 操作流程
 ```shell
 fork 原始仓库
