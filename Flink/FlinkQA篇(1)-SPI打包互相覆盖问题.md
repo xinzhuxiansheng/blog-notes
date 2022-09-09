@@ -32,12 +32,12 @@ print
 脑补下这块知识：每个connector的源码中在`resources`下的META-INFO.services目录定义SPI，所以这块通过`JD-GUI`确认项目打的fatjar是否对应的mysql-cdc SPI，剩下就是mysql-cdc的SPI叫啥，访问Flink CDC github查看。  下面给出截图说明：      
 
 **flink-cdc-connectors**
-![QA1flinkcdc源码01](images/QA1flinkcdc源码01.jpg)      
+![QA1flinkcdc源码01](http://img.xinzhuxiansheng.com/blogimgs/flink/QA1flinkcdc源码01.jpg)      
 
 ----    
 
 **使用JD-GUI反编译工具**
-![QA1反编译service01](images/QA1反编译service01.jpg)    
+![QA1反编译service01](http://img.xinzhuxiansheng.com/blogimgs/flink/QA1反编译service01.jpg)    
 
 通过以上工具，分别将 `flink-table-planner`,`flink-connector-jdbc`的jar注释后打包发现，`META-INF.services.org.apache.flink.table.factories.Factory`的SPI内容一直再变化，后来发现它们与`flink-connector-mysql-cdc`的SPI名称冲突，导致在打包的时候，会相互覆盖内容。       
 
@@ -98,4 +98,4 @@ print
 ``` 
 
 最后打包后的SPI合并内容如下：
-![QA1反编译service02](images/QA1反编译service02.jpg)    
+![QA1反编译service02](http://img.xinzhuxiansheng.com/blogimgs/flink/QA1反编译service02.jpg)    
