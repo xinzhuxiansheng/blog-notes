@@ -11,7 +11,7 @@ show full PROCESSLIST;
 2.在INNODB_TRX事务表中查看,看trx_mysql_thread_id是否在show full processlist里面的sleep线程中(INNODB_TRX表的`trx_mysql-thread_id`字段对应show full processlist中的id)；如果在，就说明这个sleep的线程事务一直没有commit或者rollback，而是卡住了，需要我们手动删除.
 
 ```shell
-select * from information_schema.innodb_trx\G;
+select * from information_schema.innodb_trx;
 ```
 
 **Output**
