@@ -1,85 +1,73 @@
-# git stash用法
-## 1. stash当前修改
+## git stash用法
+
+### 1. stash当前修改
 
 git stash会把所有未提交的修改（包括暂存的和非暂存的）都保存起来，用于后续恢复当前工作目录。 比如下面的中间状态，通过git stash命令推送一个新的储藏，当前的工作目录就干净了。
 
+**操作流程案例**    
 ```shell
-$ git status
-On branch master
-Changes to be committed:
+# 查看发生改变的文件
+git status
 
-new file:   style.css
+# 将改动文件 存储本地缓存中
+git stash
 
-Changes not staged for commit:
-
-modified:   index.html
-
-$ git stash
-Saved working directory and index state WIP on master: 5002d47 our new homepage
-HEAD is now at 5002d47 our new homepage
-
-$ git status
-On branch master
-nothing to commit, working tree clean
+# 若给每次stash 加一个注释，例如git commit -m '注释'
+git stash save "注释"
 ```
 
-需要说明一点，stash是本地的，不会通过git push命令上传到git server上。 实际应用中推荐给每个stash加一个message，用于记录版本，使用git stash save取代git stash命令。示例如下：
+>这里需要单独说明一个场景 只将部分文件放入stash中，这在github中提交PR是经常存在的   
 
+需要用到 git stash -p的命令，它是一个交互式命令，我们可以一个文件一个文件的遍历，决定每个文件的操作方式
+**操作流程案例**        
 ```shell
-$ git stash save "test-cmd-stash"
-Saved working directory and index state On autoswitch: test-cmd-stash
-HEAD 现在位于 296e8d4 remove unnecessary postion reset in onResume function
-$ git stash list
-stash@{0}: On autoswitch: test-cmd-stash
+git stash -p
 ```
 
-## 2. 重新应用缓存的stash
+(1/1) Stash this hunk [y,n,q,a,d,e,?]? 分别代表的含义如下： （输入 ?查看命令含义）
+
+```shell
+(1/1) Stash this hunk [y,n,q,a,d,e,?]? ?
+y - stash this hunk
+n - do not stash this hunk
+q - quit; do not stash this hunk or any of the remaining ones
+a - stash this hunk and all later hunks in the file
+d - do not stash this hunk or any of the later hunks in the file
+e - manually edit the current hunk
+? - print help
+```
+
+* 遇到我们需要stash的文件，输入`y`
+* 不需要stash需要commit的文件，输入`n`
+* 如果接下来没有需要stash的文件，就直接输入`q`退出就行
+
+
+### 2. 重新应用缓存的stash
 
 可以通过git stash pop命令恢复之前缓存的工作目录，输出如下：
 
+**操作流程案例**   
 ```shell
-$ git status
-On branch master
-nothing to commit, working tree clean
-$ git stash pop
-On branch master
-Changes to be committed:
+# 移除stash中 最新的一次，并且会删除移除的stash
+git stash pop
 
-    new file:   style.css
-
-Changes not staged for commit:
-
-    modified:   index.html
-
-Dropped refs/stash@{0} (32b3aa1d185dfe6d57b3c3cc3b32cbf3e380cc6a)
+# 若需要将stash，并不删除移除stash（可以通过指定使用哪个stash，默认使用最新额stash stash@{0} 序号）
+git stash apply
 ```
 
-这个指令将缓存堆栈中的第一个stash删除，并将对应修改应用到当前的工作目录下。 你也可以使用git stash apply命令，将缓存堆栈中的stash多次应用到工作目录中，但并不删除stash拷贝。命令输出如下：
 
-```shell
-$ git stash apply
-On branch master
-Changes to be committed:
-
-    new file:   style.css
-
-Changes not staged for commit:
-
-    modified:   index.html
-```
-
-## 3. 查看现有stash
+### 3. 查看现有stash
 
 可以使用git stash list命令，一个典型的输出如下：
 
+**操作流程案例**  
 ```shell
-$ git stash list
+git stash list
+
 stash@{0}: WIP on master: 049d078 added the index file
 stash@{1}: WIP on master: c264051 Revert "added file_size"
 stash@{2}: WIP on master: 21d80a5 added number to log
 ```
-
-在使用git stash apply命令时可以通过名字指定使用哪个stash，默认使用最近的stash（即stash@{0}）。
 
 ## 4. 移除stash
 
@@ -95,6 +83,7 @@ Dropped stash@{0} (364e91f3f268f0900bc3ee613f9f733e82aaed43)
 ```
 
 或者使用git stash clear命令，删除所有缓存的stash。
+
 ## 5. 查看指定stash的diff
 
 可以使用git stash show命令，后面可以跟着stash名字。示例如下：
@@ -149,6 +138,7 @@ Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
 ```
 
 这是一个很棒的捷径来恢复储藏的工作然后在新的分支上继续当时的工作。
+
 ## 7. 暂存未跟踪或忽略的文件
 
 默认情况下，git stash会缓存下列文件：
