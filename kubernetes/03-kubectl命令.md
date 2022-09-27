@@ -31,6 +31,11 @@ kubectl -n [namespace] describe pods [podname]
  kubectl -n [namespace] get all -o wide
 ```
 
+## 登录pod
+```
+kubectl exec -it xxxxx-5d64d5d658-4vgz2  -n yzhou -- /bin/bash
+```
+
 ## 删除deploymet
 
 
