@@ -1,8 +1,7 @@
-**`正文`**
 
-[TOC]
+## 反射
 
-## 场景：如果我们知道 class的全限定名 com.xxxx.xxx ,如何加载，如何通过反射实例化
+### 场景：如果我们知道 class的全限定名 com.xxxx.xxx ,如何加载，如何通过反射实例化
 
 eg: com.xinzhuxiansheng.Reflect.example.Bootstrap
 ```java
@@ -27,3 +26,5 @@ if(!clazz.isInterface()){
     InitFunc initFunc = (InitFunc)constructor.newInstance();
 }
 ```
+
+### 利用反射调用private方法
