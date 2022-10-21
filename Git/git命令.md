@@ -40,7 +40,7 @@ git push -u origin --tags
 
 ## 创建分支
 ```shell
-git branch test    #创建分支
+git switch test    #创建分支
 ```
 ## 切换分支
 ```shell
