@@ -61,6 +61,9 @@ http://idea.medeming.com/jetbrains/
  展开所有代码块: command + shift + 加号
  折叠所有代码块: command + shift + 减号
 
+ 快速跳转到页面最顶端: fn + command + 左方向键
+ 快速跳转到页面最底端: fn + command + 右方向键
+
 `Bookmark`
 添加Bookmark: F3
 查看Bookmark list: fn + command + F3
