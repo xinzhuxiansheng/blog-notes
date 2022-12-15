@@ -20,7 +20,7 @@ sbt run
 ```
 
 ### Solution (解决方案)
-在开发ZIO应用程序时，我们可以使用ZIO环境来访问两种类型的上下文信息：    
+在开发ZIO应用程序时，以下介绍在ZIO环境中访问上下文信息两种方式：    
 * 访问服务：我们可以从环境中访问服务接口，它们应该被实现并提供给世界尽头的整个应用程序（服务模式）。    
 
 * 访问配置：我们可以访问作为应用程序一部分的配置。  
@@ -35,4 +35,52 @@ case class HttpServerConfig(host:String, port:Int)
 
 
 #### Step2: 从环境中访问配置
-已经定义了配置数据类型，并且在`ZIO.service[HttpServerConfig]`方法中使用配置数据  
+已经定义了配置数据类型，并且在`ZIO.service[HttpServerConfig]`方法中使用配置数据。
+
+```scala
+
+val workflow: ZIO[HttpServerConfig, IOException, Unit] =
+  ZIO.service[HttpServerConfig].flatMap { config =>
+    Console.printLine(
+      "Application started with following configuration:\n" +
+        s"\thost: ${config.host}\n" +
+        s"\tport: ${config.port}"
+    )
+  }
+
+```
+
+**以下完整示例**
+```scala
+import zio._
+import java.io.IOException
+
+object Configuration extends ZIOAppDefault {
+
+  val workflow: ZIO[HttpServerConfig, IOException, Unit] =
+    ZIO.service[HttpServerConfig].flatMap { config =>
+      Console.printLine(
+        "Application started with following configuration:\n" +
+          s"\thost: ${config.host}\n" +
+          s"\tport: ${config.port}"
+      )
+    }
+
+  def run = workflow
+}
+```
+此时编译报错，
+
+上面的错误是因为我们试图从环境中访问 HttpServerConfig 配置，但是我们没有为它提供一个层。    
+
+为了实现这一点，我们需要采取两个步骤。  
+* 为 HttpServerConfig 配置数据类型定义一个层。  
+* 为我们的 ZIO 工作流程提供层。     
+为了提供配置层，我们需要定义一个HttpServerConfig类型的ZLayer并使用 ZIO#provide 方法。
+```
+──── ZIO APP ERROR ───────────────────────────────────────────────────  Your effect requires a service that is not in the environment. Please provide a layer for the following type: 
+ 
+ 1. dev.zio.quickstart.config.HttpServerConfig  
+ 
+ Call your effect's provide method with the layers you need. You can read more about layers and providing services here:  https://zio.dev/reference/contextual/  ────────────────────────────────────────────────────────────────────── 
+```
