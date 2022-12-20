@@ -22,3 +22,14 @@ mvn install:install-file -DgroupId=com.xinzhuxiansheg -DartifactId=demo -Dversio
 
 
 mvn clean  install package -Papache-release  -DskipTests  -Dgpg.skip  -Dmaven.javadoc.skip=true -Dcheckstyle.skip
+
+
+
+## 利用maven执行 java程序
+```shell
+mvn exec:java -Dexec.mainClass="top.guoziyang.mydb.backend.Launcher" -Dexec.args="-create /tmp/mydb"
+```
+
+refer:
+https://blog.csdn.net/sayyy/article/details/102938703
+https://github.com/CN-GuoZiyang/MYDB
