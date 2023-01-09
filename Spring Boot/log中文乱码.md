@@ -7,4 +7,4 @@ rm -rf xxxx.log
 
 # 启动时指定file编码
 java -jar -Dfile.encoding=utf-8 xxxx.jar
-```
+```AllClusterMetricsManager
