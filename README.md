@@ -6,9 +6,6 @@ Log
 
 
 
-* 学习“两段锁协议(2PL)实现可串行化调度”  refer: https://github.com/BluesTroy/TwoPhaseLocking
-
-
 
 
 
@@ -17,6 +14,7 @@ Log
 
 
 ### DB
+* 学习MYDB refer: https://github.com/CN-GuoZiyang/MYDB
 
 
 ### 
