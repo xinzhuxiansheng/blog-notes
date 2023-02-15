@@ -1,6 +1,9 @@
 
 ## Netty处理器
 
+
+### 介绍handler处理器
+
 Netty发送和接受数据handler处理器主要是继承`SimpleChannelInboundHandler`和`ChannelInboundHandlerAdapter`。 那么这两个到底有什么区别呢？ 
 
 其实用这两个抽象类是有讲究的，在客户端的业务Handler继承的是SimpleChannelInboundHandler, 而在服务端继承的是ChannelInboundHandlerAdapter。    
@@ -39,9 +42,7 @@ public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception 
 }
 ```
 
-
 从类定义看，SimpleChannelInboundHandler<T>是抽象类且支持泛型消息处理，而ChannelInboundHandlerAdapter是普通类，不支持泛型
-
 **SimpleChannelInboundHandler**
 ```java
 public abstract class SimpleChannelInboundHandler<I> extends ChannelInboundHandlerAdapter
@@ -50,3 +51,6 @@ public abstract class SimpleChannelInboundHandler<I> extends ChannelInboundHandl
 ```java
 public class ChannelInboundHandlerAdapter extends ChannelHandlerAdapter implements ChannelInboundHandler
 ```
+
+### ChannelInboundHandlerAdapter的方法
+请参考 https://netty.io/4.0/api/io/netty/channel/ChannelInboundHandlerAdapter.html
