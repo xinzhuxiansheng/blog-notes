@@ -6,11 +6,12 @@
 两种方式实现心跳机制：
 * 使用TCP协议层面的keepalive机制
 TCP keepalive机制依赖操作系统的实现，它默认是关闭的，但一般应用都会修改设置来开启，这种需要调整系统配置，故灵活性不够。
->refer: 《linux下tcp keepalive相关参数调整测试》https://imliuda.com/post/727
 
 * 在应用层上实现自定义的心跳机制
 HTTP的KeepAlive在HTTP 1.0版本默认是关闭的，但在HTTP1.1是默认开启的。    
 
 
 
-refer: 《TCP和HTTP中的KeepAlive机制总结》https://cloud.tencent.com/developer/news/696654
+refer: 
+《linux下tcp keepalive相关参数调整测试》https://imliuda.com/post/727
+《TCP和HTTP中的KeepAlive机制总结》https://cloud.tencent.com/developer/news/696654
