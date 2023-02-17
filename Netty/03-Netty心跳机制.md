@@ -15,3 +15,4 @@ HTTP的KeepAlive在HTTP 1.0版本默认是关闭的，但在HTTP1.1是默认开�
 refer: 
 《linux下tcp keepalive相关参数调整测试》https://imliuda.com/post/727
 《TCP和HTTP中的KeepAlive机制总结》https://cloud.tencent.com/developer/news/696654
+《netty heartbeat机制》https://blog.csdn.net/russle/article/details/100182232

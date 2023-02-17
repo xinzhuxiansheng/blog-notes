@@ -50,7 +50,8 @@ http://idea.medeming.com/jetbrains/
 2. 
 
 
-
+## Mac
+缩放桌面: control + 上下方向键
 
 ## Mac Idea
  最大化编辑窗口: Shift + command + F12
