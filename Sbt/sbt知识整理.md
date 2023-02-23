@@ -1,4 +1,4 @@
-## 从零开始用sbt搭建Scala项目
+## sbt知识整理
 
 ### 安装sbt
 refer https://www.scala-sbt.org/1.x/docs/Setup.html
