@@ -6,7 +6,7 @@ Log
 
 * 2023.02.01 学习《RocketMQ技术内幕》
 
-
+* 2023.02.26 开发 "scalahttpserver" https://github.com/xinzhuxiansheng/scalahttpserver
 
 
 ### 分布式
