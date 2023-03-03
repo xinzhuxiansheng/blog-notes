@@ -13,7 +13,7 @@
 | 认证方式   |   说明 |
 | -------- | -------- |
 | SASL/GSSAPI  | 主要是给 Kerberos 用户使用的，如果当前已经有了Kerberos认证，只需要给集群中每个Broker和访问用户申请Principals，然后在Kafka的配置文件中开启Kerberos的支持即可 官方参考：[Authentication using SASL/Kerberos](http://kafka.apache.org/documentation/#security_sasl_kerberos) |  
-| SASL/PLAIN     |  是一种简单的用户名/密码身份验证机制，通常与TLS/SSL一起用于加密，以实现安全身份验证。是一种比较容易使用的方式，但是有一个很明显的缺点，这种方式会把用户账户文件配置到一个静态文件中，每次想要添加新的账户都需要重启Kafka去加载静态文件，才能使之生效，十分的不方便，官方参考：[Authentication using SASL/PLAIN](http://kafka.apache.org/documentation/#security_sasl_plain) |  
+| SASL/PLAIN     |  是一种简单的用户名/密码身份验证机制，通常与TLS/SSL一起用于加密，以实现安全身份验证。是一种比较容易使用的方式，这种认证可以在使用过程中，使用 Kafka 提供的命令动态地创建和删除用户，无需重启整个集群，十分方便 官方参考：[Authentication using SASL/PLAIN](http://kafka.apache.org/documentation/#security_sasl_plain) |  
 | SASL/SCRAM(-SHA-256/-SHA-512)      | 通过将认证用户信息保存在 ZooKeeper 里面，从而动态的获取用户信息，相当于把ZK作为一个认证中心使用了。这种认证可以在使用过程中，使用 Kafka 提供的命令动态地创建和删除用户，无需重启整个集群，十分方便。官方参考：[Authentication using SASL/SCRAM](http://kafka.apache.org/documentation/#security_sasl_scram) |  
 | SASL/OAUTHBEARER      |  kafka 2.0 版本引入的新认证机制，主要是为了实现与 OAuth 2 框架的集成。Kafka 不提倡单纯使用 OAUTHBEARER，因为它生成的不安全的 Json Web Token，必须配以 SSL 加密才能用在生产环境中。官方参考：[Authentication using SASL/OAUTHBEARER](http://kafka.apache.org/documentation/#security_sasl_oauthbearer) | 
 
