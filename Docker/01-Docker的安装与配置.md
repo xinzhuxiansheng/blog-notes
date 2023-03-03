@@ -1,5 +1,17 @@
+## Docker的安装与配置
 
-### 安装Docker
+### 一、Docker的yum安装
+1、Docker要求CentOS系统的内核版本高于3.10，查看本页面的前提条件来验证你的CentOS版本
+是否支持Docker，通过`uname -r`命令查看你当前的内核版本
+```shell
+$ uname -r
+4.4.227-1.el7.elrepo.x86_64
+```
+
+>备注：3.10的内核版本与Docker和Kubernetes会有兼容性问题，稳定性较差，建议升级到4.4版本
+
+
+
 首先配置一下Docker的阿里yum源   
 
 ```
