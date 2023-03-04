@@ -7,8 +7,11 @@
 $ uname -r
 4.4.227-1.el7.elrepo.x86_64
 ```
+升级内核请参考 Linux目录下的 CentOS7升级内核文档
 
 >备注：3.10的内核版本与Docker和Kubernetes会有兼容性问题，稳定性较差，建议升级到4.4版本
+
+
 
 
 
