@@ -15,6 +15,8 @@ $ uname -r
 
 
 
+
+
 首先配置一下Docker的阿里yum源   
 
 ```

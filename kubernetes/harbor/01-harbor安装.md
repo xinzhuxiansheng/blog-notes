@@ -1,5 +1,7 @@
 ## Harbor搭建文档
 
+>关闭防火墙
+
 1、安装Docker，前面有说明不再叙述
 
 2、安装Docker-compose，要先装Docker，Docker-compose是一个单机上容器管理编排工作最新的稳定版本：
