@@ -9,6 +9,8 @@ Log
 * 2023.02.26 开发 "scalahttpserver" https://github.com/xinzhuxiansheng/scalahttpserver
 涉及React、play-scala-react-seed
 
+* 2023.03.20 学习《Functional Programming，Simplified》:(Scala edition)
+
 
 ### 分布式
 
