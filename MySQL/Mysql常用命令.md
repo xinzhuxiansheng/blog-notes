@@ -23,3 +23,13 @@ msql>drop database [库名]
 
 ## 导出sql文件
 mysql -h localhost -P 3306 -u root -p --default-character-set=utf8
+
+## 重启MySQL
+```shell
+
+```
+
+## 查看MySQL版本
+```shell
+select version();
+```
