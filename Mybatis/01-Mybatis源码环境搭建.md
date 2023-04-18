@@ -1,4 +1,4 @@
-## Mybatis源码环境搭建
+## Mybatis源码环境搭建(3.5.14-SNAPSHOT)
 
 ### 1. 准备工作
 克隆 `mybatis-3`、`parent`、`spring` 3个项目
