@@ -322,7 +322,216 @@ public class TestMain {
 }
 ```
 
-可以看到，这里对`Proxy.newProxyInstance()`方法的参数作出了变化，之前是通过实现类
+可以看到，这里对`Proxy.newProxyInstance()`方法的参数作出了变化，之前是通过实现类获取所实现接口的Class数组，而这里是把接口本身放到Class数据中，殊归同途有实现类接口和无实现类接口产生的动态代理类有什么区别？    
+1.有实现类接口是对InvocationHandler#invoke()方法调用，invoke()方法通过反射调用被代理对象Car的move()方法
+2.无实现类接口则是仅对InvocationHandler#invoke()产生调用，所以有实现类接口返回的是被代理类对象接口返回值，而无实现类接口返回的仅是invoke()方法返回值
+
+所以得到这一结论，接下来分析`UserMapper`是如何处理的？ 
+
+### Mapper处理
+
+```java
+SqlSessionFactory sqlSessionFactory = MybatisUtils.sqlSessionFactory;
+// 2. 从 SqlSessionFactory 中获取 SqlSession
+try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+    // 3. 获取 Mapper 接口的实例
+    UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+    // 4. 调用 Mapper 接口的方法执行 SQL 操作
+    int userId = Integer.parseInt(req.getParameter("userId"));
+    user = userMapper.getUserById(userId);
+
+    // 5. 处理查询结果
+    if (user != null) {
+        System.out.println("User ID: " + user.getId());
+        System.out.println("User Name: " + user.getName());
+        System.out.println("User Age: " + user.getAge());
+    } else {
+        System.out.println("User not found.");
+    }
+}
+```
+
+根据之前描述，userMapper是一个以$Proxy命名的动态代理类，那我们需要找到在什么地方使用了`Proxy.newProxyInstance`，可从debug上述代码得知
+sqlSessionFactory是DefaultSqlSessionFactory，sqlSession是DefaultSqlSession
+
+这里使用IDEA源码帮助工具的必杀器“Sequence Diagram”，查看`sqlSession.getMapper(UserMapper.class)`为入口它底层的调用逻辑。
+![invoker02](images/invoker02.png)  
+
+从上图看到`MapperRegistry`会去调用`MapperProxyFactory`的newInstance()方法
+
+**MapperRegistry.getMapper(...)**    
+
+```java
+public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
+    final MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>) knownMappers.get(type);
+    if (mapperProxyFactory == null) {
+      throw new BindingException("Type " + type + " is not known to the MapperRegistry.");
+    }
+    try {
+      return mapperProxyFactory.newInstance(sqlSession);
+    } catch (Exception e) {
+      throw new BindingException("Error getting mapper instance. Cause: " + e, e);
+    }
+  }
+```
+
+**MapperProxyFactory.newInstance(...)**
+```java
+
+  @SuppressWarnings("unchecked")
+  protected T newInstance(MapperProxy<T> mapperProxy) {
+    return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
+  }
+
+  public T newInstance(SqlSession sqlSession) {
+    final MapperProxy<T> mapperProxy = new MapperProxy<>(sqlSession, mapperInterface, methodCache);
+    return newInstance(mapperProxy);
+  }
+
+```
+
+哈哈。:), 在MapperProxyFactory的newInstance(MapperProxy<T> mapperProxy)方法中，我们找到了跟上面的测试Demo中一样的代码（动态代理打印Car移动的耗时），不知道大家是否还记得在分析有实现类和无实现类的动态代理得出的一个结论:   
+
+>1.有实现类接口是对InvocationHandler#invoke()方法调用，invoke()方法通过反射调用被代理对象Car的move()方法
+2.无实现类接口则是仅对InvocationHandler#invoke()产生调用，所以有实现类接口返回的是被代理类对象接口返回值，而无实现类接口返回的仅是invoke()方法返回值
+
+接下来，你肯定跟我想到一起了， 接下来更应该关心`Proxy.newProxyInstance()`方法的第三个形参**mapperProxy**。
+
+
+### MapperProxy调用处理器
+为了不让大家脱离上下文，我在这里重新贴出`MapperProxyFactory.newInstance(...)`
+
+**MapperProxyFactory.newInstance(...)**
+```java
+
+  @SuppressWarnings("unchecked")
+  protected T newInstance(MapperProxy<T> mapperProxy) {
+    return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
+  }
+
+  public T newInstance(SqlSession sqlSession) {
+    final MapperProxy<T> mapperProxy = new MapperProxy<>(sqlSession, mapperInterface, methodCache);
+    return newInstance(mapperProxy);
+  }
+
+```
+
+MapperProxy要成为`调用处理器`首先要实现`InvocationHandler`接口，再次实现`invoke()`方法，那MapperProxy的构造方法形参以及其内部其他方法都是为了执行invoke()方法。
+
+**MapperProxy.invoke(...)**
+
+```java
+  @Override
+  public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    try {
+      // yzhou 从Object类继承的方法不做处理
+      if (Object.class.equals(method.getDeclaringClass())) {
+        return method.invoke(this, args);
+      }
+      return cachedInvoker(method).invoke(proxy, method, args, sqlSession);
+    } catch (Throwable t) {
+      throw ExceptionUtil.unwrapThrowable(t);
+    }
+  }
+```
+
+>cachedInvoker(method)加了代理类缓存，请注意下面的cachedInvoker(...)方法
+```java
+  private MapperMethodInvoker cachedInvoker(Method method) throws Throwable {
+    try {
+      return MapUtil.computeIfAbsent(methodCache, method, m -> {
+        if (!m.isDefault()) {
+          return new PlainMethodInvoker(new MapperMethod(mapperInterface, method, sqlSession.getConfiguration()));
+        }
+        try {
+          if (privateLookupInMethod == null) {
+            return new DefaultMethodInvoker(getMethodHandleJava8(method));
+          } else {
+            return new DefaultMethodInvoker(getMethodHandleJava9(method));
+          }
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException
+            | NoSuchMethodException e) {
+          throw new RuntimeException(e);
+        }
+      });
+    } catch (RuntimeException re) {
+      Throwable cause = re.getCause();
+      throw cause == null ? re : cause;
+    }
+  }
+
+```
+
+MapUtil.computeIfAbsent(...)背后调用的是Map.computeIfAbsent(...), 它第一个形参是cache，第二个是key，第三个用来初始化当key不存在时，怎么办？ 在该方法的逻辑是若method不存在，则实例化一个new PlainMethodInvoker对象。
+
+这里可以提醒大家一个使用场景，我们经常会在map放一些内存级别的缓存数据，有时在put数据时，会去判断if(map.contains(key))再怎么样。如果这里换成以下思路, 那可以省去if else带来副作用（代码臃肿）
+```java
+
+public static void main(String[] args) {
+        Map<String, Integer> wordCounts = new HashMap<>();
+
+        // 示例：统计单词出现的次数
+        String[] words = {"hello", "world", "hello", "java"};
+
+        for (String word : words) {
+            // 使用 computeIfAbsent 方法更新单词计数
+            // 如果单词不在 Map 中，将其计数设置为 1
+            // 如果单词已在 Map 中，将其计数加 1
+            wordCounts.computeIfAbsent(word, k -> 0);
+            wordCounts.put(word, wordCounts.get(word) + 1);
+        }
+
+        System.out.println(wordCounts); // 输出：{hello=2, world=1, java=1}
+    }
+```
+
+>接着回到主题来 :)
+
+我们把鼠标放在`cachedInvoker(method).invoke`打开Sequence Diagram图
+![invoker03](images/invoker03.png)      
+
+* MapperProxy: 动态代理调用处理器
+* MapperMethodInvoker：代理接口
+* PlainMethodInvoker、DefaultMethodInvoker代理实现类 (为啥是静态类，这块我还跟进 TODO)
+
+根据在`javamain-mybatis`测试工程debug得知，MapperProxy=PlainMethodInvoker,稍等，其实以上内容已经带大家梳理一些“UserMapper”是如何在Mybatis动态代理的？ 所以文章开头的第一个问题应该可以清晰知晓，那接下来我们来了解`PlainMethodInvoker.invoke()`方法内部中`mapperMethod.execute`实现逻辑？我想它会帮我引出其他问题的答案？
+
+**PlainMethodInvoker.invoke(...)**
+```java
+ @Override
+    public Object invoke(Object proxy, Method method, Object[] args, SqlSession sqlSession) throws Throwable {
+      return mapperMethod.execute(sqlSession, args);
+    }
+```
+
+### MapperMethod是如何构建
+
+通过PlainMethodInvoker 类的构造方法可知，mapperMethod是在创建PlainMethodInvoker对象时传入其中`mapperInterface`,`method`,`sqlSession.getConfiguration()`三个参数构建的。 下面展示三个参数变量流程图：    
+![mapperProxy01](images/mapperProxy01.png)  
+
+* Class<?> mapperInterface: 项目启动后MapperRegistry类会先使用VFS读取mybatis-config.xml的mappers配置的class文件，此时还是字符串，在利用ResolverUtil工具类将class path路径，通过类加载器动态加载成class，最后放入knownMappers变量缓存在内容中。
+
+* Method method: 它是动态代理调用处理器MapperProxy.invoke()方法的method形参
+
+* Configuration config: 它是在UserServlet类中通过SqlSessionFactory.openSession()方法创建的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

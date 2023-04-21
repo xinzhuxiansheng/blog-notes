@@ -1,0 +1,126 @@
+<mxfile host="Electron" modified="2023-04-20T17:47:25.555Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="V6Rq3mYCr6e8fi5EQB7K" version="21.1.2" type="device" pages="2">
+  <diagram name="MapperMethod构建过程" id="2_PyrV2mv1WFQN7pFGSX">
+    <mxGraphModel dx="1502" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tcmFbjFTItnm94n0lgwe-1" value="MapperProxy" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="70" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-2" value="动态代理调用处理器" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="45" y="120" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-4" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="220" as="sourcePoint" />
+            <mxPoint x="130" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-5" value="new PlainMethodInvoker(...)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="300" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-7" value="cachedInvoker()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=default;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-12" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="450" y="330" width="390" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-13" value="MapperMethod" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="470" y="300" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-14" value="Class&amp;lt;?&amp;gt; mapperInterface" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;fillColor=#ffe6cc;strokeColor=#d79b00;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="460" y="350" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-15" value="Method method" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;fillColor=#f8cecc;strokeColor=#b85450;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="610" y="350" width="96" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-16" value="Configuration config" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;fillColor=#e1d5e7;strokeColor=#9673a6;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="720" y="350" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-22" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;fillColor=#fff2cc;strokeColor=#d6b656;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="190" y="540" width="370" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-23" value="MapperRegistry" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="190" y="510" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-25" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;fontSize=15;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="tcmFbjFTItnm94n0lgwe-26" target="tcmFbjFTItnm94n0lgwe-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="430" y="510" as="sourcePoint" />
+            <mxPoint x="460" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-26" value="knownMappers" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="430" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-28" value="&lt;b&gt;VFS&lt;/b&gt; 读取mybatis-config.xml的mappers下的class文件（字符串）" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;align=center;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="585" width="160" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-32" value="&lt;b&gt;ResolverUtil&lt;/b&gt;&amp;nbsp;将class文件path，通过类加载器动态加载成class" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="740" width="180" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-33" value="" style="endArrow=classic;html=1;rounded=0;fontSize=13;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="660" as="sourcePoint" />
+            <mxPoint x="280" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-34" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="tcmFbjFTItnm94n0lgwe-26">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="350" y="730" as="sourcePoint" />
+            <mxPoint x="410" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-36" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Lucida Console;entryX=0.367;entryY=-0.072;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="tcmFbjFTItnm94n0lgwe-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="190" as="sourcePoint" />
+            <mxPoint x="640" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-38" value="调用处理器 invoke()方法的method形参" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="300" y="210" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-39" value="" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;fillColor=#e1d5e7;strokeColor=#9673a6;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="660" y="540" width="370" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-41" value="sqlSession.&lt;br&gt;getConfiguration()" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="850" y="560" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-43" value="SqlSeesion sqlSession = sqlSessionFactory.openSession()" style="rounded=0;whiteSpace=wrap;html=1;fontSize=13;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="706" y="700" width="294" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-45" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="870" y="690" as="sourcePoint" />
+            <mxPoint x="920" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-46" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="tcmFbjFTItnm94n0lgwe-41" target="tcmFbjFTItnm94n0lgwe-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="960" y="480" as="sourcePoint" />
+            <mxPoint x="960" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tcmFbjFTItnm94n0lgwe-47" value="UserServlet" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=17;" vertex="1" parent="1">
+          <mxGeometry x="706" y="670" width="84" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="crpx4gsdGd9RMQJ_tu-c" name="参数拼接">
+    <mxGraphModel dx="1470" dy="1029" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4Ld_ndKkEvW57qZZbO34-1" value="" style="whiteSpace=wrap;html=1;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="-60" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="4Ld_ndKkEvW57qZZbO34-2" value="MapperProxy" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-285" y="-90" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4Ld_ndKkEvW57qZZbO34-3" value="invoke()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-250" y="-35" width="100" height="35" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
