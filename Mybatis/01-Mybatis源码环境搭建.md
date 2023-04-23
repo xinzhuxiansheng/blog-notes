@@ -17,18 +17,18 @@ git clone https://github.com/mybatis/spring
 实现步骤如下：  
 **创建空项目**
 File ->  New  ->  Project  ->  Empty Project  创建一个空Project：    
-![createEmptyProject](images/createEmptyProject.png)
+![createEmptyProject](http://img.xinzhuxiansheng.com/blogimgs/mybatis/createEmptyProject.png)
 
 **导入模块**
 File ->  New  ->  Module from Existing Sources
-![importNewModule](images/importNewModule.png)
+![importNewModule](http://img.xinzhuxiansheng.com/blogimgs/mybatis/importNewModule.png)
 
 
 ### 3. 添加测试项目
 目前已经将`mybatis-3`、`parent`、`spring`3个项目导入到同一个project中，现在添加测试项目，用来调试mybatis源码
 
 整体结构如下：  
-![importNewModule](images/javamain-mybatis-test.png)
+![importNewModule](http://img.xinzhuxiansheng.com/blogimgs/mybatis/javamain-mybatis-test.png)
 
 该模块用Jetty Server搭建Rest API服务模拟HTTP请求，用MYbatis查询MySQL USER数据；
 
@@ -270,4 +270,7 @@ Caused by: java.lang.ClassNotFoundException: Cannot find class: javassist.util.p
  curl http://localhost:8080/user?userId=1
 ```
 
-![curltest01](images/curltest01.png)
+![curltest01](http://img.xinzhuxiansheng.com/blogimgs/mybatis/curltest01.png)
+
+
+完整测试代码地址: https://github.com/xinzhuxiansheng/mybatis-debug-project
