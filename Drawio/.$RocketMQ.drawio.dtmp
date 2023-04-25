@@ -1,0 +1,76 @@
+<mxfile host="Electron" modified="2023-04-24T13:33:48.782Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="GUZYNG0HxBqEr1b-S1xK" version="21.1.2" type="device">
+  <diagram name="数据读写分离之对外内存机制" id="a0r2juBeup5DZyeJ3yKs">
+    <mxGraphModel dx="1050" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-1" value="0000000000000000000" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="90" y="80" width="310" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-2" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="90" y="180" width="380" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-4" value="MappedByteBuffer" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="130" y="370" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-6" value="writeBuffer&lt;br style=&quot;font-size: 15px;&quot;&gt;(ByteBuffer)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="290" y="285" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-7" value="TransientStorePool&lt;br&gt;(堆外内存池)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="570" y="245" width="200" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-8" value="Producer" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="590" y="450" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-9" value="MappedFile" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="354" y="190" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-10" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.144;entryY=-0.02;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" edge="1" parent="1" target="o-oP2LTt8Bmv6RUmvesQ-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="150" y="120" as="sourcePoint" />
+            <mxPoint x="150" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-11" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.113;entryY=0.007;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;exitX=0.143;exitY=1.053;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="o-oP2LTt8Bmv6RUmvesQ-3" target="o-oP2LTt8Bmv6RUmvesQ-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="150" y="260" as="sourcePoint" />
+            <mxPoint x="150" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-12" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;exitX=0.581;exitY=0.017;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.453;entryY=1.035;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="o-oP2LTt8Bmv6RUmvesQ-4" target="o-oP2LTt8Bmv6RUmvesQ-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="190" y="370" as="sourcePoint" />
+            <mxPoint x="190" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-13" value="getChannel()" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="150" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-14" value="map()" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="110" y="325" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-15" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" target="o-oP2LTt8Bmv6RUmvesQ-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="339.5" as="sourcePoint" />
+            <mxPoint x="520" y="339.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-16" value="" style="endArrow=classic;html=1;rounded=0;exitX=-0.016;exitY=0.368;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="o-oP2LTt8Bmv6RUmvesQ-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="530" y="290" as="sourcePoint" />
+            <mxPoint x="440" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-17" value="returnBuffer" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="460" y="345" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-18" value="borrowBuffer" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontFamily=Lucida Console;" vertex="1" parent="1">
+          <mxGeometry x="460" y="260" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="o-oP2LTt8Bmv6RUmvesQ-3" value="MappedFile" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="130" y="220" width="140" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

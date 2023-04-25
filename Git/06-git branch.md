@@ -29,3 +29,12 @@ git branch -D [branchName]
 # 删除远程分支
 git push origin --delete [branchName]
 ```
+
+### 修改分支名称
+
+```shell
+# 切换到要重命名的分支
+
+# 修改分支名称
+git branch -m new_branch_name
+```
