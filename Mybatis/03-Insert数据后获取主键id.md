@@ -1,5 +1,7 @@
 ## Insert数据后获取主键id
 
+>version: 3.5.14-SNAPSHOT
+
 在Mybatis使用过程中，当使用insert数据到Table后，希望自增的主键id能自动映射到实体类的形参上，这样免去我们再去查询一遍id主键或者在主动给实体类setId(),`下面介绍下insert数据后获取主键id在mybatis中如何使用？`
 
 **UserMapper.addUser**

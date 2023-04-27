@@ -1,4 +1,6 @@
-## 从Mapper接口
+## MyBatis的动态代理
+
+>version: 3.5.14-SNAPSHOT
 
 ### 引言
 《01-Mybatis源码环境搭建》blog中，搭建了`javamain-mybatis`模块用来测试Mybatis-3源码，在`UserServlet`类doGet()方法中使用Mybatis查询DB中user表数据。那是如果做到的呢？    
@@ -20,7 +22,7 @@ try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
 
 >在没有开始之前，先提一些待解释的问题：  
 1. UserMapper是接口并没有定义实现类，而在调试过程中userMapper={$Proxy20@4223}，这是什么？
-![userMapperProxy01](images/userMapperProxy01.png)
+![userMapperProxy01](http://img.xinzhuxiansheng.com/blogimgs/mybatis/userMapperProxy01.png)
 
 2. @Select 查询出来的数据 是如何映射到User对象的
 
@@ -168,7 +170,7 @@ public class TestMain {
 从原理的角度上解析一下，main()方法是执行过程：  
 第一步创建了Moveable的实现类    
 第二步创建被代理对象的动态代理对象，这里有读者会有疑问，怎么证明这个是动态代理对象？ 如图所示   
-![userMapperProxy02](images/userMapperProxy02.png)  
+![userMapperProxy02](http://img.xinzhuxiansheng.com/blogimgs/mybatis/userMapperProxy02.png)  
 JDK动态代理对象名称是有规则的，凡是经过Proxy类生成的动态代理对象，前缀必然是`$Proxy`，后面的数字也是名称组成部分。  
 
 如果读者想要一探究竟，查看`ProxyClassFactory`,
@@ -266,7 +268,7 @@ public final class $Proxy0 extends Proxy implements Moveable {
 可以看出生成的动态代理类，继承了Proxy类，然后对Moveable接口进行了实现，通过Idea或者class反序列工具jd-ui，查看move()方法调用的super.h正是Proxy.newProxyInstance()传入的InvocationHandler接口的实现类`TimeHandler`invoke()方法。
 
 也就是说，在main()方法中调用proxy.move()时，方法调用链是这样的：
-![invoker01](images/invoker01.png)  
+![invoker01](http://img.xinzhuxiansheng.com/blogimgs/mybatis/invoker01.png)  
 
 以上介绍完JDK的动态代理的实现过程会发现main()中是有被代理接口的实现类Car，而**UserMapper是没有，那又是如何实现的呢？又有什么不同？**
 
@@ -356,7 +358,7 @@ try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
 sqlSessionFactory是DefaultSqlSessionFactory，sqlSession是DefaultSqlSession
 
 这里使用IDEA源码帮助工具的必杀器“Sequence Diagram”，查看`sqlSession.getMapper(UserMapper.class)`为入口它底层的调用逻辑。
-![invoker02](images/invoker02.png)  
+![invoker02](http://img.xinzhuxiansheng.com/blogimgs/mybatis/invoker02.png)  
 
 从上图看到`MapperRegistry`会去调用`MapperProxyFactory`的newInstance()方法
 
@@ -489,7 +491,7 @@ public static void main(String[] args) {
 >接着回到主题来 :)
 
 我们把鼠标放在`cachedInvoker(method).invoke`打开Sequence Diagram图
-![invoker03](images/invoker03.png)      
+![invoker03](http://img.xinzhuxiansheng.com/blogimgs/mybatis/invoker03.png)      
 
 * MapperProxy: 动态代理调用处理器
 * MapperMethodInvoker：代理接口
@@ -508,7 +510,7 @@ public static void main(String[] args) {
 ### MapperMethod是如何构建
 
 通过PlainMethodInvoker 类的构造方法可知，mapperMethod是在创建PlainMethodInvoker对象时传入其中`mapperInterface`,`method`,`sqlSession.getConfiguration()`三个参数构建的。 下面展示三个参数变量流程图：    
-![mapperProxy01](images/mapperProxy01.png)  
+![mapperProxy01](http://img.xinzhuxiansheng.com/blogimgs/mybatis/mapperProxy01.png)  
 
 * Class<?> mapperInterface: 项目启动后MapperRegistry类会先使用VFS读取mybatis-config.xml的mappers配置的class文件，此时还是字符串，在利用ResolverUtil工具类将class path路径，通过类加载器动态加载成class，最后放入knownMappers变量缓存在内容中。
 
