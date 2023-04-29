@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-04-16T09:17:39.281Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="1ZBKvoqTgzycD2Vy6OcO" version="21.1.2" type="device" pages="4">
+<mxfile host="Electron" modified="2023-04-29T08:12:13.000Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="iL5nfkkqduE7Wz4QLhe2" version="21.1.2" type="device" pages="5">
   <diagram id="AjD2eCS2qsiHTyneQqth" name="二叉树">
     <mxGraphModel dx="1863" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -935,7 +935,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="utypSsCT9ODoSt2BnDis" name="二分法与树">
-    <mxGraphModel dx="2286" dy="878" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1436" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1143,379 +1143,379 @@
             <mxPoint x="299.5" y="1169" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-1" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-1" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="277.5" y="1290" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-2" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-2" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="217.5" y="1340" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-3" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-3" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="337.5" y="1340" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-4" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-4" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="177.5" y="1400" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-5" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-5" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="252.5" y="1400" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-6" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-6" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="307.5" y="1400" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-7" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-7" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="377.5" y="1400" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-8" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-8" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="142.5" y="1460" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-9" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-9" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="417.5" y="1460" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-12" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-12" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="347.5" y="1380" as="sourcePoint" />
             <mxPoint x="332.5" y="1400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-13" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-13" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="277.5" y="1330" as="sourcePoint" />
             <mxPoint x="262.5" y="1350" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-14" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-14" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="235" y="1380" as="sourcePoint" />
             <mxPoint x="220" y="1400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-15" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-15" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="192.5" y="1440" as="sourcePoint" />
             <mxPoint x="177.5" y="1460" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-16" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-16" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="322.5" y="1320" as="sourcePoint" />
             <mxPoint x="340" y="1340" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="367.5" y="1380" as="sourcePoint" />
             <mxPoint x="385" y="1400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-18" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-18" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="416.5" y="1440" as="sourcePoint" />
             <mxPoint x="434" y="1460" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-19" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-19" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="252.5" y="1380" as="sourcePoint" />
             <mxPoint x="270" y="1400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-20" value="二叉查找树" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-20" value="二叉查找树" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" parent="1" vertex="1">
           <mxGeometry x="248" y="1470" width="102" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-23" value="&lt;h3 style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;此处有深坑：&lt;/span&gt;&lt;/h3&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;从上面的二叉查找树没有看出任何“&lt;font color=&quot;#b5739d&quot; style=&quot;font-size: 16px;&quot;&gt;边界&lt;/font&gt;”，若“1”、“9” 两边若可以无限延伸，下面来一个夸张的“&lt;font color=&quot;#b5739d&quot; style=&quot;font-size: 16px;&quot;&gt;二叉查找树&lt;/font&gt;”&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;fontSize=16;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-23" value="&lt;h3 style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;此处有深坑：&lt;/span&gt;&lt;/h3&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;从上面的二叉查找树没有看出任何“&lt;font color=&quot;#b5739d&quot; style=&quot;font-size: 16px;&quot;&gt;边界&lt;/font&gt;”，若“1”、“9” 两边若可以无限延伸，下面来一个夸张的“&lt;font color=&quot;#b5739d&quot; style=&quot;font-size: 16px;&quot;&gt;二叉查找树&lt;/font&gt;”&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;fontSize=16;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="70" y="1530" width="820" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-24" value="&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;这里补充一下“二叉查找树”构建规则：&lt;br style=&quot;font-size: 16px;&quot;&gt;此树中，每个节点的数值比左子数上的每个节点都大，比所有右子数上的节点都小&amp;nbsp;&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontFamily=Lucida Console;labelBackgroundColor=default;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-24" value="&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;这里补充一下“二叉查找树”构建规则：&lt;br style=&quot;font-size: 16px;&quot;&gt;此树中，每个节点的数值比左子数上的每个节点都大，比所有右子数上的节点都小&amp;nbsp;&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontFamily=Lucida Console;labelBackgroundColor=default;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="480" y="1325" width="610" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-25" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-25" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="292.5" y="1630" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-26" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-26" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="232.5" y="1680" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-27" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-27" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="352.5" y="1680" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-28" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-28" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="192.5" y="1740" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-29" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-29" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="267.5" y="1740" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-30" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-30" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="322.5" y="1740" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-31" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-31" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="392.5" y="1740" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-32" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-32" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="157.5" y="1800" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-33" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-33" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="432.5" y="1800" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-34" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-34" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="362.5" y="1720" as="sourcePoint" />
             <mxPoint x="347.5" y="1740" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-35" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-35" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="292.5" y="1670" as="sourcePoint" />
             <mxPoint x="277.5" y="1690" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-36" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-36" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="250" y="1720" as="sourcePoint" />
             <mxPoint x="235" y="1740" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-37" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-37" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="207.5" y="1780" as="sourcePoint" />
             <mxPoint x="192.5" y="1800" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-38" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-38" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="337.5" y="1660" as="sourcePoint" />
             <mxPoint x="355" y="1680" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-39" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-39" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="382.5" y="1720" as="sourcePoint" />
             <mxPoint x="400" y="1740" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-40" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-40" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="431.5" y="1780" as="sourcePoint" />
             <mxPoint x="449" y="1800" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-41" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-41" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="267.5" y="1720" as="sourcePoint" />
             <mxPoint x="285" y="1740" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-42" value="二叉查找树" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-42" value="二叉查找树" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" parent="1" vertex="1">
           <mxGeometry x="263" y="1810" width="102" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-43" value="10" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-43" value="10" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="485" y="1860" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-44" value="11" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-44" value="11" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="535" y="1910" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-45" value="12" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-45" value="12" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="580" y="1970" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-46" value="......." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;sketch=1;curveFitting=1;jiggle=2;fontSize=16;fontStyle=7;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-46" value="......." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;sketch=1;curveFitting=1;jiggle=2;fontSize=16;fontStyle=7;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="590" y="2015" width="90" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-47" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-47" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="467.5" y="1840" as="sourcePoint" />
             <mxPoint x="485" y="1860" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-48" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-48" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="517.5" y="1900" as="sourcePoint" />
             <mxPoint x="535" y="1920" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-49" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-49" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="562.5" y="1950" as="sourcePoint" />
             <mxPoint x="580" y="1970" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-50" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-50" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="-110" y="510" width="20" height="660" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-51" value="数组" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#b85450;fillColor=#f8cecc;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-51" value="数组" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#b85450;fillColor=#f8cecc;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="-210" y="825" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-52" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-52" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="-110" y="1200" width="20" height="830" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-53" value="二叉查找树" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#b85450;fillColor=#f8cecc;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-53" value="二叉查找树" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#b85450;fillColor=#f8cecc;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="-220" y="1595" width="100" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-54" value="&lt;h3 style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;小结：&lt;/span&gt;&lt;/h3&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;二叉查找树充分利用了二分法思维提升了数据查找的效率，不过我们在构建二叉查找树的时候就会发现，“二叉查找树”的“高度”不稳定。&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;fontSize=16;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-54" value="&lt;h3 style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;小结：&lt;/span&gt;&lt;/h3&gt;&lt;span style=&quot;background-color: rgb(185, 224, 165); font-size: 16px;&quot;&gt;二叉查找树充分利用了二分法思维提升了数据查找的效率，不过我们在构建二叉查找树的时候就会发现，“二叉查找树”的“高度”不稳定。&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;fontSize=16;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="70" y="2020" width="990" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-55" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontSize=16;fontFamily=Lucida Console;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-55" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontSize=16;fontFamily=Lucida Console;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="317.5" y="2110" as="sourcePoint" />
             <mxPoint x="318" y="2160" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-56" value="根据以上结论，从而引入“&lt;b style=&quot;font-size: 16px;&quot;&gt;&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 16px;&quot;&gt;平衡二叉树&lt;/font&gt;&lt;/b&gt;”&lt;br style=&quot;font-size: 16px;&quot;&gt;如果树的节点变成线性结构，那么就会极大的降低我们的查询效率，所以我们必须要有一种方式来保证二叉树节点的平衡，让树的节点高度差&lt;br style=&quot;font-size: 16px;&quot;&gt;不会太大，这个时候就衍生了一些平衡算法，最终我们的二叉树就有像AVL树和红黑树，我们定义它们为“平衡二叉树”，&lt;font color=&quot;#b5739d&quot; style=&quot;font-size: 16px;&quot;&gt;平衡二叉树通常会保证&lt;br style=&quot;font-size: 16px;&quot;&gt;树的左右两边的节点层级相差不会大于2&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;sketch=1;curveFitting=1;jiggle=2;fontSize=16;labelBackgroundColor=#B9E0A5;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-56" value="根据以上结论，从而引入“&lt;b style=&quot;font-size: 16px;&quot;&gt;&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 16px;&quot;&gt;平衡二叉树&lt;/font&gt;&lt;/b&gt;”&lt;br style=&quot;font-size: 16px;&quot;&gt;如果树的节点变成线性结构，那么就会极大的降低我们的查询效率，所以我们必须要有一种方式来保证二叉树节点的平衡，让树的节点高度差&lt;br style=&quot;font-size: 16px;&quot;&gt;不会太大，这个时候就衍生了一些平衡算法，最终我们的二叉树就有像AVL树和红黑树，我们定义它们为“平衡二叉树”，&lt;font color=&quot;#b5739d&quot; style=&quot;font-size: 16px;&quot;&gt;平衡二叉树通常会保证&lt;br style=&quot;font-size: 16px;&quot;&gt;树的左右两边的节点层级相差不会大于2&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;sketch=1;curveFitting=1;jiggle=2;fontSize=16;labelBackgroundColor=#B9E0A5;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="70" y="2160" width="1030" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-57" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-57" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="237.5" y="2310" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-58" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-58" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="177.5" y="2360" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-59" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-59" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="297.5" y="2360" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-60" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-60" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="137.5" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-61" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-61" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="212.5" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-62" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-62" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="267.5" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-63" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-63" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="337.5" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-65" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-65" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="377.5" y="2480" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-66" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-66" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="307.5" y="2400" as="sourcePoint" />
             <mxPoint x="292.5" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-67" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-67" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="237.5" y="2350" as="sourcePoint" />
             <mxPoint x="222.5" y="2370" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-68" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-68" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="195" y="2400" as="sourcePoint" />
             <mxPoint x="180" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-70" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-70" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="282.5" y="2340" as="sourcePoint" />
             <mxPoint x="300" y="2360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-71" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-71" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="327.5" y="2400" as="sourcePoint" />
             <mxPoint x="345" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-72" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-72" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="376.5" y="2460" as="sourcePoint" />
             <mxPoint x="394" y="2480" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-73" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-73" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="212.5" y="2400" as="sourcePoint" />
             <mxPoint x="230" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-74" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 16px;&quot;&gt;AVL树&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-74" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 16px;&quot;&gt;AVL树&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" parent="1" vertex="1">
           <mxGeometry x="182.5" y="2480" width="102" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-75" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-75" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="755" y="2310" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-76" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-76" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="695" y="2360" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-77" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-77" value="6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="815" y="2360" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-78" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-78" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="655" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-79" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-79" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="730" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-80" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-80" value="5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="785" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-81" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-81" value="8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
           <mxGeometry x="855" y="2420" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-83" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-83" value="9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="895" y="2480" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-84" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-84" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="825" y="2400" as="sourcePoint" />
             <mxPoint x="810" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-85" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-85" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="755" y="2350" as="sourcePoint" />
             <mxPoint x="740" y="2370" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-86" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-86" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="712.5" y="2400" as="sourcePoint" />
             <mxPoint x="697.5" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-88" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-88" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="800" y="2340" as="sourcePoint" />
             <mxPoint x="817.5" y="2360" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-89" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-89" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="845" y="2400" as="sourcePoint" />
             <mxPoint x="862.5" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-90" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-90" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="894" y="2460" as="sourcePoint" />
             <mxPoint x="911.5" y="2480" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-91" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-91" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="730" y="2400" as="sourcePoint" />
             <mxPoint x="747.5" y="2420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-92" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 16px;&quot;&gt;红黑树&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-92" value="&lt;b style=&quot;font-size: 16px;&quot;&gt;&lt;font color=&quot;#ff0000&quot; style=&quot;font-size: 16px;&quot;&gt;红黑树&lt;/font&gt;&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fontColor=#B5739D;" parent="1" vertex="1">
           <mxGeometry x="668" y="2490" width="102" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-93" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-93" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
           <mxGeometry x="294" y="2480" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-94" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="XK4oxWlzFEA1NnGF64L9-63" target="XK4oxWlzFEA1NnGF64L9-93">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-94" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="XK4oxWlzFEA1NnGF64L9-63" target="XK4oxWlzFEA1NnGF64L9-93" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="386.5" y="2470" as="sourcePoint" />
             <mxPoint x="404" y="2490" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-95" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-95" value="7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="810.5" y="2486" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-96" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" target="XK4oxWlzFEA1NnGF64L9-95">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-96" value="" style="endArrow=classic;html=1;rounded=0;fontSize=16;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" target="XK4oxWlzFEA1NnGF64L9-95" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="859.5" y="2460" as="sourcePoint" />
             <mxPoint x="920.5" y="2496" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="XK4oxWlzFEA1NnGF64L9-98" value="&lt;span style=&quot;background-color: rgb(185, 224, 165);&quot;&gt;平衡二叉树的构建规则：&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;1. 非叶子节点只能允许最多两个子节点存在。&lt;br style=&quot;font-size: 16px;&quot;&gt;2. 每个节点的左边子节点值小于当前节点，右边的子节点值大于当前节点&lt;br style=&quot;font-size: 16px;&quot;&gt;3. 通过平衡算法（比如Treap，AVL，红黑树），保证树左右节点的高度相差不超过2层&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="XK4oxWlzFEA1NnGF64L9-98" value="&lt;span style=&quot;background-color: rgb(185, 224, 165);&quot;&gt;平衡二叉树的构建规则：&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;1. 非叶子节点只能允许最多两个子节点存在。&lt;br style=&quot;font-size: 16px;&quot;&gt;2. 每个节点的左边子节点值小于当前节点，右边的子节点值大于当前节点&lt;br style=&quot;font-size: 16px;&quot;&gt;3. 通过平衡算法（比如Treap，AVL，红黑树），保证树左右节点的高度相差不超过2层&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="82.5" y="2555" width="650" height="110" as="geometry" />
         </mxCell>
       </root>
@@ -1773,7 +1773,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="v4ktc9Y-5PFx9gEJ4jxr" name="B树的插入(新建)">
-    <mxGraphModel dx="2234" dy="2044" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1836" dy="1814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -3504,6 +3504,191 @@
             <mxPoint x="-120" y="4560" as="sourcePoint" />
             <mxPoint x="-110" y="4590" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="CAT-JlOt6k6KtTTH6urr" name="堆">
+    <mxGraphModel dx="1036" dy="-186" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-1" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="267.5" y="1280" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-2" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="202.5" y="1340" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-3" value="12" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="337.5" y="1340" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-4" value="60" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="145" y="1410" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-5" value="23" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="252.5" y="1400" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-6" value="71" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="307.5" y="1400" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-7" value="29" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="377.5" y="1400" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-8" value="84" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;direction=south;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="1470" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-10" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="347.5" y="1380" as="sourcePoint" />
+            <mxPoint x="332.5" y="1400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-11" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="257.5" y="1320" as="sourcePoint" />
+            <mxPoint x="242.5" y="1340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-12" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;entryX=0.702;entryY=-0.06;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="s8C-q0vdJqtRx0OLAzrR-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="1380" as="sourcePoint" />
+            <mxPoint x="220" y="1400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-13" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="1450" as="sourcePoint" />
+            <mxPoint x="145" y="1470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-14" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="322.5" y="1320" as="sourcePoint" />
+            <mxPoint x="340" y="1340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-15" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="367.5" y="1380" as="sourcePoint" />
+            <mxPoint x="385" y="1400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="252.5" y="1380" as="sourcePoint" />
+            <mxPoint x="270" y="1400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-19" value="100" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="180" y="1470" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-20" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="179" y="1450" as="sourcePoint" />
+            <mxPoint x="196.5" y="1470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-23" value="37" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;direction=south;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="230" y="1470" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-24" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;entryX=0;entryY=0.5;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="s8C-q0vdJqtRx0OLAzrR-23">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="1440" as="sourcePoint" />
+            <mxPoint x="277.5" y="1470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-26" value="min-heap" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="97.5" y="1260" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-27" value="100" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="690" y="1300" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-28" value="84" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="625" y="1360" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-29" value="71" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1360" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-30" value="60" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="567.5" y="1430" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-31" value="23" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="675" y="1420" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-32" value="12" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="730" y="1420" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-33" value="29" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="800" y="1420" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-34" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;direction=south;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="532.5" y="1490" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-35" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="770" y="1400" as="sourcePoint" />
+            <mxPoint x="755" y="1420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-36" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="1340" as="sourcePoint" />
+            <mxPoint x="665" y="1360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-37" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;entryX=0.702;entryY=-0.06;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="s8C-q0vdJqtRx0OLAzrR-30">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="622.5" y="1400" as="sourcePoint" />
+            <mxPoint x="642.5" y="1420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-38" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="582.5" y="1470" as="sourcePoint" />
+            <mxPoint x="567.5" y="1490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-39" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="745" y="1340" as="sourcePoint" />
+            <mxPoint x="762.5" y="1360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-40" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="790" y="1400" as="sourcePoint" />
+            <mxPoint x="807.5" y="1420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-41" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="675" y="1400" as="sourcePoint" />
+            <mxPoint x="692.5" y="1420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-42" value="37" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="602.5" y="1490" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-43" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="601.5" y="1470" as="sourcePoint" />
+            <mxPoint x="619" y="1490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-44" value="4" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontSize=15;fontFamily=Lucida Console;direction=south;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="652.5" y="1490" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-45" value="" style="endArrow=classic;html=1;rounded=0;fontSize=15;fontFamily=Lucida Console;entryX=0;entryY=0.5;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="s8C-q0vdJqtRx0OLAzrR-44">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="682.5" y="1460" as="sourcePoint" />
+            <mxPoint x="700" y="1490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-46" value="max-heap" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=15;fontFamily=Lucida Console;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="520" y="1280" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="s8C-q0vdJqtRx0OLAzrR-47" value="&lt;div style=&quot;font-size: 15px; line-height: 19px;&quot;&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;堆是一种完全二叉树，有最大堆和最小堆两种。&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;* 最大堆:对于每个非叶子节点V,V的值都比它的两个孩子大，称为最大堆特性(heap orderproperty)最大堆里的根总是存储最大值，最小的值存储在叶节点。&lt;/div&gt;&lt;div style=&quot;font-size: 15px;&quot;&gt;&lt;span style=&quot;font-size: 15px;&quot;&gt;*&lt;/span&gt; 最小堆:和最大堆相反，每个非叶子节点V，v的两个孩子的值都比它大。&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;labelBackgroundColor=#97D077;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1150" width="880" height="100" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

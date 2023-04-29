@@ -1,0 +1,193 @@
+<mxfile host="Electron" modified="2023-04-29T12:30:25.516Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="ZQNVFC477Js2PtJM_Fs8" version="21.1.2" type="device">
+  <diagram name="选择排序" id="wCZYEM5AFYf6TBENm00l">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-15" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;dashed=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="150" y="170" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-2" value="20" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="170" y="80" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-3" value="12" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="210" y="80" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-4" value="10" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="250" y="80" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-5" value="15" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="80" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-6" value="2" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="80" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-7" value="待排序的数组" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="50" y="85" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-8" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="99.5" y="140" as="sourcePoint" />
+            <mxPoint x="100" y="850" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-9" value="20" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="170" y="180" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-10" value="12" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="210" y="180" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-11" value="10" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="250" y="180" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-12" value="15" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="180" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-13" value="2" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="330" y="180" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-14" value="第一轮，找到数组中最小的数及下标&lt;br style=&quot;font-size: 15px;&quot;&gt;与数据下标为&lt;b style=&quot;font-size: 15px;&quot;&gt;0&lt;/b&gt;的开始交换值" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="414" y="175" width="306" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-16" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="iABSiQ6mtmhOvP6iD4mr-9" target="iABSiQ6mtmhOvP6iD4mr-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="250" as="sourcePoint" />
+            <mxPoint x="350" y="300" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-17" value="互换" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="230" y="260" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-19" value="2" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="170" y="310" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-20" value="12" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="210" y="310" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-21" value="10" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="250" y="310" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-22" value="15" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="310" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-23" value="20" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="310" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-24" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="380" as="sourcePoint" />
+            <mxPoint x="910" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-40" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;dashed=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="210" y="400" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-41" value="2" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="170" y="410" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-42" value="12" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="210" y="410" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-43" value="10" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="250" y="410" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-44" value="15" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="410" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-45" value="20" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="410" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-46" value="第二轮，在2以外的其他元素中找到最小的数及下标&lt;br style=&quot;font-size: 15px;&quot;&gt;与数据下标为&lt;b style=&quot;font-size: 15px;&quot;&gt;1&lt;/b&gt;的开始交换值" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="414" y="405" width="366" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-47" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="iABSiQ6mtmhOvP6iD4mr-42" target="iABSiQ6mtmhOvP6iD4mr-43">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="480" as="sourcePoint" />
+            <mxPoint x="350" y="530" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-48" value="互换" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="230" y="490" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-50" value="2" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="170" y="540" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-51" value="10" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="210" y="540" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-52" value="12" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="250" y="540" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-53" value="15" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="540" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-54" value="20" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="540" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-55" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="600" as="sourcePoint" />
+            <mxPoint x="910" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-56" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;dashed=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="250" y="620" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-57" value="2" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="170" y="630" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-58" value="10" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="210" y="630" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-59" value="12" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="250" y="630" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-60" value="15" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="630" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-61" value="20" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="630" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-62" value="第3轮，在2、10以外的其他元素中找到最小的数及下标&lt;br style=&quot;font-size: 15px;&quot;&gt;与数据下标为&lt;b style=&quot;font-size: 15px;&quot;&gt;2&lt;/b&gt;的开始交换值" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="414" y="625" width="386" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-63" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="iABSiQ6mtmhOvP6iD4mr-59" target="iABSiQ6mtmhOvP6iD4mr-59">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="700" as="sourcePoint" />
+            <mxPoint x="350" y="750" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-64" value="互换" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="230" y="710" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-65" value="2" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="170" y="760" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-66" value="10" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="210" y="760" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-67" value="12" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="250" y="760" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-68" value="15" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="290" y="760" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-69" value="20" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="330" y="760" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iABSiQ6mtmhOvP6iD4mr-70" value="。。。。。 以此类推" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#9673a6;fillColor=#e1d5e7;fontFamily=Lucida Console;fontSize=15;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="840" width="170" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
