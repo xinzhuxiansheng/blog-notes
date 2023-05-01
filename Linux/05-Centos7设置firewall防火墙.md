@@ -1,6 +1,4 @@
-**`正文`**
-[TOC]
-
+## CentOS7关闭防火墙
 ## 停止 firewall
 ```shell
 systemctl stop firewalld.service #停止firewall

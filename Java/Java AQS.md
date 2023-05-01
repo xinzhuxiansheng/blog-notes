@@ -1,3 +1,5 @@
+## AQS(AbstractQueuedSynchronizer抽象同步队列)
+
 
 ## state
 
@@ -205,3 +207,8 @@ https://github.com/openjdk/jol
 
 个人BLOG
 https://www.iteye.com/blog/user/rednaxelafx
+
+
+
+refer
+1. https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html

@@ -152,3 +152,4 @@ refer
 1. https://www.sobyte.net/post/2021-12/whys-the-design-mysql-auto-increment/
 2. https://www.bilibili.com/video/BV1JM41157cr/?spm_id_from=333.880.my_history.page.click&vd_source=89b3f4bd088c6355f40a00df74cf8ffd
 3. https://time.geekbang.org/column/article/80531?utm_source=pinpaizhuanqu&utm_medium=geektime&utm_campaign=guanwang&utm_term=guanwang&utm_content=0511
+4. https://zhanghaoxin.blog.csdn.net/article/details/112223230
