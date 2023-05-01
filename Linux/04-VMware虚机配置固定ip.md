@@ -60,3 +60,9 @@ DNS1=网关IP     #添加项
 重启网卡服务
 service network restart
 ```
+
+### 关闭防火墙
+```shell
+systemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+```
