@@ -8,7 +8,7 @@
 下面从两个角度来回答MySQL主键不连续的原因：
 
 ### 自增值保存在哪儿
-在这个user表里面执行`INSERT INTO `user`(name, age) VALUES('test01', 1);` 插入一行数据，再执行 show create table user 命令，就可以看到如下图所示的结果：
+在这个user表里面执行`INSERT INTO `user`(name, age) VALUES('test01', 1);` 插入一行数据，再执行 show create table user 命令，就可以看到如下图所示的结果： 
 ![iddiscontinuity07](images/iddiscontinuity07.png)
 
 可以看到，表定义里面出现了一个AUTO_INCREMENT=2，表示下一次插入数据时，如果需要自动生成自增值，会生成 id=2。 
