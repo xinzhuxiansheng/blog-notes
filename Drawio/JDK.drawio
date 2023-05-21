@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-05-11T18:41:28.378Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="JiCJeka995UqyqaE9vlT" version="21.1.2" type="device" pages="6">
+<mxfile host="Electron" modified="2023-05-19T04:48:51.528Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="pWMs-EVwfA6t7N8cYnNz" version="21.1.2" type="device" pages="7">
   <diagram id="rESn39GcFBBgE3ZcYcvu" name="Javac编译的各个阶段">
-    <mxGraphModel dx="1276" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1674" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -803,6 +803,56 @@
         </mxCell>
         <mxCell id="i9rKg9Pz5a5stASZMOhy-16" value="线程，主内存，工作内存三者的交互关系" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=15;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="130" y="490" width="290" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="-_CX3QZV58HZ_0-I9mTU" name="进程的大致结构">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-1" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="70" y="90" width="690" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-2" value="程序段" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="120" y="130" width="190" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-3" value="数据段" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="120" y="340" width="190" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-4" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="130" width="360" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-5" value="进程ID" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="160" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-6" value="进程名称" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="560" y="160" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-7" value="进程状态" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="210" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-8" value="进程优先级" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="560" y="210" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-9" value="程序起始地址" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="260" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-10" value="其他" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="560" y="260" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-11" value="文件句柄" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="360" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-12" value="进程上下文" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="390" y="410" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-13" value="进程控制块" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="490" y="520" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gtFiAVkoTQbabx7S4Tip-14" value="进程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="370" y="590" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -1,1 +1,315 @@
-<mxfile host="Electron" modified="2022-01-17T12:57:08.290Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/16.0.2 Chrome/96.0.4664.55 Electron/16.0.5 Safari/537.36" etag="oNAlDHRlgQb8XOPem1tV" version="16.0.2" type="device" pages="4"><diagram id="KU9967yDpA6ImBzqjGFY" name="flink.partition-discovery.interval-millis工作原理">xVffb6JAEP5rTO4ezvBLxFep9pK2ySVecl5fmhUG2LowZllE76+/BRYRTY1WsS/AfDuzzMw33xJ6phtvHjlZRS/oA+sZmr/pmQ89wxhZtrwWwLYCbN2qgJBTv4L0BpjRf6BATaEZ9SFtOQpEJuiqDXqYJOCJFkY4x7ztFiBrv3VFQjgCZh5hx+gf6ouoQh1j2OA/gYZR/WbdHlUrMamdVSVpRHzM9yBz0jNdjiiqp3jjAit6V/elipt+sLpLjEMizgkYjfLhxnTfx/PX1+jtifHn+fyHqXIT27pg8GX9ykQuIgwxIWzSoGOOWeJDsasmrcbnGXElQV2C7yDEVpFJMoESikTM1GqAiZiSmLJiJlyMqSdTmJEklbeXmXJQ0XJczHG6BOFFKvq4btWKFDPuwYlilV9R4V6g6tYjYAyCb6UDB0YEXbcngKhBCnd+u9BfSGUqhqZmfje7auR1W2tvIQgPQaiohjH5sJdGA5U8XsCpSnhNWKZKmDKaLJ9IsCQuJmkWAx+TFPo8S759PxqAht6i23lEBcxWpGxsLiV+QCVlzEWGvIw1fQJO4B0ydjnfguMS9va1PQcWwSny18AFbE7SqlaHbXZqM2/UbTgKi/aUbWkfz0GLwUvpsq+WYKvZn9Cj7CXfzovN+oPa/Kv2Lo2HTcvaKutiXj8vXUMd/aVyTvhZt5b4VdQaZyix73EgAqYFhcCv1WNbdwfiHIDjWzfRo2MsTNvuRI/6uYIcdCVI58sFeUdh3Vww530TLf2+30TrSIkJ5BIopXgH7QUB2J53E+35w9FC0zrRnjH6au0NT/FUH5m/I3lk+t3SFRi3oste2INujkrL6I4uaTa/JpUKm/87c/If</diagram><diagram id="tUMzhCiblbWlL8pMyKWZ" name="Flink组件">7ZpZj6M4EIB/TaSZh0gcCSGP6XT39IzUu73LaI6nkcGGeGPsyHau+fVrg0kCpu8N0Sp5CVDY5bi+KlMu6PnTfPOJg8XsnkFEep4DNz3/uud5bugF6qAl21IShk4pyDiGptFeEOHfyAirZksMkag1lIwRiRd1YcIoRYmsyQDnbF1vljJSH3UBMjOisxdECSDIavYdQzkzs/BGe/kdwtmsGtkNxuWdHFSNjWIxA5CtD0T+Tc+fcsZkeZZvpoho41V2ifztj6930WCciCj6+XPNfz1M+qWy29d02U2BIyrfrBqMtv8w+kmQDHlk++vzX9ffvpkuzgqQpbHXFxbfA6qswnteQNRwV7E+y/TZh6n6Axxord8Zn6vDlDEOMQUSM/rRmEluK9tztqQQ6fEd1Xs9wxJFC5Dou2vlbUo2kzlRV646FXMkk5m5SDEhU0YYLxT5EKAwTbScUXkLcky0N05ZjhM1YgSoUIf7SGuRnM3RQdcgCVGcqjtmpohLtGm4xjN2dXewVZQgliPJt6pfpcU3RjQB4lXX6727uWMjmx24WmBkwHh4tlO9p6hODMhXQHUtqF+BmD9OVbNE/A8V+uJMGQ4GdYauc2qG3oXhOxmePg79C8PXMhzWGfrBqRkOLIa3BNPi0Uewnup/yOk5Ho+B7J5TP6hzasPkdYlp+Dgmli8YVZMV5xlSI+vRduKICixUNxuJOC3Syi5opWnqJW+jBYM4GAZd0jo5rpGF68OfC53uA/IxkoDCWP/9J3cNn6ne3wGB1IGl6ocgoDYNWaOfkwJMlvy4D78hCuHgTexDL/aDY7Lve07j6deShXphC/zRseCHFvw7NaqSTFaKFYgxwVLPIEJ8hRPN94Gzldrw8/MM374b1hEOxi3xG3QZv2P7yYiJJhVJxnXtRI1JoSaHuMBCIppszxOe/wJ0bdF3vH28XZ35Gwm25JdI2695T9HyO6Vll13ulWKciMNgO0dWzV1dK6tOtwuuXV6ZLBYEJ0Uhs0/QqqyCAwk0ryLkxG6lFCp3mZ9pghq8ZJUcdMrSLrNYaBCFE/0uQV1Rtb2oo6hze9bmpXIEq9cO77Trgd2GLWarZBwR5Zur+phttjQjPDCsixO7Z1uzONbEUfq46eUdvEVoKBo0+O/W2EqRBDxD0lJUoN1N+x207YLMhfbxaDcU+eOOadt1nQvtzmLbUnRs2nZp6CnaCQFC4ORdwCEQs6K1+3+l7z6zHr8U/i4BOxV8u9D0hcXRMs6xosyo5QkqsZF19oDgjGrHULjUvsi/0umPyunIxNzIMYS6+xVHAv8GcaFK+8lCz6qY5/CqN7zWupaSifJjBtdKtMw6c5i2QZSCZVH4euEic4QX0Q1PGLVkZk6LI3qvz8zU5f67h9ID9l+P+Df/Ag==</diagram><diagram id="35-PDY_pWHxsHK2Zb-nD" name="Flink作业提交模式">7Vpbc5s6EP41evQZ7oZHcOx22slMZvzQmfOGQbbVyIgDInb667sSAnNr7KR24p7yEouVWO3u90krbUDmbHf4lIXp9p7FmCJDiw/IvEOGobuGAz9C8lxKXNsoBZuMxGrQUbAkP7ASakpakBjnrYGcMcpJ2hZGLElwxFuyMMvYvj1szWh71jTcqBm1o2AZhRT3hn0jMd8qL4zpUf4Zk822mll3vLJnF1aDleJ8G8Zs3xCZc2TOMsZ42dodZpiK4FVx+bz6N9XJs2U/fH+c6euv3+5Wj5NS2eI1r9QuZDjhl1WtfH0KaaHipXzlz1UAM1YkMRZKNGQG+y3heJmGkejdA2VAtuU7Ck86NPNHzKOtelizhC/CHaGCOjO2IxFoXoZJDj/3SzGAUDpjlGVyJjMOsbuOhBaesUfc6HEiF6/WSqXimG7C85mRURF8whnHhwYvVKQ+YbbDPHuGIarXruirWF+TYH/k0FSJtg36WEoWKtZuas1HZKChwHkFUEYPqC9sdR8mQN9shEz0TgytjZlu9TGrxzRB07VroWaOqJ1ArV5YtwOaNYJ2AjTHujnQ7B5oC0qSRxD5aUpJFHLCkhG9cqM0O8lN/+Dk5ozgnQuee2PnEnc8QA4fILtrbGCLfFegpuMaOxs7u4Od88HYVfvzS6sMJ7EvrsvwFNEwz0nUBqeN5M2hg+PqGv8LbBqxtwdiX8kyTIHJT+3L/xAgaoYHRsC8Gnrd6UBvdjDNWZFFWL3VvG13FBmdC6TudRTxMNtg3lMk+VG7/RuU0UfKvA9l7OkvTlOvpYxjfjBl+jWGkTJXoYzTrS51M8cfQ5l+gWOkzHUo0z1PTv9UyvTLK60DqCb+BdEjEZzceJs2ISWbRHAKUMQAeSDOd6CF+qpjR+JYvB5kOCc/wpVUJSiWCteks3aA7Duhq+AsVwzpUSlhCe7wrhKd5Op73ei7x5a6ztIgp24MsNO42pG1X5B5wNnkC1uNEL+pTurYpxEeKrldD+F+1WaJYXsfF/Ebi6ruzSHcrxn48AjJWuzWkLINrVkZ10gu8VZdayZkebHaEc5JsoEHvgVSaN/FHgAWOVSwYZW1SOL8V4j/p8qoT0o4xZy6mR5k7Kt+aG3Eb61yV5uxJ9I1tqIiuviAo4JjObs0sJpeWJPIAYT/g0QQL2jQWtVWwlZqywpJK9muDa/jd5HpL6Vm7iB3htwpmtvInyPPR3MLBT5yHdlwkauphu+rhmei+RR5FvJd2YDBVoMfx75S0VzOsUCepiS+JRt3yJtVGkH1AgUzYcql/OrPMBUO+ro0UJMO2sjzpKU2CioJWAE2QsN1UeBI22EMxMcV74KBorFAvv2SEzCFa8nXbTkXxMATkRTBtEW0xRSmlBgX8rhkonDAF/FvIgR/3UB1ARDgQFDCUbtkCzd8t8FSBb5/MbqenSMoXvOBDMFZ+lekh4nZLU1N+/nBHCpL6tdLEP3q/4cmiNvKDr+ZGiJKsLy4DUQohaO0tBRGFTl/U/a4ROr4X+aNvyxpXCVjDGGkoD1eA2vujjngvBxgnc4Alvm+GaD/AeF9IT7upGrjlTv+FiIhNzfcyQhHsva3oGrt2YI8nt/eNTpLBZYBcFKvyBb095oXPuEZ6XbmR5DmwHciNSeHap6voBs8Hr+kLWuNx++RzflP</diagram><diagram id="Y_0bu_lH_NarnwV83KzQ" name="on K8s Application Mode">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</diagram></mxfile>
+<mxfile host="Electron" modified="2023-05-18T10:47:03.977Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="h3HWJ52JqNi5pK0HAiLS" version="21.1.2" type="device" pages="5">
+  <diagram id="KU9967yDpA6ImBzqjGFY" name="flink.partition-discovery.interval-millis工作原理">
+    <mxGraphModel dx="1290" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=14;sketch=1;" parent="1" source="99w7x3CjBXZZh_KlrLXX-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-1" value="FlinkKafkaConsumerBase.run()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;sketch=1;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="70" y="70" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=14;" parent="1" source="99w7x3CjBXZZh_KlrLXX-2" target="99w7x3CjBXZZh_KlrLXX-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-2" value="FlinkKafkaConsumer.createFetcher()" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="70" y="170" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=14;" parent="1" source="99w7x3CjBXZZh_KlrLXX-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-4" value="new KafkaFetcher()" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;fillColor=#ffe6cc;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="70" y="290" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-7" value="new KafkaConsumerThread()" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="70" y="420" width="280" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="tUMzhCiblbWlL8pMyKWZ" name="Flink组件">
+    <mxGraphModel dx="1826" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="S3yXTHS49csSSYYwr_PA-0" />
+        <mxCell id="S3yXTHS49csSSYYwr_PA-1" parent="S3yXTHS49csSSYYwr_PA-0" />
+        <mxCell id="a7yjonGslge2ly_IQDVV-0" value="JobManager&lt;br&gt;(Central Work Coordination)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="130" y="230" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-1" value="TaskManager&lt;br&gt;(WorkerNodes)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="440" y="100" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-2" value="TaskManager&lt;br&gt;(WorkerNodes)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="440" y="230" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-3" value="TaskManager&lt;br&gt;(WorkerNodes)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="450" y="360" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-4" value="Flink Client" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="-60" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-5" value="Flink Components" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="740" y="10" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-6" value="External Components" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="740" y="110" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-7" value="(Optional)Standby JobManager&lt;br&gt;(In case of leading JobManager failures)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#d5e8d4;fontFamily=Comic Sans MS;strokeColor=#82b366;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="-200" y="300" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-8" value="High Availability Service Provider" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="-180" y="490" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-9" value="File Storage and Persistency" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="30" y="490" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-10" value="Resource Provider" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="270" y="490" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-11" value="Metrics Storage" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="450" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-12" value="Application-level data sources and singks" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="630" y="490" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-13" value="" style="endArrow=none;html=1;rounded=0;fontFamily=Comic Sans MS;" edge="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="430" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-14" value="" style="endArrow=none;html=1;rounded=0;fontFamily=Comic Sans MS;" edge="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="440" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-15" value="" style="endArrow=none;html=1;rounded=0;fontFamily=Comic Sans MS;" edge="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="430" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-16" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;dashed=1;" edge="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="10" y="130" as="sourcePoint" />
+            <mxPoint x="120" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-17" value="JobSubmission" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=default;fontFamily=Comic Sans MS;" vertex="1" parent="S3yXTHS49csSSYYwr_PA-1">
+          <mxGeometry x="10" y="170" width="100" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="35-PDY_pWHxsHK2Zb-nD" name="Flink作业提交模式">
+    <mxGraphModel dx="1826" dy="852" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-0" />
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-1" parent="HbZp1iy45PjkC1fKWDbk-0" />
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-9" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="510" y="220" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-2" value="JobManager" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-200" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-3" value="JobManager" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="220" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-4" value="JobManager" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="640" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-5" value="Flink Application" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-230" y="210" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-6" value="Flink Application" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="80" y="220" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-8" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="530" y="240" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-7" value="Flink Application" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="550" y="260" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-10" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="230" as="sourcePoint" />
+            <mxPoint x="210" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-11" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="210" as="sourcePoint" />
+            <mxPoint x="630" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-12" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="240" as="sourcePoint" />
+            <mxPoint x="630" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-13" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630" y="270" as="sourcePoint" />
+            <mxPoint x="630" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-14" value="Application Mode" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-160" y="100" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-15" value="Per-Job Mode" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="265" y="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-16" value="Session Mode" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="685" y="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-17" value="A dedicated JobManager is stated for submitting the job,&lt;br style=&quot;font-size: 13px;&quot;&gt;the jobmanager will obly execute this job, then exit. &lt;br style=&quot;font-size: 13px;&quot;&gt;the flink application runs on the jobManager&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;指定了一个专用的JobManager用于提交作业，&lt;br style=&quot;font-size: 13px;&quot;&gt;作业管理器将强制执行该作业，然后退出。&lt;br style=&quot;font-size: 13px;&quot;&gt;flink应用程序运行在jobManager上&lt;br style=&quot;font-size: 13px;&quot;&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-360" y="270" width="370" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-18" value="A dedicated JobManager is stated for submitting the job,&lt;br style=&quot;font-size: 13px&quot;&gt;the jobmanager will obly execute this job, then exit. &lt;br style=&quot;font-size: 13px&quot;&gt;the flink application runs on the client submitting the per-job cluster&lt;br style=&quot;font-size: 13px&quot;&gt;&lt;br style=&quot;font-size: 13px&quot;&gt;指定了一个专用的JobManager用于提交作业，&lt;br style=&quot;font-size: 13px&quot;&gt;作业管理器将强制执行该作业，然后退出。&lt;br style=&quot;font-size: 13px&quot;&gt;flink应用程序运行在提交的Per-Job cluster" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="40" y="270" width="430" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-19" value="Multiple jobs share one JobManager&lt;br&gt;&lt;br&gt;多个作业共享一个JobManager" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="510" y="310" width="240" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Y_0bu_lH_NarnwV83KzQ" name="on K8s Application Mode">
+    <mxGraphModel dx="1586" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-0" />
+        <mxCell id="JEAt9aThgjZ5hAvpox82-1" parent="JEAt9aThgjZ5hAvpox82-0" />
+        <mxCell id="JEAt9aThgjZ5hAvpox82-2" value="String [] args" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="60" y="50" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-3" value="CommandLine.options" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="110" y="120" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-4" value="CommandLine.args" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-35" y="120" width="130" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-5" value="Configuration effectiveConfiguration" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-10" y="190" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-6" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="80" as="sourcePoint" />
+            <mxPoint x="100" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-7" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="150" as="sourcePoint" />
+            <mxPoint x="100" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-8" value="KubernetesClusterClientFactory.createClusterDescriptor()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-60" y="300" width="370" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-9" value="KubernetesConfigOptions.KUBERNETES_POD_TEMPLATE_FILE_KEY" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-70" y="390" width="440" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-0" value="YZhouSubmiter" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry x="-220" y="530" width="120" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-4" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-0">
+          <mxGeometry x="55" y="100" width="10" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-1" value="CliFrontend" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry x="20" y="530" width="100" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-10" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-1">
+          <mxGeometry x="45" y="110" width="10" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-13" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-1">
+          <mxGeometry x="55" y="180" width="10" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-5" value="runApplication(args)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="-140" y="640" as="sourcePoint" />
+            <mxPoint x="50" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-6" value="main(args)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" vertex="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry x="-260" y="630" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-8" value="" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" target="OP1So73uvXRgUYCKXxMM-7" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="640" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-9" value="deployer" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" source="OP1So73uvXRgUYCKXxMM-7" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-11" value="new ApplicationClusterDeployer&lt;br style=&quot;font-size: 11px;&quot;&gt;(clusterClientServiceLoader)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontFamily=Comic Sans MS;sketch=1;" vertex="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry x="110" y="610" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-12" value="ApplicationClusterDeployer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontFamily=Comic Sans MS;fontSize=11;sketch=1;" vertex="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry x="240" y="530" width="160" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-7" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-12">
+          <mxGeometry x="75" y="110" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-16" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-12">
+          <mxGeometry x="75" y="185" width="10" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-21" value="clientFactory.&lt;br&gt;createClusterDescriptor(configuration)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" edge="1" parent="OP1So73uvXRgUYCKXxMM-12">
+          <mxGeometry x="0.0308" y="16" width="80" relative="1" as="geometry">
+            <mxPoint x="93" y="186" as="sourcePoint" />
+            <mxPoint x="320" y="186" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-22" value="clusterDescriptor" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" edge="1" parent="OP1So73uvXRgUYCKXxMM-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="220" as="sourcePoint" />
+            <mxPoint x="90" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-26" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-12">
+          <mxGeometry x="85" y="249" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-15" value="run()" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" edge="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="92" y="714" as="sourcePoint" />
+            <mxPoint x="310" y="714" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-17" value="KubernetesClusterClientFactory" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontFamily=Comic Sans MS;fontSize=11;sketch=1;" vertex="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry x="478" y="530" width="180" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-19" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-17">
+          <mxGeometry x="85" y="185" width="10" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-23" value="KubernetesClusterDescriptor" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontFamily=Comic Sans MS;fontSize=11;sketch=1;" vertex="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry x="700" y="530" width="180" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-24" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" vertex="1" parent="OP1So73uvXRgUYCKXxMM-23">
+          <mxGeometry x="85" y="250" width="10" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-25" value="deployApplicationCluster()" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" edge="1" parent="JEAt9aThgjZ5hAvpox82-1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="340" y="783" as="sourcePoint" />
+            <mxPoint x="780" y="783" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="8HtpoPdB2ZWeA5UFHST3" name="Flink SQL">
+    <mxGraphModel dx="1290" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

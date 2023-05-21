@@ -1,5 +1,136 @@
 ## AQS(AbstractQueuedSynchronizer抽象同步队列)
 
+>注意：AQS知识偏JDK底层，该篇blog，博主也是阅读其他blog以及通过ReentrantLock案例调试，做一些分享心得，该文会有大篇幅在语言描述上摘抄refer的blog。    
+
+### 引言
+AbstractQueuedSynchronizer抽象同步队列简称AQS，它是实现同步器的基础组建，并发包中锁的底层就是使用AQS实现的，那既然了解它是属于锁的业务的范畴，那肯定脱离不了多线程场景，下面简单描述下场景：        
+
+>**场景一** 有四个线程由于业务需求需要同时占用某资源，但该资源在同一个时刻只能被其中唯一线程所独占。那么此时应该如何标识该资源已经被独占，同时剩余无法获取该资源的线程又该何去何从呢？
+
+![AQS01](images/AQS01.png)  
+
+>**场景二** 在生产者和消费者模式下，需要确保生产者不会再缓冲区已满时尝试将数据添加到缓冲区中，并且消费者不会尝试从空缓冲区中删除数据。    
+
+![AQS02](images/AQS02.png)  
+
+这里就涉及到关于共享资源的竞争与同步关系。Java AQS正是为了解决这个问题而被设计出来。 `AQS 是一个集同步状态管理、线程阻塞、线程释放及队列管理功能与一身的同步框架。其核心思想是当多个线程竞争资源时会将未成功竞争到资源的线程构造为 Node 节点放置到一个双向 FIFO 队列中。被放入到该队列中的线程会保持阻塞直至被前驱节点唤醒。值得注意的是该队列中只有队首节点有资格被唤醒竞争锁。`   
+
+为了更好了解AQS的实现逻辑，我们通过ReentrantLock来实现一个生产者和消费者的案例（上述场景二）： 代码如下： 
+
+* Consumer线程负责消费Queue
+* Producer线程负责生产数据添加到Queue中
+* Queue队列是用LinkedList + ReentrantLock锁实现
+
+```java
+// Consumer:
+public class Consumer<T> implements Runnable {
+    private String name;
+    private final Queue<T> queue;
+
+    public Consumer(Queue<T> queue, String name) {
+        this.queue = queue;
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            T val = queue.take();
+            System.out.println("threadName: " + name + " , Consumed : " + val);
+        }
+    }
+}
+
+// Producer
+public class Producer<T> implements Runnable {
+    private String name;
+    private final Queue<T> queue;
+    private final Random rand = new Random();
+
+    public Producer(Queue<T> queue, String name) {
+        this.queue = queue;
+        this.name = name;
+    }
+    @Override
+    public void run() {
+        while (true) {
+            Integer val = rand.nextInt(10);
+            queue.put((T) val);
+            System.out.println("threadName: " + name + " , Produced  " + val);
+        }
+
+    }
+}
+
+// Queue
+public class Queue<T> {
+    private final int capacity;
+    private final LinkedList<T> list;
+    private final ReentrantLock lock = new ReentrantLock();
+    private final Condition notEmpty = lock.newCondition();
+    private final Condition notFull = lock.newCondition();
+
+    public Queue(int capacity) {
+        this.capacity = capacity;
+        list = new LinkedList<>();
+    }
+
+    public void put(T val) {
+        lock.lock();
+        try {
+            if (this.list.size() == capacity) {
+                notFull.await();
+            }
+            this.list.add(val);
+            notEmpty.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public T take() {
+        lock.lock();
+        T val = null;
+        try {
+            if (this.list.size() == 0) {
+                notEmpty.await();
+            }
+            val = this.list.remove();
+            notFull.signalAll();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+        return val;
+    }
+}
+
+// TestMain
+public class TestMain {
+
+    public static void main(String[] args) {
+        Queue<Integer> queue = new Queue<>(10);
+        Producer<Integer> producer01 = new Producer<Integer>(queue, "producer01");
+        Producer<Integer> producer02 = new Producer<Integer>(queue, "producer02");
+        Consumer<Integer> consumer01 = new Consumer<Integer>(queue, "consumer01");
+
+        new Thread(producer01).start();
+        new Thread(producer02).start();
+        new Thread(consumer01).start();
+    }
+}
+```
+
+
+
+
+
+
+
+
 
 ## state
 
@@ -211,4 +342,5 @@ https://www.iteye.com/blog/user/rednaxelafx
 
 
 refer
-1. https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html
+1.https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html
+2.https://zhuanlan.zhihu.com/p/308452402
