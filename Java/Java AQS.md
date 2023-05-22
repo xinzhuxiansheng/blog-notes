@@ -9,6 +9,37 @@ AbstractQueuedSynchronizer抽象同步队列简称AQS，它是实现同步器的
 
 ![AQS01](images/AQS01.png)  
 
+```java
+public class AtomicDemo {
+    // 共享变量
+    private static int count = 0;
+    private static Lock lock = new ReentrantLock();
+
+    // 操作共享变量的方法
+    public static void incr() {
+        // 为了演示效果  休眠一下子
+        try {
+            lock.lock();
+            Thread.sleep(1);
+            count++;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        for (int i = 0; i < 1000; i++) {
+            new Thread(() -> AtomicDemo.incr()).start();
+        }
+        Thread.sleep(15000);
+        System.out.println("result:" + count);
+    }
+}
+```
+
+
 >**场景二** 在生产者和消费者模式下，需要确保生产者不会再缓冲区已满时尝试将数据添加到缓冲区中，并且消费者不会尝试从空缓冲区中删除数据。    
 
 ![AQS02](images/AQS02.png)  
@@ -124,6 +155,86 @@ public class TestMain {
 }
 ```
 
+### 了解自旋锁 
+
+**什么是自旋锁**    
+自旋锁（spinlock）：是指当一个线程在获取锁的时候，如果锁已经被其它线程获取，那么该线程将循环等待，然后不断的判断锁是否能够被成功获取，直到获取到锁才会退出循环。    
+
+获取锁的线程一直处于活跃状态，但是并没有执行任何有效的任务，使用这种锁会造成 busy-waiting（https://zh.wikipedia.org/wiki/%E5%BF%99%E7%A2%8C%E7%AD%89%E5%BE%85）。
+
+**实现自旋锁**  
+下面列举一个自旋锁的实现案例。  
+```java
+public class SpinLock {
+    private static final Logger logger = LoggerFactory.getLogger(SpinLock.class);
+
+    AtomicReference<Thread> atomicReference = new AtomicReference<>();
+
+    public void myLock(){
+        Thread thread = Thread.currentThread();
+        logger.info("{} invoke myLock()", Thread.currentThread());
+        while(!atomicReference.compareAndSet(null,thread)){
+
+        }
+    }
+
+    public void myUnlock(){
+        Thread thread = Thread.currentThread();
+        atomicReference.compareAndSet(thread,null);
+        logger.info("{} invoke myUnlock()");
+    }
+
+    public static void main(String[] args) {
+        SpinLock spinLock = new SpinLock();
+        new Thread(()->{
+            spinLock.myLock();
+            // do somethings
+
+            spinLock.myUnlock();
+        });
+    }
+}
+```
+
+ myLock()方法利用了CAS，当第一个线程获取锁的时候，能够成功获取到，不会进入while循环，如果此时线程没有释放锁，那另一个线程获取锁时，此时犹豫不满足CAS的判断要求，必须等于当前Thread，则会进入while循环，直到已经获取到锁的线程调用myUnlock()来释放锁，所以整个处理过程如下图：   
+
+ ![AQS03](images/AQS03.png)  
+
+获取锁时，线程会对一个原子变量循环执行 compareAndSet 方法，直到该方法返回成功时即为成功获取锁。compareAndSet 方法底层是通用 compare-and-swap （下称 CAS）实现的。该操作通过将内存中的值与指定数据进行比较，当数值一样时将内存中的数据替换为新的值。该操作是原子操作。原子性保证了根据最新信息计算出新值，如果与此同时值已由另一个线程更新，则写入将失败。因此，这段代码可以实现互斥锁的功能。   
+
+**自旋锁缺点**
+自旋锁实现简单，同时避免了操作系统进程调度和线程上下文切换的开销，但他有两个缺点：  
+* 第一个是锁饥饿问题。在锁竞争激烈的情况下，可能存在一个线程一直被其他线程”插队“而一直获取不到锁的情况。    
+* 第二是性能问题。在实际的多处理上运行的自旋锁在锁竞争激烈时性能较差。  
+
+>固AQS的出现是了解决以上缺点。  
+
+### 调试ReentrantLock代码
+在上面`引言`章节中的**场景一**案例代码中，lock是由ReentrantLock实例化得到，那先了解下ReentrantLock的构造方法：  
+```java
+/**
+ * Creates an instance of {@code ReentrantLock}.
+ * This is equivalent to using {@code ReentrantLock(false)}.
+ */
+public ReentrantLock() {
+    sync = new NonfairSync();
+}
+```
+
+ ![AQS04](images/AQS04.png)  
+
+`通过ReentrantLock的内部类关系可知， ReentrantLock区分非公平锁和公平锁（如何实现下面再说明），当无参或者new ReentrantLock(false)表示的是非公平锁，反之是公平锁。`   
+
+**仍然在场景一的代码中，当线程调用lock()方法时，发生了什么？**  
+```java
+// NonfairSync.lock()
+final void lock() {
+    if (compareAndSetState(0, 1))
+        setExclusiveOwnerThread(Thread.currentThread());
+    else
+        acquire(1);
+}
+```
 
 
 
@@ -344,3 +455,5 @@ https://www.iteye.com/blog/user/rednaxelafx
 refer
 1.https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html
 2.https://zhuanlan.zhihu.com/p/308452402
+3.https://www.processon.com/view/62b83b561e08531560736b67?fromnew=1
+4.https://learnku.com/articles/49689
