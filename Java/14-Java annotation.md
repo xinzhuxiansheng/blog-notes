@@ -1,8 +1,4 @@
-**`正文`**
-
-[TOC]
-
-## 注解
+## Annotation (注解)
 注解为我们代码中添加信息提供了一种形式化的方法，使我们可以在稍后某个时刻非常方便地使用这些数据。
 1.它可以提供用来完整地描述程序所需的信息，而这些信息是无法用Java来表达的。因此，注解使得我们能够以将由编译器来测试和验证的格式，存储有关程序的额外信息。
 2.注解可以用来描述符文件，甚至或是新的类定义，并且有助于减轻编写"样板"代码的负担。通过使用注解，我们可以将这些元数据保存在Java源代码中，并利用annotation API为自己的注解构建处理工具，同时，注解的优点还包括：更加干净易读的代码
@@ -137,8 +133,9 @@ public class UseCaseTracker{
     }
 }
 ```
-这个程序用到两个反射的方法：`getDeclaredMethods()`和`getAnnotation()`，它们都属于AnnotatedElement接口(Class,Method与Field等类都实现了该接口)。getAnnoation()方法返回指定类型的注解对象，在这里就是UseCase。如果被注解的方法上没有该类型的注解，则返回null值。然后我们通过调用id()和description()方法从返回的UseCase对象中提取元素的值。其中，encriptPassword()方法在注解的时候没有指定description的值，因此处理器在处理它对应的注解时，通过description()方法取得的时默认值no description。
+这个程序用到两个反射的方法：`getDeclaredMethods()`和`getAnnotation()`，它们都属于AnnotatedElement接口(Class,Method与Field等类都实现了该接口)。getAnnoation()方法返回指定类型的注解对象，在这里就是UseCase。如果被注解的方法上没有该类型的注解，则返回null值。然后我们通过调用id()和description()方法从返回的UseCase对象中提取元素的值。其中，encriptPassword()方法在注解的时候没有指定description的值，因此处理器在处理它对应的注解时，通过description()方法取得的时默认值no description。  
 
 
 
-> 参考：《java编程思想》 注解
+refer   
+1.《java编程思想》 注解 
