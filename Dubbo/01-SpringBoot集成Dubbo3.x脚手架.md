@@ -1,4 +1,4 @@
-## Spring Boot集成Dubbo 3.x脚手架
+## Spring Boot集成Dubbo 3.x脚手架   
 
 ### 1.创建pom聚合工程   
 首先看下整个聚合工程结构:   
@@ -316,4 +316,6 @@ logging:
 </configuration>
 ```
 
-以上等操作完成后，Spring Boot集成Dubbo3.x也初步完成。项目配置简单可自行修改。
+以上等操作完成后，Spring Boot集成Dubbo3.x也初步完成。项目配置简单可自行修改。  
+
+>源码请参考: https://github.com/xinzhuxiansheng/javamain-services/tree/main/javamain-dubbo  
