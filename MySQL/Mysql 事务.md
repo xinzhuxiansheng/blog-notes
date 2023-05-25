@@ -53,7 +53,7 @@ SERIALIZABLE是最高的隔离级别。它通过强制事务串行执行，避�
 
 ![事务隔离级别](images/transaction01.png)
 
+        
 
-
-# Reference
-[1]《高性能Mysql》 第三版
+refer   
+1.《高性能Mysql》 第三版    

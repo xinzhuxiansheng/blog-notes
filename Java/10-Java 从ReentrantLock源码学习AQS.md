@@ -243,6 +243,11 @@ final void lock() {
 
 
 
+
+
+
+
+
 ## state
 
 ## CLH队列(Craig, Landin, and Hagersten lock queue)

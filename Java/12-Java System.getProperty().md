@@ -1,7 +1,3 @@
-**`正文`**
-
-[TOC]
-
 ## Java System Properties
 Java维护了一组对系统属性设置的操作。每个Java系统属性都是一个键值对(k-v,String-String)，例如`“java.version”=”1.7.0_09“`。你可以通过`System.getProperties()`获取到系统的全部属性值,也可以通过'System.getProperty(key)' 检索到单个属性值。
 

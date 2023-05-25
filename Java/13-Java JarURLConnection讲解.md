@@ -57,5 +57,5 @@ jar:http://www.foo.com/bar/baz.jar!/COM/foo/
 ```
 
 
-
-参考地址：https://docs.oracle.com/javase/7/docs/api/java/net/JarURLConnection.html
+refer:
+1.https://docs.oracle.com/javase/7/docs/api/java/net/JarURLConnection.html
