@@ -1,5 +1,7 @@
 ## Spring Boot集成Dubbo 3.x脚手架   
 
+>dubbo version: 3.0.1
+
 ### 1.创建pom聚合工程   
 首先看下整个聚合工程结构:   
 ![starter01](images/starter01.png)

@@ -1,5 +1,7 @@
 ## Dubbo 3.x入门实操 sayHello
 
+>dubbo version: 3.0.1
+
 ### 引言
 在上一篇《Spring Boot集成Dubbo 3.x脚手架》的内容基础上，本篇主要介绍，Dubbo3.x入门实操 sayHello。
 
