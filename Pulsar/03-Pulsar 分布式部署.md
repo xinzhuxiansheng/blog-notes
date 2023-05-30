@@ -4,7 +4,7 @@
 * **Zookeeper** Bookkeeper和Pulsar Broker服务都依赖于Zookeeper。    
 * **Pulsar Broker** Broker是Pulsar的核心组件    
 * **Bookie** Bookie节点是一个独立的Bookkeeper节点，由多个Bookie节点组成的Bookkeeper为Pulsar提供数据持久化存储服务，以及多副本、高可用性、一致性的保障。 
-* **必要的命名解析服务** 在所有分布式服务中，都有将一批对等节点组为一个逻辑上的集群，并对外提供服务的需求。因此在生产实践中，需要将一组节点通过命名解析服务对外暴露。用户可以根据企业环境中的实际需求选择Consul服务或者其他域名解析服务。   
+* **必要的命名解析服务（可选）** 在所有分布式服务中，都有将一批对等节点组为一个逻辑上的集群，并对外提供服务的需求。因此在生产实践中，需要将一组节点通过命名解析服务对外暴露。用户可以根据企业环境中的实际需求选择Consul服务或者其他域名解析服务。   
 
 结构分布式图：  
 ![baremetal02](images/baremetal02.png)   
@@ -14,9 +14,11 @@
 
 | 机器      |    IP | 角色  |
 | :-------- | --------:| :--: |
-| VM01  | 192.168.0.201 |  Broker，Bookie，Zookeeper  |
-| VM02  | 192.168.0.202 |  Broker，Bookie，Consul  |
-| VM03  | 192.168.0.203 |  Broker，Bookie  |  
+| VM01  | 192.168.0.201（vm01）|  Broker，Bookie，Zookeeper  |
+| VM02  | 192.168.0.202（vm02）|  Broker，Bookie，Consul  |
+| VM03  | 192.168.0.203（vm02）|  Broker，Bookie  |  
+
+配置VM01,VM02,VM03三台虚机的Hosts，将vm01,vm02,vm03（小写）指向各自机器ip。 
 
 >虚机环境，建议统一关闭访问墙，避免端口不通，访问不到的问题。 以上是虚机环境，若要在部署生产环境，还需参考 https://pulsar.apache.org/docs/2.11.x/deploy-bare-metal/ 
 
@@ -70,10 +72,10 @@ bin/pulsar initialize-cluster-metadata \
     --cluster pulsar-cluster-1 \ 
     --metadata-store zk:192.168.0.201:2181/test_cluster1 \
     --configuration-metadata-store zk:192.168.0.201:2181/global_zk \  
-    --web-service-url http://pulsar.yzhou.example.com:8080 \ 
-    --web-service-url-tls https://pulsar.yzhou.example.com:8443 \  
-    --broker-service-url pulsar://pulsar.yzhou.example.com:6650 \  
-    --broker-service-url-tls pulsar+ssl://pulsar.yzhou.example.com:6651 
+    --web-service-url http://vm01:8080,vm02:8080,vm03:8080 \ 
+    --web-service-url-tls https://vm01:8443,vm02:8443,vm03:8443 \  
+    --broker-service-url pulsar://vm01:6650,vm02:6650,vm03:6650 \  
+    --broker-service-url-tls pulsar+ssl://vm01:6651,vm02:6651,vm03:6651
 ```
 
 >有个不同点是，博主的初始化脚本中关于zk的配置都加上自定义路径，这样能有效避免了zk数据读写混乱。     
@@ -86,7 +88,7 @@ bin/pulsar initialize-cluster-metadata \
 * **--broker-service-url** Broker服务的地址 
 * **--broker-service-url-tls** 支持加密协议的Broker地址     
 
-> 在上面的结构分布图中是包含DNS服务，如果你没有 DNS 服务器，你可以配置多主机格式来配置以下参数：    
+> 在上面的结构分布图中是包含DNS服务，`如果你没有 DNS 服务器`，你可以配置多主机格式来配置以下参数：    
 ```shell
 --web-service-url http://host1:8080,host2:8080,host3:8080 \
 --web-service-url-tls https://host1:8443,host2:8443,host3:8443 \
@@ -104,7 +106,8 @@ bin/pulsar initialize-cluster-metadata \
 你可以使用 bin/bookkeeper shell whatisinstanceid 命令获取现有 BookKeeper 集群的元数据服务 URI。您必须将值括在双引号中，因为多个元数据服务 URI 用分号分隔。      
 
 
-### DNS服务器搭建   
+### Bookkeeper集群搭建
+
 
 
 
