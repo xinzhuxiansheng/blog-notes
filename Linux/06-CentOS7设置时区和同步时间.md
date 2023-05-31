@@ -1,9 +1,3 @@
-**`正文`**
-
-[TOC]
-
-
-
 ## 设置时区
 第一步：查询服务器时间
 ```shell
@@ -40,7 +34,6 @@ NTP synchronized: yes
 ## 同步时间
 
 ```shell
-#最好不要复制，手动打
 * * * * * /usr/sbin/ntpdate time.pool.aliyun.com >> /usr/local/time.log
 ```
 

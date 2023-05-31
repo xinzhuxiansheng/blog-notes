@@ -47,17 +47,13 @@ Settings -> Editor -> Code Style -> Java -> Import Scheme -> IntelliJ IDEA code 
 以上是 Pulsar 项目的主要模块。除此之外，还有一些其他的模块，例如测试模块（用于运行 Pulsar 的自动化测试），以及一些小的模块（用于特定的功能或集成）。
 
 
-### 本地调试    
+### 本地调试入口介绍       
 
-#### 单元测试   
-
-#### Pulsar Broker调试
-
-#### Pulsar Server Rest API调试
-
-#### Pulsar Client API调试
-
-#### Pulsar Admin（管控端） API调试
+* **单元测试**  
+* **Pulsar Broker调试**     
+* **Pulsar Server Rest API调试**    
+* **Pulsar Client API调试** 
+* **Pulsar Admin（管控端） API调试**    
 
 
 ### Zookeeper部署
