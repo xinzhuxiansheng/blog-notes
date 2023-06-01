@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-05-18T09:48:34.130Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="opZoqePlcHfNXfclXXZE" version="21.1.2" type="device" pages="3">
+<mxfile host="Electron" modified="2023-06-01T12:32:32.368Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="5g9shHCgDvNIJVtkNvrG" version="21.1.2" type="device" pages="4">
   <diagram id="s5wTTWJLYitXA7IbNfYk" name="一致性Hash算法">
     <mxGraphModel dx="1436" dy="1014" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -396,8 +396,246 @@
             <mxPoint x="139.5" y="180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="bBqmARfDxvNDyf1SCvP9-11" value="当遍历到下标&amp;nbsp; 0， 此时maxSum = -2 （&lt;b&gt;maxSum是连续下标求和的结果&lt;/b&gt;）&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 1， 此时maxSum = -1&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 2， 此时maxSum = -4&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;固发现，若子集合只有下标 1时，此时maxSum = 1，那反而每次从小标0开始求和大。 此时需要用一个值&amp;nbsp;intervalSum 来继续 &lt;b&gt;某区间的最大值&lt;/b&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;那么从头开始：&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 0， 此时maxSum = -2, nums[0] = -2, intervalSum = -2&lt;br style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 1， 此时maxSum = -1, nums[1] = 1, intervalSum = 1，因maxSum=-1，明显小于nums[1]=1, 固当前[0~1]区间的最大值是1&lt;br style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 2， 此时maxSum = -4, nums[2] = -3, intervalSum = 1，因maxSum=-4，并且当前nums[2] = -3 &amp;lt; 之前intervalSum, 那无法以下标2开始重新计算某区间，所以intervalSum仍然是1&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 3， 此时maxSum = 0, nums[3] = 4, 之前计算intervalSum = 1，因nums[3]&amp;gt;intervalSum，那表示用下标3作为新区间开头&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;通过几次遍历，每轮都在计算以下几个值：&lt;span style=&quot;white-space: pre; font-size: 13px;&quot;&gt;	&lt;/span&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;* 下标从0开始的maxSUm&lt;br style=&quot;font-size: 13px;&quot;&gt;* 某区间开始的intervalSum" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+        <mxCell id="bBqmARfDxvNDyf1SCvP9-11" value="当遍历到下标&amp;nbsp; 0， 此时maxSum = -2 （&lt;b&gt;maxSum是连续下标求和的结果&lt;/b&gt;）&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 1， 此时maxSum = -1&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 2， 此时maxSum = -4&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;固发现，若子集合只有下标 1时，此时maxSum = 1，那反而每次从小标0开始求和大。 此时需要用一个值&amp;nbsp;intervalSum 来继续 &lt;b&gt;某区间的最大值&lt;/b&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;那么从头开始：&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 0， 此时maxSum = -2, nums[0] = -2, intervalSum = -2&lt;br style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 1， 此时maxSum = -1, nums[1] = 1, intervalSum = 1，因maxSum=-1，明显小于nums[1]=1, 固当前[0~1]区间的最大值是1&lt;br style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 2， 此时maxSum = -4, nums[2] = -3, intervalSum = 1，因maxSum=-4，并且当前nums[2] = -3 &amp;lt; 之前intervalSum, 那无法以下标2开始重新计算某区间，所以intervalSum仍然是1&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;当遍历到下标&amp;nbsp; 3， 此时maxSum = 0, nums[3] = 4, 之前计算intervalSum = 1，因nums[3]&amp;gt;intervalSum，那表示用下标3作为新区间开头&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;通过几次遍历，每轮都在计算以下几个值：&lt;span style=&quot;white-space: pre; font-size: 13px;&quot;&gt; &lt;/span&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;* 下标从0开始的maxSUm&lt;br style=&quot;font-size: 13px;&quot;&gt;* 某区间开始的intervalSum" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
           <mxGeometry x="110" y="250" width="1169" height="310" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="USxQ490JJY1wWxj9T-ja" name="双指针">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-1" target="zpf1ofLOMKyZC2eaZzFo-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-1" value="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="90" y="220" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-2" target="zpf1ofLOMKyZC2eaZzFo-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-2" value="2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="180" y="220" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-3" target="zpf1ofLOMKyZC2eaZzFo-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-3" value="3" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="270" y="220" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-4" target="zpf1ofLOMKyZC2eaZzFo-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-4" value="4" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="364" y="220" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-5" value="5" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="460" y="220" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-8" value="现在有一个链表，head指向头节点，现在求倒数第二个节点的子链表，那k=2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="170" width="490" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-13" target="zpf1ofLOMKyZC2eaZzFo-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-13" value="head" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="85" y="300" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-15" value="双指针计算规则" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="75" y="350" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-17" target="zpf1ofLOMKyZC2eaZzFo-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-17" value="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="95" y="420" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-19" target="zpf1ofLOMKyZC2eaZzFo-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-19" value="2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="185" y="420" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-21" target="zpf1ofLOMKyZC2eaZzFo-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-21" value="3" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="275" y="420" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-23" target="zpf1ofLOMKyZC2eaZzFo-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-23" value="4" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="369" y="420" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-24" value="5" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="465" y="420" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-26" target="zpf1ofLOMKyZC2eaZzFo-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-26" value="head" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="90" y="500" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-27" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="50" y="535" as="sourcePoint" />
+            <mxPoint x="50" y="1370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-40" target="zpf1ofLOMKyZC2eaZzFo-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-40" value="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="95" y="600" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-41" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-42" target="zpf1ofLOMKyZC2eaZzFo-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-42" value="2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="185" y="600" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-43" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-44" target="zpf1ofLOMKyZC2eaZzFo-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-44" value="3" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="275" y="600" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-46" target="zpf1ofLOMKyZC2eaZzFo-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-46" value="4" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="369" y="600" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-47" value="5" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="465" y="600" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-48" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-49" target="zpf1ofLOMKyZC2eaZzFo-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-49" value="head" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="90" y="680" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-50" value="定义两个指针 latter，former，分别都指向head节点" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="555" width="380" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-51" value="latter、former" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="65" y="710" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-57" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-58" target="zpf1ofLOMKyZC2eaZzFo-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-58" value="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="95" y="875" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-59" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-60" target="zpf1ofLOMKyZC2eaZzFo-62">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-60" value="2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="185" y="875" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-61" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-62" target="zpf1ofLOMKyZC2eaZzFo-64">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-62" value="3" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="275" y="875" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-63" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-64" target="zpf1ofLOMKyZC2eaZzFo-65">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-64" value="4" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="369" y="875" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-65" value="5" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="465" y="875" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-66" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-67" target="zpf1ofLOMKyZC2eaZzFo-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-67" value="head" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="90" y="955" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-68" value="先用former，latter子链表的一头一尾，并且两者的步长按照k-1 计算" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="80" y="830" width="460" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-69" value="latter" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="87.5" y="985" width="65" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-70" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="750" as="sourcePoint" />
+            <mxPoint x="280" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-72" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-71" target="zpf1ofLOMKyZC2eaZzFo-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-71" value="former" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="177.5" y="985" width="65" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-73" value="此时former指向2，latter指向1，那满足步长为k-1。所以接下来， &lt;b&gt;开始former向右移动1次，latter也移动一次&lt;/b&gt;" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="255" y="960" width="395" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-74" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-75" target="zpf1ofLOMKyZC2eaZzFo-77">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-75" value="1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="90" y="1135" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-76" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-77" target="zpf1ofLOMKyZC2eaZzFo-79">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-77" value="2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="180" y="1135" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-78" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-79" target="zpf1ofLOMKyZC2eaZzFo-81">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-79" value="3" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="270" y="1135" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-80" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-81" target="zpf1ofLOMKyZC2eaZzFo-82">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-81" value="4" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="364" y="1135" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-82" value="5" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="460" y="1135" width="50" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-83" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-84" target="zpf1ofLOMKyZC2eaZzFo-75">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-84" value="head" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="85" y="1215" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-85" value="当former向右移动，如果该节点的右节点为空，则表示已达到满足条件的情况" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="90" y="1090" width="485" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-92" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-86" target="zpf1ofLOMKyZC2eaZzFo-81">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-86" value="latter" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="356.5" y="1250" width="65" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-87" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="zpf1ofLOMKyZC2eaZzFo-88">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="485" y="1180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-88" value="former" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="452.5" y="1250" width="65" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-90" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="1030" as="sourcePoint" />
+            <mxPoint x="280" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zpf1ofLOMKyZC2eaZzFo-93" value="那么latter为head节点的子链表 就检索到了。" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Lucida Console;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="87.5" y="1320" width="485" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
