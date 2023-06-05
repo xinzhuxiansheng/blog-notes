@@ -1,4 +1,4 @@
-## Pulsar Producer实战  
+## Apache Pulsar Producer实战  
 
 >Pulsar version: 2.11   
 
@@ -8,7 +8,7 @@
 
 ### 环境搭建    
 博主选择在`Pulsar源码`项目中新增加一个模块`pulsar-yzhou`，用来编写Client API，这样方便调试及修改源码。如图所示： 
-![producer01](images/producer01.png)        
+![producer01](http://img.xinzhuxiansheng.com/blogimgs/pulsar/producer01.png)        
 
 **添加依赖**    
 ```
@@ -42,7 +42,7 @@ PulsarClient client = PulsarClient.builder()
 
 在Pulsar官网中介绍，如果你想创建一个client，你可以使用loadConf()来配置参数，例如下面形式：  
 
-![producer02](images/producer02.png)    
+![producer02](http://img.xinzhuxiansheng.com/blogimgs/pulsar/producer02.png)    
 
 `loadConf`中有以下参数:     
 * **serviceUrl**:必填参数。配置 Pulsar 服务访问的链接       
@@ -92,7 +92,7 @@ PulsarClient client = PulsarClient.builder()
 #### 发送数据    
 生产者发送消息的方式有两种一一`同步发送`和`异步发送`，这与Kafka的Client有这异曲同工之处。不过有一点需特别注意区别： 
 `根据Pulsar的文档介绍 producer是线程安全的，但是在Kafka Client的Producer并不是线程安全的。`     
-![producer03](images/producer03.png)    
+![producer03](http://img.xinzhuxiansheng.com/blogimgs/pulsar/producer03.png)    
 
 在使用同步方式发送消息时客户端程序会阻塞线程，并等待写人任务完成或者抛出异常。使用异步方式发送消息时,生产者将消息放人阻塞队列并立即返回，然后客户端将消息经后台发送到 Broker 中，这时如果客户端在发送过程中出现异常，则需要用户编写异步的异常处理逻辑。 
 ```java
