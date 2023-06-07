@@ -72,7 +72,7 @@ $ # 打开 http://127.0.0.1:10821 开启调试 注：需要进行前端安装
 ```
 
 完成以上操作，启动即可，别忘记在页面配置后台地址，如果所示：    
-![envidedebug01](images/envidedebug01.png)  
+![envidedebug01](http://img.xinzhuxiansheng.com/blogimgs/chat2db/envidedebug01.png)  
 
 
 ### Q&A
@@ -101,12 +101,16 @@ Error: error:0308010C:digital envelope routines::unsupported
 参考该issue（https://github.com/ant-design/ant-design-pro/issues/9272）    
 ```shell
 # 注意 博主是windows环境，使用set设置临时环境变量，其他请参考 issue
-# 添加以下参数启动
-set NODE_OPTIONS=--openssl-legacy-provider 
-npm run start
+# 修改 package.json
+ "scripts": {
+    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && umi dev",  # 添加  SET NODE_OPTIONS=--openssl-legacy-provider &&
+    "build": "cross-env UMI_ENV=test umi build",
+    "build:electron": "cross-env UMI_ENV=desktop umi build && cp -r ./dist ./electron ",
+    "postinstall": "umi generate tmp",
 ```
+在 start参数添加`SET NODE_OPTIONS=--openssl-legacy-provider &&`, 再执行 npm run start。
 
-> 博主用的是Node18，在Idea终端执行上述命令仍然存在问题，用windows终端就OK。
+> 博主用的是Node18，或者将Node降到16+。
 
 
 refer
