@@ -16,7 +16,7 @@ Akka的主要目标是，使部署在云端的应用，或者运行在多核设�
 * ActorRe、邮箱和Actor  
 * 分发器（Dispatchers） 
 
-![buildapp01](images/buildapp01.png)    
+![buildapp01](http://img.xinzhuxiansheng.com/blogimgs/akka/buildapp01.png)    
 
 以上内容请阅读《Akka实战》中的1.7章节；
 
@@ -70,7 +70,7 @@ case CreateEvent(name, tickets) =>
 
 以下展示一个大概的流程图：  
 
-![buildapp02](images/buildapp02.png)    
+![buildapp02](http://img.xinzhuxiansheng.com/blogimgs/akka/buildapp02.png)    
 
 此时，案例项目已基本上讲解完。      
 
