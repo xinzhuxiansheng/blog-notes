@@ -1,5 +1,7 @@
 ## Chat2DB关于MySQL查询过程讲解 - 连接测试 
 
+>Chat2DB version: 1.0.9
+
 ### 引言  
 以下摘自Chat2DB官网的一段介绍 
 
