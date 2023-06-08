@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-05-17T19:26:35.356Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="A5tAqkTn4gjnYoqMBA01" version="21.1.2" type="device" pages="3">
+<mxfile host="Electron" modified="2023-06-08T09:14:48.814Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="_woOCP6RWwFzBaiavxlr" version="21.1.2" type="device" pages="4">
   <diagram id="QdtzB1-yVZnQ2-44isdV" name="第 1 页">
-    <mxGraphModel dx="1276" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -20,7 +20,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="lHQM6l09IXDPQYLzOYZr" name="思路整理">
-    <mxGraphModel dx="1276" dy="214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="229" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -253,54 +253,272 @@
     </mxGraphModel>
   </diagram>
   <diagram id="7pjMKIgsrT717uUX_Z2q" name="分发-收集模式">
-    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1050" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-1" value="message" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-1" value="message" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="100" y="280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-2" value="接受者列表" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-2" value="接受者列表" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="330" y="280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-3" value="handler01" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-3" value="handler01" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="580" y="200" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-4" value="handler02" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-4" value="handler02" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="580" y="380" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-5" value="收集器" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-5" value="收集器" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=14;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="820" y="280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-6" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" edge="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-6" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="240" y="309.5" as="sourcePoint" />
             <mxPoint x="310" y="309.5" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-7" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" edge="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-7" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="460" y="309.5" as="sourcePoint" />
             <mxPoint x="570" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-8" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" edge="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-8" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="460" y="320" as="sourcePoint" />
             <mxPoint x="570" y="410" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-9" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" edge="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-9" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="810" y="310" as="sourcePoint" />
             <mxPoint x="710" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="jL8pIOmJgS9LUeVNXqOg-10" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" edge="1" parent="1">
+        <mxCell id="jL8pIOmJgS9LUeVNXqOg-10" value="" style="endArrow=classic;html=1;rounded=0;fontSize=14;fontFamily=Lucida Console;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="810" y="330" as="sourcePoint" />
             <mxPoint x="710" y="400" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="hgr2stCyfylvZdq9FF4F" name="Actor生命周期">
+    <mxGraphModel dx="1450" dy="1029" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-1" value="实例1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="90" y="60" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-3" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-30" y="93" as="sourcePoint" />
+            <mxPoint x="83" y="92.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-4" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="90" y="220" as="sourcePoint" />
+            <mxPoint x="90" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-5" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="137" y="190" as="sourcePoint" />
+            <mxPoint x="137" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-6" value="actorOf()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="60" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-7" value="构造方法" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="230" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-9" value="preStart()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="100" y="190" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-10" value="启动事件" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-40" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-11" value="实例2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="400" y="55" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-13" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="550" y="185" as="sourcePoint" />
+            <mxPoint x="549.5" y="125" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-14" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="549" y="-5" as="sourcePoint" />
+            <mxPoint x="549" y="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-16" value="停止" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="520" y="-35" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-17" value="postStop()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="510" y="185" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-18" value="停止事件" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="390" y="-5" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-19" value="Terminated" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="570" y="55" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-21" value="实例1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="420" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-22" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="550" as="sourcePoint" />
+            <mxPoint x="109.5" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-23" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="109" y="360" as="sourcePoint" />
+            <mxPoint x="109" y="415" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-24" value="重新启动" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="330" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-25" value="preRestart()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="70" y="550" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-26" value="重启事件" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="360" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-27" value="实例2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="210" y="420" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-28" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="HDU8WnkQHvnhpzkrLuiT-27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="450" as="sourcePoint" />
+            <mxPoint x="170" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-29" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="212" y="578" as="sourcePoint" />
+            <mxPoint x="212" y="488" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-30" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="259" y="548" as="sourcePoint" />
+            <mxPoint x="259" y="488" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-31" value="构造方法" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="182" y="588" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-32" value="postStart()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="222" y="548" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-33" value="实例1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="760" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-34" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="890" as="sourcePoint" />
+            <mxPoint x="99.5" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-35" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="99" y="700" as="sourcePoint" />
+            <mxPoint x="99" y="755" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-36" value="重新启动" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="70" y="670" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-37" value="postRestart()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="60" y="890" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-39" value="实例2" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="200" y="760" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-40" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" target="HDU8WnkQHvnhpzkrLuiT-39">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="790" as="sourcePoint" />
+            <mxPoint x="160" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-41" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="202" y="918" as="sourcePoint" />
+            <mxPoint x="202" y="828" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-42" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="249" y="888" as="sourcePoint" />
+            <mxPoint x="249" y="828" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-43" value="构造方法" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="172" y="928" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-44" value="postRestart()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="219" y="887" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-46" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-163" y="793" as="sourcePoint" />
+            <mxPoint x="-50" y="792.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-47" value="actorOf()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-153" y="760" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-50" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-49" y="918" as="sourcePoint" />
+            <mxPoint x="-49" y="828" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-51" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-2" y="888" as="sourcePoint" />
+            <mxPoint x="-2" y="828" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-52" value="构造方法" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-79" y="928" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-53" value="preStart()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-39" y="888" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-54" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="359" y="548" as="sourcePoint" />
+            <mxPoint x="358.5" y="488" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-55" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="358" y="358" as="sourcePoint" />
+            <mxPoint x="358" y="413" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-56" value="停止" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="329" y="328" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-57" value="postStop()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="319" y="548" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-58" value="Terminated" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="379" y="418" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="HDU8WnkQHvnhpzkrLuiT-59" value="一次重启过程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontFamily=Lucida Console;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-130" y="690" width="90" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
