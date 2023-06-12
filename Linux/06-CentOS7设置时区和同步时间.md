@@ -1,4 +1,6 @@
-## 设置时区
+## CentOS7设置时区和同步时间    
+
+### 设置时区
 第一步：查询服务器时间
 ```shell
 [root@localhost ~]# timedatectl
@@ -31,10 +33,15 @@ NTP synchronized: yes
 ```
 
 
-## 同步时间
+### 同步时间
 
 ```shell
-* * * * * /usr/sbin/ntpdate time.pool.aliyun.com >> /usr/local/time.log
+# 安装  
+yum install chrony 　　　　　　 ##CentOS7默认已安装chrony
+
+## 设置系统时钟同步
+systemctl enable chronyd
+systemctl start chronyd
 ```
 
 
