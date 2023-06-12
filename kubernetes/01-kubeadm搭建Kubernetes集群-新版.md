@@ -33,6 +33,11 @@ Docker要求CentOS系统的内核版本高于3.10，查看本页面的前提条�
 
 >CentOS7关闭Swap，请参考`https://github.com/xinzhuxiansheng/blog-notes/blob/master/Linux/07-CentOS7%E5%85%B3%E9%97%ADSwap.md`。    
 
+#### 2.4关闭selinux 
+
+>CentOS7关闭selinux，请参考`https://github.com/xinzhuxiansheng/blog-notes/blob/master/Linux/08-CentOS7%E5%85%B3%E9%97%ADselinux.md`。   
+
+#### 2.5添加Hosts映射关系   
 
 
 
