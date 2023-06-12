@@ -65,9 +65,20 @@ preStart钩子方法调用后，Actor类的新实例被创建，并且通过Prop
 
 >postRestart方法的默认实现会触发preStart函数的调用。如果确信重启时不需要调用preStart方法，则可以忽略`super. postRestart`，但大多数情况下不是这么回事。在重新启动过程中，默认调用preStart和postStop，并且在生命周期中的启动和停止事件中也会被调用，因此在这里分别添加初始化和清理代码是非常有意义的。    
 
-### 生命周期总结    
+### 生命周期汇总    
 当把所有不同的事件组合在一起，就得到了Actor 的完整的生命周期。  
 ![actorLifecycle04](images/actorLifecycle04.png)    
+
+
+### 生命周期监控    
+Actor的生命周期可以被监控。Actor终止生命周期也就结束。如果监视器决定停止Actor，它就会被终止;如果 stop方法用于停止Actor，或者收到PoisonPill消息，就会间接调用stop方法。因为preRestart方法默认情况下，使用stop方法停止 Actor的所有子Actor，因此重启时这些子Actor也会被停止。崩溃的Actor实例重启时，不会以这种方式终止。它会被从Actor系统中移除，并不会直接或间接地调用stop方法。因为ActorRef重启后仍保持活跃，Actor实例没有终止，只是换成了一个新的实例。ActorContext 提供了watch 方法监控Actor 的死亡，并提供了unwatch方法解除监控。一旦Actor调用了Actor引用的watch方法，它就变成了这个Actor引用的监控器。当被监控的Actor终止时，一条Terminated消息被送往Actor的监控器。  
+
+Terminated消息只包含死亡Actor 的 ActorRef。崩溃的Actor实例在重启时与Actor停止时的终止方式不同，就变得很有意义，否则每当Actor重启时会收到许多终止消息，这将造成无法区分Actor是最终死亡还是临时重启。     
+
+与监视相比，它只能用于父Actor对子Actor，监控可以由任何Actor进行。只要 Actor能够访问被监控的Actor 的ActorRef，它就可以简单地调用context. watch( actorRef)。当被监控的Actor终止时，它就会收到一条Terminated消息。监控和监视可以组合使用，而且很强大。     
+
+
+
 
 
 

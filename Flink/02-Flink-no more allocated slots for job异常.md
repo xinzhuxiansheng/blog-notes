@@ -1,4 +1,4 @@
-## no more allocated slots for job异常处理
+## Flink入门篇(2)-no more allocated slots for job异常处理
 
 运行模式: Flink on Native k8s application mode
 
