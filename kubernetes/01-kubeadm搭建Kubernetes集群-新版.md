@@ -31,7 +31,7 @@ Docker要求CentOS系统的内核版本高于3.10，查看本页面的前提条�
 
 #### 2.3关闭swap    
 
->CentOS7关闭Swap，请参考``。    
+>CentOS7关闭Swap，请参考`https://github.com/xinzhuxiansheng/blog-notes/blob/master/Linux/07-CentOS7%E5%85%B3%E9%97%ADSwap.md`。    
 
 
 
