@@ -52,7 +52,7 @@ c. 修改配置文件，配置文件为：/usr/local/harbor/harbor.yml
 ### 7、测试上传和下载镜像
    a. 修改各docker client配置
       $ vim /etc/docker/daemon.json
-  "insecure-registries": ["http://harbor01.io"]
+  {"insecure-registries": ["http://harbor01.io"]}
 
    b. 重启Docker
       # systemctl  restart docker
