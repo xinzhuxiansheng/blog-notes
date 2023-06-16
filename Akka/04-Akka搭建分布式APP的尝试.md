@@ -82,8 +82,54 @@ RemoteLookupProxy Actor,它的作用是与一个远程Actor通信，当`RemoteLo
 
 此时得到实际ActorRef，那么RemoteLookupProxy Actor会用新的Receive()覆盖老的逻辑，在新的Receive()会将消息转发给得到ActorRef，从而达到消息转发的效果。 不过需注意，此时得到remote ActorRef后，会让RemoteLookupProxy Actor来监听这个实际存在的Actor，那么当远程Actor异常后，RemoteLoopupProxy Actor要知道，所以在新的Receive()中，增加了`Terminated`消息，当remote Actor异常后，RemoteLookupProxy Actor的Receive()切换成**校验状态**时的逻辑。 并且也会将消息暂存到akka Stash中。 
 
-### 总结  
-RemoteLoopupProxy Actor负责了remote Actor身份确认、消息转发、异常中断等情况，这块做的比“chapter-up-and-running”模块BoxOffice Actor多的多。  
+>RemoteLoopupProxy Actor负责了remote Actor身份确认、消息转发、异常中断等情况，这块做的比“chapter-up-and-running”模块BoxOffice Actor多的多。  
+
+### 远程部署  
+这四个字，我当时看了一脸懵逼，这是什么？通过对代码了解以及调试，博主悟到，由代码构建remote Actor改成通过配置文件来通过Actor Path匹配来识别是否是remote，并且也标柱处remote地址。  
+
+下面我们来看下`frontend-remote-deplo.conf`比`frontend.conf`多了`deployment`配置项 
+```
+deployment {
+
+  /boxOffice {
+    remote = "akka://backend@0.0.0.0:2551"
+  }
+
+  /forwarder/boxOffice {
+    remote = "akka://backend@0.0.0.0:2551"
+  }
+
+}
+``` 
+
+我们看`FrontendRemoteDeplyMain`代码，发现RestApi调用的是BoxOffice Actor 而不是 RemoteLoopupProxy Actor。  
+```java
+object FrontendRemoteDeployMain extends App
+    with Startup {
+  val config = ConfigFactory.load("frontend-remote-deploy") 
+  implicit val system = ActorSystem("frontend", config) 
+
+  val api = new RestApi() {
+    val log = Logging(system.eventStream, "frontend-remote")
+    implicit val requestTimeout = configuredRequestTimeout(config)
+    implicit def executionContext = system.dispatcher
+    def createBoxOffice(): ActorRef = system.actorOf(BoxOffice.props, BoxOffice.name)
+  }
+
+  startup(api.routes)
+}
+```
+到这里，我觉得要是用过RPC做服务之间调用的哥们，差不多觉得很类似，在消息传递过程中，并不关心调用是local还是remote，只关心业务逻辑处理。到这里我想大伙也差不多明白了，这次的尝试，感觉在Java微服务中似曾相识。不过有以下几点需注意：  
+
+* RemoteLoopupProxy Actor并不是简简单单调用，并包含actorRef状态监听等，所以就有了`RemoteBoxOfficeForwarder` Actor 
+* BackendRemoteDeployMain并没有像BackendMain创建 BoxOffice Actor，那为什么还能接受 BoxOffice Actor请求？ 大大的疑问。     
+```java
+object BackendRemoteDeployMain extends App {
+  val config = ConfigFactory.load("backend")
+  val system = ActorSystem("backend", config)
+}
+```
+
 
 refer 
 1.《Akka实战》  
