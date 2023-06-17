@@ -12,10 +12,10 @@
 
 那么现在要改造成，当请求经过DSL路由时，需将消息转发给另一个进程服务的BoxOffice Actor处理。  下面是服务结构图：  
 
-![remoteApp01](images/remoteApp01.png)  
+![remoteApp01](http://img.xinzhuxiansheng.com/blogimgs/akka/remoteApp01.png)  
 
 上面结构图与RPC的服务调用过程有些类似   
-![remoteApp02](images/remoteApp02.png)  
+![remoteApp02](http://img.xinzhuxiansheng.com/blogimgs/akka/remoteApp02.png)  
 
 
 ### 改造过程    
@@ -76,7 +76,7 @@ val api = new RestApi() {
 ### RemoteLookupProxy Actor
 我们先看下`RemoteLookupProxy Actor`的流程图  
 
-![remoteApp03](images/remoteApp03.png)  
+![remoteApp03](http://img.xinzhuxiansheng.com/blogimgs/akka/remoteApp03.png)  
 
 RemoteLookupProxy Actor,它的作用是与一个远程Actor通信，当`RemoteLookupProxy Actor`启动时，它会通过Path查找一个Actor（此时得到一个`ActorSelection`实例），它还并不是真正的ActorRef，RemoteLookupProxy Actor会向ActorSelection实例，发送Idenfify消息，用来验证该Path的Actor是否存在，当Remote Actor收到消息会回复一个`ActorIdentity`消息，若该Actor存在，则返回的消息中会包含原路径和实际Actor引用。  
 
@@ -130,6 +130,7 @@ object BackendRemoteDeployMain extends App {
 }
 ```
 
+以上就介绍完了 基于akka remote的APP搭建，但这只能算是一个Demo案例。 
 
 refer 
 1.《Akka实战》  
