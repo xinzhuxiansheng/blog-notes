@@ -6,7 +6,7 @@
 
 ### 错误日志
 TaskManager Pod日志 
-![logtime01](images/logtime01.jpg)
+![logtime01](http://img.xinzhuxiansheng.com/blogimgs/flink/logtime01.jpg)
 
 
 ### 问题解决
