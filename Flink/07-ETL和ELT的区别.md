@@ -10,7 +10,11 @@
 * ETL可以执行复杂的数据转换，并且比ELT更具成本效益。    
 
 
+
+
 refer   
 1.https://www.integrate.io/blog/etl-vs-elt/ 
 2.https://zhuanlan.zhihu.com/p/618565396    
+3.https://mp.weixin.qq.com/s/XeJ9jKYIZ53XcmsQpbOqbg 
+
 
