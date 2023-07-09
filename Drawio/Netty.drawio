@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-05-08T23:22:19.909Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="sdYUpVny6VWKrpVExbD4" version="21.1.2" type="device" pages="5">
+<mxfile host="Electron" modified="2023-07-09T05:32:22.801Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="U8IQcvZfnjv4Zc0yX4V8" version="21.1.2" type="device" pages="6">
   <diagram id="dMJWB7O2TPQu927oxFyo" name="Java BIO">
-    <mxGraphModel dx="1036" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -77,7 +77,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="-DLPbSq7TOfj49nVu1aN" name="Netty模型">
-    <mxGraphModel dx="1436" dy="614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1834" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="X_Jxtlq1-nVTgKJbhQ0k-0" />
         <mxCell id="X_Jxtlq1-nVTgKJbhQ0k-1" parent="X_Jxtlq1-nVTgKJbhQ0k-0" />
@@ -533,7 +533,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="8jU2fKeu5DVJvezdr_0g" name="第 4 页">
-    <mxGraphModel dx="1036" dy="1783" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="2013" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -578,33 +578,83 @@
     </mxGraphModel>
   </diagram>
   <diagram id="7YWtjtXps3aLpkQalhT3" name="文件上传案例">
-    <mxGraphModel dx="1034" dy="612" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="zj54Fy7OmxK8jb4clWkq-1" value="请求上传" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="zj54Fy7OmxK8jb4clWkq-1" value="请求上传" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="260" y="140" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="zj54Fy7OmxK8jb4clWkq-2" value="实现大概流程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="zj54Fy7OmxK8jb4clWkq-2" value="实现大概流程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="130" y="100" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="zj54Fy7OmxK8jb4clWkq-4" value="创建文件" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="zj54Fy7OmxK8jb4clWkq-4" value="创建文件" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="260" y="250" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="zj54Fy7OmxK8jb4clWkq-5" value="将客户端数据写入本地磁盘" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" vertex="1" parent="1">
+        <mxCell id="zj54Fy7OmxK8jb4clWkq-5" value="将客户端数据写入本地磁盘" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontSize=15;fontFamily=Lucida Console;" parent="1" vertex="1">
           <mxGeometry x="225" y="360" width="220" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="zj54Fy7OmxK8jb4clWkq-6" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" edge="1" parent="1">
+        <mxCell id="zj54Fy7OmxK8jb4clWkq-6" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="334.5" y="190" as="sourcePoint" />
             <mxPoint x="335" y="240" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="zj54Fy7OmxK8jb4clWkq-7" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" edge="1" parent="1">
+        <mxCell id="zj54Fy7OmxK8jb4clWkq-7" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=15;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="334.5" y="300" as="sourcePoint" />
             <mxPoint x="335" y="350" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="fNy6w7DwumnSiph7hIC3" name="第 6 页">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-1" value="Client" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="140" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-2" value="Server" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Lucida Console;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="530" y="120" width="140" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-3" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.184;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="f7-0t3wRTKnsoMGcMLGQ-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="190" as="sourcePoint" />
+            <mxPoint x="370" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-4" value="建立连接" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="160" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-5" value="" style="endArrow=classic;html=1;rounded=0;exitX=-0.014;exitY=0.321;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="f7-0t3wRTKnsoMGcMLGQ-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="200" as="sourcePoint" />
+            <mxPoint x="260" y="242" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-6" value="连接成功" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="216" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-7" value="" style="endArrow=classic;html=1;rounded=0;entryX=-0.007;entryY=0.608;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="f7-0t3wRTKnsoMGcMLGQ-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="350" as="sourcePoint" />
+            <mxPoint x="390" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-8" value="发送消息" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="324" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-9" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="f7-0t3wRTKnsoMGcMLGQ-2" target="f7-0t3wRTKnsoMGcMLGQ-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="360" as="sourcePoint" />
+            <mxPoint x="270" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7-0t3wRTKnsoMGcMLGQ-10" value="返回消息" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="379" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
