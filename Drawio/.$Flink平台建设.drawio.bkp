@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-07-26T16:15:28.605Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="J7HiqvZSmWoteJaucvMF" version="21.6.5" type="device" pages="9">
+<mxfile host="Electron" modified="2023-07-26T07:01:18.276Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="PkFEpEhgmq3Rn9cedU4R" version="21.6.5" type="device" pages="9">
   <diagram id="qdw6wU8q7zvKth3_8u86" name="表结构">
     <mxGraphModel dx="1354" dy="1410" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -673,7 +673,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="Bnm6MKZe-yqQA6MwjJ6S" name="Kafka Schema转Flink DataType">
-    <mxGraphModel dx="1434" dy="805" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
