@@ -64,4 +64,3 @@ kubectl get all -n flink
 
 6.登录Dashboard查看Flink Kubernetes Operator启动日志  
 https://k8s01:32469/#/login   
-

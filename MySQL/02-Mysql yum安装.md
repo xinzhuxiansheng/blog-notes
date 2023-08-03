@@ -1,3 +1,22 @@
+## CentOS7 安装 MySQL8  
+
+### 卸载系统自带 MySQL（MariaDB）   
+```shell
+# 查看安装过的 MySQL和MariaDB
+yum list installed | grep mariadb && yum list installed | grep mysql
+
+# 卸载
+yum -y remove mariadb-libs.x86_64
+```
+
+### 下载 MySQL 安装包   
+下载地址： https://dev.mysql.com/downloads/mysql/   
+
+![centosinstall01](images/centosinstall01.png)      
+
+
+
+
 
 1. 下载mysql rpm
 ```shell
