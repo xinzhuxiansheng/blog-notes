@@ -1,0 +1,142 @@
+<mxfile host="Electron" modified="2023-08-12T01:50:47.167Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.5 Chrome/114.0.5735.243 Electron/25.3.1 Safari/537.36" etag="bID3TvuZbNBlaZClcu0P" version="21.6.5" type="device" pages="4">
+  <diagram name="第 1 页" id="kAdJjKpbqvwE1rkGfX6-">
+    <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-1" value="Openjob-server#main()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="270" y="130" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="-10" y="330" width="400" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-4" value="Openjob-worker-core" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="120" y="400" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-5" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="420" y="330" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-6" value="Openjob-worker-core" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="460" y="400" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-7" value="openjob-agent-java&lt;br&gt;https://github.com/open-job/openjob-agent-java" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="50" y="350" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-8" value="参考 simple 项目集成到 普通java项目或者 spring boot项目&lt;br&gt;https://github.com/open-job/openjob-samples" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="440" y="350" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-9" value="" style="endArrow=classic;html=1;rounded=0;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="320" as="sourcePoint" />
+            <mxPoint x="340" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-10" value="" style="endArrow=classic;html=1;rounded=0;shadow=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="320" as="sourcePoint" />
+            <mxPoint x="410" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-11" value="Worker" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="10" y="290" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Dz3wW92SCQmVYfkEo5oS-12" value="Worker" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="710" y="290" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="q-znuxv71KVE1naicGJs" name="第 2 页">
+    <mxGraphModel dx="1354" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-1" value="登录日志" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-2" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="60" y="159.5" as="sourcePoint" />
+            <mxPoint x="130" y="159.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-3" value="id，登录账号，登录时间，登录ip" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="140" y="145" width="230" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-4" value="POST http://localhost:8080/admin/user/login" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-210" y="220" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-5" value="操作日志" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-6" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="60" y="369.5" as="sourcePoint" />
+            <mxPoint x="130" y="369.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-7" value="日志类型（登录日志，操作日志）&lt;br style=&quot;font-size: 13px;&quot;&gt;用户信息（用户名，用户ID）&lt;br style=&quot;font-size: 13px;&quot;&gt;操作描述（登录，创建job）&lt;br style=&quot;font-size: 13px;&quot;&gt;操作时间（）&lt;br style=&quot;font-size: 13px;&quot;&gt;操作结果" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="140" y="317.5" width="320" height="105" as="geometry" />
+        </mxCell>
+        <mxCell id="nCvRQLFXcFn5v2MrUrTA-8" value="定义 LogRecordAnnotation 注解" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="470" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XgF0JKJPVPfWuDrOPNu3-1" value="operator_log&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;id&lt;br style=&quot;font-size: 13px;&quot;&gt;module&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;type&amp;nbsp; &amp;nbsp;操作类型，eg:&amp;nbsp; 增删改查&lt;br style=&quot;font-size: 13px;&quot;&gt;bizNo&amp;nbsp; 业务编号，便于查询&lt;span style=&quot;white-space: pre; font-size: 13px;&quot;&gt;&#x9;&lt;/span&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;success 成功日志模板&lt;br style=&quot;font-size: 13px;&quot;&gt;fail&amp;nbsp; 操作失败时的模板内容&lt;br style=&quot;font-size: 13px;&quot;&gt;deail&amp;nbsp; 额外的记录信息&lt;br style=&quot;font-size: 13px;&quot;&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="610" width="230" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="XgF0JKJPVPfWuDrOPNu3-3" value="增加一个菜单 “审计日志”&lt;br&gt;包含2个子菜单：&lt;br&gt;登录日志&lt;br&gt;操作日志" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="520" width="230" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7TOjH13yvt648Gco_xbr" name="第 3 页">
+    <mxGraphModel dx="2234" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="apOCyWeVEpO9gsZABOVm-1" value="1. 增加一个菜单 “审计日志”&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;包含2个子菜单：&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;“登录日志”&lt;/span&gt;&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;“操作日志”&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-450" y="-200" width="210" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="apOCyWeVEpO9gsZABOVm-2" value="登录日志表 login_log&lt;br&gt;&lt;br&gt;id&lt;br&gt;user_name&lt;br&gt;createtime" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-467" y="30" width="245" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="apOCyWeVEpO9gsZABOVm-5" value="操作日志表 operator_log&lt;br&gt;&lt;br&gt;id&lt;br&gt;user_name&lt;br&gt;createtime&lt;br&gt;module&amp;nbsp; &amp;nbsp;模块 ，区分不同业务模块&lt;br&gt;type 操作类型&amp;nbsp; 增删改查&lt;br&gt;bizNo&amp;nbsp; 业务编号&lt;br&gt;summary&amp;nbsp; &amp;nbsp; &amp;nbsp; 概要，例如 用户「openjob」新增了新的命名空间「namespace01」" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="30" width="480" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="apOCyWeVEpO9gsZABOVm-6" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-345" y="110" as="sourcePoint" />
+            <mxPoint x="-345" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="apOCyWeVEpO9gsZABOVm-7" value="登录时，直接插入 login_log 表" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-450" y="200" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="apOCyWeVEpO9gsZABOVm-8" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-280" y="-80" as="sourcePoint" />
+            <mxPoint x="-50" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="apOCyWeVEpO9gsZABOVm-9" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-360" y="-80" as="sourcePoint" />
+            <mxPoint x="-360" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="apOCyWeVEpO9gsZABOVm-11" value="log" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=40;tabHeight=14;tabPosition=left;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="205" width="70" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="LchjsoPwWqxV0vt9JMyx" name="第 4 页">
+    <mxGraphModel dx="954" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

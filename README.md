@@ -9,7 +9,11 @@ Log
 * 2023.02.26 开发 "scalahttpserver" https://github.com/xinzhuxiansheng/scalahttpserver
 涉及React、play-scala-react-seed
 
-* 2023.03.20 学习《Functional Programming，Simplified》:(Scala edition)
+* 2023.03.20 学习《Functional Programming，Simplified》:(Scala edition)     
+
+* 2023.07 下旬 学习《Akka in Action, Second Edition》   
+
+* 2023.08.初 学习《The Self-Service Data Roadmap Democratize Data and Reduce Time to Insight》  
 
 
 ### 分布式
