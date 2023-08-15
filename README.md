@@ -13,7 +13,9 @@ Log
 
 * 2023.07 下旬 学习《Akka in Action, Second Edition》   
 
-* 2023.08.初 学习《The Self-Service Data Roadmap Democratize Data and Reduce Time to Insight》  
+* 2023.08.初 学习《The Self-Service Data Roadmap Democratize Data and Reduce Time to Insight》      
+
+* 2023.08.08 学习 Github Openjob项目    
 
 
 ### 分布式
