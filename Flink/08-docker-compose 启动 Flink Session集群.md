@@ -18,6 +18,8 @@ services:
 
   taskmanager:
     image: flink:1.14.6-scala_2.12-java8
+    extra_hosts:
+      - "yzhou.com:192.168.0.201"
     depends_on:
       - jobmanager
     command: taskmanager
