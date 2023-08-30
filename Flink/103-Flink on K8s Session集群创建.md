@@ -1,7 +1,7 @@
 ## Flink K8s Session 集群创建 
 
 ### 创建 Session集群  
-1.编写 session-deployment-demo01.yaml 
+1.编写 session-deployment-only.yaml 
 ```
 # Flink Session集群
 apiVersion: flink.apache.org/v1beta1

@@ -1,0 +1,55 @@
+<mxfile host="Electron" modified="2023-08-30T01:36:33.543Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="49HpS8CUuEgGW6Sw33X3" version="21.6.8" type="device">
+  <diagram name="第 1 页" id="uIxCYlsGSbbOkvK6Xd5x">
+    <mxGraphModel dx="2261" dy="810" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="LjBSys6c2UfRr27pgXpf-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="LjBSys6c2UfRr27pgXpf-1" target="LjBSys6c2UfRr27pgXpf-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-1" value="腾讯云机器" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-2" value="腾讯云 K8s集群" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="420" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-4" value="Neko" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#82b366;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="160" y="250" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-5" value="" style="endArrow=classic;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="170" as="sourcePoint" />
+            <mxPoint x="260" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="LjBSys6c2UfRr27pgXpf-7" target="LjBSys6c2UfRr27pgXpf-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-7" value="本地 Mac 开发机" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-8" value="Ingress" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="510" y="230" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-10" value="公网IP" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="415" y="106" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-11" value="配置 腾讯云 K8s 外网Hosts+Ingress 域名" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="140" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-12" value="Ingress-nginx(NodePort) 部署的Pod IP:&amp;nbsp; 192.168.0.100" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="520" y="310" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-13" value="内网IP： 192.168.0.101" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="310" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-14" value="配置 Hosts" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="575" y="220" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="LjBSys6c2UfRr27pgXpf-15" value="公网IP" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="190" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
