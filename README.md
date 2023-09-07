@@ -15,7 +15,11 @@ Log
 
 * 2023.08.初 学习《The Self-Service Data Roadmap Democratize Data and Reduce Time to Insight》      
 
-* 2023.08.08 学习 Github Openjob项目    
+* 2023.08.08 学习 Github Openjob项目 
+
+* 2023.08.30 实战 Hazelcast 构建 Spring Boot Cluster模式    
+
+* 2023.09.04 学习《Calcite数据管理实战》
 
 
 ### 分布式
