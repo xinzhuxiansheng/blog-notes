@@ -176,4 +176,13 @@ log4j.appender.stdout.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
 ```
 
 5.搭建Kafka 
-此处可参考
+此处可参考该篇内容:  https://github.com/xinzhuxiansheng/blog-notes/blob/master/Kafka/13-Docker%E5%AE%89%E8%A3%85Kafka.md  
+
+6.启动 main()方法，使用Shell 模拟Topic “yzhoutp01”写入，模拟Topic “yzhoutp02”消费   
+模拟数据为： {"vid":"1001","uid":"abc001","start_time":1665367200000,"country":"US"}
+
+消费Topic “yzhoutp02” 得到: 
+{"vid":"1001","uid":"abc001","start_time":1665367200000,"area":"A US"}
+
+该案例，完成。  
+
