@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-08-18T16:53:41.518Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="X4vcdijUR0KYYFyZLfd0" version="21.6.8" type="device" pages="7">
+<mxfile host="Electron" modified="2023-09-18T01:13:56.827Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.7.5 Chrome/114.0.5735.289 Electron/25.8.1 Safari/537.36" etag="tCu43uqKMoPNP2Ex9X5j" version="21.7.5" type="device" pages="7">
   <diagram name="部署结构图" id="kAdJjKpbqvwE1rkGfX6-">
-    <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1354" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -47,7 +47,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="q-znuxv71KVE1naicGJs" name="第 2 页">
-    <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1354" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -381,13 +381,16 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="2xho76W-x_eaZ2IgXvhG" name="第 7 页">
-    <mxGraphModel dx="1354" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="2xho76W-x_eaZ2IgXvhG" name="Master HA">
+    <mxGraphModel dx="1354" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="r9nxVaPiNIxiCTTsN-QK-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-230" y="40" width="120" height="60" as="geometry" />
+        <mxCell id="uTONiRTOah-e0WxdQE2R-2" value="Master" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-220" y="70" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uTONiRTOah-e0WxdQE2R-3" value="Worker" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-220" y="300" width="120" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

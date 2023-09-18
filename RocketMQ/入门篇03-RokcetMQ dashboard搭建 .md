@@ -1,4 +1,3 @@
-
 ## RocketMQ dashboard搭建
 
 >因仓库的master分支将RocketMQ版本升级到5.1.0后，当RocketMQ Broker集群为4.9.5, 会导致Topic页面操作出现不兼容，现在将原master分支回退到 86bdb0636494bc23751f5df90fdb56a87b928ca7 commit(当时RocketMQ版本为4.9.3)， 如果希望兼容 4.x版本的RocketMQ，建议大家下载`https://github.com/xinzhuxiansheng/rocketmq-dashboard/tree/yzhou_master_493`
