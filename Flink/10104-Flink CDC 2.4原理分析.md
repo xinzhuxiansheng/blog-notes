@@ -292,7 +292,10 @@ private void analyzeTable(MySqlPartition partition, TableId tableId) {
 
 `MySqlChunkSplitter#trySplitAllEvenlySizedChunks()` 
 ![flinkcdc2analyse09](images/flinkcdc2analyse09.png)    
-chunkSize等于`scan.incremental.snapshot.chunk.size`，默认大小是8096,这里的单位是条数。      
+chunkSize等于`scan.incremental.snapshot.chunk.size`，默认大小是8096,这里的单位是条数。          
+
+示例，若A表有3数据，将 scan.incremental.snapshot.chunk.size 设置为2 ，我们看 chunks的分割列表情况 ：    
+![flinkcdc2analyse11](images/flinkcdc2analyse11.png)        
 
 ```java
 private Optional<List<MySqlSnapshotSplit>> trySplitAllEvenlySizedChunks(
@@ -408,7 +411,127 @@ public List<ChunkRange> splitEvenlySizedChunks(
 }
 ```
 
-现在回到 `MySqlChunkSplitter#splitChunks()` 通过上面的 `trySplitAllEvenlySizedChunks()` 可知道 split 的规则，若是均匀分布则直接返回分割段集合`List<MySqlSnapshotSplit>` ,若是非均匀分布，那又如何处理呢？   
+现在回到 `MySqlChunkSplitter#splitChunks()` 通过上面的 `trySplitAllEvenlySizedChunks()` 可知道 split 的规则，若是均匀分布则直接返回分割段集合`List<MySqlSnapshotSplit>` ,若是非均匀分布，那又如何处理呢？       
+
+```java
+// splitChunks()的部分片段, 处理非均匀分布场景  
+synchronized (lock) {
+    this.currentSplittingTableId = tableId;
+    this.nextChunkStart = ChunkSplitterState.ChunkBound.START_BOUND;
+    this.nextChunkId = 0;
+    return Collections.singletonList(
+            splitOneUnevenlySizedChunk(partition, tableId));
+}
+``` 
+
+`MySqlChunkSplitter#splitOneUnevenlySizedChunk()` 正如它的方法名字那样，每次只分割1个chunk， 它主要负责处理非均匀分布，我们来了解在它的处理逻辑，   
+![flinkcdc2analyse12](images/flinkcdc2analyse12.png)
+
+1.首先 获取下一个 chunkEnd，它的sql示例： SELECT MAX(`name`) FROM (SELECT `name` FROM `yzhou_test`.`users` WHERE `name` >= ? ORDER BY `name` ASC LIMIT 8096) AS T，     
+2.如果 如果chunkStart = 下一个chunkEnd，则表示 当前Chunk已分配结束，接下来使用 SELECT MIN(%s) FROM %s WHERE %s > ?， 将下一段Chunk的min 作为 chunkstart 再执行 上面的sql。      
+这里特别注意， 查询下一次的chunkEnd Max(`name`) 里面总是包含 limit chunksize， 所以 SELECT MIN(%s) FROM %s WHERE %s > ? 求 最小值，能跳到下一个 limit 分页。    
+3.如果 下一个chunkEnd >=max,表示超过边界值 则 返回 null,    
+4.返回 chunk    
+
+因为查询下一个 chunkEnd的SQL 总是包含Limit chunksize，所以 在非均匀分布的情况下，是使用limit 来保障数据均匀分布。       
+
+>但这里有个issue，请大家mark一下 ：https://github.com/ververica/flink-cdc-connectors/issues/2489 。  后续再讨论 MySQL不同编码在的排序方式    
+
+```java
+/** Generates one snapshot split (chunk) for the give table path. */
+private MySqlSnapshotSplit splitOneUnevenlySizedChunk(MySqlPartition partition, TableId tableId)
+        throws SQLException {
+    final int chunkSize = sourceConfig.getSplitSize();
+    final Object chunkStartVal = nextChunkStart.getValue();
+    LOG.info(
+            "Use unevenly-sized chunks for table {}, the chunk size is {} from {}",
+            tableId,
+            chunkSize,
+            nextChunkStart == ChunkSplitterState.ChunkBound.START_BOUND
+                    ? "null"
+                    : chunkStartVal.toString());
+    // we start from [null, min + chunk_size) and avoid [null, min)
+    Object chunkEnd =
+            nextChunkEnd(
+                    jdbcConnection,
+                    nextChunkStart == ChunkSplitterState.ChunkBound.START_BOUND
+                            ? minMaxOfSplitColumn[0]
+                            : chunkStartVal,
+                    tableId,
+                    splitColumn.name(),
+                    minMaxOfSplitColumn[1],
+                    chunkSize);
+    // may sleep a while to avoid DDOS on MySQL server
+    maySleep(nextChunkId, tableId);
+    if (chunkEnd != null && ObjectUtils.compare(chunkEnd, minMaxOfSplitColumn[1]) <= 0) {
+        nextChunkStart = ChunkSplitterState.ChunkBound.middleOf(chunkEnd);
+        return createSnapshotSplit(
+                jdbcConnection,
+                partition,
+                tableId,
+                nextChunkId++,
+                splitType,
+                chunkStartVal,
+                chunkEnd);
+    } else {
+        currentSplittingTableId = null;
+        nextChunkStart = ChunkSplitterState.ChunkBound.END_BOUND;
+        return createSnapshotSplit(
+                jdbcConnection,
+                partition,
+                tableId,
+                nextChunkId++,
+                splitType,
+                chunkStartVal,
+                null);
+    }
+}
+```
+
+在介绍 splitOneUnevenlySizedChunk() 提到 它每次只拉取1个chunk，与均匀分布不同，均匀分布是直接返回 List<Chunk>集合，那非均匀分布分割table又是 如何停止 ？        
+
+我们现在回到 `MySqlSnapshotSplitAssigner#splitTable()` 里面用do while(hasNextChunk())来遍历处理，返回chunk集合， 可这里分两种split， 均匀分布和非均匀， 其中针对 均匀分布 直接遍历1次即可完成chunk集群， 而对 非均匀分布 是每次遍历只分割1个chunk， 我们来看 hasNextChunk()的判断逻辑：             
+```
+@Override
+public boolean hasNextChunk() {
+    return currentSplittingTableId != null;
+}
+```
+
+![flinkcdc2analyse13](images/flinkcdc2analyse13.png)    
+
+我们再把思绪拉回到 `splitChunks()`方法，当我们根据splitType得到是非均匀分布时，才会调用以下代码：       
+```java
+// splitChunks()的部分片段, 处理非均匀分布场景  
+synchronized (lock) {
+    this.currentSplittingTableId = tableId;
+    this.nextChunkStart = ChunkSplitterState.ChunkBound.START_BOUND;
+    this.nextChunkId = 0;
+    return Collections.singletonList(
+            splitOneUnevenlySizedChunk(partition, tableId));
+```
+
+所以 当对非均匀分布的table进行分割时，会增加一个字段进行标识 this.currentSplittingTableId = tableId; 所以 当每次分割结束时，判断是否结束，若结束重新将 currentSplittingTableId = null； 你可回头再看 splitOneUnevenlySizedChunk() 但达到边界值，又重新赋值后再返回：        
+```java
+// splitOneUnevenlySizedChunk 片段 
+currentSplittingTableId = null;
+nextChunkStart = ChunkSplitterState.ChunkBound.END_BOUND;
+return createSnapshotSplit(
+        jdbcConnection,
+        partition,
+        tableId,
+        nextChunkId++,
+        splitType,
+        chunkStartVal,
+        null);
+```
+
+
+以上 就完成了对Table的分割，将chunk集合存储到 `MySqlSnapshotSplitAssigner.List<MySqlSchemalessSnapshotSplit> remainingSplits;` 
+
+
+
+https://github.com/ververica/flink-cdc-connectors/issues/2489
 
 
 
