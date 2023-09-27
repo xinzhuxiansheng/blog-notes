@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-09-27T15:16:07.702Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.7.5 Chrome/114.0.5735.289 Electron/25.8.1 Safari/537.36" etag="2OYYg9RpuaWV7OktwjVt" version="21.7.5" type="device" pages="16">
+<mxfile host="Electron" modified="2023-09-27T15:47:47.812Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.7.5 Chrome/114.0.5735.289 Electron/25.8.1 Safari/537.36" etag="RrW8as3I1RUvASzN5k6l" version="21.7.5" type="device" pages="16">
   <diagram id="KU9967yDpA6ImBzqjGFY" name="flink.partition-discovery.interval-millis工作原理">
     <mxGraphModel dx="2074" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1262,7 +1262,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="koz-bvFRgvZQQ9la6aLA" name="CDC 03 MySQL SplitTask">
-    <mxGraphModel dx="4234" dy="809" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="4686" dy="843" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1607,6 +1607,11 @@
         <mxCell id="sNV94cJS4pCpDoRuQvK1-55" value="4. backfillBinlogReadTask.execute()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="1350" y="1897" width="250" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="CPb3IWZZOH03QsYHIPLW-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="sNV94cJS4pCpDoRuQvK1-57">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1475" y="2140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="sNV94cJS4pCpDoRuQvK1-57" value="MySqlStreamingChangeEventSource#execute()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="1325" y="2017" width="300" height="60" as="geometry" />
         </mxCell>
@@ -1821,6 +1826,24 @@
         </mxCell>
         <mxCell id="CPb3IWZZOH03QsYHIPLW-14" value="createReader()" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="-1411.75" y="400" width="154.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CPb3IWZZOH03QsYHIPLW-15" value="LW" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1330" y="2160" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CPb3IWZZOH03QsYHIPLW-16" value="ChangeEventQueue&amp;lt;DataChangeEvent&amp;gt; queue" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="970" y="2175" width="310" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CPb3IWZZOH03QsYHIPLW-17" value="SnapshotChange" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="2160" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CPb3IWZZOH03QsYHIPLW-18" value="HW" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1570" y="2160" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CPb3IWZZOH03QsYHIPLW-19" value="Binlog&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1630" y="2160" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CPb3IWZZOH03QsYHIPLW-21" value="&lt;meta charset=&quot;utf-8&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Comic Sans MS&amp;quot;; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;BINLOG_END&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="2160" width="100" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

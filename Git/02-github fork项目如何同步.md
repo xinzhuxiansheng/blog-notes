@@ -17,4 +17,6 @@ git push --tags
 
 ### 同步分支
 
-这里通过checkout 克隆出upstream分支，然后将分支push到origin
+这里通过checkout 克隆出upstream分支，然后将分支push到origin 
+
+

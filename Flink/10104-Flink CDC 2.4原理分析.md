@@ -122,7 +122,7 @@ registerReader();
 
 ![flinkcdc2analyse05](images/flinkcdc2analyse05.png)    
 
-#### 分割数据   
+### 分割数据   
 
 ![flinkcdc2analyse06](images/flinkcdc2analyse06.png)    
 `MySqlSnapshotSplitAssigner#open()`  
@@ -545,7 +545,7 @@ return createSnapshotSplit(
 
 
 
-#### 分配任务       
+### 分配任务       
 上面分析，已经帮我们完成2个环节 
 1.获取已注册的Readers
 2.获取待分配的Chunks    
@@ -557,7 +557,144 @@ return createSnapshotSplit(
 
 
 ### Reader 处理数据 
-该章节主要讲解 Reader处理全量+增量的逻辑。  
+>该章节主要讲解 Reader处理全量+增量的逻辑         
+
+`MySqlSource`是 flink-connector-mysql-cdc的核心类，在`Separating Work Discovery from Reading`章节中创建`MySqlSourceEnumerator`的时候提到它 ，`MySqlSourceReader`(work)调用 `MySqlSource#createReader()`方法创建的。 下面我们看下**Reader处理入口**的方法调用逻辑：  
+
+![flinkcdc2Reader01](images/flinkcdc2Reader01.png)  
+
+从任务队列中领取SplitTask任务，调用线程run()执行 `MySqlSplitReader#fetch()`方法， 这里大家先忽略，SplitTask多线程模型，我自己也没深入了解，至少这不影响分析数据读取。 fetch()会调用 `pollSplitRecords()`, 该方法非常重要。  
+我们还是拿上面的sql案例，来阅读源码：   
+```sql
+CREATE TABLE `yzhou_source_yzhou_test01`
+(
+    `id`      INT    NOT NULL COMMENT '',
+    `name`    STRING NOT NULL COMMENT '',
+    `address` STRING COMMENT '',
+    PRIMARY KEY (id) NOT ENFORCED
+)
+    WITH
+        (
+        'connector' = 'mysql-cdc',
+        'hostname' = '127.0.0.1',
+        'port' = '3306',
+        'username' = 'root',
+        'password' = '12345678',
+        'database-name' = 'yzhou_test',
+        'table-name' = 'users',
+        'server-id' = '5401',
+        'scan.startup.mode' = 'initial'
+        );
+
+select * from yzhou_source_yzhou_test01;
+```
+
+`MySqlSplitReader#pollSplitRecords()`   
+```java
+private MySqlRecords pollSplitRecords() throws InterruptedException {
+    Iterator<SourceRecords> dataIt;
+    if (currentReader == null) {
+        // (1) Reads binlog split firstly and then read snapshot split
+        if (binlogSplits.size() > 0) {
+            // the binlog split may come from:
+            // (a) the initial binlog split
+            // (b) added back binlog-split in newly added table process
+            MySqlSplit nextSplit = binlogSplits.poll();
+            currentSplitId = nextSplit.splitId();
+            currentReader = getBinlogSplitReader();
+            currentReader.submitSplit(nextSplit);
+        } else if (snapshotSplits.size() > 0) {
+            MySqlSplit nextSplit = snapshotSplits.poll();
+            currentSplitId = nextSplit.splitId();
+            currentReader = getSnapshotSplitReader();
+            currentReader.submitSplit(nextSplit);
+        } else {
+            LOG.info("No available split to read.");
+        }
+        dataIt = currentReader.pollSplitRecords();
+        return dataIt == null ? finishedSplit() : forRecords(dataIt);
+    } else if (currentReader instanceof SnapshotSplitReader) {
+        // (2) try to switch to binlog split reading util current snapshot split finished
+        dataIt = currentReader.pollSplitRecords();
+        if (dataIt != null) {
+            // first fetch data of snapshot split, return and emit the records of snapshot split
+            MySqlRecords records;
+            if (context.isHasAssignedBinlogSplit()) {
+                records = forNewAddedTableFinishedSplit(currentSplitId, dataIt);
+                closeSnapshotReader();
+                closeBinlogReader();
+            } else {
+                records = forRecords(dataIt);
+                MySqlSplit nextSplit = snapshotSplits.poll();
+                if (nextSplit != null) {
+                    currentSplitId = nextSplit.splitId();
+                    currentReader.submitSplit(nextSplit);
+                } else {
+                    closeSnapshotReader();
+                }
+            }
+            return records;
+        } else {
+            return finishedSplit();
+        }
+    } else if (currentReader instanceof BinlogSplitReader) {
+        // (3) switch to snapshot split reading if there are newly added snapshot splits
+        dataIt = currentReader.pollSplitRecords();
+        if (dataIt != null) {
+            // try to switch to read snapshot split if there are new added snapshot
+            MySqlSplit nextSplit = snapshotSplits.poll();
+            if (nextSplit != null) {
+                closeBinlogReader();
+                LOG.info("It's turn to switch next fetch reader to snapshot split reader");
+                currentSplitId = nextSplit.splitId();
+                currentReader = getSnapshotSplitReader();
+                currentReader.submitSplit(nextSplit);
+            }
+            return MySqlRecords.forBinlogRecords(BINLOG_SPLIT_ID, dataIt);
+        } else {
+            // null will be returned after receiving suspend binlog event
+            // finish current binlog split reading
+            closeBinlogReader();
+            return finishedSplit();
+        }
+    } else {
+        throw new IllegalStateException("Unsupported reader type.");
+    }
+}
+```
+
+当我们将添加 `'scan.startup.mode' = 'initial'`参数，Flink CDC会先进行全量读取，所以 会先进去 `else if (snapshotSplits.size() > 0) {` 阶段， 接着处理以下内容：  
+```java
+MySqlSplit nextSplit = snapshotSplits.poll();
+currentSplitId = nextSplit.splitId();
+currentReader = getSnapshotSplitReader();
+currentReader.submitSplit(nextSplit);
+```
+读取剩余的Chunk（nextSplit），getSnapshotSplitReader() 会创建2个非常重要的对象，1.StatefulTaskContext statefulTaskContext,2.SnapshotSplitReader。具体作用会在后面介绍 。    
+
+>注意，请一定记住 MySqlSplitReader针对不同阶段，会创建不同阶段的Reader对象来进行数据读取，不要弄混淆。 若是binlog阶段，创建的是 `BinlogSplitReader`, 若是snapshot阶段，创建的是 `SnapshotSplitReader`
+![flinkcdc2Reader02](images/flinkcdc2Reader02.png)  
+
+>目前处理全量读取阶段   
+在`SnapshotSplitReader#submitSplit()` 使用单线程池来异步执行全量阶段的读取，并且将读取逻辑封装到`MySqlSnapshotSplitReadTask`(类名长的差不多，注意后几位，例如Task，Reader), 所以接下来的重点就是看`MySqlSnapshotSplitReadTask`  
+```java
+// ...
+executorService.execute(
+        () -> {
+            try {
+                currentTaskRunning = true;
+                // execute snapshot read task
+                final SnapshotSplitChangeEventSourceContextImpl sourceContext =
+                        new SnapshotSplitChangeEventSourceContextImpl();
+                SnapshotResult<MySqlOffsetContext> snapshotResult =
+                        splitSnapshotReadTask.execute(
+                                sourceContext,
+                                statefulTaskContext.getMySqlPartition(),
+                                statefulTaskContext.getOffsetContext());
+// ...
+```
+
+**MySqlSnapshotSplitReadTask**  
 
 `MySqlSnapshotSplitReadTask#doExecute()`        
 
@@ -631,12 +768,117 @@ protected SnapshotResult<MySqlOffsetContext> doExecute(
 LOG.info("Snapshot step 2 - Snapshotting data");
 createDataEvents(ctx, snapshotSplit.getTableId());
 ```
+先按照chunk边界通过jdbc查出数据，while (rs.next())遍历 ResultSet集合，每条数据转换成Object数组 Row，在通过 debezium的 `SnapshotChangeRecordEmitter` + `BufferingSnapshotChangeRecordReceiver` 读取表中的快照数据。 请特别注意 下面逻辑：    
+```java
+changeRecordEmitter.emitChangeRecords(dataCollectionSchema, new Receiver<P>() {
+
+    @Override
+    public void changeRecord(P partition,
+                                DataCollectionSchema schema,
+                                Operation operation,
+                                Object key, Struct value,
+                                OffsetContext offset,
+                                ConnectHeaders headers)
+            throws InterruptedException {
+        eventListener.onEvent(partition, dataCollectionSchema.id(), offset, key, value, operation);
+        receiver.changeRecord(partition, dataCollectionSchema, operation, key, value, offset, headers);
+    }
+});
+```
+这与CDC 数据变更不同，此时 eventListener 定义监听事件类型，receiver来处理监听事件的数据。 BufferingSnapshotChangeRecordReceiver只会处理已存在表中的数据，对数据变更事件不做任何处理。    
+
+>`SnapshotChangeRecordEmitter` 是 Debezium 内部的一个组件，用于处理数据库的初始快照事件。当你启动一个 Debezium 连接器并需要从数据库的当前状态开始捕获变更，而不是从某个历史点开始，Debezium 会执行一个称为 "快照" 的操作。这个快照操作会读取数据库的所有行（或配置的表的所有行）并生成对应的事件。
+这里是该组件在 Debezium 中的用途：
+1. **初始快照生成**：当你第一次启动 Debezium 连接器，或者当连接器配置为执行快照操作时，`SnapshotChangeRecordEmitter` 被用来生成每一行数据的记录事件。这些事件代表了表的当前状态。   
+2. **处理大量数据**：生成快照可能涉及到处理数据库中的大量数据。`SnapshotChangeRecordEmitter` 被设计成可扩展的，能够高效地处理大数据集。 
+3. **数据变更记录的一致性**：在快照过程中，`SnapshotChangeRecordEmitter` 会确保产生的记录与正在发生的数据库变更（通过 binlog 或其他机制）保持一致。这意味着，即使在快照过程中数据库状态发生了变更   
 
 
+此时`receiver.changeRecord`会将 表中数据 写入 queue中。 
+
+![flinkcdc2Reader03](images/flinkcdc2Reader03.png)  
 
 
+**step03.**通过`SHOW MASTER STATUS` 查询当前的binlog offset , 并标记为 `highWatermark`  
 
 
+目前queue已经存放的数据为： 
+![flinkcdc2Reader04](images/flinkcdc2Reader04.png)  
+
+我们现在回到 `SnapshotSplitReader#submitSplit()`， 当snapshot阶段读取完后，会比较 context的lowwatermark,highwatermark的大小，若相等则不存在 binlog读取，直接在queue追加一个 BINLOG_END Record。 
+![flinkcdc2Reader05](images/flinkcdc2Reader05.png)      
+
+```java
+SnapshotResult<MySqlOffsetContext> snapshotResult =
+        splitSnapshotReadTask.execute(
+                sourceContext,
+                statefulTaskContext.getMySqlPartition(),
+                statefulTaskContext.getOffsetContext());
+
+final MySqlBinlogSplit backfillBinlogSplit =
+        createBackfillBinlogSplit(sourceContext);
+// optimization that skip the binlog read when the low watermark equals high
+// watermark
+final boolean binlogBackfillRequired =
+        backfillBinlogSplit
+                .getEndingOffset()
+                .isAfter(backfillBinlogSplit.getStartingOffset());
+if (!binlogBackfillRequired) {
+    dispatchBinlogEndEvent(backfillBinlogSplit);
+    currentTaskRunning = false;
+    return;
+}
+
+// execute binlog read task
+if (snapshotResult.isCompletedOrSkipped()) {
+    final MySqlBinlogSplitReadTask backfillBinlogReadTask =
+            createBackfillBinlogReadTask(backfillBinlogSplit);
+    final MySqlOffsetContext.Loader loader =
+            new MySqlOffsetContext.Loader(
+                    statefulTaskContext.getConnectorConfig());
+    final MySqlOffsetContext mySqlOffsetContext =
+            loader.load(
+                    backfillBinlogSplit.getStartingOffset().getOffset());
+
+    backfillBinlogReadTask.execute(
+            new SnapshotBinlogSplitChangeEventSourceContextImpl(),
+            statefulTaskContext.getMySqlPartition(),
+            mySqlOffsetContext);
+} else {
+    setReadException(
+            new IllegalStateException(
+                    String.format(
+                            "Read snapshot for mysql split %s fail",
+                            currentSnapshotSplit)));
+}
+```
+
+则，读取binlog数据再放入queue中。
+![flinkcdc2Reader06](images/flinkcdc2Reader06.png)   
+
+
+现在回到`MySqlSplitReader#pollSplitRecords()` 
+```java
+if (binlogSplits.size() > 0) {
+    // the binlog split may come from:
+    // (a) the initial binlog split
+    // (b) added back binlog-split in newly added table process
+    MySqlSplit nextSplit = binlogSplits.poll();
+    currentSplitId = nextSplit.splitId();
+    currentReader = getBinlogSplitReader();
+    currentReader.submitSplit(nextSplit);
+} else if (snapshotSplits.size() > 0) {
+    MySqlSplit nextSplit = snapshotSplits.poll();
+    currentSplitId = nextSplit.splitId();
+    currentReader = getSnapshotSplitReader();
+    currentReader.submitSplit(nextSplit);
+} else {
+    LOG.info("No available split to read.");
+}
+dataIt = currentReader.pollSplitRecords();
+```
+
+currentReader.pollSplitRecords()方法 如何是 全量 + 增量模式， 当读完全量时，会直接放入缓存中 `Map<Struct, List<SourceRecord>> snapshotRecords = new HashMap<>();`, 当读到binlog阶段，会进行upset操作，只有 splitKey在区间内，才合并， 具体根据不同操作符，对缓存中的数据进行合并处理。  
 
 
 
