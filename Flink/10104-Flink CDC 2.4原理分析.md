@@ -115,14 +115,15 @@ registerReader();
 ![flinkcdc2analyse04](images/flinkcdc2analyse04.png)        
 
 
-#### SplitEnumerator的分配切片（Chunks）   
+### SplitEnumerator的分配切片（Chunks）   
 该篇Blog开头提到 Flink CDC 1.x针对 `全量阶段`只能单并发运行，那么该章节主要来介绍Flink CDC 2.x对这块了哪些优化。        
 
 在**Separating Work Discovery from Reading** 章节中介绍 `SplitEnumerator`与 `Reader`构建 Master-Worker结构，Flink CDC 2.x 对 snapshot阶段的数据按照一定规则进行分割，然后将任务拆分后，分散给`Reader`，让它们来分段读取。这真的是妥妥的**分布式调度中的分片任务**。     
 
 ![flinkcdc2analyse05](images/flinkcdc2analyse05.png)    
 
-**分割数据**    
+#### 分割数据   
+
 ![flinkcdc2analyse06](images/flinkcdc2analyse06.png)    
 `MySqlSnapshotSplitAssigner#open()`  
 ```java
@@ -169,6 +170,8 @@ private void splitChunksForRemainingTables() {
     }
 }
 ```
+
+---
 
 `MySqlSnapshotSplitAssigner#splitTable()`,在do...while循环中使用了`synchronized (lock)`,可以确定是 `MySqlSourceEnumerator` 串行拆分 Table。 
 
@@ -250,6 +253,8 @@ public List<MySqlSnapshotSplit> splitChunks(MySqlPartition partition, TableId ta
 }
 ``` 
 
+---
+
 `MySqlChunkSplitter#analyzeTable()`                   
 ![flinkcdc2analyse10](images/flinkcdc2analyse10.png)    
 
@@ -326,6 +331,8 @@ private Optional<List<MySqlSnapshotSplit>> trySplitAllEvenlySizedChunks(
 }
 ```
 
+---
+
 `MySqlChunkSplitter#getDynamicChunkSize()`, 
 isEvenlySplitColumn()方法会判断 splitColumn 是否是均匀分布，目前仅支持数值类型为均匀分布：BIGINT，INTEGER，DECIMAL。 若是其他则是非均匀分布，直接返回 -1, 此处需明确一点，并不都是数值类型都是均匀分布，还需判断分布因子的范围区间是否在`distributionFactorUpper` 和 `distributionFactorLower` 之间。   
 distributionFactorUpper 取决于 `chunk-key.even-distribution.factor.upper-bound` 参数  
@@ -367,6 +374,8 @@ private int getDynamicChunkSize(
     return -1;
 }
 ```
+
+---
 
 `MySqlChunkSplitter#splitEvenlySizedChunks()` ，该方法主要负责是 根据一定间距规则，拆分表，返回表的区间集合。       
 **if (approximateRowCnt <= chunkSize)** 如果默认的chunkSize >= 表的条数，则将整张表当作一个chunk 返回 
@@ -411,6 +420,8 @@ public List<ChunkRange> splitEvenlySizedChunks(
 }
 ```
 
+---
+
 现在回到 `MySqlChunkSplitter#splitChunks()` 通过上面的 `trySplitAllEvenlySizedChunks()` 可知道 split 的规则，若是均匀分布则直接返回分割段集合`List<MySqlSnapshotSplit>` ,若是非均匀分布，那又如何处理呢？       
 
 ```java
@@ -423,6 +434,8 @@ synchronized (lock) {
             splitOneUnevenlySizedChunk(partition, tableId));
 }
 ``` 
+
+---
 
 `MySqlChunkSplitter#splitOneUnevenlySizedChunk()` 正如它的方法名字那样，每次只分割1个chunk， 它主要负责处理非均匀分布，我们来了解在它的处理逻辑，   
 ![flinkcdc2analyse12](images/flinkcdc2analyse12.png)
@@ -488,6 +501,8 @@ private MySqlSnapshotSplit splitOneUnevenlySizedChunk(MySqlPartition partition, 
 }
 ```
 
+---
+
 在介绍 splitOneUnevenlySizedChunk() 提到 它每次只拉取1个chunk，与均匀分布不同，均匀分布是直接返回 List<Chunk>集合，那非均匀分布分割table又是 如何停止 ？        
 
 我们现在回到 `MySqlSnapshotSplitAssigner#splitTable()` 里面用do while(hasNextChunk())来遍历处理，返回chunk集合， 可这里分两种split， 均匀分布和非均匀， 其中针对 均匀分布 直接遍历1次即可完成chunk集群， 而对 非均匀分布 是每次遍历只分割1个chunk， 我们来看 hasNextChunk()的判断逻辑：             
@@ -526,16 +541,101 @@ return createSnapshotSplit(
         null);
 ```
 
-
-以上 就完成了对Table的分割，将chunk集合存储到 `MySqlSnapshotSplitAssigner.List<MySqlSchemalessSnapshotSplit> remainingSplits;` 
-
-
-
-https://github.com/ververica/flink-cdc-connectors/issues/2489
+以上 就完成了对Table的分割，将chunk集合存储到 `MySqlSnapshotSplitAssigner.List<MySqlSchemalessSnapshotSplit> remainingSplits;`      
 
 
 
-**分配任务**        
+#### 分配任务       
+上面分析，已经帮我们完成2个环节 
+1.获取已注册的Readers
+2.获取待分配的Chunks    
+
+此处暂时略， 后续再补充     
+
+
+
+
+
+### Reader 处理数据 
+该章节主要讲解 Reader处理全量+增量的逻辑。  
+
+`MySqlSnapshotSplitReadTask#doExecute()`        
+
+```java
+@Override
+protected SnapshotResult<MySqlOffsetContext> doExecute(
+        ChangeEventSourceContext context,
+        MySqlOffsetContext previousOffset,
+        SnapshotContext<MySqlPartition, MySqlOffsetContext> snapshotContext,
+        SnapshottingTask snapshottingTask)
+        throws Exception {
+    final MySqlSnapshotContext ctx = (MySqlSnapshotContext) snapshotContext;
+    ctx.offset = previousOffset;
+    final SignalEventDispatcher signalEventDispatcher =
+            new SignalEventDispatcher(
+                    previousOffset.getOffset(),
+                    topicSelector.topicNameFor(snapshotSplit.getTableId()),
+                    dispatcher.getQueue());
+
+    final BinlogOffset lowWatermark = currentBinlogOffset(jdbcConnection);
+    LOG.info(
+            "Snapshot step 1 - Determining low watermark {} for split {}",
+            lowWatermark,
+            snapshotSplit);
+    ((SnapshotSplitReader.SnapshotSplitChangeEventSourceContextImpl) (context))
+            .setLowWatermark(lowWatermark);
+    signalEventDispatcher.dispatchWatermarkEvent(
+            snapshotSplit, lowWatermark, SignalEventDispatcher.WatermarkKind.LOW);
+
+    LOG.info("Snapshot step 2 - Snapshotting data");
+    createDataEvents(ctx, snapshotSplit.getTableId());
+
+    final BinlogOffset highWatermark = currentBinlogOffset(jdbcConnection);
+    LOG.info(
+            "Snapshot step 3 - Determining high watermark {} for split {}",
+            highWatermark,
+            snapshotSplit);
+    signalEventDispatcher.dispatchWatermarkEvent(
+            snapshotSplit, highWatermark, SignalEventDispatcher.WatermarkKind.HIGH);
+    ((SnapshotSplitReader.SnapshotSplitChangeEventSourceContextImpl) (context))
+            .setHighWatermark(highWatermark);
+
+    return SnapshotResult.completed(ctx.offset);
+}
+```
+
+
+`MySqlSnapshotSplitReadTask#doExecute()`是 Reader 执行分配的Chunk任务入口。 从 doExecute() 方法log打印步骤，分为3步：   
+
+**step01.**通过`SHOW MASTER STATUS` 查询当前的binlog offset , 并标记为 `lowWatermark`        
+查询 binlog offset sql执行结果：    
+
+![flinkcdc2analyse14](images/flinkcdc2analyse14.png)    
+
+`signalEventDispatcher.dispatchWatermarkEvent()`, 会将 lowWatermark 封装成 `SourceRecord` 对象，然后放入 `StatefulTaskContext.EventDispatcherImpl<TableId> dispatcher.queue`队列中 (后续会再介绍Queue)。  
+
+
+>此处，需提前介绍下 EventDispatcherImpl<TableId> dispatcher.queue的构造，因为后续会涉及到 queue的读写。在后续 处理Queue的Record 会涉及到 `SnapshotSplitReader#pollSplitRecords()`,该方法通过注释的方式告诉我们，queue的内部数据存放顺序： 
+```
+// data input: [low watermark event][snapshot events][high watermark event][binlog
+// events][binlog-end event]
+// data output: [low watermark event][normalized events][high watermark event]
+``` 
+
+所以根据上面的queue，我们已经通过 step01，将 lowWatermark 放入queue中       
+![flinkcdc2analyse15](images/flinkcdc2analyse15.png)    
+
+
+**step02.** 读取 Snapshot data  
+```java
+LOG.info("Snapshot step 2 - Snapshotting data");
+createDataEvents(ctx, snapshotSplit.getTableId());
+```
+
+
+
+
+
 
 
 
