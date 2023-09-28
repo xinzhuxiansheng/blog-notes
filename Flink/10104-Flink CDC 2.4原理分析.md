@@ -785,7 +785,7 @@ changeRecordEmitter.emitChangeRecords(dataCollectionSchema, new Receiver<P>() {
     }
 });
 ```
-这与CDC 数据变更不同，此时 eventListener 定义监听事件类型，receiver来处理监听事件的数据。 BufferingSnapshotChangeRecordReceiver只会处理已存在表中的数据，对数据变更事件不做任何处理。    
+这与CDC 数据变更不同，此时 eventListener 定义监听事件类型，receiver来处理监听事件的数据。 BufferingSnapshotChangeRecordReceiver 只会处理已存在表中的数据，对数据变更事件不做任何处理。    
 
 >`SnapshotChangeRecordEmitter` 是 Debezium 内部的一个组件，用于处理数据库的初始快照事件。当你启动一个 Debezium 连接器并需要从数据库的当前状态开始捕获变更，而不是从某个历史点开始，Debezium 会执行一个称为 "快照" 的操作。这个快照操作会读取数据库的所有行（或配置的表的所有行）并生成对应的事件。
 这里是该组件在 Debezium 中的用途：
@@ -880,7 +880,12 @@ dataIt = currentReader.pollSplitRecords();
 
 currentReader.pollSplitRecords()方法 如何是 全量 + 增量模式， 当读完全量时，会直接放入缓存中 `Map<Struct, List<SourceRecord>> snapshotRecords = new HashMap<>();`, 当读到binlog阶段，会进行upset操作，只有 splitKey在区间内，才合并， 具体根据不同操作符，对缓存中的数据进行合并处理。  
 
+>其实在第一遍 用jdbc 就可以select
 
+
+
+TODO    
+后面接着写
 
 
 
