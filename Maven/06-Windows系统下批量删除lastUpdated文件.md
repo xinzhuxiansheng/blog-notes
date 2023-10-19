@@ -12,4 +12,5 @@ rem 搜索完毕
 pause
 ```
 
->注意将内容中的REPOSITORY_PATH改成自己本地maven路径即可
+>注意将内容中的REPOSITORY_PATH改成自己本地maven路径即可     
+
