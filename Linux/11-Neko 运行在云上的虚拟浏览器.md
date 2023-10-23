@@ -2,12 +2,12 @@
 
 ### 背景    
 在实际开发过程中，经常会出现网络隔离等情况, 如图中所示，`腾讯云K8s集群`对于`本地Mac 开发机` 来说只能通过公网访问，那么想访问K8s集群 Pod服务，最好的方法是 将服务绑定的Service使用NodePort通信，这样我可以在`本地 Mac 开发机`直接访问，可这种与实际生产过程中还是会有些偏差，在实际生产过程中，非特殊情况是不允许使用NodePort通信，而是使用`ClusterIP`,所以这需要我们使用`ingress-nginx`做域名绑定到Service，从而让服务无需关心IP是什么。
-![neko01](images/neko01.png)    
+![neko01](http://img.xinzhuxiansheng.com/blogimgs/linux/neko01.png)    
 
 
 而我的`腾讯云 K8s集群`是腾讯云机器，我只好用公网IP访问，如果我在开发机中配置 hosts映射后访问会遭到腾讯云拦截，内容如下：        
 
-![neko02](images/neko02.png)        
+![neko02](http://img.xinzhuxiansheng.com/blogimgs/linux/neko02.png)        
 
 这导致我在本地开发机无法使用域名映射方式访问，当然与`腾讯云K8s集群`同在内网的`腾讯云机器`肯定不受影响。    
 
@@ -49,7 +49,7 @@ services:
 ```    
 
 **image**: 可参考官网选择不同浏览器镜像 
-![neko03](images/neko03.png)        
+![neko03](http://img.xinzhuxiansheng.com/blogimgs/linux/neko03.png)        
 
 **extra_hosts**：配置 hosts域名映射 
 
@@ -64,13 +64,13 @@ NEKO_FILE_TRANSFER_PATH: /home/neko/Downloads
 
 ### neko 访问   
 访问公网IP+8082, 直接访问即可,默认账号密码：admin/admin
-![neko04](images/neko04.png)    
+![neko04](http://img.xinzhuxiansheng.com/blogimgs/linux/neko04.png)    
 
 `点击键盘`即可控制浏览器啦  
-![neko05](images/neko05.png)
+![neko05](http://img.xinzhuxiansheng.com/blogimgs/linux/neko05.png)
 
 这里特别说明一个字符串复制操作，当希望把`本地 Mac开发机`的字符串 copy到虚拟浏览器中，请使用 neko。 
-![neko06](images/neko06.png)    
+![neko06](http://img.xinzhuxiansheng.com/blogimgs/linux/neko06.png)    
 
 先将copy的字符串paste到 剪贴板内，在进行 copy，paste。 这里其实特别像`系统剪贴板与vim剪贴板`。 不是同一个缓冲区层，无法互相拷贝。   
 
