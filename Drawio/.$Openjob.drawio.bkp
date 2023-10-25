@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-09-16T10:49:20.071Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.7.5 Chrome/114.0.5735.289 Electron/25.8.1 Safari/537.36" etag="nYk6MBI_pzZsOgdOQ5Ca" version="21.7.5" type="device" pages="7">
+<mxfile host="Electron" modified="2023-10-25T01:45:05.893Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.7.5 Chrome/114.0.5735.289 Electron/25.8.1 Safari/537.36" etag="Po6-6H1Xn4vW7f6qoQws" version="21.7.5" type="device" pages="8">
   <diagram name="部署结构图" id="kAdJjKpbqvwE1rkGfX6-">
-    <mxGraphModel dx="1354" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2474" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -47,7 +47,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="q-znuxv71KVE1naicGJs" name="第 2 页">
-    <mxGraphModel dx="1354" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2474" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -381,17 +381,72 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="2xho76W-x_eaZ2IgXvhG" name="Master HA">
-    <mxGraphModel dx="1354" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="2xho76W-x_eaZ2IgXvhG" name="触发任务">
+    <mxGraphModel dx="3274" dy="1569" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="r9nxVaPiNIxiCTTsN-QK-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-230" y="40" width="120" height="60" as="geometry" />
+        <mxCell id="uTONiRTOah-e0WxdQE2R-2" value="任务实例列表" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-820" y="-260" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="uTONiRTOah-e0WxdQE2R-1" value="Text" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="20" y="440" width="60" height="30" as="geometry" />
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-2" value="http://localhost:8080/admin/job-instance/list?namespaceId=2&amp;amp;appId=&amp;amp;jobId=&amp;amp;status=&amp;amp;id=&amp;amp;beginTime=0&amp;amp;endTime=0&amp;amp;page=1&amp;amp;size=20" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-740" y="-210" width="860" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-3" value="&lt;div style=&quot;color: rgb(8, 8, 8); font-size: 13px;&quot;&gt;JobInstanceController#listJobInstance()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-740" y="-150" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-4" value="执行" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-820" y="10" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="SSP5KuJbM_UKiwTObGz0-5" target="SSP5KuJbM_UKiwTObGz0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-5" value="http://localhost:8080/admin/job/execute" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-740" y="50" width="290" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-6" value="&lt;div style=&quot;color: rgb(8, 8, 8); font-size: 13px;&quot;&gt;JobController#execute()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-450" y="50" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-7" value="&lt;div style=&quot;color: rgb(8, 8, 8); font-size: 13px;&quot;&gt;JobSchedulingService#executeByOnce()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-740" y="150" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="SSP5KuJbM_UKiwTObGz0-9" value="&lt;div style=&quot;color: rgb(8, 8, 8); font-size: 13px;&quot;&gt;createJobInstance()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-580" y="200" width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="wYM6cj373mtuRj0-sUuO-1" target="wYM6cj373mtuRj0-sUuO-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-1" value="&lt;div style=&quot;color: rgb(8, 8, 8); font-size: 13px;&quot;&gt;JobInstance&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-775" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="wYM6cj373mtuRj0-sUuO-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-715" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-2" value="&lt;div style=&quot;color: rgb(8, 8, 8); font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;SchedulerTimerTask&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-820" y="510" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-810" y="870" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-4" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-650" y="870" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-7" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-480" y="870" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="wYM6cj373mtuRj0-sUuO-10" value="AbstractWheel.List&amp;lt;&lt;span style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;SystemTimer&lt;/span&gt;&lt;span style=&quot;color: rgb(8, 8, 8); font-size: 13px;&quot;&gt;&amp;gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-1050" y="810" width="240" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="XN4Bq7kmsDT6ZBkRTwZ-" name="时间轮">
+    <mxGraphModel dx="1434" dy="809" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>
