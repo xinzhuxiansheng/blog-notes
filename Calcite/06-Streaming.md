@@ -19,3 +19,10 @@ Calcite 的 SQL 是标准 SQL 的扩展，而不是另一种“类 SQL”语言�
 如果不使用 STREAM 关键字，您将回到常规标准 SQL。            
 
 ### An example schema （示例）  
+我们的流式 SQL 示例使用以下架构：       
+* 订单（rowtime、productId、orderId、units）- 流和表        
+* 产品（rowtime、productId、名称）- 一个表      
+* Shipments (rowtime, orderId) - 一个流         
+
+### A simple query (一个简单的查询)     
+让我们从最简单的流式查询开始：          

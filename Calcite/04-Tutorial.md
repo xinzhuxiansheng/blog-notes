@@ -18,7 +18,7 @@ CSV 还可以用作构建其他数据格式适配器的模板。 虽然代码不
 你需要 Java（版本 8、9 或 10）和 Git。      
 ```shell
 $ git clone https://github.com/apache/calcite.git
-$ ./gradlew build -x test # 编译  记得跳过测试
+$ ./gradlew clean build -x test # 编译  记得跳过测试
 $ cd calcite/example/csv    
 $ ./sqlline 
 ```
