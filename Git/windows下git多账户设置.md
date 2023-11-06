@@ -28,3 +28,22 @@ Host github.com
     IdentityFile ~/.ssh/id_rsa_github
     User username1
 ```
+
+## 解决 no matching host key type found. Their offer: ssh-rsa 异常
+```
+// 添加以下参数
+HostKeyAlgorithms +ssh-rsa
+PubkeyAcceptedKeyTypes +ssh-rsa
+```
+
+完整示例：  
+```
+Host xxx.xxx.xxx.xxx
+  AddKeysToAgent yes
+  UseKeychain yes
+  Port xxx
+  HostKeyAlgorithms +ssh-rsa
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  IdentityFile ~/.ssh/github
+```
+
