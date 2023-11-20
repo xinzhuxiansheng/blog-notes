@@ -194,10 +194,10 @@ LocalCache.CACHE.put(uid, JSONUtil.toJsonStr(messages), LocalCache.TIMEOUT);
 
 >博主对OKHttp不熟悉呀，对于其他AIGC的功能实现过程都类似。      
 
-refer   
-1.https://github.com/wangxuqi/Prompt-Engineering-Guide-Chinese/blob/main/guides/prompts-intro.md#%E6%8C%87%E4%BB%A4 
-2.https://platform.openai.com/docs/api-reference/chat   
-3.https://github.com/Grt1228/chatgpt-java   
-4.https://github.com/noobnooc/noobnooc/discussions/9    
-5.https://github.com/f/awesome-chatgpt-prompts  
-6.https://segmentfault.com/a/1190000020628924   
+refer     
+1.https://github.com/wangxuqi/Prompt-Engineering-Guide-Chinese/blob/main/guides/prompts-intro.md#%E6%8C%87%E4%BB%A4   
+2.https://platform.openai.com/docs/api-reference/chat    
+3.https://github.com/Grt1228/chatgpt-java     
+4.https://github.com/noobnooc/noobnooc/discussions/9      
+5.https://github.com/f/awesome-chatgpt-prompts    
+6.https://segmentfault.com/a/1190000020628924     

@@ -302,5 +302,5 @@ Calcite 将以 JDBC 的方式执行相同的查询。对于应用程序，数据
 
 refer   
 1.https://calcite.apache.org/docs/index.html        
-2.https://github.com/zqhxuyuan/tutorials/blob/72740ec130a15331b0b2428b9750099c47073052/middleware/src/main/java/com/zqh/calcite/HelloCalcite.java#L72   
+2.https://github.com/zqhxuyuan/tutorials/blob/72740ec130a15331b0b2428b9750099c47073052/middleware/src/main/java/com/zqh/calcite/HelloCalcite.java#L72      
 

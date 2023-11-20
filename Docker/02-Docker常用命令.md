@@ -1,9 +1,18 @@
---In Blog
---Tags: Docker
+## Docker 常用命令行
 
-# Docker 常用命令行
+### 帮助手册  
+可通过`docker -h` 查看 docker 相关的命令，docker cli 将命令主要分为以下几类：       
+* Common Commands   
+* Management Commands    
+* Swarm Commands    
+* Commands   
 
-## Docker image相关
+
+### Docker 命令的总结       
+
+
+
+### Docker image相关
 ```shell
 #查看镜像列表
 docker images
@@ -15,7 +24,7 @@ docker pull <image>
 docker rmi <image id>
 ```
 
-## Docker container相关
+### Docker container相关
 ```shell
 #查看正在运行的container
 docker ps

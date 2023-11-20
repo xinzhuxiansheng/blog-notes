@@ -1,0 +1,65 @@
+<mxfile host="Electron" modified="2023-11-15T19:05:06.760Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="Drx_NzUK2kBuQx3a-SHQ" version="22.0.3" type="device" pages="2">
+  <diagram name="Docker命令总结" id="MsAvJ8Psn0gxqY2eIk2R">
+    <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="4uQlipzQtvqW4cy2oqtc-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="400" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-1" value="Docker 命令总结" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="340" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="4uQlipzQtvqW4cy2oqtc-2" target="N8VLz7CXJd6VBNPQUqYb-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-2" value="Docker 环境" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="70" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-3" value="容器生命周期" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="250" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-4" value="容器运维" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="430" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-5" value="容器rootfs" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="610" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-1" value="docker info" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-130" y="380" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-4" value="示例：&amp;nbsp; 创建 Docker docker create -it --name nginx nginx:1.14&lt;br style=&quot;font-size: 13px;&quot;&gt;可通过 docker create --help 查看 参数&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;查看 docker ps&lt;br style=&quot;font-size: 13px;&quot;&gt;docker&amp;nbsp; ps -a&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;启动 Docker docker start nginx&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;docker unpause id&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;关闭 Docker docker kill id&lt;br style=&quot;font-size: 13px;&quot;&gt;docker stop id&lt;br style=&quot;font-size: 13px;&quot;&gt;docker pause id&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;创建并启动 docker run&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;重命名 docker rename c nginx" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="70" y="500" width="450" height="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="HeHR7ZoXtua4s-vLYizI" name="Docker安装与配置">
+    <mxGraphModel dx="1834" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Mw8VMHpUXd0KzHonvc4w-1" value="docker.io" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-270" y="-30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Mw8VMHpUXd0KzHonvc4w-2" value="docker-ce" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-270" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Mw8VMHpUXd0KzHonvc4w-3" value="docker-ee" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-270" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Mw8VMHpUXd0KzHonvc4w-5" value="debian / ubuntu 官方基于docker社区源码封装的版本" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="-15" width="410" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Mw8VMHpUXd0KzHonvc4w-6" value="docker.com 放出来的社区版，仅维护源码" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="105" width="410" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Mw8VMHpUXd0KzHonvc4w-7" value="docker.com 维护的商业版" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="225" width="410" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
