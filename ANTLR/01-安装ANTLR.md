@@ -26,7 +26,7 @@ alias antlr4='java -Xmx500M -cp "/Users/a/Software/antlr/antlr-4.13.1-complete.j
 alias grun='java -Xmx500M -cp "/Users/a/Software/antlr/antlr-4.13.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig' #快速运行ANTLR测试工具
 ```
 
-在终端上输入 `antlr4`, 可返回以下信息： 
+在终端上输入 `antlr4`, 可返回以下信息：    
 ```
 ANTLR Parser Generator  Version 4.13.1
  -o ___              specify output directory where all output is generated

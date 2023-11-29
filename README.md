@@ -21,7 +21,11 @@ Log
 
 * 2023.09.04 学习《Calcite数据管理实战》
 
-* 2023.11.04 学习 JaCoCo & ByteCode
+* 2023.11.04 学习 JaCoCo & ByteCode 
+
+* 2023.11.19 学习 Antlr4    
+
+* 2023.11.25 学习 React18 + TS
 
 ### 分布式
 

@@ -1,5 +1,7 @@
 ## 入门的ANTLR项目  
 
+> "EOF" 表示的是 终止符（mac = control + d） 
+
 ### 引言  
 在 ANTLR 项目实战，可了解到  ANTLR Tool, Runtime, and Generated Code 三个方面的使用，以及如何与 Java 项目集成。 
 
