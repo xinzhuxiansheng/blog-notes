@@ -6,10 +6,13 @@
 * 普通 Join 支特常规的 Inner Join 和 Outer Join。 Outer Join 对应的就是 Left Join, Right Join 和 Full Join。        
 
 ### Inner Join 
-`Inner Join在SQL语句中可以简写为Join, 在双流Join时，只有左右两边数据流中的数据都关联上了,才会输出结果 +[L,R], 结果中会包含这两条流中的数据。`      
+`Inner Join在SQL语句中可以简写为Join, 在双流Join时，只有左右两边数据流中的数据都关联上了,才会输出结果 +[L,R], 结果中会包含这两条流中的数据。`          
 
 #### 执行过程   
-Inner Join 的执行流程,看下面示例图，这里面有三个流表或者说是动态表，表A和表B属于两个业务表，
+Inner Join 的执行流程,看下面示例图，这里面有三个流表或者说是动态表  
+![innerjoin01](images/innerjoin01.png)      
+
+表A和表B属于两个业务表.
 
 ### Out Join    
 * Left Join(Left Outer Join) 它属于简写形式，完整写法是Left Outer Join      
