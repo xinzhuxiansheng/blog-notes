@@ -4,9 +4,9 @@
 
 ![flinksqljoindiagram01](images/flinksqljoindiagram01.png)  
 
-在Flink SQl中，无论是ININER JOIN是OUTER JON (Left、Right、Full), 都需要对左右两边的数据流进行保存，两边的数据流对应的就是 Left数据流和Right数据流，简称为L和R。 此时JOIN 底层对应的会有两个State来存储两边数据流里面的数据, 在这里可以称之为LState和RState。    
+在Flink SQL中，无论是ININER JOIN是OUTER JON (Left、Right、Full), 都需要对左右两边的数据流进行保存，两边的数据流对应的就是 Left数据流和Right数据流，简称为L和R。 此时JOIN 底层对应的会有两个State来存储两边数据流里面的数据, 在这里可以称之为LState和RState。    
 
-其中LState中存储左边数据流中的数据,Rstate存储右边数据流中的数据，左右两边的数据流到来的时候会进行如下操作： 
+其中LState中存储左边数据流中的数据,RState存储右边数据流中的数据，左右两边的数据流到来的时候会进行如下操作： 
 * 1.左边数据流中的数据到达的时候,会存储至LState中。并且到RState中进行Join。   
 * 2.然后将Join之后生成的结果数据发送到下游。右边数据流中的数据到达的时候会存储到RState中。并且到LState中进行Join，  
 * 3.然后将Join之后生成的结果数据发送到下游。这祥就实现了Flink SQL的双流Join。   

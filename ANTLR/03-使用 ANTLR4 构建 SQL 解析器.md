@@ -8,7 +8,7 @@
 
 ### 目标
 我们要构建一个新数据库，它将使用 SQL 语句的方式来创建 CSV 文件、插入数据、删除数据等操作。          
-为了开始研究这个想法，让我们分解一下需要做的任务。              
+为了开始研究这个想法，让我们分解一下需要做的任务。                
 
 #### 任务
 * 使用我们自己的规则为 SQL 语句创建一个 g4 语法文件              
@@ -24,9 +24,9 @@
 * 文件名和列名的标识符中仅允许使用字母数字                
 * 仅允许使用 AND/OR 运算符的基本过滤条件        
 
-我们想要支持的声明:     
-```shell
-CREATE FILE <FILE NAME> ( [ColumnNames] );
+我们想要支持的SQL如下所示:           
+```shell   
+CREATE FILE <FILE NAME> ( [ColumnNames] );      
 # 示例： CREATE FILE product (id, name, desc , price);
 
 INSERT INTO FILE <FILE NAME> ROWS ([value1,value2…valueN]); 
@@ -37,15 +37,13 @@ SELECT [ColumnNames] FROM FILE <FILE NAME> WHERE [Expression]
 # 示例： select * from file product where price > 3;    
 
 DELETE FILE <FILE NAME>;
-# 示例： delete file product;   
+# 示例： delete file product;       
 ```
 
 这些陈述是不言自明的。现在我们必须在一个名为语法文件（.g4 是 ANTLR 使用的扩展名）的文件中创建所有词汇标记和解析器规则。         
 
 ### 项目设置
-让我们创建一个文件夹并设置一个python虚拟环境。          
-
-
+让我们创建一个文件夹并安装 ANTLR4 的开发环境, 此处可参考博主的另一篇 Blog '安装 ANTLR'
 
 现在请确保按照 ANTLR 安装说明或以下命令添加用于生成 Lexer 和 Parser 的 ANTLR 工具。         
 

@@ -56,4 +56,4 @@ Starting Job Manager
 ```
 
 ### 解决方法    
-因为 Docker版本过低，升级Docker 版本即可。
+因为 Docker版本过低，升级Docker 版本即可。    

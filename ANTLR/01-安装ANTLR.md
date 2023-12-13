@@ -1,9 +1,9 @@
 ## 安装 ANTLR 
 
-### 背景  
+>针对 Java
 
 ### 安装 ANTLR 
->env: Mac, antlr version: 4.13.1, jdk version: 11
+>env: Mac, antlr version: 4.13.1, jdk version: 11+ (必须确保 JDK 版本)  
 
 `官网原文` 
 >All users should download the ANTLR tool itself and then choose a runtime target below, unless you are using Java which is built into the tool jar.
@@ -50,11 +50,53 @@ ANTLR Parser Generator  Version 4.13.1
  -Xexact-output-dir  all output goes into -o dir regardless of paths/package
 ```
 
-### 运行 Github 文档中的简单示例    
-在临时目录下创建 `Expr.g4` 文件，内容如下： 
+### 运行 Github 文档中的简单示例 
+请参考 "https://github.com/antlr/antlr4/blob/master/doc/getting-started.md#a-first-example" `A First Example`   
+1.创建 `githubDemo` 目录，结构如下： 
+```
+githubDemo
+├── Hello.g4
+└── gen  // 创建 gen 目录，后续会将生成的文件 指定到该路径下
 ```
 
+并创建 `Hello.g4` 文件，内容如下： 
 ```
+// Define a grammar called Hello
+grammar Hello;
+r  : 'hello' ID ;         // match keyword hello followed by an identifier
+ID : [a-z]+ ;             // match lower-case identifiers
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+```
+
+2.生成文件 & 编译 *.java
+```shell
+# -o 指定目录
+antlr4 Hello.g4 -o gen 
+
+# 编译
+cd gen/
+javac Hello*.java 
+```
+
+3.使用grun 测试
+```shell
+cd gen /
+grun Hello r -tree
+>输入 hello parrt
+>输入 ^D (mac 终止符)
+(The output:)
+(r hello parrt)
+
+grun Hello r -gui
+>输入 hello parrt
+^D
+```
+
+![firstdemo01](images/firstdemo01.png)      
+
+
+
+
 
 
 refer   
