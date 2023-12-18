@@ -10,7 +10,7 @@ Permissions 0664 for 'xxxxxxxxxxxx' are too open.
 It is required that your private key files are NOT accessible by others.
 This private key will be ignored.
 Load key "xxxxxxxxxxxxx": bad permissions
-root@120.53.89.164: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+root@xxx.xx.xxx.164: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 ```
 
 ### 解决    

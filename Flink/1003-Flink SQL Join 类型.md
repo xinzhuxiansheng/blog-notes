@@ -11,7 +11,7 @@ Flink SOL中可以支特多种流数据Join的类型, 下面来看一下:
 * Table Function Join: (表函数Join)         
 * Window Join:     (窗口Join)   
 
-这就是Flink SOL支持的Join类型 那接下来我们来详细分析一下这些Join类型。      
+这就是Flink SOL支持的Join类型 那接下来我们来详细分析一下这些Join类型。              
  
 
 
