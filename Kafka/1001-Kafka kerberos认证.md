@@ -1,3 +1,5 @@
+
+
 创建 client.properties
 ```
 sasl.mechanism=GSSAPI
@@ -10,7 +12,7 @@ sasl.jaas.config=com.sun.security.auth.module.Krb5LoginModule required \
     keyTab="/root/kafka/kafka.keytab" \
     principal="kafka/kafka30-all@KAFKA.COM" \
     renewTGT=true \
-    useTicketCache=true;
+    useTicketCache=true;  
 ```
 
 
