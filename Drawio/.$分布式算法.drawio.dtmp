@@ -1,0 +1,261 @@
+<mxfile host="Electron" modified="2023-12-27T08:22:51.349Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="bYwUhgUDUyAX6R6oWYSi" version="22.0.3" type="device" pages="2">
+  <diagram name="经典思想实验 - 两将军问题" id="lpbOVf3mbZmm0JFDLYZK">
+    <mxGraphModel dx="954" dy="627" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-1" value="城市" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="330" y="110" width="70" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-2" value="军队 A" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="230" y="230" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-3" value="军队 B" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="230" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-4" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="9LQxAgsS8kxjmnMP7aeT-2" target="9LQxAgsS8kxjmnMP7aeT-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="250" as="sourcePoint" />
+            <mxPoint x="360" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-5" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="9LQxAgsS8kxjmnMP7aeT-2" target="9LQxAgsS8kxjmnMP7aeT-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="210" as="sourcePoint" />
+            <mxPoint x="360" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-6" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="9LQxAgsS8kxjmnMP7aeT-3" target="9LQxAgsS8kxjmnMP7aeT-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="283" y="237" as="sourcePoint" />
+            <mxPoint x="370" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-7" value="信使" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="335" y="230" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-8" value="进攻 ？" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="400" y="180" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-9" value="进攻 ？" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="260" y="180" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-10" value="将军 A" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="230" y="420" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-11" value="将军 B" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="440" y="420" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-13" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" target="9LQxAgsS8kxjmnMP7aeT-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="275" y="640" as="sourcePoint" />
+            <mxPoint x="270" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-14" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" target="9LQxAgsS8kxjmnMP7aeT-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="485" y="640" as="sourcePoint" />
+            <mxPoint x="285" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-15" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="274" y="500" as="sourcePoint" />
+            <mxPoint x="440" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-16" value="8月4日9时 发起进攻" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="320" y="490" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-17" value="将军 A" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="240" y="760" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-18" value="将军 B" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="450" y="760" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-19" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" target="9LQxAgsS8kxjmnMP7aeT-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="285" y="980" as="sourcePoint" />
+            <mxPoint x="280" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-20" value="" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" target="9LQxAgsS8kxjmnMP7aeT-18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="495" y="980" as="sourcePoint" />
+            <mxPoint x="295" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-21" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="284" y="840" as="sourcePoint" />
+            <mxPoint x="490" y="910" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-22" value="8月4日9时 发起进攻" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="330" y="830" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-23" value="" style="shape=umlDestroy;whiteSpace=wrap;html=1;strokeWidth=3;targetShapes=umlLifeline;" vertex="1" parent="1">
+          <mxGeometry x="440" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-24" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="495" y="920" as="sourcePoint" />
+            <mxPoint x="370" y="940" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9LQxAgsS8kxjmnMP7aeT-25" value="" style="shape=umlDestroy;whiteSpace=wrap;html=1;strokeWidth=3;targetShapes=umlLifeline;" vertex="1" parent="1">
+          <mxGeometry x="345" y="931" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="yBE9CwxXr_FIi_O96cG2" name="经典思想实验 - 拜占庭将军问题">
+    <mxGraphModel dx="954" dy="627" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-1" target="IfgSH9wbBzBgC6HKBTuu-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-1" value="军队 C" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="350" y="90" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-2" value="军队 A" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="210" y="320" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-3" value="军队 B" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="500" y="320" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-4" value="城市" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="345" y="230" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-6" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.967;exitY=0.267;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="330" as="sourcePoint" />
+            <mxPoint x="340" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-7" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.033;exitY=0.133;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="278" y="346" as="sourcePoint" />
+            <mxPoint x="420" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-8" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-2" target="IfgSH9wbBzBgC6HKBTuu-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="210" as="sourcePoint" />
+            <mxPoint x="310" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-9" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-3" target="IfgSH9wbBzBgC6HKBTuu-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="330" as="sourcePoint" />
+            <mxPoint x="369" y="151" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-10" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-2" target="IfgSH9wbBzBgC6HKBTuu-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="330" as="sourcePoint" />
+            <mxPoint x="411" y="151" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-11" value="进攻 ？" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="180" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-12" value="进攻 ？" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="430" y="300" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-13" value="进攻 ？" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="290" y="300" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-14" value="信使" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="240" y="210" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-15" value="信使" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="210" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-16" value="信使" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-18" value="将军 C" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="379" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-19" value="将军&amp;nbsp;A" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="239" y="730" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-20" value="将军&amp;nbsp;B" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="529" y="730" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-21" value="城市" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="640" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-24" value="" style="endArrow=classic;startArrow=none;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startFill=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-19" target="IfgSH9wbBzBgC6HKBTuu-18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="289" y="620" as="sourcePoint" />
+            <mxPoint x="339" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-25" value="" style="endArrow=classic;startArrow=none;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;endFill=1;startFill=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-20" target="IfgSH9wbBzBgC6HKBTuu-18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="279" y="740" as="sourcePoint" />
+            <mxPoint x="398" y="561" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-26" value="" style="endArrow=classic;startArrow=none;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;startFill=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-19" target="IfgSH9wbBzBgC6HKBTuu-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="569" y="740" as="sourcePoint" />
+            <mxPoint x="440" y="561" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-30" value="进攻" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="269" y="620" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-31" value="撤退" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="499" y="620" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-32" value="进攻" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="379" y="790" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-34" value="将军&amp;nbsp;C" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="820" y="500" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-35" value="将军&amp;nbsp;A" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="680" y="730" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-36" value="将军&amp;nbsp;B" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="970" y="730" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-37" value="城市" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="815" y="640" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-38" value="" style="endArrow=classic;startArrow=none;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startFill=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-35" target="IfgSH9wbBzBgC6HKBTuu-34">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="730" y="620" as="sourcePoint" />
+            <mxPoint x="780" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-39" value="" style="endArrow=classic;startArrow=none;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;startFill=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-36" target="IfgSH9wbBzBgC6HKBTuu-34">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="740" as="sourcePoint" />
+            <mxPoint x="839" y="561" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-40" value="" style="endArrow=classic;startArrow=none;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;startFill=0;" edge="1" parent="1" source="IfgSH9wbBzBgC6HKBTuu-35" target="IfgSH9wbBzBgC6HKBTuu-36">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1010" y="740" as="sourcePoint" />
+            <mxPoint x="881" y="561" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-41" value="进攻" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="710" y="620" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-42" value="撤退" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="940" y="620" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IfgSH9wbBzBgC6HKBTuu-43" value="撤退" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="820" y="790" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

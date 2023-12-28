@@ -1,0 +1,39 @@
+version: "3"
+    
+services:
+  kafka:
+    container_name: kafka
+    user: root
+    image: quay.io/strimzi/kafka:latest-kafka-3.5.2-arm64
+    volumes:
+      - "./server.properties:/opt/kafka/config/kraft/server.properties"
+    command:
+      [
+        "sh",
+        "-c",
+        "bin/kafka-storage.sh format -t $$(bin/kafka-storage.sh random-uuid) -c /opt/kafka/config/kraft/server.properties && bin/kafka-server-start.sh /opt/kafka/config/kraft/server.properties"
+      ]
+    ports:
+      - "9092:9092"
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.4.0
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      - kafka
+    ports:
+      - "7081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka:9092'
+  schema-registry-ui:
+   image: landoop/schema-registry-ui
+   container_name: schema-registry-ui
+   depends_on:
+     - schema-registry
+     - kafka
+   ports:
+     - "8000:8000"
+   environment:
+     - SCHEMAREGISTRY_URL=http://schema-registry:8081
+     - PROXY=true
