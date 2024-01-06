@@ -80,7 +80,7 @@ data:
     source.group.id=raccoon.reactor.event.group_ft
     kafka.sink.topic=raccoon.reactor.sink
     watermarks.maxOutOfOrderness=1
-    database.url=jdbc:postgresql://190.120.103.38:5432/job_db
+    database.url=jdbc:postgresql://190.xxx.103.38:5432/job_db
     database.user=xxx
     database.password=xxx
     parallelism.max=64

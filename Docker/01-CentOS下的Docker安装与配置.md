@@ -24,6 +24,9 @@ gpgkey=https://mirrors.aliyun.com/docker-ce/linux/centos/gpg
 EOF
 ```
 
+> 此方法安装的 Docker 版本比较老 ，可参考 https://blog.csdn.net/skh2015java/article/details/127700161 ， 指定版本安装
+
+
 然后yum方式安装docker   
 
 ```

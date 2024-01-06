@@ -1,0 +1,565 @@
+<mxfile host="Electron" modified="2024-01-06T04:54:02.232Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="nePsgUPD6ym0PoY80ABy" version="22.0.3" type="device" pages="10">
+  <diagram id="KU9967yDpA6ImBzqjGFY" name="flink.partition-discovery.interval-millis工作原理">
+    <mxGraphModel dx="954" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=14;sketch=1;" parent="1" source="99w7x3CjBXZZh_KlrLXX-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-1" value="FlinkKafkaConsumerBase.run()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;sketch=1;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="70" y="70" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=14;" parent="1" source="99w7x3CjBXZZh_KlrLXX-2" target="99w7x3CjBXZZh_KlrLXX-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-2" value="FlinkKafkaConsumer.createFetcher()" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;fillColor=#d5e8d4;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="70" y="170" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=1;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=14;" parent="1" source="99w7x3CjBXZZh_KlrLXX-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-4" value="new KafkaFetcher()" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;fillColor=#ffe6cc;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="70" y="290" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="99w7x3CjBXZZh_KlrLXX-7" value="new KafkaConsumerThread()" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;fontSize=14;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="70" y="420" width="280" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="tUMzhCiblbWlL8pMyKWZ" name="Flink组件">
+    <mxGraphModel dx="1354" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="S3yXTHS49csSSYYwr_PA-0" />
+        <mxCell id="S3yXTHS49csSSYYwr_PA-1" parent="S3yXTHS49csSSYYwr_PA-0" />
+        <mxCell id="a7yjonGslge2ly_IQDVV-0" value="JobManager&lt;br&gt;(Central Work Coordination)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="130" y="230" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-1" value="TaskManager&lt;br&gt;(WorkerNodes)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="440" y="100" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-2" value="TaskManager&lt;br&gt;(WorkerNodes)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="440" y="230" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-3" value="TaskManager&lt;br&gt;(WorkerNodes)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="450" y="360" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-4" value="Flink Client" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="-60" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-5" value="Flink Components" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;fontFamily=Comic Sans MS;strokeColor=#6c8ebf;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="740" y="10" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-6" value="External Components" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="740" y="110" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-7" value="(Optional)Standby JobManager&lt;br&gt;(In case of leading JobManager failures)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#d5e8d4;fontFamily=Comic Sans MS;strokeColor=#82b366;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="-200" y="300" width="280" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-8" value="High Availability Service Provider" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="-180" y="490" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-9" value="File Storage and Persistency" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="30" y="490" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-10" value="Resource Provider" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="270" y="490" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-11" value="Metrics Storage" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="450" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-12" value="Application-level data sources and singks" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;fontFamily=Comic Sans MS;strokeColor=#d6b656;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="630" y="490" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-13" value="" style="endArrow=none;html=1;rounded=0;fontFamily=Comic Sans MS;" parent="S3yXTHS49csSSYYwr_PA-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="430" y="130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-14" value="" style="endArrow=none;html=1;rounded=0;fontFamily=Comic Sans MS;" parent="S3yXTHS49csSSYYwr_PA-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="440" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-15" value="" style="endArrow=none;html=1;rounded=0;fontFamily=Comic Sans MS;" parent="S3yXTHS49csSSYYwr_PA-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="sourcePoint" />
+            <mxPoint x="430" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-16" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;dashed=1;" parent="S3yXTHS49csSSYYwr_PA-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="10" y="130" as="sourcePoint" />
+            <mxPoint x="120" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a7yjonGslge2ly_IQDVV-17" value="JobSubmission" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=default;fontFamily=Comic Sans MS;" parent="S3yXTHS49csSSYYwr_PA-1" vertex="1">
+          <mxGeometry x="10" y="170" width="100" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="35-PDY_pWHxsHK2Zb-nD" name="Flink作业提交模式">
+    <mxGraphModel dx="1354" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-0" />
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-1" parent="HbZp1iy45PjkC1fKWDbk-0" />
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-9" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="510" y="220" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-2" value="JobManager" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-200" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-3" value="JobManager" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="220" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-4" value="JobManager" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="640" y="140" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-5" value="Flink Application" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-230" y="210" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-6" value="Flink Application" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="80" y="220" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-8" value="" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="530" y="240" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-7" value="Flink Application" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="550" y="260" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-10" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="230" as="sourcePoint" />
+            <mxPoint x="210" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-11" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="570" y="210" as="sourcePoint" />
+            <mxPoint x="630" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-12" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="610" y="240" as="sourcePoint" />
+            <mxPoint x="630" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-13" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630" y="270" as="sourcePoint" />
+            <mxPoint x="630" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-14" value="Application Mode" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-160" y="100" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-15" value="Per-Job Mode" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="265" y="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-16" value="Session Mode" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="685" y="100" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-17" value="A dedicated JobManager is stated for submitting the job,&lt;br style=&quot;font-size: 13px;&quot;&gt;the jobmanager will obly execute this job, then exit. &lt;br style=&quot;font-size: 13px;&quot;&gt;the flink application runs on the jobManager&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;指定了一个专用的JobManager用于提交作业，&lt;br style=&quot;font-size: 13px;&quot;&gt;作业管理器将强制执行该作业，然后退出。&lt;br style=&quot;font-size: 13px;&quot;&gt;flink应用程序运行在jobManager上&lt;br style=&quot;font-size: 13px;&quot;&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="-360" y="270" width="370" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-18" value="A dedicated JobManager is stated for submitting the job,&lt;br style=&quot;font-size: 13px&quot;&gt;the jobmanager will obly execute this job, then exit. &lt;br style=&quot;font-size: 13px&quot;&gt;the flink application runs on the client submitting the per-job cluster&lt;br style=&quot;font-size: 13px&quot;&gt;&lt;br style=&quot;font-size: 13px&quot;&gt;指定了一个专用的JobManager用于提交作业，&lt;br style=&quot;font-size: 13px&quot;&gt;作业管理器将强制执行该作业，然后退出。&lt;br style=&quot;font-size: 13px&quot;&gt;flink应用程序运行在提交的Per-Job cluster" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="40" y="270" width="430" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HbZp1iy45PjkC1fKWDbk-19" value="Multiple jobs share one JobManager&lt;br&gt;&lt;br&gt;多个作业共享一个JobManager" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Comic Sans MS;fontSize=13;" parent="HbZp1iy45PjkC1fKWDbk-1" vertex="1">
+          <mxGeometry x="510" y="310" width="240" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Y_0bu_lH_NarnwV83KzQ" name="on K8s Application Mode">
+    <mxGraphModel dx="1354" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-0" />
+        <mxCell id="JEAt9aThgjZ5hAvpox82-1" parent="JEAt9aThgjZ5hAvpox82-0" />
+        <mxCell id="JEAt9aThgjZ5hAvpox82-2" value="String [] args" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="60" y="50" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-3" value="CommandLine.options" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="110" y="120" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-4" value="CommandLine.args" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-35" y="120" width="130" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-5" value="Configuration effectiveConfiguration" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-10" y="190" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-6" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="80" as="sourcePoint" />
+            <mxPoint x="100" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-7" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="150" as="sourcePoint" />
+            <mxPoint x="100" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-8" value="KubernetesClusterClientFactory.createClusterDescriptor()" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-60" y="300" width="370" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="JEAt9aThgjZ5hAvpox82-9" value="KubernetesConfigOptions.KUBERNETES_POD_TEMPLATE_FILE_KEY" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-70" y="390" width="440" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-0" value="YZhouSubmiter" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-220" y="530" width="120" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-4" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" parent="OP1So73uvXRgUYCKXxMM-0" vertex="1">
+          <mxGeometry x="55" y="100" width="10" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-1" value="CliFrontend" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="20" y="530" width="100" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-10" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" parent="OP1So73uvXRgUYCKXxMM-1" vertex="1">
+          <mxGeometry x="45" y="110" width="10" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-13" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" parent="OP1So73uvXRgUYCKXxMM-1" vertex="1">
+          <mxGeometry x="55" y="180" width="10" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-5" value="runApplication(args)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" parent="JEAt9aThgjZ5hAvpox82-1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="-140" y="640" as="sourcePoint" />
+            <mxPoint x="50" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-6" value="main(args)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="-260" y="630" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-8" value="" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" parent="JEAt9aThgjZ5hAvpox82-1" target="OP1So73uvXRgUYCKXxMM-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="640" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-9" value="deployer" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=13;" parent="JEAt9aThgjZ5hAvpox82-1" source="OP1So73uvXRgUYCKXxMM-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-11" value="new ApplicationClusterDeployer&lt;br style=&quot;font-size: 11px;&quot;&gt;(clusterClientServiceLoader)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontFamily=Comic Sans MS;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="110" y="610" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-12" value="ApplicationClusterDeployer" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontFamily=Comic Sans MS;fontSize=11;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="240" y="530" width="160" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-7" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=13;sketch=1;" parent="OP1So73uvXRgUYCKXxMM-12" vertex="1">
+          <mxGeometry x="75" y="110" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-16" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" parent="OP1So73uvXRgUYCKXxMM-12" vertex="1">
+          <mxGeometry x="75" y="185" width="10" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-21" value="clientFactory.&lt;br&gt;createClusterDescriptor(configuration)" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" parent="OP1So73uvXRgUYCKXxMM-12" edge="1">
+          <mxGeometry x="0.0308" y="16" width="80" relative="1" as="geometry">
+            <mxPoint x="93" y="186" as="sourcePoint" />
+            <mxPoint x="320" y="186" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-22" value="clusterDescriptor" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" parent="OP1So73uvXRgUYCKXxMM-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="220" as="sourcePoint" />
+            <mxPoint x="90" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-26" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" parent="OP1So73uvXRgUYCKXxMM-12" vertex="1">
+          <mxGeometry x="85" y="249" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-15" value="run()" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" parent="JEAt9aThgjZ5hAvpox82-1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="92" y="714" as="sourcePoint" />
+            <mxPoint x="310" y="714" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-17" value="KubernetesClusterClientFactory" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontFamily=Comic Sans MS;fontSize=11;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="478" y="530" width="180" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-19" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" parent="OP1So73uvXRgUYCKXxMM-17" vertex="1">
+          <mxGeometry x="85" y="185" width="10" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-23" value="KubernetesClusterDescriptor" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;fontFamily=Comic Sans MS;fontSize=11;sketch=1;" parent="JEAt9aThgjZ5hAvpox82-1" vertex="1">
+          <mxGeometry x="700" y="530" width="180" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-24" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;fontFamily=Comic Sans MS;fontSize=11;" parent="OP1So73uvXRgUYCKXxMM-23" vertex="1">
+          <mxGeometry x="85" y="250" width="10" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="OP1So73uvXRgUYCKXxMM-25" value="deployApplicationCluster()" style="html=1;verticalAlign=bottom;endArrow=block;rounded=0;sketch=1;fontFamily=Comic Sans MS;fontSize=11;" parent="JEAt9aThgjZ5hAvpox82-1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="340" y="783" as="sourcePoint" />
+            <mxPoint x="780" y="783" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="8HtpoPdB2ZWeA5UFHST3" name="Flink SQL 项目搭建">
+    <mxGraphModel dx="954" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" source="kD2pbJbDJFFLH0_rJ7pL-1" target="kD2pbJbDJFFLH0_rJ7pL-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-1" value="实时计算平台 (Flink)" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="70" y="230" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-2" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="10" y="360" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-3" value="Flink SQL Job" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="130" y="370" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-4" value="Kubernetes" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="10" y="330" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" source="kD2pbJbDJFFLH0_rJ7pL-5" target="kD2pbJbDJFFLH0_rJ7pL-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-5" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="125" y="80" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-10" value="封装 Flink Table API 打包成 Jar，将 SQL 作为 args 传入 JAR中" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="140" y="310" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="kD2pbJbDJFFLH0_rJ7pL-11" value="编写SQL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="150" y="170" width="90" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="LME8m8o3a-eKu5ktQGd_" name="第 9 页">
+    <mxGraphModel dx="1354" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="205" width="490" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-1" value="Grafana" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="-10" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="6ovAS1xCzCNLRJA_CNM3-2" target="6ovAS1xCzCNLRJA_CNM3-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-2" value="Nginx" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="250" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="6ovAS1xCzCNLRJA_CNM3-4" target="6ovAS1xCzCNLRJA_CNM3-1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="6ovAS1xCzCNLRJA_CNM3-4" target="6ovAS1xCzCNLRJA_CNM3-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-4" value="ingress" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="-10" y="220" width="380" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-6" value="使用 API Key" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="150" y="290" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.501;entryY=-0.1;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" source="6ovAS1xCzCNLRJA_CNM3-7" target="6ovAS1xCzCNLRJA_CNM3-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6ovAS1xCzCNLRJA_CNM3-7" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;sketch=1;curveFitting=1;jiggle=2;" parent="1" vertex="1">
+          <mxGeometry x="165" y="60" width="30" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Af3Gly6x_Vct8I9ueAPe" name="自定义 Sources &amp; Sinks">
+    <mxGraphModel dx="954" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qWBAMWlTDb77JVYtgu8F-1" value="创建解析和验证选项的工厂" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="90" y="240" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qWBAMWlTDb77JVYtgu8F-2" value="实现表连接器" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="90" y="410" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qWBAMWlTDb77JVYtgu8F-3" value="实现和发现自定义格式" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="90" y="560" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qWBAMWlTDb77JVYtgu8F-4" value="使用提供的工具类" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="90" y="710" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-1" value="implements DynamicTableSourceFactory" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="520" y="120" width="290" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-2" value="HttpTableFactory" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="520" y="90" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-3" value="定义所有配置项" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="580" y="163" width="330" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-4" value="override factoryIdentifier()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="580" y="213" width="330" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-5" value="override requiredOptions()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="580" y="260" width="330" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-6" value="override optionalOptions()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="580" y="307" width="330" height="47" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-7" value="定义 connector = http,&amp;nbsp; 与 connector = kafka 同理" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="848" y="221.5" width="322" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-8" value="必填的参数项" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="848" y="270" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-9" value="可选的参数项" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="848" y="315.5" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-10" value="定义 参数类型、参数默认值、参数描述" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="848" y="173" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-11" value="override createDynamicTableSource()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="580" y="354" width="330" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-12" value="创建并返回动态表 source&amp;nbsp; &amp;nbsp; implements ScanTableSource" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="690" y="400" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j7pQN08lBtJuy0FH1N5A-14" value="按照定义，动态表是随时间变化的。&lt;br&gt;&lt;p&gt;在读取动态表时，表中数据可以是以下情况之一：&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;changelog 流（支持有界或无界），在 changelog 流结束前，所有的改变都会被源源不断地消费，由 ScanTableSource 接口表示。&lt;/span&gt;&lt;/p&gt;&lt;p&gt;处于一直变换或数据量很大的外部表，其中的数据一般不会被全量读取，除非是在查询某个值时，由 LookupTableSource 接口表示。&lt;/p&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="980" y="440" width="590" height="180" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="yaSgo8WQd42YeOZI_i1D" name="第 12 页">
+    <mxGraphModel dx="1754" dy="1425" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="czwPj0lkTTitxPN5dMzv-1" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;结合 FLIP-27 和 DBlog paper，表订阅首先在 JobManager 上对数据进行分片，生成 snapshot split 集合，然后 reader 就绪后，向 JM 申请消费 split，JM 发送消费的区间给到 Reader。当 Reader 完成 split 的消费之后，split 会存下当前的高水位信息，并将 split 以事件的形态回传给 JM 做状态记录。Splits 先在 JM 的待分配列表中，当分配给 Reader 消费后，会进行已分配列表，当状态回传后，split 会记录到已完成列表&lt;/div&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-540" y="-530" width="1040" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="czwPj0lkTTitxPN5dMzv-2" value="这构建了 master-worker 架构" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-520" y="-360" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="czwPj0lkTTitxPN5dMzv-3" value="如何构建 ？" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-434" y="-317" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="czwPj0lkTTitxPN5dMzv-4" value="split集合" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-210" y="-317" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="czwPj0lkTTitxPN5dMzv-5" value="已分配队列，已完成队列" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="-317" width="140" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="rJpBxgOm_XKR3h2pensR" name="Flink的执行图">
+    <mxGraphModel dx="1354" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="FVFq910NcyBu3RUqhZ0--1" value="stream API" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--2" value="Batch API" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="160" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--3" value="StreamGraph" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--4" value="OptimizedPlan" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="160" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--5" value="JobGraph" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="460" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--6" value="ExecutionGraph" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="570" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--7" value="物理执行图" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="-70" y="680" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--8" value="用户代码" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="310" y="255" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--9" value="利用用户代码生成的程序拓扑" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="310" y="360" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--10" value="将算子链接在一起" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="310" y="460" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--11" value="根据并行度生成对应的并行实例" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="310" y="575" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--12" value="在执行端形成的逻辑上拓扑结构" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="310" y="685" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--14" value="StreamEdge" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="850" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--15" value="StreamNode" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="850" y="455" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;dashed=1;" parent="1" source="FVFq910NcyBu3RUqhZ0--16" target="FVFq910NcyBu3RUqhZ0--14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;dashed=1;" parent="1" source="FVFq910NcyBu3RUqhZ0--16" target="FVFq910NcyBu3RUqhZ0--15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--16" value="StreamGraph" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1150" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--19" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Comic Sans MS;fontSize=13;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="880" y="450" as="sourcePoint" />
+            <mxPoint x="880" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FVFq910NcyBu3RUqhZ0--20" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.592;exitY=1.067;exitDx=0;exitDy=0;exitPerimeter=0;fontFamily=Comic Sans MS;fontSize=13;dashed=1;" parent="1" source="FVFq910NcyBu3RUqhZ0--14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="920" y="370" as="sourcePoint" />
+            <mxPoint x="920" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="785PE5H5uIs_j0KpeZp5" name="Flink 编程模型">
+    <mxGraphModel dx="954" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-1" value="Stateful Stream Processing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="160" y="540" width="250" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-2" value="DataStream / DataSet API" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="210" y="480" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-3" value="Table API" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="270" y="420" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-4" value="SQL" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="320" y="360" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-5" value="整个抽象底层" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="430" y="545" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-6" value="core API,&amp;nbsp; 提供了一套针对流处理的函数" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="440" y="485" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-7" value="对 core API 进行了封装和优化" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="440" y="425" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="DxXu-rY-M2_xT8rtIcuI-8" value="此 API 全部使用 SQL 编写代码" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="440" y="365" width="190" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
