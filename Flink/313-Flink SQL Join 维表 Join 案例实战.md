@@ -5,7 +5,7 @@
 
 因为主播所在的国家是固定的, 但是这个国家对应的大区是运营人员人为划分的 后期可能还会调整,那就是说国家和大区的关系可能会发生改变, 但是也不会频繁变化，可能隔几个月会调整一次, 国家和大区的映射关系存储在MySOL数据库中, 这份映射关系运营人员可以在控制平台进行修改，那我们在实时处理开播记录数据的时候, 如果想要关联最新的国家和大区的映射关系， 就需要使用维表Join来实现了。      
 
-1.下面我们提前在本地MySQL中去初始化国家和大区的映射关系(sql语句)。        
+#### 1.下面我们提前在本地MySQL中去初始化国家和大区的映射关系(sql语句)。        
 
 ```sql  
 // 建表 table
@@ -23,7 +23,7 @@ INSERT INTO 'country_area' VALUES ('SA', 'A AR');
 INSERT INTO 'country_area' VALUES ('IN', 'A IN');   
 ```
 
-2.添加依赖
+#### 2.添加依赖
 ```xml
 <dependency>
     <groupId>com.ververica</groupId>
@@ -43,7 +43,7 @@ INSERT INTO 'country_area' VALUES ('IN', 'A IN');
 </dependency>
 ```
 
-3.代码编写(Scala)
+#### 3.代码编写(Scala)
 ```scala
 package com.yzhou.sql.scala.join
 
@@ -155,30 +155,30 @@ object LookupJoinInnerJoin {
 
 >注意: 针对MySQL 维表中的jdbc url参数，针对8.x MySQL一定要添加该参数 `serverTimezone=Asia/Shanghai`  
 
-```
+```shell
 'url' = 'jdbc:mysql://localhost:3306/yzhou_test?serverTimezone=Asia/Shanghai', -- mysql8.x中需要指定时区
 ```
 
 >注意: 针对MySQL 维表参数中 `lookup.cache.max-rows`,`lookup.cache.ttl`,`lookup.max-retries` 这三个参数在实际作业开发中，是一定要加上的，尽可能优化。            
 
-```
+```shell
 'lookup.cache.max-rows' = '100', -- 控制lookup缓存中最多存储的数据条数
 'lookup.cache.ttl' = '3600000', -- 控制lookup缓存中数据的生命周期(毫秒)，太大或者太小都不合适
 'lookup.max-retries' = '1' -- 查询数据库失败后重试的次数
 ```
 
-4.添加log4j.properties
-```
+#### 4.添加log4j.properties
+```shell
 log4j.rootLogger=info, stdout
 log4j.appender.stdout=org.apache.log4j.ConsoleAppender
 log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
 log4j.appender.stdout.layout.ConversionPattern=%-4r [%t] %-5p %c %x - %m%n
 ```
 
-5.搭建Kafka 
+#### 5.搭建Kafka 
 此处可参考该篇内容:  https://github.com/xinzhuxiansheng/blog-notes/blob/master/Kafka/13-Docker%E5%AE%89%E8%A3%85Kafka.md  
 
-6.启动 main()方法，使用Shell 模拟Topic “yzhoutp01”写入，模拟Topic “yzhoutp02”消费   
+#### 6.启动 main()方法，使用Shell 模拟Topic “yzhoutp01”写入，模拟Topic “yzhoutp02”消费   
 模拟数据为： {"vid":"1001","uid":"abc001","start_time":1665367200000,"country":"US"}
 
 消费Topic “yzhoutp02” 得到: 
