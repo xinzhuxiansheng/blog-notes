@@ -72,16 +72,7 @@ SupportsRowLevelDelete，SupportsRowLevelUpdate 的 sink 端。
 ### 运行时的实现    
 
 
-
-
-
-
-
-
-
-
 refer   
 1.https://nightlies.apache.org/flink/flink-docs-release-1.17/zh/docs/dev/table/sourcessinks/            
 2.https://nightlies.apache.org/flink/flink-docs-release-1.17/zh/docs/dev/table/sourcessinks/#source-%e7%ab%af%e7%9a%84%e5%8a%9f%e8%83%bd%e6%8e%a5%e5%8f%a3  
-3.https://github.com/dongkelun/flink-learning/tree/master/flink-http-connector      
-4.https://cloud.tencent.com/developer/article/2291286       
+3.https://github.com/dongkelun/flink-learning/tree/master/flink-http-connector            
