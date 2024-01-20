@@ -162,9 +162,9 @@ configuration.setString("execution.savepoint.path","file:///Users/a/TMP/flink_ch
 val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration)
 ```
 
-此时，启动 main() 方法后，只需要发送如下内容即可, 我想你应该了解到，从状态恢复后的数据是 `EventCounter(event-1,13.0,2) `, 所以 测试的前面2条测试数据不需要发送，仅发送第三条数据，验证统计结果是否是基于前面2条数据统计结果计算的即可。     
+此时，启动 main() 方法后，只需要发送如下内容即可, 我想你应该了解到，从状态恢复后的数据是 `EventCounter(event-1,23.0,3) `, 所以测试的前面3条测试数据不需要发送，仅发送第4条数据(消息内容如下)，验证统计结果是否是基于前面3条数据统计结果计算的即可。     
 ```
-event-1 10 1591695864476    
+event-1 1 1591695864476    
 ```
 
 ### 总结    
