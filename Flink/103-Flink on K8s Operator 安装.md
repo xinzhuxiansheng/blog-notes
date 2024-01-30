@@ -1,6 +1,6 @@
 ## Flink on K8s Operator 安装  
 
-1.查阅官方安装指引
+1.查阅官方安装指引  
 Flink主页： https://flink.apache.org/
 Flink Operator主页： https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-stable/  
 flink-kubernetes-operator heml包下载网站：https://downloads.apache.org/flink/

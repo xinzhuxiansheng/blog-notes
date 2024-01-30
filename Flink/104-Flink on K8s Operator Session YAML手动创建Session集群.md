@@ -1,4 +1,8 @@
-## Flink K8s Session 集群创建 
+## Flink K8s Operator YAML 手动创建 Session 集群
+
+>Operator version: 1.5.0   
+
+>注意：若需删除 Seesion 集群，请先将 kind 为 FlinkSessionJob 下的 job删除 ！！！ 
 
 ### 创建 Session集群  
 1.编写 session-deployment-only.yaml 
@@ -10,8 +14,8 @@ metadata:
   namespace: flink
   name: session-deployment-only
 spec:
-  image: flink:1.13.6
-  flinkVersion: v1_13
+  image: flink:1.15.4
+  flinkVersion: v1_15
   imagePullPolicy: IfNotPresent   # 镜像拉取策略，本地没有则从仓库拉取
   ingress:   # ingress配置，用于访问flink web页面
     template: "flink.k8s.io/{{namespace}}/{{name}}(/|$)(.*)"

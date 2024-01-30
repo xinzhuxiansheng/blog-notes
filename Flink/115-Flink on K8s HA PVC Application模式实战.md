@@ -1,7 +1,7 @@
 ## Flink on K8s HA PVC Application 模式实战 
 
 1.创建checkpoint pvc
-创建checkpoint pvc yaml文件flink-checkpoint-application-pvc.yaml
+创建checkpoint pvc yaml文件 flink-checkpoint-application-pvc.yaml
 vim flink-checkpoint-application-pvc.yaml
 
 ```yaml

@@ -2,6 +2,19 @@
 
 Log
 
+* 2024.01.27 read 'Programming Scala Scalability = Functional Programming + Objects'     
+
+* 2023.12 重点放在 Flink 上
+
+* 2023.12.08 使用 React18 + Http4s 开发文件服务器  
+
+* 2023.11.25 学习 React18 + TS
+
+* 2023.11.19 学习 Antlr4    
+
+
+之前是 顺序
+
 * 2022.12.26 学习《scala-with-cats》
 
 * 2023.02.01 学习《RocketMQ技术内幕》
@@ -23,13 +36,9 @@ Log
 
 * 2023.11.04 学习 JaCoCo & ByteCode 
 
-* 2023.11.19 学习 Antlr4    
 
-* 2023.11.25 学习 React18 + TS
 
-* 2023.12.08 使用 React18 + Http4s 开发文件服务器
 
-* 2023.12 重点放在 Flink 上
 
 ### 分布式
 

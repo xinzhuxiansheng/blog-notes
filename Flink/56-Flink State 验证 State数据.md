@@ -1,4 +1,4 @@
-## Flink State 使用 LocalStreamEnvironment（IDEA 开发环境） 验证 State & 从 Checkpoint 恢复 State 
+## Flink 使用 LocalStreamEnvironment（IDEA 开发环境） 验证 State & 从 Checkpoint 恢复 State 
 
 >Flink version: 1.15.4   
 
@@ -94,12 +94,12 @@ class EventCounterProcessFunction extends KeyedProcessFunction[String, Event, Ev
 ### 不带 checkpoint 测试    
 
 基于上面示例 Code，先启动 nc 命令监听 9000 端口  
-```
+```shell
 nc -lk 9000 
 ```
 
 再启动 main()方法，并在 命令终端模拟发送如下数据：  
-```
+```shell
 event-1 1 1591695864473
 event-1 12 1591695864474    
 ```
@@ -110,13 +110,13 @@ event-1 12 1591695864474
 EventCounter(event-1,13.0,2)        
 ```
 
-上面的输出内容是符合上面代码处理的预期的， 但当 `main() 重启后`，我们在模拟一条数据发送：  
-```
+上面的输出内容是符合上面代码处理的预期的， 但当 `main() 重启后`，我们在模拟一条数据发送：   
+```shell  
 event-1 10 1591695864476
 ```
 
 此时控制台输出的`最新`的如下内容，这很明显并非 `示例需求的介绍的那样 “统计每种事件的个数和value值的总和”`，之前的统计数据丢失了。       
-```
+```shell
 EventCounter(event-1,10.0,1)  
 ```
 
@@ -142,7 +142,7 @@ env.getCheckpointConfig.setCheckpointStorage("file:///Users/a/TMP/flink_checkpoi
 >注意：在很多Blog 中使用 `FsStateBackend` 来配置 checkpoint 存储状态后端，该类已在高版本 Flink 废弃了，而示例代码中的配置，使用 `HashMapStateBackend` 作为状态存储后端，并异步将内存中的 state 持久化在 本地文件系统中。    
 
 接下来，我们像上一章节“不带 checkpoint 测试” 步骤，重新操作一遍， `得到的想象与之前的想象如出一辙`， 重启后，之前统计的结果也没有恢复过来，但我们指定的 checkpoint 路径(file:///Users/a/TMP/flink_checkpoint)下多了一些文件，内容如下：   
-```
+```shell
 ➜  8781988ef03014886759192ebd228383 
 .
 ├── chk-69
@@ -155,7 +155,7 @@ env.getCheckpointConfig.setCheckpointStorage("file:///Users/a/TMP/flink_checkpoi
 
 ### 指定 execution.savepoint.path 参数 测试 
 基于 “带 checkpoint 测试”的示例代码基础上， 修改 StreamExecutionEnvironment 对象，创建时指定 `execution.savepoint.path`   
-```
+```shell
 var configuration =  new Configuration()
 configuration.setString("execution.savepoint.path","file:///Users/a/TMP/flink_checkpoint/8781988ef03014886759192ebd228383/chk-69");
 // 获取执行环境
@@ -163,7 +163,7 @@ val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvi
 ```
 
 此时，启动 main() 方法后，只需要发送如下内容即可, 我想你应该了解到，从状态恢复后的数据是 `EventCounter(event-1,23.0,3) `, 所以测试的前面3条测试数据不需要发送，仅发送第4条数据(消息内容如下)，验证统计结果是否是基于前面3条数据统计结果计算的即可。     
-```
+```shell
 event-1 1 1591695864476    
 ```
 
