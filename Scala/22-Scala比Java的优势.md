@@ -104,5 +104,4 @@ val numbers = List(1, 2, 3, 4, 5)
 val doubled = numbers.map(_ * 2)
 
 println(doubled) // 输出 List(2, 4, 6, 8, 10)
-
 ```
