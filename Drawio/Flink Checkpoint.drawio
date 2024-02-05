@@ -1,0 +1,216 @@
+<mxfile host="Electron" modified="2024-02-05T02:58:45.433Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="Wrw0ufEYh0PU6Hh9NEGs" version="22.0.3" type="device" pages="2">
+  <diagram name="流程1" id="2WoKs-dCDb5hNbEgrxKs">
+    <mxGraphModel dx="2714" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sVIjti374ynEVooHmX1T-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="144" y="80" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-2" value="CheckpointCoordinator" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="170" y="123" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-3" value="JobManager" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="239.5" y="90" width="81" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-4" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="240" width="510" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-5" value="Source 算子" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="240" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-6" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="410" width="510" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-7" value="Map 算子" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-70" y="410" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-8" value="Step1: 所有 Source 侧 SubTask 做 checkpoint，持久化 State，然后向下游广播 CheckBarrier" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="570" y="240" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-9" value="Step2: Map 算子的 SubTask 接受到 Barrier，进行 Barrier 对齐，当所有的输入都接受到 Barrier，进行 Checkpoint，并向下广播 Barrier" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="570" y="410" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-10" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="590" width="510" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-11" value="Windows 算子" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-100" y="590" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-12" value="Step3: Window 算子的 SubTask 接受到 所有输入 Barrier，Checkpoint，并向下游广播 Barrier" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="570" y="590" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-13" value="" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="770" width="510" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-14" value="Sink 算子" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="770" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sVIjti374ynEVooHmX1T-15" value="Step4: 算子接受到 Barrier，进行 Checkpoint" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="570" y="770" width="260" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Cjhzn0cZrJa70uTlnmx6" name="Checkpoint 处理流程">
+    <mxGraphModel dx="3274" dy="1965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="77udZAXV97fHLvFeK-Fd-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-515" y="-140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-1" value="CheckpointCoordinator#ScheduledTrigger（implements Runnable）" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-670" y="-270" width="310" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-3" value="CheckpointCoordinator#triggerCheckpoint()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-676" y="-134" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-5" value="run()" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="-180" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-6" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Comic Sans MS;fontSize=13;dashed=1;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-510" y="-50" as="sourcePoint" />
+            <mxPoint x="-800" y="-80" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-610" y="50" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-7" value="CompletableFuture" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-960" y="-140" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-9" value="CheckpointTriggerRequest()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-210" y="-170" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-11" value="CheckpointCoordinator#chooseRequestToExecute()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-210" y="-60" width="350" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-516" y="-280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-12" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;scheduleTriggerWithDelay(long initDelay)&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontColor=default;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-731.5" y="-440" width="431" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-14" value="创建 timer.scheduleAtFixedRate()&amp;nbsp; 定时线程" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="-350" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-16" value="&lt;h2 name=&quot;3.-Checkpoint%E7%9A%84%E5%AE%9E%E7%8E%B0&quot; id=&quot;dk54e&quot; style=&quot;font-size: 13px;&quot;&gt;Checkpoint的实现 流程概览&lt;/h2&gt;&lt;p style=&quot;font-size: 13px;&quot;&gt;在Flink中，做Checkpoint大致由以下几步组成：&lt;/p&gt;&lt;ol class=&quot;ol-level-0&quot; style=&quot;font-size: 13px;&quot;&gt;&lt;li style=&quot;font-size: 13px;&quot;&gt;可行性检查&lt;/li&gt;&lt;li style=&quot;font-size: 13px;&quot;&gt;JobMaster通知Task触发检查点&lt;/li&gt;&lt;li style=&quot;font-size: 13px;&quot;&gt;TaskExecutor执行检查点&lt;/li&gt;&lt;li style=&quot;font-size: 13px;&quot;&gt;JobMaster确认检查点&lt;/li&gt;&lt;/ol&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-1040" y="-670" width="280" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-17" value="1.可行性检查" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontFamily=Comic Sans MS;fontSize=13;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="-10" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-18" value="startTriggeringCheckpoint()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-70" y="-10" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-19" target="77udZAXV97fHLvFeK-Fd-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-19" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;CompletableFuture&amp;lt;CheckpointPlan&amp;gt; checkpointPlanFuture =&lt;br style=&quot;font-size: 13px;&quot;&gt;        checkpointPlanCalculator.calculateCheckpointPlan();&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-560" y="120" width="400" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-20" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Comic Sans MS;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-670" y="200" as="sourcePoint" />
+            <mxPoint x="-140" y="150" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="30" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-21" value="1.确保作业不是处于关闭中或未启动的状态" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-410" y="180" width="250" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-22" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-3" target="77udZAXV97fHLvFeK-Fd-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-340" y="-100" as="sourcePoint" />
+            <mxPoint x="-290" y="-150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-23" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-3" target="77udZAXV97fHLvFeK-Fd-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-350" y="-100" as="sourcePoint" />
+            <mxPoint x="-200" y="-130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-24" target="77udZAXV97fHLvFeK-Fd-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-24" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;2.创建一个 CheckpointID&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;long checkpointID =&lt;br style=&quot;font-size: 13px;&quot;&gt;        &lt;span style=&quot;font-size: 13px;&quot;&gt;checkpointIdCounter&lt;/span&gt;.getAndIncrement();&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;align=center;fontFamily=Comic Sans MS;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-507" y="260" width="295" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-27" target="77udZAXV97fHLvFeK-Fd-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-359.5" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-27" value="3.创建一个 PendingCheckpoint 对象&lt;br style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;&lt;div style=&quot;border-color: var(--border-color); font-size: 13px;&quot;&gt;CheckpointCoordinator#createPendingCheckpoint(）&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-531.75" y="400" width="344.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-29" target="77udZAXV97fHLvFeK-Fd-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-29" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;创建定时线程关注是否有超时 &lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;ScheduledFuture&amp;lt;?&amp;gt; cancellerHandle =&lt;br style=&quot;font-size: 13px;&quot;&gt;        timer.schedule(&lt;br style=&quot;font-size: 13px;&quot;&gt;                &lt;span style=&quot;font-size: 13px;&quot;&gt;new &lt;/span&gt;CheckpointCanceller(checkpoint),&lt;br style=&quot;font-size: 13px;&quot;&gt;                &lt;span style=&quot;font-size: 13px;&quot;&gt;checkpointTimeout&lt;/span&gt;,&lt;br style=&quot;font-size: 13px;&quot;&gt;                TimeUnit.&lt;span style=&quot;font-style: italic; font-size: 13px;&quot;&gt;MILLISECONDS&lt;/span&gt;);&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=default;labelBackgroundColor=none;align=center;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-870" y="367" width="280" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-31" value="如果超时则&amp;nbsp;abort 当前 PendingCheckpoint" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-802" y="560" width="144" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-34" value="4.CheckpointCoordinator#snapshotMasterState(checkpoint)&lt;br style=&quot;font-size: 13px;&quot;&gt;触发MasterHook。部分外部系统在触发检查点之前，需要做一些扩展逻辑，通过该实现MasterHook可以实现通知机制" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-568.6" y="520" width="417.19" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-35" value="5.重复步骤1，没问题的话通知SourceStreamTask开始&lt;b style=&quot;font-size: 13px;&quot;&gt;触发检查点&lt;/b&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;code style=&quot;font-size: 13px;&quot;&gt;CheckpointPlanCalculator#triggerCheckpointRequest&lt;/code&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-568.6" y="690" width="417.19" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-359.6" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-37" target="77udZAXV97fHLvFeK-Fd-40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-37" value="CheckpointCoordinator#triggerTasks()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="70" y="230" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-38" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="77udZAXV97fHLvFeK-Fd-35" target="77udZAXV97fHLvFeK-Fd-37">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-70" y="480" as="sourcePoint" />
+            <mxPoint x="-20" y="430" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-110" y="640" />
+              <mxPoint y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-40" value="Execution#triggerCheckpoint()&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;Execution 对应了一个Task实例，因此JobMaster可以通过里面的Slot引用找到其&lt;code style=&quot;font-size: 13px;&quot;&gt;TaskManagerGateway&lt;/code&gt;，发送远程请求触发Checkpoint" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="45" y="400" width="310" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-42" value="2.JobMaster 通知 Task 触发检查点" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontFamily=Comic Sans MS;fontSize=13;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="-70" y="210" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-43" value="Task#triggerCheckpointBarrier()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="670" y="-134" width="260" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-44" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="1400" as="sourcePoint" />
+            <mxPoint x="520" y="-620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="77udZAXV97fHLvFeK-Fd-45" value="3.TaskManager 执行检查点" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontFamily=Comic Sans MS;fontSize=13;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="530" y="-134" width="140" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -9,7 +9,7 @@
 指定 savepoint 存储路径   
 
 ```
-./flink cancel -s [hdfs/file]://路径 [job id]   
+./flink cancel -s [hdfs/file]://路径 [job id]    
 ```
 
 示例： 
