@@ -104,5 +104,7 @@ JobManager，TaskManager 启动完成后，访问 `http://localhost:8081/#/overv
 ![flinkdebugenv02](images/flinkdebugenv02.png)     
 
 
+>注意，Idea 启动并不会影响你调整 JobManager，TaskManager 的 flink-conf.yaml 配置项   
+
 refer   
 1.https://nightlies.apache.org/flink/flink-docs-master/zh/docs/flinkdev/building/   
