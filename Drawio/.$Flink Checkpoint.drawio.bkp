@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-02-05T02:58:28.523Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="qFyYRxsRpzrOVUjsoQq9" version="22.0.3" type="device" pages="2">
+<mxfile host="Electron" modified="2024-02-05T10:11:25.446Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="DPfBKLVjVSZGISqPOePH" version="22.0.3" type="device" pages="2">
   <diagram name="流程1" id="2WoKs-dCDb5hNbEgrxKs">
     <mxGraphModel dx="2714" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -198,7 +198,7 @@
         <mxCell id="77udZAXV97fHLvFeK-Fd-42" value="2.JobMaster 通知 Task 触发检查点" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#a20025;strokeColor=#6F0000;fontFamily=Comic Sans MS;fontSize=13;fontColor=#ffffff;" vertex="1" parent="1">
           <mxGeometry x="-70" y="210" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="77udZAXV97fHLvFeK-Fd-43" value="Task#triggerCheckpointBarrier()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="77udZAXV97fHLvFeK-Fd-43" value="Task#triggerCheckpointBarrier()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="670" y="-134" width="260" height="90" as="geometry" />
         </mxCell>
         <mxCell id="77udZAXV97fHLvFeK-Fd-44" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;" edge="1" parent="1">

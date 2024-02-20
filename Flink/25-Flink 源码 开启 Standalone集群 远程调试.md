@@ -36,7 +36,3 @@ env.java.opts.taskmanager: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n
 >注意：在IDEA 配置`远程调试` 表单的 `use module classpath` 参数，其模块指的是`调试入口类所在的代码模块`, 根据 Flink 源码可知，StandaloneSessionClusterEntrypoint，TaskManagerRunner 都在 flink-runtime 模块中。  
 
 找到 main() 方法打上断点就可以开始调试了。      
-
-
-
-

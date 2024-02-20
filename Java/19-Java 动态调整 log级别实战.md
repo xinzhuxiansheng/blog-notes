@@ -177,7 +177,7 @@ appender.file.layout.pattern = %d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36}
 ### JMX 全局修改服务 Log 级别       
 可通过 java/bin/Jconsole 全局修改 log 级别， 需做以下步骤：    
 
-* 1.服务启动时需配置 JMX 启动参数 (VM Options)
+* 1.服务启动时需配置 JMX 启动参数 (VM Options)    
 ```shell
 -Dcom.sun.management.jmxremote
 -Dcom.sun.management.jmxremote.port=12345
@@ -185,7 +185,7 @@ appender.file.layout.pattern = %d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36}
 -Dcom.sun.management.jmxremote.ssl=false
 ```
 
-* 2.找到对应的 mbeanName，修改 Level 
+* 2.找到对应的 mbeanName，修改 Level    
 修改成 Level 由 INFO 改成 DEBUG 即可 。  
 ![remotedebug01](images/remotedebug01.png)      
 
