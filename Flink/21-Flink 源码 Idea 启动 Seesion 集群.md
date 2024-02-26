@@ -1,6 +1,8 @@
-## Flink 源码搭建   
+## Flink 源码 搭建 （Idea 启动 Seesion集群）     
 
 >Flink version: 1.18.0
+
+>分别启动 JobManager，TaskManager       
 
 ### 1. 源码导入
 
@@ -104,7 +106,7 @@ JobManager，TaskManager 启动完成后，访问 `http://localhost:8081/#/overv
 ![flinkdebugenv02](images/flinkdebugenv02.png)     
 
 
->注意，Idea 启动并不会影响你调整 JobManager，TaskManager 的 flink-conf.yaml 配置项   
+>注意，Idea 启动并不会影响你调整 JobManager，TaskManager 的 flink-conf.yaml 配置项     
 
 refer   
 1.https://nightlies.apache.org/flink/flink-docs-master/zh/docs/flinkdev/building/   

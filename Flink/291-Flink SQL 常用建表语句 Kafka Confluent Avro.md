@@ -1,3 +1,6 @@
+
+
+### 只处理 value
 ```
 CREATE TABLE TABLE_NAME (
     `id` STRING COMMENT '',
@@ -5,22 +8,16 @@ CREATE TABLE TABLE_NAME (
     `col87` STRING COMMENT '',
     `col88` BYTES COMMENT ''
   )
-WITH
-  (
-    'properties.sasl.mechanism' = 'SCRAM-SHA-256',
-    'value.avro-confluent.subject' = 'xxx-value',
-    'properties.security.protocol' = 'SASL_PLAINTEXT',
-    'scan.startup.mode' = 'earliest-offset',
-    'key.fields' = 'id',
-    'properties.bootstrap.servers' = '192.168.xxx.xxx:9092',
-    'properties.sasl.jaas.config' = 'org.apache.kafka.common.security.scram.ScramLoginModule required username="admin" password="xxx";',
-    'connector' = 'kafka',
-    'key.avro-confluent.url' = 'http://192.168.xxx.xxx:8081',
-    'value.format' = 'avro-confluent',
-    'key.format' = 'avro-confluent',
-    'value.fields-include' = 'EXCEPT_KEY',
-    'topic' = 'xxxx',
-    'properties.group.id' = 'testGroup',
-    'value.avro-confluent.url' = 'http://192.168.xxx.xxx:8081'
-  )
+WITH (
+	'connector' = 'kafka',
+	'topic' = 'topicName',
+	'scan.startup.mode' = 'earliest-offset',
+	'properties.group.id' = 'gid',
+	'properties.security.protocol' = 'SASL_PLAINTEXT',
+	'properties.sasl.mechanism' = 'SCRAM-SHA-256',
+	'properties.bootstrap.servers' = 'xxx.xxx.xxx.xxx:9092',
+	'properties.sasl.jaas.config' = 'org.apache.kafka.common.security.scram.ScramLoginModule required username="xxxx" password="xxxx";',
+	'value.format' = 'avro-confluent',
+	'value.avro-confluent.url' = 'http://xxx.xxx.xxx.xxx:8091'
+);
 ```
