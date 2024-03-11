@@ -2,6 +2,8 @@
 
 Log
 
+* 2024.03.11 将重心放在 Apache Paimon + Apache Dolphinscheduler 
+
 * 2024.01.27 read 'Programming Scala Scalability = Functional Programming + Objects'     
 
 * 2023.12 重点放在 Flink 上
