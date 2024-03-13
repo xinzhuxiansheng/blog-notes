@@ -2,6 +2,8 @@
 
 Log
 
+* 工作重点： "湖仓"   
+
 * 2024.03.11 将重心放在 Apache Paimon & Apache Dolphinscheduler & Rust & Risingwave    
 
 * 2024.01.27 read 'Programming Scala Scalability = Functional Programming + Objects'     
