@@ -1,7 +1,7 @@
 ## kubeadm 搭建 Kubernetes v1.27 集群    
 
 >Ubuntu: 22.04.4 , kubernetes version: v1.23.5, containerd version: 1.6.24 
->本环境基于 VMware 虚拟环境，但本篇 Blog 不涉及到 VMware 搭建虚拟环境的介绍。   
+>本环境基于 VMware 虚拟环境，但本篇 Blog 不涉及到 VMware 搭建虚拟环境的介绍。    
 
 
 ### 1.集群规划    
@@ -389,7 +389,7 @@ ip link delete kube-ipvs0
 部署EFK、Grafana Loki日志系统     
 部署持久化存储，可选NFS、Rook-ceph、Openebs、Longhorn等     
 安装Ingress Controller、官方Ingress-Nginx、traefic、apache apisix等     
-安装负载均衡插件MetaLB、OpenELB等     
+安装负载均衡插件MetaLB、OpenELB等       
 
 refer     
-1.https://blog.csdn.net/networken/article/details/124071068   
+1.https://blog.csdn.net/networken/article/details/124071068    

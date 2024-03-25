@@ -37,3 +37,4 @@ flink kafka scan =.startup.mode的几个选项
 1.'scan.startup.mode' 
 * earliest-offset 
 * latest-offset   
+* group-offsets

@@ -1,0 +1,85 @@
+<mxfile host="Electron" modified="2024-03-22T10:50:28.655Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="qxGUyBal_uokIkK-_TAD" version="22.0.3" type="device">
+  <diagram name="第 1 页" id="3xUTaUgCC9NKu3znaScp">
+    <mxGraphModel dx="1593" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="gZq5AvmwAYu3Xe7hFHVc-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-120" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-1" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;StreamExecutionEnvironment#fromSource()&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;fontColor=default;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-340" y="10" width="440" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="gZq5AvmwAYu3Xe7hFHVc-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="110" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-2" value="DataStreamSource#DataStreamSource()" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-260" y="220" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-4" value="&lt;div style=&quot;background-color: rgb(30, 31, 34); color: rgb(188, 190, 196); font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;new DataStreamSource()&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="120" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-5" value="&lt;div style=&quot;background-color: rgb(30, 31, 34); color: rgb(188, 190, 196); font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;new SourceTransformation()&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="120" y="220" width="280" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-8" value="&lt;div style=&quot;background-color: rgb(30, 31, 34); color: rgb(188, 190, 196); font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;StreamGraphGenerator#static{}&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="460" y="390" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-9" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=0;dashed=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" target="gZq5AvmwAYu3Xe7hFHVc-8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="280" as="sourcePoint" />
+            <mxPoint x="330" y="230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="280" />
+              <mxPoint x="430" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="gZq5AvmwAYu3Xe7hFHVc-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="599.9999999999998" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-10" value="&lt;div style=&quot;background-color: rgb(30, 31, 34); color: rgb(188, 190, 196); font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;SourceTransformationTranslator&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="90" y="570" width="340" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-11" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0.579;entryY=-0.048;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;entryPerimeter=0;dashed=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="gZq5AvmwAYu3Xe7hFHVc-8" target="gZq5AvmwAYu3Xe7hFHVc-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="290" y="290" as="sourcePoint" />
+            <mxPoint x="470" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="420" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-13" value="转成 StreamGraph 的点&amp;nbsp;Vertex" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="470" y="450" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-14" value="&lt;div style=&quot;background-color: rgb(30, 31, 34); color: rgb(188, 190, 196); font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;new SourceOperatorFactory()&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="635" y="760" width="330" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="gZq5AvmwAYu3Xe7hFHVc-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800" y="750" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="800" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-16" value="&lt;div style=&quot;background-color: rgb(30, 31, 34); color: rgb(188, 190, 196); font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px; text-align: left;&quot;&gt;SourceTransformationTranslator#translateInternal()&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="570" y="570" width="460" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-19" value="构建算子实例" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="970" y="960" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gZq5AvmwAYu3Xe7hFHVc-20" value="&lt;div style=&quot;background-color:#1e1f22;color:#bcbec4&quot;&gt;&lt;pre style=&quot;font-family:&#39;JetBrains Mono&#39;,monospace;font-size:12.8pt;&quot;&gt;SourceOperatorFactory#createStreamOperator()&lt;/pre&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="900" width="470" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

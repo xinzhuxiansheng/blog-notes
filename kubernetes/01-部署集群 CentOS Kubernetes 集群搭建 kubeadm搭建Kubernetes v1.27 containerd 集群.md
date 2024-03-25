@@ -745,11 +745,6 @@ SUCCESS
 
 
 
-
-// TODO 后续 再整理
-
-
-
 refer 
 1.https://v1-27.docs.kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/     
 2.https://kubernetes.io/zh-cn/releases/   
