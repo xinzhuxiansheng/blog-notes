@@ -46,7 +46,12 @@ services:
       NEKO_VIDEO_BITRATE: 3000
       NEKO_FILE_TRANSFER_ENABLED: true
       NEKO_FILE_TRANSFER_PATH: /home/neko/Downloads
+      NEKO_NAT1TO1: 192.168.0.140
 ```    
+
+```bash
+docker-compose -f xx.yaml up -d
+```
 
 **image**: 可参考官网选择不同浏览器镜像 
 ![neko03](http://img.xinzhuxiansheng.com/blogimgs/linux/neko03.png)        

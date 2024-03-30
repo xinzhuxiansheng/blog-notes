@@ -141,6 +141,8 @@ $ vi /sys/kernel/mm/transparent_hugepage/enabled
 [always] madvise never
 ```
 
+以上是永久关闭，重启后才生效，还需执行 `swapoff -a` 临时生效。                  
+
 ## 设置时间同步 
 
 使用 `timedatectl` 命令查看时间和时区   
