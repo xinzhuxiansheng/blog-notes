@@ -1,6 +1,6 @@
 # Flink on K8s - Kubernetes Operator - yaml 创建 Session 集群     
 
->Operator version: 1.8.0    
+>Operator version: 1.8  
 
 ## 介绍 
 请访问  https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-release-1.8/docs/custom-resource/overview/#application-deployments ,了解 Seesion yaml的编写示例； 
@@ -105,6 +105,8 @@ flink-operator-webhook-service                        ClusterIP   10.96.189.126 
 
 #### 此 Seesion 与 Standalone Seesion 不同  
 在 Standalone Seesion集群下，TaskManager是一起部署好的， 而 Kubernetes Operator 的 Seesion Mode，仅仅只启动 JobManager，而 TaskManager 会随着申请资源大小而创建，并不受 JobManager限制。      
+
+这里特别注意： Operator 的 Seesion下 创建的 Job，它对应的资源是 sessionjob。    
 
 #### 向 Seesion集群添加作业  
 ```bash
@@ -215,8 +217,6 @@ spec:
 3.Seesion 集群 和 Job 一起提交，按照先后顺序创建        
 
 >注意：若需删除 Seesion 集群，请先将 kind 为 FlinkSessionJob 下的 job删除 ！！！      
-
-
 
 
 

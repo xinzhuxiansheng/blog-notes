@@ -1,6 +1,6 @@
-## Flink on K8s Operator 日志持久化 
+## Flink on K8s - Kubernetes Operator - Operator 日志持久化
 
->注意 Operator 版本
+>Operator version: 1.8 
 
 1.编写日志 operator-log-pvc.yaml    
 vim operator-log-pvc.yaml   

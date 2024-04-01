@@ -1,5 +1,7 @@
 # Flink on Kubernetes - Kubernetes Operator - 安装 Operator    
 
+>Operator version: 1.8
+
 ## 引言 
 请访问 Flink Kubernetes Operator 官网  `https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/`  
 
