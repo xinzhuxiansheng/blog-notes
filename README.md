@@ -2,6 +2,8 @@
 
 Log
 
+* 2024.04.02 学习 Apache Seatunnel, 深入研究该项目，目标是参与社区、提PR 
+
 * 工作重点： "湖仓"   
 
 * 2024.03.11 将重心放在 Apache Paimon & Apache Dolphinscheduler & Rust & Risingwave    
