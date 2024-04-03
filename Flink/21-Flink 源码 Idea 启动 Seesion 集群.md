@@ -1,4 +1,4 @@
-## Flink 源码 搭建 （Idea 启动 Seesion集群）     
+## Flink 源码 Idea 启动 Seesion集群    
 
 >Flink version: 1.18.0
 
@@ -44,7 +44,7 @@ mvn clean package
 * **Program arguments**:  -c conf   
 * **Modify classpath**: 选择 `Include` 且指定 distlib 的目录下的`jar`。   
 需特别注意, 选择目录无效，需分别添加 jar。例如下图：    
-![flinkdebugenv01](images/flinkdebugenv01.png)  
+![flinkdebugenv01](http://img.xinzhuxiansheng.com/blogimgs/flink/flinkdebugenv01.png)   
 
 ### 3. 配置控制台打印 log 
 注意，此时 jobmanager已可在 idea 中启动，但经过测试，log无法在 idea 控制台打印，而是在`项目根目录下会自动创建一个log 文件夹`打印 log。         
@@ -80,7 +80,7 @@ appender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m
 * **Program arguments**:  -c conf   
 * **Modify classpath**: 选择 `Include` 且指定 distlib 的目录下的`jar`。   
 需特别注意, 选择目录无效，需分别添加 jar。例如下图：    
-![flinkdebugenv01](images/flinkdebugenv01.png)  
+![flinkdebugenv01](http://img.xinzhuxiansheng.com/blogimgs/flink/flinkdebugenv01.png)  
 
 #### 3.2修改 conf/flink-conf.yaml 配置文件  
 >注意：TaskManager 启动比 JobManager 不同点， 需修改项目根目录下 conf/flink-conf.yaml 文件，添加内容如下：  
@@ -103,7 +103,7 @@ taskmanager.memory.jvm-overhead.min: 128m
 
 ### 访问 Flink Web UI
 JobManager，TaskManager 启动完成后，访问 `http://localhost:8081/#/overview` ,查看 `Task Managers` 菜单，若看到名为 `tm_yzhou` 的 taskmanager，则表示注册成功。  
-![flinkdebugenv02](images/flinkdebugenv02.png)     
+![flinkdebugenv02](http://img.xinzhuxiansheng.com/blogimgs/flink/flinkdebugenv02.png)     
 
 
 >注意，Idea 启动并不会影响你调整 JobManager，TaskManager 的 flink-conf.yaml 配置项     
