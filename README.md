@@ -2,7 +2,7 @@
 
 Log
 
-* 2024.04.02 学习 Apache Seatunnel, 深入研究该项目，目标是参与社区、提PR 
+* 2024.04.03 学习 Flink Kubernetes Operator 源码
 
 * 工作重点： "湖仓"   
 
