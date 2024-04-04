@@ -1,6 +1,6 @@
 # Kubernetes Operator - 部署 Operator
 
->该篇是基于 “Kubernetes Operator - 开发 Operator 案例1” 中实战案例代码部署。	
+>该篇是基于 “Kubernetes Operator - 自定义 controller 开发 Operator 案例1” 中实战案例代码部署。	
 
 ## 编写 Dockerfile 	
 ```yaml
@@ -21,7 +21,7 @@ docker build -t yzhou/ingress-manager:1.0.0 .
 ```
 
 ## 将镜像导入 kind	
-注意 --name 参数，它指向的是 kind的 集群名称， 可通过`kind get clusters` 获取。		
+注意 --name 参数，它指向的是 kind的 集群名称， 可通过`kind get clusters` 获取。		  
 ```bash
 kind load docker-image yzhou/ingress-manager:1.0.0 --name yzhou-k8s-dev
 ```

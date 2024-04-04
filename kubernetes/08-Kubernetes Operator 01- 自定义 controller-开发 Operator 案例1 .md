@@ -1,4 +1,4 @@
-# Kubernetes Operator - 开发 Operator 案例1    
+# Kubernetes Operator - 自定义 controller 开发 Operator 案例1    
 
 ## 背景 
 如下图所示：    
