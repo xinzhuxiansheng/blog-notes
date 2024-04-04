@@ -1,4 +1,4 @@
-# Kubernetes Operator 入门实践 - 开发 Operator 案例1    
+# Kubernetes Operator - 开发 Operator 案例1    
 
 ## 背景 
 如下图所示：    
@@ -179,6 +179,7 @@ func (c *controller) processNextItem() bool {
 	if shutdown {
 		return false
 	}
+	defer c.queue.Done(item)
 	key := item.(string)
 
 	err := c.syncService(key)
