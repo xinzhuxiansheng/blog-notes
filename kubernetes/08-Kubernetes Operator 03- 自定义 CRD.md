@@ -6,3 +6,7 @@
 * 使用自定义资源：像内置资源比如 Pod一样声明资源，使用CR声明我们的资源信息  
 * 删除自定义资源：当我们不再需要时，可以删除自定义资源 
 
+
+
+refer   
+1.https://kubernetes.io/zh-cn/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/        
