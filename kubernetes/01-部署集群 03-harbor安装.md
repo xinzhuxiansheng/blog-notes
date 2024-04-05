@@ -86,6 +86,24 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 
+>注意，还需将所有节点执行 `docker login -u admin -p 123456 harbor01.io` 登录操作，否则无法拉取镜像。        
+
+
+## Kubernetes 节点 配置 .docker/config.json   
+集群节点 docker login 之后，会生成 `/root/.docker/config.json` 文件， 当Kubernetes 拉取 harbor 镜像时出现 身份校验异常时，需将 `root/.docker/config.json` 文件复制到`/var/lib/kubelet/config.json`, 然后在 Kubernetes 上重新部署即可正常拉取镜像。    
+
+
+## 镜像上传操作   
+1. 因节点 hosts 配置了harbor 域名地址，则在 打包镜像时，需添加域名前缀，例如：  
+```shell
+docker build -t harbor01.io/yzhou/k8s-client-test:0.0.1 .  
+```
+
+2. 最后再推送镜像 
+```shell
+docker push harbor01.io/yzhou/k8s-client-test:0.0.1  
+```
+
 ## 其他操作 
 
 ### Harbor 命令 启动 & 停止

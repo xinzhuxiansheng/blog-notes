@@ -2,9 +2,7 @@
 
 >该篇是基于 上一篇 ’Flink on Kubernetes - Kubernetes集群搭建 - 基础环境搭建‘ 完成。   
 
-安装 Docker version： 20.10.7
-
-## 安装 Docker 
+## 安装 Docker (20.10.7)
 Docker安装官方指引  https://docs.docker.com/engine/install/centos/  
 
 >注意：`建议搭建再还没安装 Docker 之前，先了解下官网的文档，建议指定版本安装`。 
@@ -450,16 +448,20 @@ $ systemctl status haproxy
 #### 5.启动后检查端口，在2台Master上执行
 
 master-01 output log:    
+```bash
 [root@k8s01 ~]# netstat -lntup |grep haproxy
 tcp        0      0 0.0.0.0:1080            0.0.0.0:*               LISTEN      13480/haproxy       
 tcp        0      0 0.0.0.0:16443           0.0.0.0:*               LISTEN      13480/haproxy       
 udp        0      0 0.0.0.0:45763           0.0.0.0:*                           13479/haproxy
+```
 
 master-02 output log:      
+```bash
 [root@k8s02 ~]# netstat -lntup |grep haproxy 
 tcp        0      0 0.0.0.0:1080            0.0.0.0:*               LISTEN      11008/haproxy       
 tcp        0      0 0.0.0.0:16443           0.0.0.0:*               LISTEN      11008/haproxy       
 udp        0      0 0.0.0.0:53632           0.0.0.0:*                           11007/haproxy
+```
 
 
 >此时，所有虚机环境已经完成以下内容：            
