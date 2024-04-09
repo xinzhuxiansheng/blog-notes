@@ -5,7 +5,7 @@
 
 ```
 chmod 700 /home/user/.ssh
-chmod 600 /home/user/.ssh/authorized_keys
+chmod 600 /home/user/.ssh/authorized_keys 
 ```
 
 1.Hadoop高可用集群规划

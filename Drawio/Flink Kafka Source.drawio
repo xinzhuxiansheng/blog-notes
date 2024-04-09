@@ -1,0 +1,47 @@
+<mxfile host="Electron" modified="2024-04-08T02:28:30.284Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="Oex53oYhK2OYShK5I83a" version="24.1.0" type="device">
+  <diagram name="Split分配流程" id="mEK6_J85pj-uxIT36-Su">
+    <mxGraphModel dx="2874" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-1" value="KafkaSourceEnumerator" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="175" y="40" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-3" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;KafkaSourceEnumerator#start()&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="150" y="140" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-4" value="Split 流程入口" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="374" y="145" width="96" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-fAsEpMH5wsK3s9IOhUY-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-60" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-5" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;flink-runtime&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="40" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-fAsEpMH5wsK3s9IOhUY-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-7" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;SourceCoordinator#start&lt;span style=&quot;font-size: 13px; white-space: normal;&quot;&gt;()&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="142.5" width="200" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-10" value="JobMaster#onStart()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-510" y="35" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-fAsEpMH5wsK3s9IOhUY-11" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="-fAsEpMH5wsK3s9IOhUY-10" target="-fAsEpMH5wsK3s9IOhUY-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-630" y="150" as="sourcePoint" />
+            <mxPoint x="-580" y="100" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-290" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
