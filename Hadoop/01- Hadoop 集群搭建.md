@@ -25,6 +25,7 @@ vm01 节点 生成 ssh，并且将 vm01 ssh 分发到 其他节点
 $ ssh-keygen -t rsa  #（每个节点执行，敲三个回车，就会生成两个文件id_rsa（私钥）、id_rsa.pub（公钥））
 
 vm01上操作互信配置，将公钥拷贝到要免密登录的目标机器上。
+$ ssh-copy-id -i ~/.ssh/id_rsa.pub vm01
 $ ssh-copy-id -i ~/.ssh/id_rsa.pub vm02
 $ ssh-copy-id -i ~/.ssh/id_rsa.pub vm03
 vm02~vm03 上同上面操作类似，完成互信配置
