@@ -114,6 +114,8 @@ cd "apache-seatunnel-incubating-${version}"
 ./bin/seatunnel.sh --config ./config/v2.batch.config.template -e local
 ```
 
+>注意，在执行 `bin/seatunnel.sh` 之前,若环境已运行 `bin/seatunnel-cluster.sh -d` 可能会出现无法运行，可参考 `https://github.com/apache/seatunnel/issues/6171`, 根据官网的解释： -e local 是本地模式，推荐在本地没有 seatunnel cluster时 使用， 若启动 seatunnel cluster 后，若执行 `./bin/seatunnel.sh --config ./config/v2.batch.config.template` 则将 job 发送给 seatunnel cluster 执行。    
+
 查看输出：运行命令时，您可以在控制台中看到其输出。您可以认为这是命令运行成功与否的标志。
 SeaTunnel 控制台将打印一些日志，如下所示：  
 ``` 
@@ -135,7 +137,7 @@ SeaTunnel 控制台将打印一些日志，如下所示：
 2023-06-30 08:39:37,210 INFO  org.apache.seatunnel.connectors.seatunnel.console.sink.ConsoleSinkWriter - subtaskIndex=0  rowIndex=16:  SeaTunnelRow#tableId= SeaTunnelRow#kind=INSERT : sVwxf, 941238118
 ```
 
-现在，您已经快速浏览了 SeaTunnel，您可以看到连接器来查找 SeaTunnel 支持的所有源和接收器。或者如果您想了解有关 SeaTunnel 引擎的更多信息(https://seatunnel.apache.org/docs/2.3.2/seatunnel-engine/about/)，请参阅 SeaTunnel 引擎。
+现在，您已经快速浏览了 SeaTunnel，您可以看到连接器来查找 SeaTunnel 支持的所有源和接收器。或者如果您想了解有关 SeaTunnel 引擎的更多信息(https://seatunnel.apache.org/docs/2.3.2/seatunnel-engine/about/)，请参阅 SeaTunnel 引擎。  
 
 refer   
 1.https://seatunnel.apache.org/docs/2.3.2/start-v2/locally/deployment   
