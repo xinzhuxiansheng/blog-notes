@@ -32,7 +32,7 @@ public static void main(String[] args) {
 >Kafka中默认的消费位移的提交方式是自动提交，这个由"enable.auto.commit"参数决定，默认值：true。 自动提交不是每次poll到消息就提交，而是周期性提交，周期时间由"auto.commit.interval.ms"参数决定，默认值：5000ms。  
 
 **以下是 autoCommitEnabled的调用逻辑**
-![autoCommitEnabled的引用关系](http://118.126.116.71/blogimgs/kafka/enable_auto_commit/enable_auto_commit01.png)
+![autoCommitEnabled的引用关系](http://img.xinzhuxiansheng.com/blogimgs/kafka/enable_auto_commit/enable_auto_commit01.png)
 
 **1.** 当ConsumerCoordinate完成加入消费组后，根据Timer 重置下次提交Offsets的时间
 ```java
@@ -56,7 +56,7 @@ public long timeToNextPoll(long now) {
 ```
 
 **3.** 当kafkaConsumer调用poll(), 都会调用`updateAssignmentMetadataIfNeeded()`确保当前的coordinate是否初始化ok并且是否已经加入消费组，若开启自动提交Commit会周期性提交Offsets
-![updateAssignmentMetadataIfNeeded处理逻辑](http://118.126.116.71/blogimgs/kafka/enable_auto_commit/enable_auto_commit02.png)
+![updateAssignmentMetadataIfNeeded处理逻辑](http://img.xinzhuxiansheng.com/blogimgs/kafka/enable_auto_commit/enable_auto_commit02.png)
 
 **4.** 当ConsumerCoordinate准备加入消费组，会同步提交当前消费的偏移量
 

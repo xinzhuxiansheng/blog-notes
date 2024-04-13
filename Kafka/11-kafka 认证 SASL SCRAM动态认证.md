@@ -23,7 +23,7 @@
 
 ## 2. 部署基于SASL/SCRAM(-SHA-256/-SHA-512)Kafka集群 (v2.7.1)
 **集群认证脉络**    
-![集群认证脉络](http://118.126.116.71/blogimgs/kafka/SASL_SCRAM/认证_集群认证脉络.jpg)    
+![集群认证脉络](http://img.xinzhuxiansheng.com/blogimgs/kafka/SASL_SCRAM/认证_集群认证脉络.jpg)    
 
 Kafka集群认证3种关系：   
 1.Client与Broker之间      

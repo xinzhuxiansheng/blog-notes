@@ -26,7 +26,7 @@ Github: https://github.com/apache/kafka  Tags: 2.2.1
 
 **1. Gradle配置**
 
-![Gradle配置](http://118.126.116.71/blogimgs/kafka/GradleSetting.png)
+![Gradle配置](http://img.xinzhuxiansheng.com/blogimgs/kafka/GradleSetting.png)
 
 .......... 慢慢等Gradle 下载依赖包
 
@@ -43,7 +43,7 @@ zookeeper version: 3.4.13
 ```shell
 gradle clean releaseTarGz -x test
 ```
-![编译common_message包](http://118.126.116.71/blogimgs/kafka/编译common_message包.png)
+![编译common_message包](http://img.xinzhuxiansheng.com/blogimgs/kafka/编译common_message包.png)
 
 **4. 配置Application main方法启动**
 
@@ -78,7 +78,7 @@ SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further detail
 * 调整log4j:1.2.17 执行周期由 Scope: Provided -> Compile
 * 添加Library slf4j-log4j12:1.7.25 Scope: Compile
 
-![log4jdebug环境配置](http://118.126.116.71/blogimgs/kafka/log4jdebug环境配置.png)
+![log4jdebug环境配置](http://img.xinzhuxiansheng.com/blogimgs/kafka/log4jdebug环境配置.png)
 
 
 **6. Core模块配置 log4j.properties**

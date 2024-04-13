@@ -46,7 +46,7 @@ public static void main(String[] args) throws InterruptedException {
 
 ## 发送消息的整体流程
 
-![KafkaProducer 架构 UML](http://118.126.116.71/blogimgs/kafka/producer/Producer讲解05.png)
+![KafkaProducer 架构 UML](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/Producer讲解05.png)
 架构图参考(《深入理解Kafka》)
 
 ### KafkaProducer中的重要组件
@@ -71,7 +71,7 @@ private final CompressionType compressionType;
 private final TransactionManager transactionManager;(事务相关后面对详细介绍)
 ```
 
-![KafkaProducer field UML](http://118.126.116.71/blogimgs/kafka/producer/Producer讲解01.png)
+![KafkaProducer field UML](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/Producer讲解01.png)
 
 
 ### 1. 拦截器
@@ -129,7 +129,7 @@ properties.put("partitioner.class","定义拦截器的class的路径名")
 ```
 
 `分区流程图`
-![分区器流程](http://118.126.116.71/blogimgs/kafka/producer/Producer讲解02.png)
+![分区器流程](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/Producer讲解02.png)
 
 **3.2** Partitioner的处理逻辑(默认实现DefaultPartitioner.java)
 Partitioner会根据ProducerRecord的Key是否为null，使用随机数+1对分区个数取余获取指定的Partition， 将Partition值放入新的TopicPartition对象，再根据Partition存储到指定的队列的累加器中。 分区器其实是 `软负载`的一种实现方式,Kafka分区写入负载默认是 `RoundRobin`(轮询)算法

@@ -15,19 +15,19 @@
 ## 2. 转换
 * 在业务代码中，有时会遇到ClassA的对象使用Fastjson转换成JSONObject temp对象，再将temp转成ClassB(参考图2-1)， 若ClassA的对象字节**较大**，这对于Fastjson的转换来说是耗时的。     
 `图2-1`
-![fastjson转换](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat04.png)
+![fastjson转换](http://img.xinzhuxiansheng.com/blogimgs/kafka/broker/broker_oldmessageformat04.png)
 
 * 这里可以引出Kafka针对ProduceRequest的消息转换(参考图2-2)，对于Producer来说消息的发送   很多情况下都是批量+压缩，所以若V2以下的消息集**较大**进行解压遍历再压缩转换V2格式的消息集，这同样也是耗时。    
 `图2-2`
-![messageConversions](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat05.png)
+![messageConversions](http://img.xinzhuxiansheng.com/blogimgs/kafka/broker/broker_oldmessageformat05.png)
 
 ## 3. LogValidator.validateMessagesAndAssignOffsets(...)
 请阅读之前的推文["Kafka Broker处理ProduceRequest的过程"](https://mp.weixin.qq.com/s/4siSxGScg1wqI6H7NKLVCw) ，快速了解它的上下文。 图3-1给出了MessageConversions处理逻辑的地方 **Log.append()方法**，它涉及主要的3个步骤如图3-2，其中 LogValidator.validateMessagesAndAssignOffsets(...)方法，它会涉及到消息的解压和转换。  下面会详细说明validateMessagesAndAssignOffsets()方法的处理过程。    
 `图3-1`
-![起始点](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat01.png)
+![起始点](http://img.xinzhuxiansheng.com/blogimgs/kafka/broker/broker_oldmessageformat01.png)
 
 `图3-2`
-![validateMessagesAndAssignOffsets](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat02.png)
+![validateMessagesAndAssignOffsets](http://img.xinzhuxiansheng.com/blogimgs/kafka/broker/broker_oldmessageformat02.png)
 
 ### 3.1 LogValidator.validateMessagesAndAssignOffsets(...)
 
@@ -77,7 +77,7 @@ for (batch <- records.batches.asScala) {  // AbstractLegacyRecordBatch$BasicLega
 ```
 
 `图3-2-2 for循环` 
-![for循环](http://118.126.116.71/blogimgs/kafka/broker/broker_oldmessageformat03.png)
+![for循环](http://img.xinzhuxiansheng.com/blogimgs/kafka/broker/broker_oldmessageformat03.png)
 
 **3.2.1**   
 外层for循环 *records.batches* 将MemoryRecords的ByteBuffer类型的buffer，根据Records.java中(**参考代码3-2-3**) buffer当前的position + SIZE的偏移量(OFFSET_OFFSET+OFFSET_LENGTH)，通过buffer.getInt()固定读取4个长度(SIZE_LENGTH)，。并根据Magic Value判断若大于V1创建DefaultRecrdBatch否则ByteBufferLegacyRecordBatch对象，直到将ByteBuffer读取完(**参考代码3-2-4**)。  

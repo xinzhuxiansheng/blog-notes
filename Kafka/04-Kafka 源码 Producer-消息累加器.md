@@ -9,7 +9,7 @@
 
 ## 案例
 
-![异步处理](http://118.126.116.71/blogimgs/kafka/producer/producer_accumulator01.png)
+![异步处理](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_accumulator01.png)
 这里有两个线程分别是ProducerThread、ConsumerThread，有一个队列是BlockingQueue，ProducerThread的任务是将接受到的数据丢到队列中而ConsumerThread的任务消费队列中的数据去做逻辑处理。
 
 假设这个`队列足够大，并且不阻塞`，这样的话，ProducerThread只会把时间消耗在接受到更多的数据，并不会让上游一直处于阻塞状态，由于ConsumerThread是独立的线程并不会阻塞ProducerThread，所以我们通过批量处理或者增加消费线程数，从而提高ConsumerThread处理能力，尽可能让队列处理`未满`状态。写和读是并行处理的，所以这种方式叫做`异步处理`也叫做`削峰`。
@@ -18,14 +18,14 @@
 
 ## 容器-消息累加器(RecordAccumulator)
 参考下面示意图，Producer线程与Sender线程作为并行处理线程而RecordAccumulator主要作用是缓存消息以便Sender线程可以批量发送，进而减少网络传输的资源消耗以提高性能。   
-![Producer Accumulator示意图](http://118.126.116.71/blogimgs/kafka/producer/producer_accumulator02.png)
+![Producer Accumulator示意图](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_accumulator02.png)
 
 > 下面就探讨下 数据是如何存储在RecordAccumulator里面的？  
 
-![Producer Accumulator结构图](http://118.126.116.71/blogimgs/kafka/producer/producer_accumulator05.png)
+![Producer Accumulator结构图](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_accumulator05.png)
 **RecordAccumulator结构图**
 
-![Producer Accumulator流程图](http://118.126.116.71/blogimgs/kafka/producer/producer_accumulator03.png)
+![Producer Accumulator流程图](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_accumulator03.png)
 **RecordAccumulator追加消息的流程图**
 
 `流程说明`
@@ -49,7 +49,7 @@ buffer = free.allocate(size, maxTimeToBlock);
 ```
 
 下面是free相关的类的类图
-![Accumulator free类图](http://118.126.116.71/blogimgs/kafka/producer/producer_accumulator04.png)
+![Accumulator free类图](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_accumulator04.png)
 有free相关类的依赖关系，接着看 free.allocate()方法
 
 ```java

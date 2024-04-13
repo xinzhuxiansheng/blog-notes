@@ -131,7 +131,7 @@ if (guaranteeMessageOrder) {  // yzhou max.in.flight.requests.per.connection 判
 
 **Step04**:     
 **drain()流程图**      
-![drain()](http://118.126.116.71/blogimgs/kafka/producer/producer_sender06.png)
+![drain()](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_sender06.png)
 *5.4.1.* drain()方法根据已经准备好Nodes来获取消息累加器中的数据集，这里传入的maxRequestSize是Producer的max.request.size参数值。     
 * RecordAccumulator.drainBatchesForOneNode(Cluster cluster, Node node, int maxSize, long now)方法 首先获取Node下的所有分区的Leader，遍历每个Leader的PartitionInfo构造TopicPartition获取消息累加器的Deque数据集，这里特别注意 deque.peekFirst()和deque.pollFirst()。peekFirst()获取队列的第一个元素，若队列是空是返回null，但不会删除元素，它是用来判断当前ProducerBatch发生重试时，是否达到重试间隔时间和判断已经读取队列的数据大小+当前ProducerBatch字节的和是否大于要求的maxRequestSize。pollFirst()将经过之前的判断可以读取队列的第一个元素并且从队列删除它，添加到ready队列中。 size变量是用来累加发送的ProducerBatch集合的字节大小。
 
@@ -155,7 +155,7 @@ expiredBatches.addAll(expiredInflightBatches);
 
 **Step05**:     
 从待发送的数据集inflightBatches中获取过期数据集，从消息累加器中获取过期数据集。在2.2.x版本中，Producer默认的重试次数为Long.MAX_VALUE,其实这样的数值不合理，所以在这里引入了"delivery.timeout.ms"参数，它默认时间是120s。 这里可以参考`Kafka KIP-91` https://cwiki.apache.org/confluence/display/KAFKA/KIP-91+Provide+Intuitive+User+Timeouts+in+The+Producer
-![delivery.timeout.ms](http://118.126.116.71/blogimgs/kafka/producer/producer_sender02.png)
+![delivery.timeout.ms](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_sender02.png)
 
 --- 
 *5.6 Sender.sendProducerData() : step06* 
@@ -260,7 +260,7 @@ private void doSend(ClientRequest clientRequest, boolean isInternalRequest, long
 
 #### RequestHeader      
 **RequestHeader类图**      
-![RequestHeader](http://118.126.116.71/blogimgs/kafka/producer/producer_sender03.png)
+![RequestHeader](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_sender03.png)
 * API_KEY_FIELD_NAME: 请求类型,请参考 `AbstractRequest类`中的parseRequest()方法, 发送数据所定义的apikey=PRODUCE;
 * API_VERSION_FIELD_NAME: 发送数据的日志版本；
 * CLIENT_ID_FIELD_NAME: Producer的client.id参数或者producer 生成的clientId "producer-" + PRODUCER_CLIENT_ID_SEQUENCE.getAndIncrement();
@@ -268,7 +268,7 @@ private void doSend(ClientRequest clientRequest, boolean isInternalRequest, long
 
 #### NetworkSend    
 **NetworkSend类图** 
-![NetworkSend](http://118.126.116.71/blogimgs/kafka/producer/producer_sender04.png)    
+![NetworkSend](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_sender04.png)    
 下面是NetworkSend对象创建:  
 ```java
 Send send = request.toSend(destination, header);
@@ -280,7 +280,7 @@ NetworkSend继承了ByteBufferSend类，
 
 #### InFlightRequests   
 **InFlightRequests类图**     
-![InFlightRequests](http://118.126.116.71/blogimgs/kafka/producer/producer_sender05.png)    
+![InFlightRequests](http://img.xinzhuxiansheng.com/blogimgs/kafka/producer/producer_sender05.png)    
 
 * maxInFlightRequestsPerConnection 它是Producer的`max.in.flight.requests.per.connection`参数值，默认是5。 根据node节点获取待发送的InFlightRequest数据，
 * queue.peekFirst().send.completed()是为了确定队列中的第一个元素的请求是否已经发送完成，如果没有则不继续向这个node发送消息

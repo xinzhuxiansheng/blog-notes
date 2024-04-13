@@ -16,7 +16,7 @@ Topic的某个分区只有1个副本在ISR，并且出现唯一的副本所在�
 ```shell
 ./kafka-topics.sh --zookeeper [zkurl] --topic [topic名称] --describe
 ```
-![Test01 desc](http://118.126.116.71/blogimgs/kafka/Topic%E5%88%86%E5%8C%BALeader%E4%B8%BA-1/Topic%E5%88%86%E5%8C%BA%E7%AD%89%E4%BA%8E-101.png)
+![Test01 desc](http://img.xinzhuxiansheng.com/blogimgs/kafka/Topic%E5%88%86%E5%8C%BALeader%E4%B8%BA-1/Topic%E5%88%86%E5%8C%BA%E7%AD%89%E4%BA%8E-101.png)
 目前Leader：3， 若Isr：3,2 都出现Broker异常或者机器宕机，Leader：-1；
 
 ## 2.IDEA + KafkaManager(CMAK)复现
@@ -35,7 +35,7 @@ test01 Partition0分区 Isr的2是Follower，它会同步3的数据，所以开�
 **1.** 搭建本地调试Kafka源码环境，请参考[Kafka源码环境搭建](http://xinzhuxiansheng.com/articleDetail?id=4)
 **2.** 开启远程调试端口，请参考[Kafka开启远程调试](http://xinzhuxiansheng.com/articleDetail?id=10)
 **3.** 在IDEA中Kafka的源码 `ReplicaFetcherThread.java的processPartitionData()方法`打上断点
-![processPartitionData方法断点](http://118.126.116.71/blogimgs/kafka/Topic%E5%88%86%E5%8C%BALeader%E4%B8%BA-1/Topic%E5%88%86%E5%8C%BA%E7%AD%89%E4%BA%8E-102.png)
+![processPartitionData方法断点](http://img.xinzhuxiansheng.com/blogimgs/kafka/Topic%E5%88%86%E5%8C%BALeader%E4%B8%BA-1/Topic%E5%88%86%E5%8C%BA%E7%AD%89%E4%BA%8E-102.png)
 **4.** 在IDEA 创建Producer发送数据(1s发一条即可)，因为2在有数据同步时候会执行 processPartitionData()
 ```java
 Long i = 0L;
@@ -54,7 +54,7 @@ while (true) {
 }
 ```
 **5.** 手动 Kill掉Broker3，之后 再去掉IDEA断点，继续执行
-![processPartitionData方法断点](http://118.126.116.71/blogimgs/kafka/Topic%E5%88%86%E5%8C%BALeader%E4%B8%BA-1/Topic%E5%88%86%E5%8C%BA%E7%AD%89%E4%BA%8E-104.png)
+![processPartitionData方法断点](http://img.xinzhuxiansheng.com/blogimgs/kafka/Topic%E5%88%86%E5%8C%BALeader%E4%B8%BA-1/Topic%E5%88%86%E5%8C%BA%E7%AD%89%E4%BA%8E-104.png)
 
 
 ## 3.Leader=-1 对Kafka Topic写入和消费有影响
