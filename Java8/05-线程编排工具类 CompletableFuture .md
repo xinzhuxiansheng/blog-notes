@@ -1,5 +1,7 @@
 # 线程编排工具类 CompletableFuture     
 
+>Jdk version: 1.8 
+
 ## 介绍 
 CompletableFuture 是 Java 8 并发API 引入的一种新的同步机制。它扩展了 `Future`，具有更多功能和灵活性。它允许你实现一个`事件驱动模型`，连接那些只有在其他任务完成后才会执行的任务。与 Future 接口一样，`CompletableFuture 必须使用将由操作返回的结果类型进行参数化(当你使用 CompletableFuture 时，你需要指定这个 CompletableFuture 将来会返回的结果类型。这个类型通过泛型参数 T 指定。)` 例如：CompletableFuture<T> methodName(T location) ,    
 
@@ -49,7 +51,7 @@ thenComposeAsync() 使用一个函数，该函数返回一个新的 CompletableF
 
 ## 使用 CompletableFuture类
 在这个示例中，你将学习如何使用CompletableFuture类以并发方式实现一些异步任务的执行。我们将使用我们的20,000个亚马逊产品的集合来实现以下任务树：           
-![usecompletablefuture01](images/usecompletablefuture01.png)    
+![usecompletablefuture01](http://img.xinzhuxiansheng.com/blogimgs/java8/usecompletablefuture01.png)    
 
 首先，我们将使用示例。然后，我们将执行四个并发任务。第一个任务将进行产品搜索。当搜索完成后，我们将结果写入文件。第二个任务将获得评分最高的产品。第三个任务将获得最畅销的产品。当这些都完成后，我们将使用另一个任务来合并它们的信息。最后，第四个任务将获取购买产品的用户列表。main()程序将等待所有任务的完成，然后将写入结果。让我们看看实现的细节。     
 

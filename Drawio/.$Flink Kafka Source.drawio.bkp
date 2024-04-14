@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-04-13T02:21:33.440Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="I6ighzrnbTDBDyvypGyr" version="24.1.0" type="device">
+<mxfile host="Electron" modified="2024-04-14T04:43:03.620Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="ytfxJikqA2AsD79l8BLT" version="24.1.0" type="device" pages="2">
   <diagram name="Split分配流程" id="mEK6_J85pj-uxIT36-Su">
     <mxGraphModel dx="2281" dy="888" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -36,7 +36,7 @@
           <mxGeometry x="-550" y="260" width="314" height="140" as="geometry" />
         </mxCell>
         <mxCell id="XOFEye4ypruZDApZL0SX-2" value="JobMaster#startJobExecution()&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;startScheduling()&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
-          <mxGeometry x="-780" y="130" width="190" height="60" as="geometry" />
+          <mxGeometry x="-780" y="130" width="250" height="60" as="geometry" />
         </mxCell>
         <mxCell id="XOFEye4ypruZDApZL0SX-3" value="创建 adminClient&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="150" y="240" width="120" height="30" as="geometry" />
@@ -44,6 +44,34 @@
         <mxCell id="XOFEye4ypruZDApZL0SX-4" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;参数：partition.discovery.interval.ms&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontFamily=Comic Sans MS;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="280" y="200" width="210" height="40" as="geometry" />
         </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="SjgnwwGi2MbgR1QuT1IQ" name="第 2 页">
+    <mxGraphModel dx="1881" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v0zNpMn8U2NGERQDpilG-1" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;SchedulerBase.executionGraph&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;fontColor=default;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="150" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="v0zNpMn8U2NGERQDpilG-2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="300" width="590" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="v0zNpMn8U2NGERQDpilG-3" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="340" width="550" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="v0zNpMn8U2NGERQDpilG-4" value="org.apache.flink.runtime.jobmaster.JobMaster#requestJob()" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="300" width="350" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="v0zNpMn8U2NGERQDpilG-5" value="org.apache.flink.runtime.scheduler.SchedulerBase#requestJob()" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="340" width="380" height="30" as="geometry" />
+        </mxCell>
+        <UserObject label="org.apache.flink.runtime.executiongraph.ExecutionJobVertex" id="v0zNpMn8U2NGERQDpilG-6">
+          <mxCell style="text;whiteSpace=wrap;align=left;verticalAlign=middle;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+            <mxGeometry x="700" y="170" width="390" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
       </root>
     </mxGraphModel>
   </diagram>
