@@ -186,5 +186,467 @@ public class OpenClosed {
  }
 }
 ```
-这个应用程序仅适用于矩形的事实带来了一个限制，它说明了开闭原则：如果我们想在 CalculateArea 类中添加一个 Circle（改变它的功能），我们必须修改模块本身。显然，这与开闭原则相矛盾，该原则规定我们不应该因为改变它的功能而需要改变模块。            
+这个应用程序仅适用于矩形的事实带来了一个限制，它说明了开闭原则：如果我们想在 CalculateArea 类中添加一个 Circle（改变它的功能），我们必须修改模块本身。显然，这与开闭原则相矛盾，该原则规定我们不应该因为改变它的功能而需要改变模块。                 
+
+为了符合开闭原则，我们可以重新审视我们熟悉的形状示例，其中创建了一个名为Shape的抽象类，然后所有形状都必须继承自Shape类，该类具有一个名为getArea()的抽象方法。           
+
+到这一步，我们可以添加尽可能多的不同类，而无需更改Shape类本身（例如，一个Circle）。现在我们可以说Shape类是封闭的。
+以下代码实现了这个解决方案，用于矩形和圆，并允许创建无限多的形状：              
+```java
+abstract class Shape {
+    public abstract double getArea();
+}
+
+class Rectangle extends Shape {
+    protected double length;
+    protected double width;
+    
+    public Rectangle(double l, double w) {
+        length = l;
+        width = w;
+    }
+    
+    public double getArea() {
+        return length * width;
+    }
+}
+
+class Circle extends Shape {
+    protected double radius;
+    
+    public Circle(double r) {
+        radius = r;
+    }
+    
+    public double getArea() {
+        return radius * radius * 3.14;
+    }
+}
+
+class CalculateAreas {
+    private double area;
+    
+    public double calcArea(Shape s) {
+        area = s.getArea();
+        return area;
+    }
+}
+```         
+
+```java
+public class OpenClosed {
+    public static void main(String args[]) {
+        System.out.println("Hello World");
+        CalculateAreas ca = new CalculateAreas();
+        Rectangle r = new Rectangle(1, 2);
+        System.out.println("Area = " + ca.calcArea(r));
+        Circle c = new Circle(3);
+        System.out.println("Area = " + ca.calcArea(c));
+    }
+}
+```
+
+在这个实现中，当你添加一个新的形状时，CalculateAreas()方法不需要改变。              
+
+您可以扩展您的代码，而无需担心遗留代码。在其核心，开闭原则规定您应该通过子类来扩展代码，而原始类不需要更改。然而，"扩展"这个词在与SOLID相关的讨论中有几个问题。正如我们将在后面详细介绍的那样，如果我们更倾向于组合而不是继承，那么这将如何影响开闭原则？               
+
+在遵循SOLID原则之一时，代码也可能符合其他SOLID原则之一。例如，当设计遵循开闭原则时，代码也可能符合单一职责原则。            
+
+### LSP：里氏替换原则       
+里氏替换原则指出，设计必须提供用子类的实例来替换父类的实例的能力。如果父类可以做某事，那么子类也必须能够做到。
+让我们来看一些可能看起来合理但却违反了里氏替换原则的代码。在下面的代码中，我们有一个典型的抽象类叫做Shape。然后Rectangle继承自Shape，并覆盖其抽象方法calcArea()。而Square又继承自Rectangle。            
+
+```java
+abstract class Shape{
+    protected double area;
+    public abstract double calcArea();
+}
+
+class Rectangle extends Shape {
+    private double length;
+    private double width;
+
+    public Rectangle(double l, double w) {
+        length = l;
+        width = w;
+    }
+
+    public double calcArea() {
+        area = length * width;
+        return (area);
+    };
+}
+
+class Square extends Rectangle {
+    public Square(double s) {
+        super(s, s);
+    }
+}
+
+public class LiskovSubstitution {
+    public static void main(String args[]) {
+        System.out.println("Hello World");
+        Rectangle r = new Rectangle(1, 2);
+        System.out.println("Area = " + r.calcArea());
+        Square s = new Square(2);
+        System.out.println("Area = " + s.calcArea());
+    }
+}
+```
+
+到目前为止一切都很顺利：一个矩形是一个形状，所以一切看起来都很好。因为一个正方形是一个矩形，我们仍然很好——或者我们还好吗？
+现在我们进入了一个有些哲学性的讨论：一个正方形真的是一个矩形吗？许多人会说是的。然而，虽然正方形很可能是矩形的一种特殊类型，但它确实具有与矩形不同的属性。矩形是一个平行四边形（对边是相等的），正方形也是。然而，正方形也是一个菱形（所有边都是相等的），而矩形不是。因此，存在一些差异。          
+
+当涉及到面向对象设计时，几何学并不是真正的问题。问题在于我们如何构建矩形和正方形。以下是Rectangle类的构造函数： 
+```java
+public Rectangle(double l, double w){
+ length = l;
+ width = w;
+}
+```
+
+Rectangle类的构造函数显然需要两个参数。然而，Square类的构造函数只需要一个参数，尽管其父类Rectangle期望两个参数。            
+```java 
+class Square extends Rectangle{
+ public Square(double s){
+ super(s, s);
+ }
+``` 
+
+实际上，计算面积的功能对于这两个类是微妙不同的。事实上，Square类通过两次传递相同的参数来欺骗Rectangle类。这可能看起来是一个可以接受的解决方案，但实际上可能会使维护代码的人感到困惑，并且可能会在未来造成意想不到的维护问题。这至少是一个不一致的问题，也许是一个值得怀疑的设计决定。当你看到一个构造函数调用另一个构造函数时，最好暂停一下，重新考虑设计——它可能不是一个合适的子类。       
+如何解决这个特定的困境呢？简单地说，正方形不能替代长方形，因此它们不应该是同一个子类。因此，它们应该是单独的类。        
+```java
+ abstract class Shape {
+ protected double area;
+ public abstract double calcArea();
+}
+class Rectangle extends Shape {
+ private double length;
+ private double width;
+ public Rectangle(double l, double w) {
+ length = l;
+ width = w;
+ }
+ public double calcArea() {
+ area = length*width;
+ return (area);
+ };
+}
+class Square extends Shape {
+ private double side;
+ public Square(double s){
+ side = s;
+ } 
+ public double calcArea() {
+ area = side*side;
+ return (area);
+ };
+}
+
+public class LiskovSubstitution {
+ public static void main(String args[]) {
+ System.out.println("Hello World");
+ Rectangle r = new Rectangle(1,2);
+ System.out.println("Area = " + r.calcArea());
+ Square s = new Square(2);
+ System.out.println("Area = " + s.calcArea());
+ }
+}
+```     
+
+### 4) 接口隔离原则（Interface Segregation Principle）  
+接口隔离原则指出，与其拥有少数较大的接口，不如拥有许多小的接口更好。        
+
+在这个示例中，我们正在创建一个包含哺乳动物多种行为的单一接口，即吃（eat）和发出噪音（makeNoise）：      
+```java
+interface IMammal {
+ public void eat();
+ public void makeNoise();
+}
+class Dog implements IMammal {
+ public void eat() {
+ System.out.println("Dog is eating");
+ }
+ public void makeNoise() {
+ System.out.println("Dog is making noise");
+ }
+}
+public class MyClass {
+ public static void main(String args[]) {
+ System.out.println("Hello World");
+ Dog fido = new Dog();
+ fido.eat();
+ fido.makeNoise();
+ }
+}
+```     
+
+与其为哺乳动物创建一个单一接口，我们可以为所有行为创建单独的接口：              
+```java
+interface IEat {
+ public void eat(); 
+}
+interface IMakeNoise {
+ public void makeNoise();
+}
+class Dog implements IEat, IMakeNoise {
+ public void eat() {
+ System.out.println("Dog is eating");
+ }
+ public void makeNoise() {
+ System.out.println("Dog is making noise");
+ }
+}
+public class MyClass {
+ public static void main(String args[]) {
+ System.out.println("Hello World");
+ Dog fido = new Dog();
+ fido.eat();
+ fido.makeNoise();
+ }
+}
+```
+实际上，我们正在将行为从哺乳动物类中解耦。因此，我们不是通过继承（实际上是接口）来创建单一的哺乳动物实体，而是转向基于组合的设计，类似于前一章节的策略。        
+
+简而言之，通过使用这种方法，我们可以使用组合构建哺乳动物，而不是被迫利用包含在单一哺乳动物类中的行为。例如，假设有人发现了一种不吃东西而是通过皮肤吸收营养的哺乳动物。如果我们从包含 eat() 行为的单一 Mammal 类继承，新的哺乳动物就不需要这个行为。但是，如果我们将所有行为分别分离到单独的接口中，我们可以按照每个哺乳动物的实际情况构建它。       
+
+### 5) 依赖倒置原则（Dependency Inversion Principle）               
+依赖倒置原则指出，代码应该依赖于抽象。通常似乎依赖倒置和依赖注入这两个术语是可以互换使用的；然而，在我们讨论这个原则时，有一些关键术语需要理解：            
+- 依赖倒置：反转依赖的原则          
+- 依赖注入：反转依赖的行为          
+- 构造函数注入：通过构造函数执行依赖注入        
+- 参数注入：通过方法的参数执行依赖注入，比如通过 setter 方法        
+
+依赖倒置的目标是将依赖关系与抽象而不是具体的实现耦合在一起。        
+虽然显然你必须在某个时候创建具体的东西，但我们努力尽可能将具体对象（使用 new 关键字）创建在尽可能高的层次，比如在 main() 方法中。也许更好的思考方式是重新审视第8章“框架和重用：使用接口和抽象类设计”中提出的讨论，我们在那里讨论了在运行时加载类，以及在第9章“构建对象和面向对象设计”中谈到的解耦和创建具有有限职责的小类。         
+
+同样，依赖倒置原则的一个目标是在运行时而不是在编译时选择对象（你可以在运行时改变程序的行为）。甚至你可以编写新的类而无需重新编译旧的类（实际上，你可以编写新的类并注入它们）。          
+这次讨论的基础很大程度上是在第11章“避免依赖和高耦合类”中奠定的。让我们在考虑依赖倒置原则时继续构建。            
+
+### 步骤1：初始示例         
+作为此示例的第一步，我们再次回顾本书中经常使用的一个经典面向对象设计示例，即一个哺乳动物类（Mammal），以及继承自哺乳动物的狗（Dog）和猫（Cat）类。哺乳动物类是抽象的，并包含一个名为 makeNoise() 的方法。           
+```java
+abstract class Mammal {
+    public abstract String makeNoise();
+}
+```
+子类，比如 Cat，使用继承来利用 Mammal 的行为 makeNoise()：          
+```java
+class Cat extends Mammal {
+    public String makeNoise() {
+        return "Meow";
+    }
+}
+```
+然后主应用程序实例化一个 Cat 对象并调用 makeNoise() 方法：              
+```java
+Mammal cat = new Cat();
+System.out.println("Cat says " + cat.makeNoise());
+```
+
+
+以下是第一步的完整应用程序代码：        
+```java
+public class TestMammal {
+    public static void main(String args[]) {
+        System.out.println("Hello World\n");
+        Mammal cat = new Cat();
+        Mammal dog = new Dog();
+        System.out.println("Cat says " + cat.makeNoise());
+        System.out.println("Dog says " + dog.makeNoise());
+    }
+}
+
+abstract class Mammal {
+    public abstract String makeNoise();
+}
+
+class Cat extends Mammal {
+    public String makeNoise() {
+        return "Meow";
+    }
+}
+
+class Dog extends Mammal {
+    public String makeNoise() {
+        return "Bark";
+    }
+}
+```
+
+#### 第2步：分离行为        
+上述代码存在一个潜在严重的缺陷：它将哺乳动物和行为（makingNoise）耦合在一起。将哺乳动物的行为与它们本身分离可能有重大优势。为了实现这一点，我们创建一个名为 MakingNoise 的类，可以被所有哺乳动物以及非哺乳动物使用。        
+
+在这种模型中，猫、狗或鸟可以扩展 MakeNoise 类并创建符合其需求的自己的制造噪音行为，例如以下代码片段用于猫：         
+```java
+abstract class MakingNoise {
+    public abstract String makeNoise();
+}
+```
+
+以下是第二步的完整应用程序代码：                
+```java
+public class TestMammal {
+    public static void main(String args[]) {
+        System.out.println("Hello World\n");
+        Mammal cat = new Cat();
+        Mammal dog = new Dog();
+        System.out.println("Cat says " + cat.makeNoise());
+        System.out.println("Dog says " + dog.makeNoise());
+    }
+}
+
+abstract class Mammal {
+    public abstract String makeNoise();
+}
+
+abstract class MakingNoise {
+    public abstract String makeNoise();
+}
+
+class Cat extends Mammal {
+    CatNoise behavior = new CatNoise();
+    
+    public String makeNoise() {
+        return behavior.makeNoise();
+    }
+}
+
+class CatNoise extends MakingNoise {
+    public String makeNoise() {
+        return "Meow";
+    }
+}
+```
+
+通过将 MakingNoise 行为与 Cat 类分离，我们可以在 Cat 类中使用 CatNoise 类来代替硬编码的行为，如下所示。         
+
+以下是第三步的代码示例：        
+```java
+interface NoiseMaker {
+    String makeNoise();
+}
+
+class CatNoise implements NoiseMaker {
+    public String makeNoise() {
+        return "Meow";
+    }
+}
+
+class DogNoise implements NoiseMaker {
+    public String makeNoise() {
+        return "Bark";
+    }
+}
+
+abstract class Mammal {
+    private NoiseMaker noiseMaker;
+
+    public Mammal(NoiseMaker noiseMaker) {
+        this.noiseMaker = noiseMaker;
+    }
+
+    public String makeNoise() {
+        return noiseMaker.makeNoise();
+    }
+}
+
+class Cat extends Mammal {
+    public Cat() {
+        super(new CatNoise());
+    }
+}
+
+class Dog extends Mammal {
+    public Dog() {
+        super(new DogNoise());
+    }
+}
+
+public class TestMammal {
+    public static void main(String args[]) {
+        System.out.println("Hello World\n");
+        Mammal cat = new Cat();
+        Mammal dog = new Dog();
+        System.out.println("Cat says " + cat.makeNoise());
+        System.out.println("Dog says " + dog.makeNoise());
+    }
+}
+```
+
+在这个示例中，我们使用了接口 `NoiseMaker` 来表示能够发出噪音的实体。`CatNoise` 和 `DogNoise` 类实现了这个接口，分别代表了猫和狗的噪音行为。然后，我们将 `Mammal` 类修改为接收一个 `NoiseMaker` 对象作为构造函数的参数，并在 `makeNoise()` 方法中调用 `NoiseMaker` 对象的 `makeNoise()` 方法来获取噪音。最后，在 `Cat` 和 `Dog` 类的构造函数中，我们分别传入了 `CatNoise` 和 `DogNoise` 对象，实现了通过构造函数进行依赖注入的功能。             
+
+这里的重要转变是放弃特定的哺乳动物（如猫和狗），而是简单地使用如下所示的 Mammal 类：            
+```java
+class Mammal {
+    MakingNoise speaker;
+
+    public Mammal(MakingNoise sb) {
+        this.speaker = sb;
+    }
+
+    public String makeNoise() {
+        return this.speaker.makeNoise();
+    }
+}
+```
+
+现在，我们可以实例化一个 Cat 噪音行为并将其提供给 Animal 类，以创建一个行为类似猫的哺乳动物。事实上，您可以始终通过注入行为来组装一个 Cat，而不是使用传统的类构建技术。             
+```java
+Mammal cat = new Mammal(new CatNoise());
+```
+
+以下是最终步骤的完整应用程序：          
+```java
+public class TestMammal {
+    public static void main(String args[]) {
+        System.out.println("Hello World\n");
+        Mammal cat = new Mammal(new CatNoise());
+        Mammal dog = new Mammal(new DogNoise());
+        System.out.println("Cat says " + cat.makeNoise());
+        System.out.println("Dog says " + dog.makeNoise());
+    }
+}
+
+class Mammal {
+    MakingNoise speaker;
+
+    public Mammal(MakingNoise sb) {
+        this.speaker = sb;
+    }
+
+    public String makeNoise() {
+        return this.speaker.makeNoise();
+    }
+}
+```
+
+在这个例子中，我们将噪音行为注入到 Mammal 类中，以实现松耦合的设计。这样一来，我们可以更灵活地创建不同类型的哺乳动物，而不需要依赖于具体的类结构。             
+```java
+interface MakingNoise
+{
+ public String makeNoise();
+}
+class CatNoise implements MakingNoise
+{
+ public String makeNoise()
+ {
+ return "Meow";
+ }
+}
+class DogNoise implements MakingNoise
+{
+ public String makeNoise()
+ {
+ return "Bark";
+ }
+}
+```
+在讨论依赖注入时，何时实际实例化对象现在是一个关键考虑因素。尽管目标是通过注入组合对象，但显然你必须在某个时候实例化对象。因此，设计决策围绕着何时进行这种实例化展开。      
+如本章前面所述，依赖倒置的目标是与抽象而不是具体的东西耦合，即使显然你必须在某个时候创建具体的东西。因此，一个简单的目标是尽可能在上层（如 main() 方法）创建一个具体对象（通过使用 new 关键字）。当你看到 new 关键字时，总是要评估一下情况。        
+
+## 结论        
+这就结束了对 SOLID 原则的讨论。SOLID 原则是当今最具影响力的一组面向对象指导原则之一。有趣的是，研究这些原则与基本的面向对象封装、继承、多态和组合的关系，特别是在组合与继承的辩论中。       
+
+对我来说，从 SOLID 讨论中最有趣的一点是，没有什么是一成不变的。从组合优于继承的讨论中可以明显看出，即使是古老的基本面向对象概念也是可以重新解释的。正如我们所见，一点时间，伴随着各种思想过程的相应演变，对创新是有好处的。             
 
