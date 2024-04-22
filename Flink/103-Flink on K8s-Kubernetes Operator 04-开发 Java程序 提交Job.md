@@ -1,4 +1,4 @@
-# Flink on K8s - Kubernetes Operator - 开发 Java程序提交 Job
+# Flink on Kubernetes - Kubernetes Operator - 开发 Java程序提交 Job
 
 >Operator version: 1.8，Flink version: 1.17   
 

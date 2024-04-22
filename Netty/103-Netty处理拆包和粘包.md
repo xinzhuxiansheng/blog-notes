@@ -144,5 +144,6 @@ public abstract class CustomEncoder<I> extends ChannelOutboundHandlerAdapter {
 
 
 
-refer: 《Netty如何解决粘包以及拆包问题》https://juejin.cn/post/6975109908106575903
+refer:    
+1.《Netty如何解决粘包以及拆包问题》https://juejin.cn/post/6975109908106575903
 

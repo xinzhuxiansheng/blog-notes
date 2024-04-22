@@ -1,4 +1,4 @@
-# Flink on K8s - Kubernetes Operator - yaml 创建 Session 集群     
+# Flink on Kubernetes - Kubernetes Operator - yaml 创建 Session 集群     
 
 >Operator version: 1.8  
 
@@ -60,7 +60,7 @@ spec:
 ```
 
 ```bash
-kubeclt -n flink apply -f basic-session-deployment-only.yaml    
+kubectl -n flink apply -f basic-session-deployment-only.yaml    
 ```
 
 >注意，此时Seesion 集群会自动创建 2个 `Service`资源:    
