@@ -1,4 +1,4 @@
-# Flink on Kubernetes - Kubernetes Operator -yaml 创建 Application Job 示例    
+# Flink on K8s - Kubernetes Operator -yaml 创建 Application Job 示例  
 
 >Operator version: 1.8  
 
