@@ -119,3 +119,14 @@ cd harbor/
 重启Harbor
 # docker-compose restart
 ```
+
+## Q&A  
+
+### 1.虚拟机重启后，Harbor 无法访问 
+可尝试以下操作：    
+```shell
+systemctl restart docker  
+cd harbor 目录  
+docker-compose down 
+docker-compose up -d 
+```
