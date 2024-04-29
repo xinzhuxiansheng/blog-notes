@@ -1,7 +1,7 @@
 # Flink on Kubernetes - Kubernetes Operator - Flink Ingress 配置 & Application Job 部署示例 - 修订篇      
 
 ## 引言 
-
+在 上一篇“Flink on Kubernetes - Kubernetes Operator - Flink Ingress 配置 & Application Job 部署示例” Blog 中，介绍了部署 M
 
 
 ```shell
