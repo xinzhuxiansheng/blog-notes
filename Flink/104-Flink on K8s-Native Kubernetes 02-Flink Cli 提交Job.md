@@ -10,7 +10,7 @@ Native Kubernetes Job 提供了 `-Dkubernetes.pod-template-file.jobmanager` 配�
 
 为了演示 initContainers 阶段，下载 StateMachineExample.jar, 我们需提前将 该jar 上传到 机器上，这里特别标明：StateMachineExample.jar 在 flink 安装包目录下 `examples/streaming/StateMachineExample.jar`;         
 
-![nativek8senv02](images/nativek8senv02.png)   
+![nativek8senv02](http://img.xinzhuxiansheng.com/blogimgs/flink/nativek8senv02.png)   
 
 initContainers 容器使用的是 `busybox:latest`镜像，它的目的是使用最小化工具镜像，提高部署效率， 当然 command 使用 wget 下载 StateMachineExample.jar。那 busybox镜像也需支持该命令，否则无法下载。
 
@@ -157,7 +157,9 @@ kubectl apply -f flink-application-job01-ingress.yaml
 ```
 
 ## 最后一步         
-浏览器访问： http://flink.k8s.io:32717/flink-native/flink-application-job01/ (还得重点提醒大家，URL 一定是以"/"结尾)   
+浏览器访问： http://flink.k8s.io:32717/flink-native/flink-application-job01/ (还得重点提醒大家，URL 一定是以"/"结尾)        
+
+![nativek8senv03](http://img.xinzhuxiansheng.com/blogimgs/flink/nativek8senv03.png)           
 
 以上就完成 Flink Cli 提交 Application Job 示例。        
 

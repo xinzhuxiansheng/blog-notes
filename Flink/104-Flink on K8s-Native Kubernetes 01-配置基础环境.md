@@ -1,4 +1,4 @@
-# Flink on Kubernetes - Native Kubernetes - 基础环境配置    
+# Flink on Kubernetes - Native Kubernetes - 配置基础环境    
 
 >Flink version: 1.17, Kubernetes version: 1.23.16     
 
@@ -84,7 +84,7 @@ kubectl create clusterrolebinding flinknative-role-binding-flinknative -n flink-
 请参考 `https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/resource-providers/native_kubernetes/#application-mode` 根据官网给的示例， 将 Flink 作为 base Docker image，将 `my-flink-job` COPY到 指定的用户自定义jar 目录下， 这样在启动 Job时，只需手动指定 jar 路径。  当然这个测试 case，操作简单，但`无法做到一劳永逸`, 即使是我在开发或者测试阶段都不愿意尝试的方式；            
 
 在开发和测试阶段， `job.jar`是会频繁更新的，所以我们可以参考下图中的其他2种方式做一些改进，降低我们调试 Job的时间成本。     
-![nativek8senv01](images/nativek8senv01.png)                    
+![nativek8senv01](http://img.xinzhuxiansheng.com/blogimgs/flink/nativek8senv01.png)                    
 
 1.将 job.jar 打入 Docker Image，只要 job.jar 变动，都得打包镜像，那是次次都麻烦；                        
 2.将 job.jar 上传 HTTP 服务器，利用 initContainers 生命周期阶段，下载 job.jar, 不过它麻烦的是，需部署一个HTTP 文件服务器；              
@@ -179,7 +179,7 @@ docker run -d --name nginx_files_server -p 886:886 -v /root/yzhou/nginx/TMP:/hom
 
 访问：192.168.0.201:886    
 
-![nativek8senv02](images/nativek8senv02.png)    
+![nativek8senv02](http://img.xinzhuxiansheng.com/blogimgs/flink/nativek8senv02.png)    
 
 >以上就完成了 Native Kubernetes 基础环境配置                    
 
