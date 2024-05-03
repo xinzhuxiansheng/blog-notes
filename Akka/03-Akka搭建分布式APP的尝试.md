@@ -132,5 +132,6 @@ object BackendRemoteDeployMain extends App {
 
 以上就介绍完了 基于akka remote的APP搭建，但这只能算是一个Demo案例。 
 
-refer 
-1.《Akka实战》  
+refer       
+1.《Akka实战》          
+

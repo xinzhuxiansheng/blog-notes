@@ -79,6 +79,7 @@ case CreateEvent(name, tickets) =>
 
 
 refer
-1.《Akka实战》
-2.https://github.com/RayRoestenburg/akka-in-action
-3.https://httpie.io/docs/cli/centos-and-rhel
+1.《Akka实战》      
+2.https://github.com/RayRoestenburg/akka-in-action      
+3.https://httpie.io/docs/cli/centos-and-rhel      
+4.https://github.com/franciscolopezsancho/akka-topics   
