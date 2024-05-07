@@ -1,11 +1,28 @@
-<mxfile host="Electron" modified="2023-12-05T14:54:16.846Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="HATZDu2bk6z_AkmjHYmS" version="22.0.3" type="device">
+<mxfile host="Electron" modified="2024-05-06T10:15:35.972Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="IDKR96qDKUbpE3OOzFaH" version="24.1.0" type="device" pages="2">
   <diagram name="第 1 页" id="vsOGU07KWZ9WdCyzXyXh">
-    <mxGraphModel dx="954" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="888" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="M8AiuZ8uqF3TKXBePWHi-1" value="JobManager&amp;nbsp;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="70" y="120" width="380" height="60" as="geometry" />
+        <mxCell id="M8AiuZ8uqF3TKXBePWHi-1" value="JobManager&amp;nbsp;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="240" width="380" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="c4Q8pNLAOaG8NyQPV_C2" name="Job Status 设计">
+    <mxGraphModel dx="1834" dy="1288" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uoBpR4SK4tJWaJllddbE-5" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="-80" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="uoBpR4SK4tJWaJllddbE-6" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="150" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="uoBpR4SK4tJWaJllddbE-7" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="150" width="210" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

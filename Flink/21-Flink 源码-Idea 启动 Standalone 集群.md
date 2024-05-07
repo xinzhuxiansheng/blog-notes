@@ -1,4 +1,4 @@
-## Flink 源码 Idea 启动 Seesion集群    
+## Flink 源码 - Idea 启动 Standalone 集群    
 
 >Flink version: 1.18.0
 
@@ -27,7 +27,7 @@ mvn clean package
 * 在项目根目录下创建 `conf`,`distlib` 两个文件夹       
 * 将编译后  `flink-dist/target/flink-1.18-SNAPSHOT-bin/flink-1.18-SNAPSHOT` 目录下的 conf，lib 分别拷贝到 创建好的 conf，distlib 两个文件夹下。    
 
-### 2. 启动 Stadnalone 集群的 JobManager 
+### 2. 启动 Standalone 集群的 JobManager 
 配置启动类：`org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint`  
 
 #### 2.1配置以下启动参数:   
@@ -63,7 +63,7 @@ appender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m
 
 ```
 
-### 3. 启动 Stadnalone 集群的 TaskManager   
+### 3. 启动 Standalone 集群的 TaskManager   
 配置启动类：`org.apache.flink.runtime.taskexecutor.TaskManagerRunner`       
 
 #### 3.1配置以下启动参数:   
