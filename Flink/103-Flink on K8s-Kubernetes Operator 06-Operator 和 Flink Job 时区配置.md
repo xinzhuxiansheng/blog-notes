@@ -196,4 +196,17 @@ kubectl get pod flink-kubernetes-operator-7d5d8dcb64-bqnpp -n flink -o yaml
 ## 总结   
 目前来看，Operator 和 Flink Job 时区都已设置完成。        
 得到的结论，卸载 flink-kubernetes-operator，并没有影响正在运行的 Flink Job。            
->别忘记，在 Java 程序部署 Flink Job的方法中，添加 时区配置。      
+>别忘记，在 Java 程序部署 Flink Job的方法中，添加 时区配置。        
+```java
+PodTemplateSpec podTemplateSpec = new PodTemplateSpec();
+PodSpec podSpec = new PodSpec();
+Container container = new Container();
+container.setName("flink-main-container"); // container name 不可修改
+EnvVar envVar01 = new EnvVar();
+envVar01.setName("TZ");
+envVar01.setValue("Asia/Shanghai");
+container.setEnv(Collections.singletonList(envVar01));
+podSpec.setContainers(Collections.singletonList(container));
+podTemplateSpec.setSpec(podSpec);
+flinkDeploymentSpec.setPodTemplate(podTemplateSpec);    
+```
