@@ -1,5 +1,7 @@
 # Flink on Kubernetes - Kubernetes Operator - Operator 和 Flink Job 时区配置  
 
+>Operator version: 1.8  
+
 ## 引言    
 Kubernetes Pod 时区问题(少于8小时)是一个比较容易忽略的问题，在实际平台开发中，我们会用`日志采集组件`收集 Kubernetes Pod的 log，这样会有以下几点好处： 
 * 便于 log 检索, Flink Job 会存在 多个Pod，那一个个查看，有些费时费力。        
@@ -98,9 +100,9 @@ kubectl logs -n flink --tail=100 --follow basic-application-deployment-only-ingr
 
 Output logs:      
 ```bash
-2024-05-07 17:01:53,671 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Completed checkpoint 360 for job cb8ec3e5a641da6fcd2a6db1abc10e8a (15090 bytes, checkpointDuration=15 ms, finalizationTime=0 ms).
-2024-05-07 17:01:55,658 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Triggering checkpoint 361 (type=CheckpointType{name='Checkpoint', sharingFilesStrategy=FORWARD_BACKWARD}) @ 1715072515656 for job cb8ec3e5a641da6fcd2a6db1abc10e8a.
-2024-05-07 17:01:55,672 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Completed checkpoint 361 for job cb8ec3e5a641da6fcd2a6db1abc10e8a (15225 bytes, checkpointDuration=15 ms, finalizationTime=1 ms).
+2024-05-01 17:01:53,671 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Completed checkpoint 360 for job cb8ec3e5a641da6fcd2a6db1abc10e8a (15090 bytes, checkpointDuration=15 ms, finalizationTime=0 ms).
+2024-05-01 17:01:55,658 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Triggering checkpoint 361 (type=CheckpointType{name='Checkpoint', sharingFilesStrategy=FORWARD_BACKWARD}) @ 1715072515656 for job cb8ec3e5a641da6fcd2a6db1abc10e8a.
+2024-05-01 17:01:55,672 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Completed checkpoint 361 for job cb8ec3e5a641da6fcd2a6db1abc10e8a (15225 bytes, checkpointDuration=15 ms, finalizationTime=1 ms).
 ```
 
 
