@@ -47,7 +47,10 @@ basic-application-deployment-only-ingress-tz-rest   ClusterIP   10.96.17.230   <
 flink-operator-webhook-service                      ClusterIP   10.96.139.50   <none>        443/TCP             19h
 ```
 
-若我们在 Flink Job YAML 中添加 ingress 相关配置，Operator 会根据我们提供的 `template`,创建 Ingress 资源。         
+若我们在 Flink Job YAML 中添加 ingress 相关配置，Operator 会根据我们提供的 `template`,创建 Ingress 资源，可参考 Flink Operator 的架构图：           
+
+![operatoringress01](images/operatoringress01.png)          
+
 ```bash  
 [root@k8s01 k8s_yaml]# kubectl get ingress -n flink 
 NAME                                           CLASS   HOSTS          ADDRESS       PORTS   AGE
@@ -84,10 +87,11 @@ spec:
 背景铺垫差不多了，那么现在的需求是：            
 * 不使用 Flink Kubernetes Operator 创建 Ingress 资源情况下  
 * 开发一个 Operator 来创建 Flink Job Ingress        
-* 监听 Flink Job Service, 若没有 Ingress，则创建 Ingress，若 Service 不存在，则删除 Ingress`                      
-![operatoringress01](images/operatoringress01.png)      
+* 监听 Flink Job Service, 若没有 Ingress，则创建 Ingress，若 Service 不存在，则删除 Ingress`                          
 
-上图“红色”框的 Ingress，就不需要 Flink Kubernetes Operator。            
+          
+
+
 
 
 
