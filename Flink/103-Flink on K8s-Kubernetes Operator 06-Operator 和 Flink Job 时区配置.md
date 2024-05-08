@@ -4,11 +4,10 @@
 
 ## 引言    
 Kubernetes Pod 时区问题(少于8小时)是一个比较容易忽略的问题，在实际平台开发中，我们会用`日志采集组件`收集 Kubernetes Pod的 log，这样会有以下几点好处： 
-* 便于 log 检索, Flink Job 会存在 多个Pod，那一个个查看，有些费时费力。        
-* 便于 log 持久化, Flink Job 会存在 异常重启，若log 没有采集且没有外部挂载，则异常时的 log会丢失。        
+* 便于 log 检索, Flink Job 会存在 多个Pod，在排查异常过程中，一个个查看 Pod，有些费时费力。           
+* 便于 log 持久化, Flink Job 会存在 异常重启，若log 没有采集且没有外部挂载，则 Pod重启后，log会丢失。            
 
-在 log 检索场景中，支持时间条件检索是必不可少的（时间语义要准确），若还存在与其他平台关联检索，那时间就一定要校准。            
-
+在 log 检索场景中，支持时间条件检索是必不可少的（时间语义要准确），若还存在与其他平台关联检索，那时间就一定要校准。                
 
 ## 查看 POD logs 
 下面是Flink 相关 POD 的示例列表, 使用 `kubectl logs -n flink --tail=100 --follow POD名称` 查看 POD logs。       
@@ -21,17 +20,17 @@ flink       busybox                                                     ●  1/1
 flink       flink-kubernetes-operator-59878dff7-l4zp8                   ●  2/2   Running   
 ```
 
->Flink Job POD 和 Flink kubernetes operator POD 的默认时区是UTC，与我们的北京时区相差8小时     
+>Flink Job POD 和 Flink kubernetes operator POD 的默认时区是UTC，与我们的北京时区相差8小时      
 
 ## Flink Job POD 时区配置      
-使用 `kubectl logs -n flink --tail=100 --follow basic-application-deployment-only-ingress-58579ff58c-n4jqb` 查看 Job POD logs     
+使用 `kubectl logs -n flink --tail=100 --follow basic-application-deployment-only-ingress-58579ff58c-n4jqb` 查看 Job POD logs       
 ```bash
 2024-05-01 08:34:19,494 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Completed checkpoint 11082 for job 8ed117bddd09c5fa736f7792cc04498f (15387 bytes, checkpointDuration=8 ms, finalizationTime=0 ms).
 2024-05-01 08:34:21,487 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Triggering checkpoint 11083 (type=CheckpointType{name='Checkpoint', sharingFilesStrategy=FORWARD_BACKWARD}) @ 1715070861487 for job 8ed117bddd09c5fa736f7792cc04498f.
 2024-05-01 08:34:21,494 INFO  org.apache.flink.runtime.checkpoint.CheckpointCoordinator    [] - Completed checkpoint 11083 for job  8ed117bddd09c5fa736f7792cc04498f (15288 bytes, checkpointDuration=7 ms, finalizationTime=0 ms).
 ```   
 
-1.yaml 配置 时区        
+* 1.yaml 配置 时区        
 在 Flink Job YAML 的 `podTemplate` 配置项 中添加以下内容即可：         
 ```yaml
   podTemplate:
@@ -83,17 +82,17 @@ spec:
 ```
 
 
-2.提交作业      
+* 2.提交作业      
 ```shell
 kubectl apply -f basic-application-deployment-only-ingress-tz.yaml        
 ```
 
-3.查看作业 Pod       
+* 3.查看作业 Pod       
 ```shell
 kubectl get all -n flink 
 ```
 
-4.打开网页，查看日志      
+* 4.查看日志          
 ```shell
 kubectl logs -n flink --tail=100 --follow basic-application-deployment-only-ingress-tz-bd954c447-s446f    
 ``` 
