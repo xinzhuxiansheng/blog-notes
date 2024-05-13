@@ -135,5 +135,8 @@ CustomResourceEventSource event source 是一个特殊的事件源，负责处�
 
 
 
+
+
+
 refer       
 1.https://javaoperatorsdk.io/docs/getting-started                        
