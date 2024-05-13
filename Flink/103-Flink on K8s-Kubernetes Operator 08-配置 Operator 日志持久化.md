@@ -1,6 +1,82 @@
-## Flink on K8s - Kubernetes Operator - Operator 日志持久化
+# Flink on Kubernetes - Kubernetes Operator - 配置 Operator 日志持久化   
 
->Operator version: 1.8 
+>Operator version: 1.8    
+
+## 引言   
+“我们 需要 Operator Log”，Flink Kubernetes Operator 部署后，并没有将 Log 持久化在 Pod 内部文件目录中，可访问 Operator 官网 `https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/docs/operations/metrics-logging/#logging`，了解关于 Logging 的介绍，内容如下：     
+
+>The Operator controls the logging behaviour for Flink applications and the Operator itself using configuration files mounted externally via ConfigMaps. Configuration files(https://github.com/apache/flink-kubernetes-operator/tree/main/helm/flink-kubernetes-operator/conf) with default values are shipped in the Helm chart. It is recommended to review and adjust them if needed in the values.yaml file before deploying the Operator in production environments.       
+
+### 查看 log4j-operator.properties 配置 
+了解可知，Operator 的 log 是通过 ConfigMaps 下的 `log4j-operator.properties` 配置的。 可访问 https://github.com/apache/flink-kubernetes-operator/tree/main/helm/flink-kubernetes-operator/conf 下的 `log4j-operator.properties` 也可使用 `kubectl -n flink describe configmap flink-operator-config` 命名，查看 `log4j-operator.properties:` 内容。       
+
+**查看 Operator configmaps：**      
+```shell
+[root@k8s01 ~]# kubectl get configmaps -n flink        
+NAME                    DATA   AGE
+flink-operator-config   3      62m
+kube-root-ca.crt        1      44d
+```
+
+**log4j-operator.properties 内容如下：**   
+```bash   
+################################################################################
+#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  "License"); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+# limitations under the License.
+################################################################################
+
+rootLogger.level = INFO
+rootLogger.appenderRef.console.ref = ConsoleAppender
+
+# Log all infos to the console
+appender.console.name = ConsoleAppender
+appender.console.type = CONSOLE
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = %style{%d}{yellow} %style{%-30c{1.}}{cyan} %highlight{[%-5level]%notEmpty{[%X{resource.namespace}/}%notEmpty{%X{resource.name}]} %msg%n%throwable}
+
+# Do not log config loading
+logger.conf.name = org.apache.flink.configuration.GlobalConfiguration
+logger.conf.level = WARN
+
+# Avoid logging fallback key INFO messages
+logger.conf.name = org.apache.flink.configuration.Configuration
+logger.conf.level = WARN
+
+# Flink Operator Logging Overrides
+# rootLogger.level = DEBUG
+# logger.operator.name= org.apache.flink.kubernetes.operator
+# logger.operator.level = DEBUG
+```
+
+`log4j-operator.properties` 只定义了 `ConsoleAppender`, 这显然对一个Java 程序来说是远远不够的, `它会让 Operator log 使用 kubectl logs`查看 。         
+
+* 当 Flink Job 部署以及运行过程中，可能出现的异常，Operator Log 需排查      
+* 当 `Custom Operator Plugins` 部署以及运行过程中，可能出现的异常，Operator Log 需排查     
+>可访问官网 `https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/docs/operations/plugins/#custom-operator-plugins` 了解更多 Plugins细节(其含义，我们开发 jar，托管给 Operator 执行)， `后续在实践 “Custom Flink Resource Listeners” 监听 Flink Job状态, Log 也特别重要`  ...      
+
+## 配置 log4j-operator.properties   
+
+
+
+
+
+
+
+当 Flink Job 部署异常时，我们首要查看的是 Flink Kubernetes Operator POD 的 log，
+
 
 1.编写日志 operator-log-pvc.yaml    
 vim operator-log-pvc.yaml   
@@ -65,7 +141,7 @@ jvmArgs:
 cd /root/flink-operator/helm/templates
 vim flink-operator.yaml 
 
->修改 挂载点 flink-operator-log 
+>修改 挂载点 flink-operator-log  
 
 ```yaml
 spec:
@@ -203,4 +279,9 @@ http://flink.k8s.io:32469/flink/application-deployment-with-hostalises/#/overvie
 https://k8s01:32469/#/login 
 
 12.删除作业     
-kubectl delete-f application-deployment-with-hostalises.yaml
+kubectl delete-f application-deployment-with-hostalises.yaml    
+
+
+
+refer     
+1.https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/docs/operations/metrics-logging/#logging     

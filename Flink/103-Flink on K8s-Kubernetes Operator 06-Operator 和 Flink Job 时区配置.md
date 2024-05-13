@@ -134,7 +134,7 @@ basic-application-deployment-only-ingress-tz-taskmanager-1-1   1/1     Running  
 ```bash
 [root@k8s01 k8s_yaml]# kubectl get flinkdeployment -n flink
 NAME                                           JOB STATUS   LIFECYCLE STATE
-basic-application-deployment-only-ingress-tz   RUNNING      STABLE
+basic-application-deployment-only-ingress-tz   RUNNING      STABLE   
 ``` 
 
 * 3.CRD 仍然存在      

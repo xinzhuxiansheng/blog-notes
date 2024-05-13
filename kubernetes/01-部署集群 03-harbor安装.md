@@ -96,7 +96,7 @@ systemctl restart docker
 ## 镜像上传操作       
 1. 登录 
 ```shell
-docker login -u admin -p 123456 harbor01.io`
+docker login -u admin -p 123456 harbor01.io
 ```
 
 2. 因节点 hosts 配置了harbor 域名地址，则在 打包镜像时，需添加域名前缀，例如：       
