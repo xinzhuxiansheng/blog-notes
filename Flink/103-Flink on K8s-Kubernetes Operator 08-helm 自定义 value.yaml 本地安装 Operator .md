@@ -102,6 +102,6 @@ helm 本地安装，命令中没有指定 `flink-operator-repo/flink-kubernetes-
 
 本地部署是 自定义 Operator 不可或缺的一小步 :) 。       
 
-refer:    
+refer         
 1.https://nightlies.apache.org/flink/flink-kubernetes-operator-docs-main/docs/operations/helm/#overriding-configuration-parameters-during-helm-install        
 2.https://flink.apache.org/zh/downloads/             
