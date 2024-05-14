@@ -8,7 +8,7 @@
 >The Operator controls the logging behaviour for Flink applications and the Operator itself using configuration files mounted externally via ConfigMaps. Configuration files(https://github.com/apache/flink-kubernetes-operator/tree/main/helm/flink-kubernetes-operator/conf) with default values are shipped in the Helm chart. It is recommended to review and adjust them if needed in the values.yaml file before deploying the Operator in production environments.        
 
 ### 排查 Operator Log 配置  
-![configoperatorlog01](images/configoperatorlog01.png)        
+![configoperatorlog01](http://img.xinzhuxiansheng.com/blogimgs/flink/configoperatorlog01.png)        
 
 查看 flink-kubernetes-operator YAML，可知晓 Operator Log 配置是由 `flink-operator-config` configMap中的 `log4j-operator.properties` 决定的。        
 ```shell
@@ -120,8 +120,12 @@ jvmArgs:
   operator: "-Dlog.file=/opt/flink/log/operator.log"
 ```
 
->注意：在log 配置中，使用 ${sys:log.file} 变量，所以，还需在 JVM 参数中配置 `-Dlog.file`      
-
+>注意：在log 配置中，使用 ${sys:log.file} 变量，所以，还需在 JVM 参数中配置 `-Dlog.file`，我想你可能也意识到，凡是跟JVM 相关的参数也都可以在这里配置，例如 JVM 内存大小, 剩下的以此类推，示例：        
+```bash
+jvmArgs:
+  webhook: "-Dlog.file=/opt/flink/log/webhook.log -Xms1024m -Xmx1024m"  
+  operator: "-Dlog.file=/opt/flink/log/operator.log -Xms1024m -Xmx1024m"     
+```
 
 ## 创建 Operator Log PVC  
 在之前 Blog “Flink on Kubernetes - Kubernetes集群搭建 - 部署 Prometheus Grafana” 提到过一个知识点：   
@@ -150,7 +154,8 @@ kubectl -n flink apply -f flink-operator-log-pvc.yaml
 
 ## 修改 flink-kubernetes-operator/templates/flink-operator.yaml, 添加 log-pvc       
 
-vim flink-kubernetes-operator/templates/flink-operator.yaml ,修改内容如下：        
+vim flink-kubernetes-operator/templates/flink-operator.yaml ,修改内容如下：         
+
 >`注意：flink-operator.yaml 包含较多的 if、else、end，它是一个完整的判断处理逻辑，所以，在该文件修改的时候，要注意 if、end 的判断边界，若加错位置，可能会出现某个条件满足，导致你的配置不生效`          
 ```shell
 # 1.增加 flink-operator-log volumnes 
@@ -267,7 +272,36 @@ operator.log	webhook.log
 ```
 
 3）持久化是否生效         
-可在 POD /opt/flink/log目录下 `touch xxx.log`, 若 Operator 重启后，仍然存在，则生效啦。       
+可在 POD /opt/flink/log目录下 `touch xxx.log`, 若 Operator 重启后，仍然存在，则生效啦。      
+
+## 修改 Flink Operator 运行用户     
+默认情况 Flink Operator POD 内部使用 Flink 用户运行 Operator 程序，官方镜像 POD内部 无法使用 vi、less 等 查看 log的命令行工具，且在执行 `apt-get update && apt-get install -y less` 安装时，提示无权限。  为了能更好的检索 POD 内部 log， 可以修改 `flink-kubernetes-operator/myvalues.yaml` 以下配置：   
+```bash
+podSecurityContext:
+  runAsUser: 0   # 默认值是 999
+  runAsGroup: 0  # 默认值是 999 
+  # fsGroup: 9999
+``` 
+
+>podSecurityContext 是 Kubernetes Pod 安全上下文配置的一部分，用于定义 Pod 或容器运行时的安全设置。它可以配置一些与用户、组和文件系统权限相关的选项，以增强安全性。以下是你提到的各项配置的解释：     
+```bash
+podSecurityContext
+podSecurityContext 定义在 Pod 级别的安全设置，适用于所有容器。它可以指定用户和组的 ID，以及文件系统的组 ID。
+配置项说明
+    runAsUser:
+        指定容器中的所有进程运行时使用的用户 ID (UID)。
+        例如，runAsUser: 9999 表示容器中的进程将以 UID 9999 运行。
+
+    runAsGroup:
+        指定容器中的所有进程运行时使用的组 ID (GID)。
+        例如，runAsGroup: 9999 表示容器中的进程将以 GID 9999 运行。
+
+    fsGroup:
+        指定挂载到 Pod 的卷的文件系统组 ID。该组 ID 会应用于挂载到该 Pod 的所有卷及其创建的文件。
+        例如，fsGroup: 9999 表示挂载的卷和文件将拥有 GID 9999。
+```
+
+重新安装 Operator 后，POD 以 root USER 运行 Operator 程序，接着安装 Less（apt-get update && apt-get install -y less）， 就可以检索 /opt/flink/log/operator.log    
 
 ## 总结     
 Log 持久化是生产实战中的重要的一环，目前 Operator Log 配置的是 `RollingFile`,因为 log 量少，无法达到 100M 滚动切割，后续我再来 Check Rolling 是否生效。           
