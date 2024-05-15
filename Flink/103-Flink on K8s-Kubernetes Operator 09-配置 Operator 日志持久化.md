@@ -250,8 +250,9 @@ REVISION: 1
 TEST SUITE: None
 ```
 
-## 验证  
-1）查看 PVC      
+## 验证   
+
+### 查看 PVC      
 ```shell
 # 查看 pvc
 [root@k8s01 k8s_yaml]# kubectl -n flink get pvc 
@@ -259,7 +260,7 @@ NAME                     STATUS   VOLUME                                     CAP
 flink-operator-log-pvc   Bound    pvc-bf6fd323-d50f-447c-b3f8-a29b201f1adf   2Gi        RWO            nfs-storage    37s
 ```
 
-2）POD 路径挂载成功且有 operator.log 文件存在     
+### POD 路径挂载成功且有 operator.log 文件存在     
 ```bash
 # kubectl exec -it 进入 POD
 # Output log:       
@@ -271,8 +272,9 @@ flink@flink-kubernetes-operator-df8549cfb-cpmg5:~/log$ ls
 operator.log	webhook.log
 ```
 
-3）持久化是否生效         
-可在 POD /opt/flink/log目录下 `touch xxx.log`, 若 Operator 重启后，仍然存在，则生效啦。      
+### 持久化是否生效         
+可在 POD /opt/flink/log目录下 `touch xxx.log`, 若 Operator 重启后，仍然存在，则生效啦。       
+
 
 ## 修改 Flink Operator 运行用户     
 默认情况 Flink Operator POD 内部使用 Flink 用户运行 Operator 程序，官方镜像 POD内部 无法使用 vi、less 等 查看 log的命令行工具，且在执行 `apt-get update && apt-get install -y less` 安装时，提示无权限。  为了能更好的检索 POD 内部 log， 可以修改 `flink-kubernetes-operator/myvalues.yaml` 以下配置：   
