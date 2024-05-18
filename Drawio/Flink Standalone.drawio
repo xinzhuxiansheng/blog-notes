@@ -1,0 +1,81 @@
+<mxfile host="Electron" modified="2024-05-18T02:22:33.424Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="UK-fIcYq3K_SWXjeqX6U" version="24.1.0" type="device">
+  <diagram name="脚本执行脉络图" id="qLQxipcltvYCt7U49bK6">
+    <mxGraphModel dx="2218" dy="1070" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-1" value="start-cluster.sh" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="10" y="107" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;dashed=1;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="137" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-2" value="1.config.sh" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="250" y="107" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-3" value="2. jobmanager.sh start" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="-15" y="230" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-4" value="3. config.sh#TMWorker() start" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-32.5" y="360" width="205" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="530" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-15" value="4. taskmanager.sh" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="-15" y="500" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-17" value="flink-daemon.sh" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="350" y="230" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-19" value="flink-daemon.sh" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="350" y="500" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-21" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-2" target="XckGWlKGxGuaQi7iGHcU-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="110" as="sourcePoint" />
+            <mxPoint x="590" y="60" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="400" y="140" />
+              <mxPoint x="440" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XckGWlKGxGuaQi7iGHcU-22" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" source="XckGWlKGxGuaQi7iGHcU-2" target="XckGWlKGxGuaQi7iGHcU-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="370" y="140" as="sourcePoint" />
+            <mxPoint x="510" y="70" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="120" />
+              <mxPoint x="580" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
