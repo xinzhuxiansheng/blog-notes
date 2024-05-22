@@ -1,6 +1,6 @@
 # Flink 源码 - Standalone - Idea 启动 Standalone 集群 (Session Model)          
 
->Flink version: 1.17.0      
+>Flink version: 1.17.0      	
 
 ## 引言         
 若你对 `Flink Standalone` 使用还不太了解，可访问`Flink Architecture`(https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/concepts/flink-architecture/#taskmanagers) 和 `Flink Standalone deployment`(https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/resource-providers/standalone/overview/) 了解更多细节 。           
@@ -10,10 +10,11 @@
 接下来，演示 Flink Standalone 集群的基本使用。              
 
 ## Deployment Flink Standalone     
-1）下载 Flink   
+
+### 1）下载 Flink   
 访问 https://flink.apache.org/zh/downloads/， 下载 `Apache Flink 1.17.2 (asc, sha512)`          
 
-2）解压 & 启动 Standalone（单节点）         
+### 2）解压 & 启动 Standalone（单节点）         
 ```shell
 # 解压 
 tar -zxf flink-1.17.2-bin-scala_2.12.tgz        
@@ -33,7 +34,7 @@ taskmanager.numberOfTaskSlots: 40 # Slot个数 调大一些，默认是 1。
 flink-1.17.2/bin/start-cluster.sh           
 ```
 
-3）访问 Flink Web UI    
+### 3）访问 Flink Web UI    
 http://192.168.0.201:8081           
 ![standalonedebug01](http://img.xinzhuxiansheng.com/blogimgs/flink/standalonedebug01.png)              
 
@@ -68,7 +69,8 @@ http://192.168.0.201:8081
 使用 `ps -ef|grep java` ，查看 master、worker 的 jvm 进程，完整的启动命令。    
 ```bash
 [root@vm01 flink-1.17.2]# ps -ef|grep java
-root     104813      1  1 May18 pts/0    00:30:53 /data/jdk1.8.0_391/bin/java -Xmx1073741824 -Xms1073741824 -XX:MaxMetaspaceSize=268435456 -Dlog.file=/root/yzhou/flink/flink1172/flink-1.17.2/log/flink-root-standalonesession-0-vm01.log -Dlog4j.configuration=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/log4j.properties -Dlog4j.configurationFile=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/log4j.properties -Dlogback.configurationFile=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/logback.xml -classpath /root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-cep-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-connector-files-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-csv-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-json-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-scala_2.12-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-api-java-uber-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-planner-loader-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-runtime-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-1.2-api-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-api-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-core-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-slf4j-impl-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-dist-1.17.2.jar:::/opt/module/hadoop-3.1.3/etc/hadoop: org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint -D jobmanager.memory.off-heap.size=134217728b -D jobmanager.memory.jvm-overhead.min=201326592b -D jobmanager.memory.jvm-metaspace.size=268435456b -D jobmanager.memory.heap.size=1073741824b -D jobmanager.memory.jvm-overhead.max=201326592b --configDir /root/yzhou/flink/flink1172/flink-1.17.2/conf --executionMode cluster
+root     104813      1  1 May18 pts/0    00:30:53 /data/jdk1.8.0_391/bin/java -Xmx1073741824 -Xms1073741824 -XX:MaxMetaspaceSize=268435456 -Dlog.file=/root/yzhou/flink/flink1172/flink-1.17.2/log/flink-root-standalonesession-0-vm01.log -Dlog4j.configuration=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/log4j.properties -Dlog4j.configurationFile=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/log4j.properties -Dlogback.configurationFile=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/logback.xml -classpath /root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-cep-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-connector-files-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-csv-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-json-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-scala_2.12-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-api-java-uber-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-planner-loader-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-runtime-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-1.2-api-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-api-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-core-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-slf4j-impl-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-dist-1.17.2.jar:::/opt/module/hadoop-3.1.3/etc/hadoop: org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint -D jobmanager.memory.off-heap.size=134217728b -D jobmanager.memory.jvm-overhead.min=201326592b -D jobmanager.memory.jvm-metaspace.size=268435456b -D jobmanager.memory.heap.size=1073741824b -D jobmanager.memory.jvm-overhead.max=201326592b --configDir /root/yzhou/flink/flink1172/flink-1.17.2/conf --executionMode cluster 
+
 root     105103      1  1 May18 pts/0    00:34:34 /data/jdk1.8.0_391/bin/java -XX:+UseG1GC -Xmx536870902 -Xms536870902 -XX:MaxDirectMemorySize=268435458 -XX:MaxMetaspaceSize=268435456 -Dlog.file=/root/yzhou/flink/flink1172/flink-1.17.2/log/flink-root-taskexecutor-0-vm01.log -Dlog4j.configuration=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/log4j.properties -Dlog4j.configurationFile=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/log4j.properties -Dlogback.configurationFile=file:/root/yzhou/flink/flink1172/flink-1.17.2/conf/logback.xml -classpath /root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-cep-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-connector-files-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-csv-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-json-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-scala_2.12-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-api-java-uber-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-planner-loader-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-table-runtime-1.17.2.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-1.2-api-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-api-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-core-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/log4j-slf4j-impl-2.17.1.jar:/root/yzhou/flink/flink1172/flink-1.17.2/lib/flink-dist-1.17.2.jar:::/opt/module/hadoop-3.1.3/etc/hadoop: org.apache.flink.runtime.taskexecutor.TaskManagerRunner --configDir /root/yzhou/flink/flink1172/flink-1.17.2/conf -D taskmanager.memory.network.min=134217730b -D taskmanager.cpu.cores=40.0 -D taskmanager.memory.task.off-heap.size=0b -D taskmanager.memory.jvm-metaspace.size=268435456b -D external-resources=none -D taskmanager.memory.jvm-overhead.min=201326592b -D taskmanager.memory.framework.off-heap.size=134217728b -D taskmanager.memory.network.max=134217730b -D taskmanager.memory.framework.heap.size=134217728b -D taskmanager.memory.managed.size=536870920b -D taskmanager.memory.task.heap.size=402653174b -D taskmanager.numberOfTaskSlots=40 -D taskmanager.memory.jvm-overhead.max=201326592b      
 ```
 
@@ -163,6 +165,8 @@ Modify classpath: 选择 `Include` 且指定 devlib 的目录下的`jar`。   `�
 
 >注意：此时，Jobmanager 已经可以在 Idea 中启动，可启动后，发现 log 无法在 Idea 控制台打印，log 会打印到 `-Dlog.file` 参数指定的 log 文件中。         
 
+![standalonedebug05](http://img.xinzhuxiansheng.com/blogimgs/flink/standalonedebug05.png) 	
+
 接下来，我们配置控制台打印 log 策略         
 
 ### 3）配置控制台打印 log   
@@ -236,12 +240,14 @@ Windows 无法创建 这样的路径 C:\Users\yzhou\AppData\Local\Temp\tm_localh
 这块若想了解原因，可查看 `TaskManagerRunner#getTaskManagerResourceId()` 方法，从 taskmanager options 若读取不到 `taskmanager.resource-id` 参数，则按照默认规则生成一个 resourceId。         
 ![standalonedebug07](http://img.xinzhuxiansheng.com/blogimgs/flink/standalonedebug07.png)              
 
-所以，`若你是 windows 环境`，还需在 Program arguments， 添加一个 `taskmanager.resource-id=tmp_yzhou` 参数配置。       
+所以，`若你是 windows 环境`，还需在 Program arguments， 添加一个 `taskmanager.resource-id=tmp_yzhou` 参数配置。     
+
+关于`taskmanager.resource-id` 参数, 可访问 https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/resource-providers/standalone/working_directory/ 了解它更多功能。      
 
 Taskmanager 启动 OK ！！！      
 
 ## 访问 Flink Web UI
-JobManager，TaskManager 启动完成后，访问 `http://127.0.0.1:8081` ,查看 `Task Managers` 菜单，若看到名为 `tm_yzhou` 的 taskmanager，则表示注册成功。    
+JobManager，TaskManager 启动完成后，访问 `http://127.0.0.1:8081` ,查看 `Task Managers` 菜单，若看到名为 `tm_yzhou` 的 taskmanager，则表示注册成功。    	
 
 ![standalonedebug08](http://img.xinzhuxiansheng.com/blogimgs/flink/standalonedebug08.png)               
 
@@ -249,4 +255,5 @@ refer
 1.https://nightlies.apache.org/flink/flink-docs-master/zh/docs/flinkdev/building/     
 2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/concepts/flink-architecture/#taskmanagers          
 3.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/concepts/glossary/             
-4.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/resource-providers/standalone/overview/  
+4.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/resource-providers/standalone/overview/    
+5.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/resource-providers/standalone/working_directory/  
