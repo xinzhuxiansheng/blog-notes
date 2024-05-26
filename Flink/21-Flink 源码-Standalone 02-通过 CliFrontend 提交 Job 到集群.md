@@ -7,7 +7,7 @@
 
 我是参考 `./bin/start-cluster.sh` 脚本启动后的Java进程, 添加了 classpath，`可在 Idea 中，其实不需要全部配置`,当然添加后，启动并没有什么异常情况，但我现在要说的是一个例外，内容如下：                       
 
-我在修改 `flink-runtime`模块的代码后，重启调试，发现修改后的代码并为生效，我尝试将 Maven 本地仓库中的`maven-repository/org/apache/flink/flink-runtime/1.17-SNAPSHOT` 目录清空，仍然不起作用，后来才意识到，我手动添加过 flink打包后的 lib，所以，我在 Idea 的启动配置项，将 `flink-dist-1.18-SNAPSHOT.jar` 从 classpath 配置中移除，再重新启动调试，则添加的代码就可以执行了。          
+我在修改 `flink-runtime`模块的代码后，重启调试，发现修改后的代码并未生效，我尝试将 Maven 本地仓库中的`maven-repository/org/apache/flink/flink-runtime/1.17-SNAPSHOT` 目录清空，仍然不起作用，后来才意识到，我手动添加过 flink打包后的 lib，所以，我在 Idea 的启动配置项，将 `flink-dist-1.18-SNAPSHOT.jar` 从 classpath 配置中移除，再重新启动调试，则添加的代码就可以执行了。          
 
 >注意：若修改了 源码中某个模块，若在classpath 也配置了，记得移除掉。                
 
@@ -37,7 +37,7 @@ exec /data/jdk1.8.0_391/bin/java    -Dlog.file=/root/yzhou/flink/flink1172/flink
 
 ### 修改 Standalone 的 conf/flink-conf.yaml         
 >操作是基于 上一篇 Blog "Flink 源码 - Standalone - Idea 启动 Standalone 集群 (Session Model)" 的 Standalone 环境部署并且 devconf、devlib 目录配置会延续使用。          
-![cliFrontenddebug01](images/cliFrontenddebug01.png)     
+![cliFrontenddebug01](http://img.xinzhuxiansheng.com/blogimgs/flink/cliFrontenddebug01.png)     
 
 vim conf/flink-conf.yaml ,修改内容如下：            
 ```yaml
@@ -99,7 +99,7 @@ cli 成功了，接下来，开始介绍 CliFrontend 提交 Job 配置。
 首先，我们在 项目根目录下创建一个 `devcliconf` 文件夹，将 `devconf`下的文件 copy 到 devcliconf 文件夹下。       
 
 >为什么要这么做？   
-![cliFrontenddebug02](images/cliFrontenddebug02.png)   
+![cliFrontenddebug02](http://img.xinzhuxiansheng.com/blogimgs/flink/cliFrontenddebug02.png)   
 
 `StandaloneSessionClusterEntrypoint(Jobmanager)、TaskManagerRunner(Taskmanager)、./bin/flink run(CLI)` 这三个都依赖 `conf/flink-conf.yaml`,  CLI 在提交作业的时候，可以指定将 Job 提交到 某个集群，例如本地集群（CLI & Standalone 集群在一个节点）、外部集群 （CLI 与 Standalone 集群不在同一个节点 ），而控制它的参数在 conf/flink-conf.yaml 中配置：      
 ```yaml  
@@ -144,16 +144,16 @@ Console log:
 Executing example with default input data.
 Use --input to specify file input.
 Printing result to stdout. Use --output to specify output path.
-2024-05-21 21:29:02,860 INFO  org.apache.flink.client.program.rest.RestClusterClient       [] - Submitting job 'WordCount' (6eac7419cb4ef7a3b632126f61936c03).
-2024-05-21 21:29:04,923 INFO  org.apache.flink.client.program.rest.RestClusterClient       [] - Successfully submitted job 'WordCount' (6eac7419cb4ef7a3b632126f61936c03) to 'http://192.168.0.201:8081'.
-Job has been submitted with JobID 6eac7419cb4ef7a3b632126f61936c03
+2024-05-27 01:30:50,037 INFO  org.apache.flink.client.program.rest.RestClusterClient       [] - Submitting job 'WordCount' (34bd1f5ecee4bfdd9c736241a56c8ef2).
+2024-05-27 01:30:52,569 INFO  org.apache.flink.client.program.rest.RestClusterClient       [] - Successfully submitted job 'WordCount' (34bd1f5ecee4bfdd9c736241a56c8ef2) to 'http://192.168.0.201:8081'.
+Job has been submitted with JobID 34bd1f5ecee4bfdd9c736241a56c8ef2
 Program execution finished
-Job with JobID 6eac7419cb4ef7a3b632126f61936c03 has finished.
-Job Runtime: 225 ms    
+Job with JobID 34bd1f5ecee4bfdd9c736241a56c8ef2 has finished.
+Job Runtime: 1342 ms  
 ```     
 
 Flink Web UI     
-![cliFrontenddebug03](images/cliFrontenddebug03.png)     
+![cliFrontenddebug03](http://img.xinzhuxiansheng.com/blogimgs/flink/cliFrontenddebug03.png)     
 
 
 

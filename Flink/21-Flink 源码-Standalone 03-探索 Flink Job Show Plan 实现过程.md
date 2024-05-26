@@ -1,9 +1,18 @@
-# Flink 源码 - Standalone - 探索 Flink Web UI 的 Submit New Job Feature             
+# Flink 源码 - Standalone - 探索 Flink Job Show Plan 实现过程             
 
->Flink version: 1.17.2  
+>Flink version: 1.17.2          
+
+>注意，该篇 Blog 涉及到的“点”较多,阅读源码过程要实践“第一性原理”,似乎可行性不高，学习的过程像是剥洋葱一样，从外到内，也无法拿着`Flink confluence FLIP`(https://cwiki.apache.org/confluence/display/FLINK/Flink+Improvement+Proposals)对着它的 `Motivation`直接理解，若做到 do-find-why 似乎可行性较高。    
+
+>如果我有表述的不清楚，还麻烦大家给我留言。     
 
 ## 引言     
+在之前的 Blog 内容中，部署了一些 Flink Job，对下面的图肯定有所了解：        
+![showplan13](images/showplan13.png)        
 
+它是 Flink Job 的 `Job Graph 拓扑图`，它展示了 Job 的执行计划。 具体来说，它显示了数据流通过各个算子（operators）的路径，以及每个算子的并行度（Parallelism）。 它在我们使用Flink 的任何阶段都有举足轻重的作用，例如，数据流可视化，帮助我们理解 Job的结构和处理过程，它显示的并行度，可帮助我们优化资源使用和提高处理效率，在后面的 Blog 中，我们会很长时间围绕这 `JobGraph`。    
+
+![showplan14](images/showplan14.png)    
 
 
 ## 开发 Stream WordCount 作业      
@@ -112,7 +121,7 @@ mvn clean package
 
 ## Cli 查看 jar 的 JobGraph         
 ```shell
-./flink info -c com.yzhou.blog.wordcount.StreamWordCount TMP/flink-blog-1.0-SNAPSHOT-jar-with-dependencies.jar  
+./flink info -c com.yzhou.blog.wordcount.StreamWordCount TMP/flink-blog-1.0-SNAPSHOT-jar-with-dependencies.jar   
 ```
 
 Output log:             
@@ -180,12 +189,47 @@ WARNING: All illegal access operations will be denied in a future release
 --------------------------------------------------------------
 
 No description provided.
-```
+```     
+
+## 如何调试 Flink Web API 服务   
+在之前的 Blog "Flink 源码 - Standalone - Idea 启动 Standalone 集群 (Session Model)" 介绍过 “Deployment Flink Standalone”，当部署成功后，可以访问 Flink 提供的 WEB UI（http://192.168.0.201:8081），查看Flink（JobManager,TaskManager） 、 Flink Job 等相关信息，也提供 Flink Job 任务提交的入口 `Submit New Job`。       
+
+![showplan12](images/showplan12.png)            
+
+“查看页面源码” 可看到 Flink WEB UI 是前后端分离模式，我们可以独立请求 API得到返回结果。 
+
+
 
 ## Show Plan        
 Standalone Cluster      
 
->Flink Job 是一个带有 main()方法入口的 Jar， 那 Flink client 是如何“识别” 用户程序的呢？  
+>Flink Job 是一个带有 main()方法入口的 Jar，那 Flink client 是如何“识别” 用户程序的呢？    
+
+## PackagedProgram          
+
+**JarPlanHandler#handleRequest()**      
+```java     
+@Override
+protected CompletableFuture<JobPlanInfo> handleRequest(
+        @Nonnull final HandlerRequest<JarPlanRequestBody> request,
+        @Nonnull final RestfulGateway gateway)
+        throws RestHandlerException {
+
+    ...... 省略部分代码    
+
+    return CompletableFuture.supplyAsync(
+            () -> {
+                try (PackagedProgram packagedProgram =
+                        context.toPackagedProgram(effectiveConfiguration)) {  
+                    
+                    ...... 省略部分代码   
+
+                }
+            },
+            executor);
+}     
+```
+
 
 ### 创建 PackagedProgram userCodeClassLoader
 PackagedProgram 在它的构造方法中，创建了一个自定义类加载器 `FlinkUserCodeClassLoader userCodeClassLoader`。 `FlinkUserCodeClassLoaders#create()`方法会根据 `classloader.resolve-order` 配置项最终创建的 ChildFirstClassLoader 还是 ParentFirstClassLoader, 这样的目的是定义从用户代码加载类时的类解析策略，即是先检查用户代码 jar（“child-first”）还是应用程序类路径（“parent-first”）。默认设置指示首先从用户代码 jar 加载类，这意味着用户代码 jar 可以包含和加载与 Flink 使用的不同的依赖项（传递性）。
@@ -246,7 +290,6 @@ protected Class<?> loadClassWithoutExceptionHandling(String name, boolean resolv
 
 >关于 Class Loading 的配置部分，Flink 官网 doc 也单独列出来，可访问 `https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/config/#class-loading` 了解更多。                   
 
-
 ### 创建 PackagedProgram mainClass            
 该章节内容的介绍 与 上一章节 "创建 PackagedProgram userCodeClassLoader"的内容是联动的， 正如它的实现一样，是使用 userCodeClassLoader 来加载 mainClass。 
 ```java
@@ -292,7 +335,7 @@ private static Class<?> loadMainClass(String className, ClassLoader cl)
 }
 ```
 
->在 DataX 项目，可查看 `CLassLoaderSwapper`的实现。 代码示例如下：          
+>在 DataX 项目，可查看 `CLassLoaderSwapper.java`的实现。 代码示例如下： 
 **CLassLoaderSwapper#setCurrentThreadClassLoader()**        
 ```java
 /**
@@ -307,6 +350,121 @@ public ClassLoader setCurrentThreadClassLoader(ClassLoader classLoader) {
     return this.storeClassLoader;
 }
 ```
+
+到此，PackagedProgram.newBuilder() 重要部分构建已介绍的差不多了，接下来，探讨 JobGraph 的构造过程：         
+```java
+final JobGraph jobGraph =
+    context.toJobGraph(packagedProgram, effectiveConfiguration, true);
+```
+
+## JobGraph     
+
+**JarPlanHandler#handleRequest()**   
+```java
+@Override
+protected CompletableFuture<JobPlanInfo> handleRequest(
+        @Nonnull final HandlerRequest<JarPlanRequestBody> request,
+        @Nonnull final RestfulGateway gateway)
+        throws RestHandlerException {
+    
+    ...... 省略部分代码 
+
+    return CompletableFuture.supplyAsync(
+            () -> {
+                try (...... 省略部分代码 ) {
+                    final JobGraph jobGraph =
+                            context.toJobGraph(packagedProgram, effectiveConfiguration, true);
+                    return planGenerator.apply(jobGraph);
+                }
+            },
+            executor);
+}  
+```         
+
+下面给出 JobGraph 构造时序图                
+![showplan08](images/showplan08.png)             
+
+JobGraph的构造重要部分在 PackagedProgramUtils#createJobGraph(...) 方法内部，接下来，我们来重点讲解这部分的逻辑。            
+
+### 创建 Pipeline     
+![showplan09](images/showplan09.png)        
+**PackagedProgramUtils#createJobGraph(......)**       
+```java
+final Pipeline pipeline =
+        getPipelineFromProgram(
+                packagedProgram, configuration, defaultParallelism, suppressOutput);
+``` 
+
+`PackagedProgramUtils#getPipelineFromProgram()`方法实现逻辑让我花了些时间去思考，从 benv 、senv 对象的创建，到 `program.invokeInteractiveModeForExecution()` 内部调用 `PackagedProgram#callMainMethod()` 执行 Flink Job 的 main() 方法。    
+
+**PackagedProgramUtils#getPipelineFromProgram() 时序图**
+![showplan10](images/showplan10.png)            
+
+>PackagedProgram#callMainMethod() 执行的是 StreamWordCount的 main()方法，而方法是无返回值的，那 callMainMethod()又是如何与 Pipeline 是如何关联的呢？ 还有 main()方法执行逻辑似乎并不像普通的java程序一样，会启动独立的 Java Server程序。 跟固化的思维逻辑相比，此时的 main() 执行还是在 Flink Client，还并未到 Flink Job 执行物理线程那一步。      
+
+![showplan11](images/showplan11.png)            
+
+**PackagedProgramUtils#getPipelineFromProgram()**               
+```java
+public static Pipeline getPipelineFromProgram(
+        PackagedProgram program,
+        Configuration configuration,
+        int parallelism,
+        boolean suppressOutput)
+        throws CompilerException, ProgramInvocationException {
+    
+    ...... 省略部分代码 
+
+    // temporary hack to support the optimizer plan preview
+    OptimizerPlanEnvironment benv =
+            new OptimizerPlanEnvironment(
+                    configuration, program.getUserCodeClassLoader(), parallelism);
+    benv.setAsContext();
+    StreamPlanEnvironment senv =
+            new StreamPlanEnvironment(
+                    configuration, program.getUserCodeClassLoader(), parallelism);
+    senv.setAsContext();
+
+    try {
+        program.invokeInteractiveModeForExecution(); // 执行 main()
+    } catch (Throwable t) {
+        if (benv.getPipeline() != null) {
+            return benv.getPipeline();
+        }
+
+        if (senv.getPipeline() != null) {
+            return senv.getPipeline();
+        }
+
+        if (t instanceof ProgramInvocationException) {
+            throw t;
+        }
+
+        throw generateException(
+                program, "The program caused an error: ", t, stdOutBuffer, stdErrBuffer);
+    } finally {
+        benv.unsetAsContext();
+        senv.unsetAsContext();
+        if (suppressOutput) {
+            System.setOut(originalOut);
+            System.setErr(originalErr);
+        }
+        Thread.currentThread().setContextClassLoader(contextClassLoader);
+    }
+
+    throw generateException(
+            program,
+            "The program plan could not be fetched - the program aborted pre-maturely.",
+            null,
+            stdOutBuffer,
+            stdErrBuffer);
+}
+```   
+
+### PackagedProgram#callMainMethod
+
+
+
 
 
 ## Rest Router   
