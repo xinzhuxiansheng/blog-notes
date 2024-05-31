@@ -548,7 +548,7 @@ Flink 首先会将该链路算子转成 `Transformation`对象，存储在 `Stre
 * ReduceTransformation Keyed Aggregation  
 * LegacySinkTransformation Prnt to Std.Out      
 
-并不包含 keyBy() 的 PartitionTransformation，下面是 keyBy 的 KeyedStream#KeyedStream()代码，显然它没有调用`StreamExecutionEnvironment#addOperator()`方法。         
+并不包含 keyBy() 的 PartitionTransformation ，下面是 keyBy 的 KeyedStream#KeyedStream()代码，显然它没有调用`StreamExecutionEnvironment#addOperator()`方法。         
 ```java
 this(
     dataStream,
@@ -582,12 +582,18 @@ OneInputTransformation<T, R> resultTransform =
 而 this.transformation 是 Source DataStream对象内部的 Transformation。  根据`引用传递`,那 `StreamExecutionEnvironment.transformations`集合 如下图所示：     
 ![showplan33](images/showplan33.png)  
 
-所以 父节点 inputs 存放了 `PartitionTransformation （Partition）`。并且 每个 transformation 都保存了它 前面所有的 transformations 引用链路。        
+集合中每个 transformation 的内部属性 inputs 存放了它前面所有的 transformations 引用链路。        
 
-**针对第二个疑惑**：我们知晓调用`StreamExecutionEnvironment#addOperator()`方法，会将 Transformation 对象添加到 `StreamExecutionEnvironment.transformations`集合中。         
-
-通过 Idea 查看 addOperator() 方法引用，这太粗放了，至于添不添加，后面还是 case by case 再分析。          
+**针对第二个疑惑**：我们知晓调用`StreamExecutionEnvironment#addOperator()`方法，才会将 Transformation 对象添加到 `StreamExecutionEnvironment.transformations`集合中。 关于 `keyBy() 的 PartitionTransformation` 没有加入到 transformations集合中，其原因是 PartitionTransformation 没有继承 `PhysicalTransformation`抽象类，这意味着它在运行时并不会转换为算子。 以 StreamWordCount 为例，看它的 Transformation 的继承关系：        
 ![showplan34](images/showplan34.png)        
+
+* 继承 `PhysicalTransformation`抽象类的 Transformation 称为 `物理 Transformation`，它会在运行时转换为具体的算子。        
+
+* 直接继承 `Transformation`抽象类的 Transformation 称为 `虚拟 Transformation`，它不会在运行时转换为具体的算子。             
+
+但有个例外`LegacySourceTransformation (Source)` 并没有添加到`transformations`集合中，`规律总结得到的一个结论：非 Source 的 Transformation 除外，其它 物理 Transformation 会加到 transformations集合中`。        
+
+>关于 物理 Transformation 和 虚拟 Transformation 概念 ，在后面构造 StreamGraph 会用到，请务必知晓。      
 
 #### 3）List<Transformation<?>> transformations 构造 StreamGraph 
 在`模块二`中，当执行 `env.execute();`, 是使用 `StreamExecutionEnvironment.transformations`集合来构造 StreamGraph的。 如下图所示：       
@@ -596,8 +602,14 @@ OneInputTransformation<T, R> resultTransform =
 
 `StreamGraphGenerator#generate()`   
 
->StreamGraphGenerator#translate() 方法中的形参 `translator`是什么？  
+>StreamGraphGenerator#translate() 方法中的形参 `TransformationTranslator<?, Transformation<?>> translator`是什么？ 下面是 translator的Map 集合，它的 key 是 Transformation。 
 ```java
+
+private static final Map<
+                    Class<? extends Transformation>,
+                    TransformationTranslator<?, ? extends Transformation>>
+            translatorMap;
+
 static {
     @SuppressWarnings("rawtypes")
     Map<Class<? extends Transformation>, TransformationTranslator<?, ? extends Transformation>>
@@ -625,6 +637,30 @@ static {
     translatorMap = Collections.unmodifiableMap(tmp);
 }
 ```
+
+
+```java
+return shouldExecuteInBatchMode
+        ? translator.translateForBatch(transform, context)
+        : translator.translateForStreaming(transform, context);
+```
+
+
+
+
+
+
+
+StreamGraphGenerator.alreadyTransformed, 该字段类型是： Map<Transformation<?>, Collection<Integer>> alreadyTransformed。 注意，Transformation 经过 各自的 `TransformationTranslator`转换后会put 进去，key 是 transformation，若 key 是物理 Transformation，则 value 是它自身 id，若 key 是虚拟 Transformation，则 value 是它 父节点的 ids。  
+
+为什么会有这样的区分呢？     
+
+
+
+
+
+
+
 
 
 
