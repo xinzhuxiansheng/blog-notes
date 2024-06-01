@@ -18,7 +18,7 @@
 ![showplan14](images/showplan14.png)             
 
 ## 开发 Stream WordCount 作业        
-关于从零开始搭建 Flink Job 开发项目，可参考Flink 官网给出的模板示例： https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/maven/，以下是我的 Flink Job 开发项目的构造过程：         
+关于从零开始搭建 Flink Job 开发项目，可参考Flink 官网给出的模板示例：`https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/maven/` ，以下是 Example Job 项目搭建过程：         
 
 ### 添加 Flink 相关依赖         
 ```xml
@@ -116,10 +116,12 @@ public class StreamWordCount {
 ```
 
 ### 打包        
-打包后，产出 `flink-blog-1.0-SNAPSHOT-jar-with-dependencies.jar`, 完整项目示例可访问 https://github.com/xinzhuxiansheng/flink-tutorial/tree/main/flink-blog。    
+打包后，产出 `flink-blog-1.0-SNAPSHOT-jar-with-dependencies.jar`。            
 ```shell        
 mvn clean package       
 ```                 
+
+>Example Job 的完整项目示例可访问 Github `https://github.com/xinzhuxiansheng/flink-tutorial/tree/main/flink-blog`
 
 ## How to view job plan    
 查看 Job Plan 有两种方式，一个是使用 CLI 命令行，另一种是浏览 Flink WEB UI 页面。下面，介绍两种查看方式。               
@@ -561,7 +563,7 @@ this(
     keyType);  
 ```
 
-那这里我会有 2个疑惑？      
+**那这里我会有 2个疑惑？**        
 * 1.transformations集合 没有 keyBy()的 PartitionTransformation 如何保证 StreamWordCount DataStram API 链路的完整性 ？       
 * 2.哪些 Transformation 该加入 `StreamExecutionEnvironment.transformations`集合中。         
 
@@ -579,7 +581,7 @@ OneInputTransformation<T, R> resultTransform =
             false);
 ```
 
-而 this.transformation 是 Source DataStream对象内部的 Transformation。  根据`引用传递`,那 `StreamExecutionEnvironment.transformations`集合 如下图所示：     
+而 this.transformation 是 Source DataStream对象内部的 Transformation。  根据`引用传递`,那 `StreamExecutionEnvironment.transformations`集合 如下图(**图33**)所示：      
 ![showplan33](images/showplan33.png)  
 
 集合中每个 transformation 的内部属性 inputs 存放了它前面所有的 transformations 引用链路。        
@@ -595,12 +597,314 @@ OneInputTransformation<T, R> resultTransform =
 
 >关于 物理 Transformation 和 虚拟 Transformation 概念 ，在后面构造 StreamGraph 会用到，请务必知晓。      
 
-#### 3）List<Transformation<?>> transformations 构造 StreamGraph 
-在`模块二`中，当执行 `env.execute();`, 是使用 `StreamExecutionEnvironment.transformations`集合来构造 StreamGraph的。 如下图所示：       
+#### 3）List<Transformation<?>> transformations 遍历以及递归的过程  
+在`模块二`中，当执行 `env.execute()`方法时，会传入 `StreamExecutionEnvironment.transformations`集合作为形参来调用 `StreamExecutionEnvironment#getStreamGraph()` 来构造 StreamGraph的。 如下图所示：         
 
-![showplan28](images/showplan28.png)      
+![showplan28](images/showplan28.png)     
 
-`StreamGraphGenerator#generate()`   
+下面通过 Idea 的 `Call Hierarchy` 查看 StreamGraph 生成的核心方法`StreamGraphGenerator#generate()` 从 StreamWordCount#main() 为入口的调用链路。         
+![showplan35](images/showplan35.png)        
+
+>注意，`StreamExecutionEnvironment.transformations`集合的结构图(**图33**)请务必记住，在下面的介绍过程中，全部围绕它的结构层次来执行，包括一些递归操作。 `It's very important !!!`。      
+
+下面是 `StreamGraphGenerator#generate()` 方法代码。        
+```java
+public StreamGraph generate() {
+    streamGraph = new StreamGraph(executionConfig, checkpointConfig, savepointRestoreSettings);
+    shouldExecuteInBatchMode = shouldExecuteInBatchMode();
+    configureStreamGraph(streamGraph);
+
+    alreadyTransformed = new IdentityHashMap<>();
+
+    for (Transformation<?> transformation : transformations) {
+        transform(transformation);
+    }
+
+    streamGraph.setSlotSharingGroupResource(slotSharingGroupResources);
+
+    setFineGrainedGlobalStreamExchangeMode(streamGraph);
+
+    for (StreamNode node : streamGraph.getStreamNodes()) {
+        if (node.getInEdges().stream().anyMatch(this::shouldDisableUnalignedCheckpointing)) {
+            for (StreamEdge edge : node.getInEdges()) {
+                edge.setSupportsUnalignedCheckpoints(false);
+            }
+        }
+    }
+
+    final StreamGraph builtStreamGraph = streamGraph;
+
+    alreadyTransformed.clear();
+    alreadyTransformed = null;
+    streamGraph = null;
+
+    return builtStreamGraph;
+}
+```
+
+在 **generate()** 方法中，首先会创建 StreamGraph 实例，在通过 for 循环(`for (Transformation<?> transformation : transformations)`)遍历 transformation &  调用 transform(transformation)，其内部会将 transformation 转换为 `StreamNode` 以及关联一些 `StreamEdge`。     
+
+**transform(transformation)** 方法，是转换 transformation 的入口 function;      
+
+![showplan36](images/showplan36.png)   
+
+其内部先使用`alreadyTransformed`判断是否转换过(这点非常重要，但这也是因为它的数据结构而存在的)，其次它会做一些参数初始化，例如最大并发数`transform.setMaxParallelism`，共享 slot槽 `transform.getSlotSharingGroup().ifPresent` 等配置，等做完这些准备后，transform() 方法会从 一个静态 Map `translatorMap` 获取对应的 translator `translatorMap.get(transform.getClass())`，得到一个 translator。          
+
+![showplan37](images/showplan37.png)     
+
+**StreamGraphGenerator#transform(transformation)** 方法, 有了 translator ，会调用`StreamGraphGenerator#translate(translator, transform)`方法，委托 translator 负责转换 transformation 。 但 transformation 自身的数据结构内部是包括 上游 parent Transformations，在转换自身之前，要先判断 parent Transformations 是否都完成转换，其次才是 自己。
+
+![showplan38](images/showplan38.png)                
+
+**StreamGraphGenerator#translate(translator, transform)** 方法，在判断当前 transform 是否包含 parent Transformations，会存在递归逻辑，`final List<Collection<Integer>> allInputIds = getParentInputIds(transform.getInputs());` , 若存在 父 Transformation ，则通过 `for (Transformation<?> transformation : parentTransformations)`,遍历它的父 Transformation，`allInputIds.add(transform(transformation));` 调回 `StreamGraphGenerator#transform(transformation)` 这已形成递归调用。        
+
+![showplan39](images/showplan39.png)        
+
+
+**StreamGraphGenerator#getParentInputIds()**  
+```java
+private List<Collection<Integer>> getParentInputIds(
+        @Nullable final Collection<Transformation<?>> parentTransformations) {
+    final List<Collection<Integer>> allInputIds = new ArrayList<>();
+    if (parentTransformations == null) {
+        return allInputIds;
+    }
+
+    for (Transformation<?> transformation : parentTransformations) {
+        allInputIds.add(transform(transformation)); // 递归调用 transform 
+    }
+    return allInputIds;
+}
+```     
+
+下面，结合(**图33**)，使用一些示例，对 getParentInputIds() 方法进行递归演示：           
+![showplan33](images/showplan33.png)            
+
+从 `StreamExecutionEnvironment.transformations`集合取出 `OneInputTransformation （flatMap）`        
+
+1.执行 StreamGraphGenerator#transform(transformation)，先判断 `OneInputTransformation （flatMap）`是否转换过 在从`translatorMap.get(transform.getClass())`取出 translator。             
+
+2.OneInputTransformation （flatMap）和 translator 作为形参，执行`StreamGraphGenerator#translate(translator, transform)`，其内部调用 `StreamGraphGenerator#getParentInputIds()` 判断 OneInputTransformation （flatMap） 是否存在 父 Transformation， 根据 **图33** 可知，flatMap 的 inputs 是 `LegacySourceTransformation (source)`, 不为空，则在调用 `StreamExecutionEnvironment.transformations()`,此时，你会发现，我们现在又回到 step1了。 
+
+假设，从 `StreamExecutionEnvironment.transformations`集合取出 `OneInputTransformation （map）`， 那它的 inputs 是 `OneInputTransformation （flatMap）`,而 flatMap 的 inputs 是`LegacySourceTransformation (source)`,  你会发现 如果在 `StreamGraphGenerator#transform(transformation)` 不做 `if (alreadyTransformed.containsKey(transform))` 判断，则会重复转换。       
+
+那我接着回到 step2, 当执行 `StreamGraphGenerator#transform(transformation)` 是 LegacySourceTransformation (source)  时，它并没有父 Transformation，那就会执行`translator.translateForStreaming(transform, context)` 方法。       
+
+**StreamGraphGenerator#translate(translator, transform)**       
+```java
+private Collection<Integer> translate(
+        final TransformationTranslator<?, Transformation<?>> translator,
+        final Transformation<?> transform) {
+    // ... 省略部分代码
+
+    final List<Collection<Integer>> allInputIds = getParentInputIds(transform.getInputs());
+
+    // ... 省略部分代码  
+    final TransformationTranslator.Context context =
+            new ContextImpl(this, streamGraph, slotSharingGroup, configuration);
+
+    return shouldExecuteInBatchMode
+            ? translator.translateForBatch(transform, context)
+            : translator.translateForStreaming(transform, context);
+}
+```
+
+>注意：StreamGraphGenerator#generate() 的 `for (Transformation<?> transformation : transformations)` 它遍历的是 `StreamExecutionEnvironment.transformations`集合，集合的size 是4（包含 OneInputTransformation （flatMap）、OneInputTransformation （map）、ReduceTransformation （sum）、LegacySinkTransformation （Print to Std. Out））， 你可以通过 Idea 调试可看到 LegacySinkTransformation （Print to Std. Out） 的 inputs，因为引用传递，所以包括它自生一共是 6个 Transformation， 所以在 getParentInputIds() 递归时，保证了所有 Transformation 都被当作形参，传入 `StreamGraphGenerator#transform(transformation)` 方法中执行 。                 
+
+#### 4）translator 转换 transform 为 StreamNode & StreamEdge 过程       
+`StreamGraphGenerator#transform(transformation)`方法是并不能直接转换 以下 Transformation：      
+LegacySourceTransformation (source)、OneInputTransformation （flatMap）、OneInputTransformation （map）、PartitionTransformation （Partition）、ReduceTransformation （sum）、LegacySinkTransformation （Print to Std. Out）  
+
+它需要借助 `translator`, 每种 Transformation 的 translator，是通过 `StreamGraphGenerator` 的 静态块提前定义好的： 
+**StreamGraphGenerator.java**       
+```java
+@SuppressWarnings("rawtypes")
+private static final Map<
+                Class<? extends Transformation>,
+                TransformationTranslator<?, ? extends Transformation>>
+        translatorMap;
+
+static {
+    @SuppressWarnings("rawtypes")
+    Map<Class<? extends Transformation>, TransformationTranslator<?, ? extends Transformation>>
+            tmp = new HashMap<>();
+    tmp.put(OneInputTransformation.class, new OneInputTransformationTranslator<>());
+    tmp.put(TwoInputTransformation.class, new TwoInputTransformationTranslator<>());
+    tmp.put(MultipleInputTransformation.class, new MultiInputTransformationTranslator<>());
+    tmp.put(KeyedMultipleInputTransformation.class, new MultiInputTransformationTranslator<>());
+    tmp.put(SourceTransformation.class, new SourceTransformationTranslator<>());
+    tmp.put(SinkTransformation.class, new SinkTransformationTranslator<>());
+    tmp.put(LegacySinkTransformation.class, new LegacySinkTransformationTranslator<>());
+    tmp.put(LegacySourceTransformation.class, new LegacySourceTransformationTranslator<>());
+    tmp.put(UnionTransformation.class, new UnionTransformationTranslator<>());
+    tmp.put(PartitionTransformation.class, new PartitionTransformationTranslator<>());
+    tmp.put(SideOutputTransformation.class, new SideOutputTransformationTranslator<>());
+    tmp.put(ReduceTransformation.class, new ReduceTransformationTranslator<>());
+    tmp.put(
+            TimestampsAndWatermarksTransformation.class,
+            new TimestampsAndWatermarksTransformationTranslator<>());
+    tmp.put(BroadcastStateTransformation.class, new BroadcastStateTransformationTranslator<>());
+    tmp.put(
+            KeyedBroadcastStateTransformation.class,
+            new KeyedBroadcastStateTransformationTranslator<>());
+    tmp.put(CacheTransformation.class, new CacheTransformationTranslator<>());
+    translatorMap = Collections.unmodifiableMap(tmp);
+}
+```
+
+这种“策略模式”，是很常见的一种。    
+
+它给我们构造了以下的关系图：    
+
+![showplan40](images/showplan40.png)      
+
+
+那么，我们开始进入 translator 环节          
+
+##### 4.1） translator 入口 function  
+TransformationTranslator 继承 SimpleTransformationTranslator， translateForStreaming()是 translator 当然入口。            
+**SimpleTransformationTranslator#translateForStreaming()**  
+```java
+public final Collection<Integer> translateForStreaming(
+        final T transformation, final Context context) {
+    checkNotNull(transformation);
+    checkNotNull(context);
+
+    final Collection<Integer> transformedIds =
+            translateForStreamingInternal(transformation, context);
+    configure(transformation, context);
+
+    return transformedIds;
+}
+```     
+
+##### 4.2）LegacySourceTransformationTranslator (Source) 转换  LegacySourceTransformation    
+在 `LegacySourceTransformationTranslator.translateInternal()`方法中会调用 `StreamGraph#addLegacySource()`创建 `StreamNode`，但整个创建过程与 LegacySourceTransformationTranslator 没有关系，所以越来越觉得 StreamGraph 像个工具类, 不过还得注意 StreamNode的 构造方法的形参：           
+```java
+StreamNode vertex =
+    new StreamNode(
+            vertexID,
+            slotSharingGroup,
+            coLocationGroup,
+            operatorFactory,
+            operatorName,
+            vertexClass);
+```
+
+vertexID : `LegacySourceTransformation (source)`的 id       
+vertexClass: org.apache.flink.streaming.runtime.tasks.SourceStreamTask   
+
+![showplan41](images/showplan41.png)  
+
+所以，当 LegacySourceTransformation (source) 转换后，在 StreamGraph 的 `Map<Integer, StreamNode> StreamNodes` 存放 key 为 transformation.id , value 是 StreamNode。 
+
+转换完成后，会返回 LegacySourceTransformation 的id，`StreamGraphGenerator#transform(transformation)` 会将 返回的 transformedIds 作为value，transform 作为 key ，put 到 StreamGraphGenerator.alreadyTransformed 容器中。        
+
+**StreamGraphGenerator#transform()**
+```java
+private Collection<Integer> transform(Transformation<?> transform) {
+        
+        // ...... 省略部分代码
+
+        Collection<Integer> transformedIds;
+        if (translator != null) {
+            transformedIds = translate(translator, transform);
+        } else {
+            transformedIds = legacyTransform(transform);
+        }
+
+        // need this check because the iterate transformation adds itself before
+        // transforming the feedback edges
+        if (!alreadyTransformed.containsKey(transform)) {
+            alreadyTransformed.put(transform, transformedIds);
+        }
+
+        return transformedIds;
+    }
+```     
+
+`特别注意： 它的 value，返回是它自身的id，特殊说明是因为，在转换虚拟 Transformation时 返回的ids，并不是它自身id，而是它父类的 ids。`         
+
+>注意：关于 一些参数配置，再不影响主流程情况，后面会再介绍       
+
+##### 4.3）OneInputTransformationTranslator (FlatMap) 转换  OneInputTransformation   
+`OneInputTransformationTranslator` 并不像 LegacySourceTransformationTranslator 那样，而它是继承 `AbstractOneInputTransformationTranslator`, 中间多了一层抽象。      
+
+在 `LegacySourceTransformationTranslator.translateInternal()`方法 调用的是 `AbstractOneInputTransformationTranslator#translateInternal()` `StreamGraph#addOperator()`，它会创建一个 StreamNode,并且也会 put 到 `StreamGraph.StreamNodes` 容器中，key 是 transformation.id, value 是 StreamNode, 但主流程并没有结束， 创建 StreamNode 后，会调用下面的for循环，创建 StreamEdge:   
+```java
+for (Integer inputId : context.getStreamNodeIds(parentTransformations.get(0))) {   
+    streamGraph.addEdge(inputId, transformationId, 0);   
+}
+```
+
+而 `OneInputTransformation （flatMap）`的 parent Transformation 是 LegacySourceTransformation (source), 所以从`StreamGraphGenerator.alreadyTransformed` 获取 LegacySourceTransformation (source) 的 id。  
+
+下图是 `streamGraph.addEdge(inputId, transformationId, 0);`的 方法调用关系：        
+![showplan42](images/showplan42.png)        
+
+那重点来看 `StreamGraph#addEdgeInternal()` 方法。           
+
+>在还有没代码之前，还需对齐一下定义：       
+1.形参 upStreamVertexID 中的 upStream 与 parent 是对等关系， 称呼上游或者父 都可以          
+2.形参 upStreamVertexID 中的 VertexID 与 tramsformation.id 是对等关系           
+
+首先 StreamGraph#addEdgeInternal() 会根据 上游的 tramsformation.id 作为key，判断它是什么类型节点（virtualSideOutputNode、virtualPartitionNode、StreamNode）
+![showplan43](images/showplan43.png)            
+
+在 4.2小节可知道 LegacySourceTransformation (source) 并非 virtualSideOutputNode、virtualPartitionNode， 所以它会执行 `StreamGraph#createActualEdge()`。 
+
+在 **StreamGraph#createActualEdge()** 会创建一个 StreamEdge, 
+```java
+StreamEdge edge =
+                new StreamEdge(
+                        upstreamNode,
+                        downstreamNode,
+                        typeNumber,
+                        partitioner,
+                        outputTag,
+                        exchangeMode,
+                        uniqueId,
+                        intermediateDataSetId);
+
+getStreamNode(edge.getSourceId()).addOutEdge(edge);
+getStreamNode(edge.getTargetId()).addInEdge(edge);
+```
+
+![showplan44](images/showplan44.png)        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+1.会先判断 transformation 是否已转换过，避免重复转换；        
+2.对 transformation 进行一些配置设置；      
+3.根据 transformation class，从 translatorMap 获取对应的转换类 translator ；          
+4.若 translator 不为null，则调用 translate(translator, transform) 。
+
+
+
+
 
 >StreamGraphGenerator#translate() 方法中的形参 `TransformationTranslator<?, Transformation<?>> translator`是什么？ 下面是 translator的Map 集合，它的 key 是 Transformation。 
 ```java
@@ -651,9 +955,85 @@ return shouldExecuteInBatchMode
 
 
 
+
+
+
 StreamGraphGenerator.alreadyTransformed, 该字段类型是： Map<Transformation<?>, Collection<Integer>> alreadyTransformed。 注意，Transformation 经过 各自的 `TransformationTranslator`转换后会put 进去，key 是 transformation，若 key 是物理 Transformation，则 value 是它自身 id，若 key 是虚拟 Transformation，则 value 是它 父节点的 ids。  
 
 为什么会有这样的区分呢？     
+
+
+
+
+
+
+
+
+OneInputTransformation{id=296, name='Flat Map', outputType=String, parallelism=1}   
+
+flatMap OneInputTransformation, 
+1.通过 alreadyTransformed 判断它是否已转换过了，若存在，则直接返回; 
+2.判断 self的 最大并行度是否有效，若无效或者未配置，则使用全局配置进行初始化; 
+3.获取共享 Slot 组； 
+
+4.通过 translatorMap 获取 self 对应的 Translator; 
+5.如果存在对应的 Translator，则 调用 translate(translator, transform) 进行转换, 对于不存在对应的 Translator，单独调用 legacyTransform() 处理；    
+6.将 step5 返回的 transformedIds 作为 value， self 作为 key，存放在 alreadyTransformed；  
+
+
+transform(transformation) 表达： 提交 transformation 转换任务
+translate(translator, transform) 表达：执行 某个具体的 转换逻辑 
+
+然后判断是否有父级，如果，需要将 父级是否已经转换完了 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
