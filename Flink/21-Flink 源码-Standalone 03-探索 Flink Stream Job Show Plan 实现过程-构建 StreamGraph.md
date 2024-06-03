@@ -1,8 +1,9 @@
-# Flink 源码 - Standalone - 探索 Flink Job Show Plan 实现过程             
+# Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph              
 
 >Flink version: 1.17.2          
 
->注意，该篇 Blog 涉及到的“点”较多,阅读源码过程要实践“第一性原理”,似乎可行性不高，学习的过程像是剥洋葱一样，从外到内，也无法拿着`Flink confluence FLIP`(https://cwiki.apache.org/confluence/display/FLINK/Flink+Improvement+Proposals)对着它的 `Motivation`直接理解，若做到 do-find-why 似乎可行性较高。      
+>注意，该篇 Blog 涉及到的内容较多,本人在阅读源码过程，用“第一性原理”的思路来阐述，对于我来说“太难”，本人无法拿着`Flink confluence FLIP`(https://cwiki.apache.org/confluence/display/FLINK/Flink+Improvement+Proposals)对着它的 `Motivation`直接理解。  
+探索的过程像是剥洋葱一样，从外到内。若做到 do-find-why 即可。          
 
 >如果我有表述的不清楚，还麻烦大家给我留言,帮忙修订它。       
 
@@ -15,7 +16,7 @@
 >在之前的 Blog "Flink 源码 - Standalone - Idea 启动 Standalone 集群 (Session Model)" 内容中提到 `Flink Architecture 的拼图游戏`，那 ”Show Plan“ 涉及到哪些角色呢？  
 
 接下来，我们通过 Job 示例，探索 Show Plan 实现过程，并最终画到架构图上：                
-![showplan14](images/showplan14.png)             
+![showplan14](images/showplan14.png)              
 
 ## 开发 Stream WordCount 作业        
 关于从零开始搭建 Flink Job 开发项目，可参考Flink 官网给出的模板示例：`https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/maven/` ，以下是 Example Job 项目搭建过程：         
@@ -257,7 +258,7 @@ D:\Code\Java\flink-tutorial\flink-blog\target\flink-blog-1.0-SNAPSHOT-jar-with-d
 
 ![showplan12](images/showplan12.png)        
 
-可阅读 `RestServerEndpoint#start()` 了解 Netty Server的启动过程，那么 Show Plan 对应的 Handler 是 `JarPlanHandler`, 处理逻辑在 `handleRequest()`; 下面是 JarPlanHandler#handleRequest()具体代码：       
+可阅读 `RestServerEndpoint#start()` 了解 Netty Server的启动过程，那么 Show Plan 对应的 Handler 是 `JarPlanHandler`, 处理逻辑在 `handleRequest()`; 下面是 `JarPlanHandler#handleRequest()`具体代码：       
 ```java
 @Override
 protected CompletableFuture<JobPlanInfo> handleRequest(
@@ -713,7 +714,7 @@ private Collection<Integer> translate(
 
 #### 4）translator 转换 transform 为 StreamNode & StreamEdge 过程       
 `StreamGraphGenerator#transform(transformation)`方法是并不能直接转换 以下 Transformation：      
-LegacySourceTransformation (source)、OneInputTransformation （flatMap）、OneInputTransformation （map）、PartitionTransformation （Partition）、ReduceTransformation （sum）、LegacySinkTransformation （Print to Std. Out）  
+LegacySourceTransformation (source)、OneInputTransformation （flatMap）、OneInputTransformation （map）、PartitionTransformation （keyBy）、ReduceTransformation （sum）、LegacySinkTransformation （Print to Std. Out）  
 
 它需要借助 `translator`, 每种 Transformation 的 translator，是通过 `StreamGraphGenerator` 的 静态块提前定义好的： 
 **StreamGraphGenerator.java**       
@@ -873,269 +874,89 @@ getStreamNode(edge.getTargetId()).addInEdge(edge);
 ![showplan44](images/showplan44.png)        
 
 
+##### 4.4）OneInputTransformationTranslator (Map) 转换  OneInputTransformation  
+因为 Map 与 FlatMap 都属于 OneInputTransformation.class，所以它的转换逻辑是一致的。
+
+![showplan45](images/showplan45.png)        
 
 
+##### 4.5）PartitionTransformationTranslator (keyBy) 转换  PartitionTransformation     
+在`PartitionTransformationTranslator#translateInternal()`方法中，先获取`PartitionTransformation （keyBy）` 的 父 Transformation，再把 父 Transformation 作为 key，从 `StreamGraphGenerator.alreadyTransformed` 获取 value。    
 
+获取它的父 Transformation 的 ids, 然后调用 `Transformation.getNewNodeId()` 获取虚拟节点 id，
+在 调用`StreamGraph#addVirtualPartitionNode()` 创建一个`VirtualPartitionNode`, 将 虚拟节点放入 `Map<Integer, Tuple3<Integer, StreamPartitioner<?>, StreamExchangeMode>> virtualPartitionNodes` 容器中。     
 
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-1.会先判断 transformation 是否已转换过，避免重复转换；        
-2.对 transformation 进行一些配置设置；      
-3.根据 transformation class，从 translatorMap 获取对应的转换类 translator ；          
-4.若 translator 不为null，则调用 translate(translator, transform) 。
-
-
-
-
-
->StreamGraphGenerator#translate() 方法中的形参 `TransformationTranslator<?, Transformation<?>> translator`是什么？ 下面是 translator的Map 集合，它的 key 是 Transformation。 
+**StreamGraph#addVirtualPartitionNode()**       
 ```java
-
-private static final Map<
-                    Class<? extends Transformation>,
-                    TransformationTranslator<?, ? extends Transformation>>
-            translatorMap;
-
-static {
-    @SuppressWarnings("rawtypes")
-    Map<Class<? extends Transformation>, TransformationTranslator<?, ? extends Transformation>>
-            tmp = new HashMap<>();
-    tmp.put(OneInputTransformation.class, new OneInputTransformationTranslator<>());
-    tmp.put(TwoInputTransformation.class, new TwoInputTransformationTranslator<>());
-    tmp.put(MultipleInputTransformation.class, new MultiInputTransformationTranslator<>());
-    tmp.put(KeyedMultipleInputTransformation.class, new MultiInputTransformationTranslator<>());
-    tmp.put(SourceTransformation.class, new SourceTransformationTranslator<>());
-    tmp.put(SinkTransformation.class, new SinkTransformationTranslator<>());
-    tmp.put(LegacySinkTransformation.class, new LegacySinkTransformationTranslator<>());
-    tmp.put(LegacySourceTransformation.class, new LegacySourceTransformationTranslator<>());
-    tmp.put(UnionTransformation.class, new UnionTransformationTranslator<>());
-    tmp.put(PartitionTransformation.class, new PartitionTransformationTranslator<>());
-    tmp.put(SideOutputTransformation.class, new SideOutputTransformationTranslator<>());
-    tmp.put(ReduceTransformation.class, new ReduceTransformationTranslator<>());
-    tmp.put(
-            TimestampsAndWatermarksTransformation.class,
-            new TimestampsAndWatermarksTransformationTranslator<>());
-    tmp.put(BroadcastStateTransformation.class, new BroadcastStateTransformationTranslator<>());
-    tmp.put(
-            KeyedBroadcastStateTransformation.class,
-            new KeyedBroadcastStateTransformationTranslator<>());
-    tmp.put(CacheTransformation.class, new CacheTransformationTranslator<>());
-    translatorMap = Collections.unmodifiableMap(tmp);
-}
-```
-
-
-```java
-return shouldExecuteInBatchMode
-        ? translator.translateForBatch(transform, context)
-        : translator.translateForStreaming(transform, context);
-```
-
-
-
-
-
-
-
-
-
-
-StreamGraphGenerator.alreadyTransformed, 该字段类型是： Map<Transformation<?>, Collection<Integer>> alreadyTransformed。 注意，Transformation 经过 各自的 `TransformationTranslator`转换后会put 进去，key 是 transformation，若 key 是物理 Transformation，则 value 是它自身 id，若 key 是虚拟 Transformation，则 value 是它 父节点的 ids。  
-
-为什么会有这样的区分呢？     
-
-
-
-
-
-
-
-
-OneInputTransformation{id=296, name='Flat Map', outputType=String, parallelism=1}   
-
-flatMap OneInputTransformation, 
-1.通过 alreadyTransformed 判断它是否已转换过了，若存在，则直接返回; 
-2.判断 self的 最大并行度是否有效，若无效或者未配置，则使用全局配置进行初始化; 
-3.获取共享 Slot 组； 
-
-4.通过 translatorMap 获取 self 对应的 Translator; 
-5.如果存在对应的 Translator，则 调用 translate(translator, transform) 进行转换, 对于不存在对应的 Translator，单独调用 legacyTransform() 处理；    
-6.将 step5 返回的 transformedIds 作为 value， self 作为 key，存放在 alreadyTransformed；  
-
-
-transform(transformation) 表达： 提交 transformation 转换任务
-translate(translator, transform) 表达：执行 某个具体的 转换逻辑 
-
-然后判断是否有父级，如果，需要将 父级是否已经转换完了 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->PackagedProgram#callMainMethod() 执行的是 StreamWordCount的 main()方法，而方法是无返回值的，那 callMainMethod()又是如何与 Pipeline 是如何关联的呢？ 还有 main()方法执行逻辑似乎并不像普通的java程序一样，会启动独立的 Java Server程序。 跟固化的思维逻辑相比，此时的 main() 执行还是在 Flink Client，还并未到 Flink Job 执行物理线程那一步。      
-
-![showplan11](images/showplan11.png)    
-        
-
-**PackagedProgramUtils#getPipelineFromProgram()**               
-```java
-public static Pipeline getPipelineFromProgram(
-        PackagedProgram program,
-        Configuration configuration,
-        int parallelism,
-        boolean suppressOutput)
-        throws CompilerException, ProgramInvocationException {
-    
-    ...... 省略部分代码 
-
-    // temporary hack to support the optimizer plan preview
-    OptimizerPlanEnvironment benv =
-            new OptimizerPlanEnvironment(
-                    configuration, program.getUserCodeClassLoader(), parallelism);
-    benv.setAsContext();
-    StreamPlanEnvironment senv =
-            new StreamPlanEnvironment(
-                    configuration, program.getUserCodeClassLoader(), parallelism);
-    senv.setAsContext();
-
-    try {
-        program.invokeInteractiveModeForExecution(); // 执行 main()
-    } catch (Throwable t) {
-        if (benv.getPipeline() != null) {
-            return benv.getPipeline();
-        }
-
-        if (senv.getPipeline() != null) {
-            return senv.getPipeline();
-        }
-
-        if (t instanceof ProgramInvocationException) {
-            throw t;
-        }
-
-        throw generateException(
-                program, "The program caused an error: ", t, stdOutBuffer, stdErrBuffer);
-    } finally {
-        benv.unsetAsContext();
-        senv.unsetAsContext();
-        if (suppressOutput) {
-            System.setOut(originalOut);
-            System.setErr(originalErr);
-        }
-        Thread.currentThread().setContextClassLoader(contextClassLoader);
+ public void addVirtualPartitionNode(
+        Integer originalId,
+        Integer virtualId,
+        StreamPartitioner<?> partitioner,
+        StreamExchangeMode exchangeMode) {
+
+    if (virtualPartitionNodes.containsKey(virtualId)) {
+        throw new IllegalStateException(
+                "Already has virtual partition node with id " + virtualId);
     }
 
-    throw generateException(
-            program,
-            "The program plan could not be fetched - the program aborted pre-maturely.",
-            null,
-            stdOutBuffer,
-            stdErrBuffer);
+    virtualPartitionNodes.put(virtualId, new Tuple3<>(originalId, partitioner, exchangeMode));
 }
-```   
+```
 
-### PackagedProgram#callMainMethod
+##### 4.6）ReduceTransformationTranslator (sum) 转换  ReduceTransformation   
+ReduceTransformation （sum）与 OneInputTransformation （map） 转换差不多，同样是调用 `StreamGraph#addOperator()` 创建 StreamNode, 但是在添加 StreamEdge `streamGraph.addEdge(inputId, transformationId, 0)` 的时候，会有不同的处理。        
+
+因为 ReduceTransformation（sum）的 父 Transformation 是 `PartitionTransformation （keyBy）`,它并不是 StreamNode，而是 `VirtualPartitionNode`;       
+
+![showplan46](images/showplan46.png)    
+
+下面是`if (virtualPartitionNodes.containsKey(upStreamVertexID))`代码，很明显这是一个递归处理逻辑，而跳出递归的判断就是 if 判断条件不成立, 如果当前的父 Transformation 不是 StreamNode，则会拿父 Transformation 的 父 Transformation，后面以此内推，直到条件满足后，执行 `StreamGraph.createActualEdge()`方法。  
+
+```java
+private void addEdgeInternal(
+        // ...... 省略部分代码
+        ) {
+
+    if (virtualSideOutputNodes.containsKey(upStreamVertexID)) {
+
+        // ...... 省略部分代码
+
+    } else if (virtualPartitionNodes.containsKey(upStreamVertexID)) {
+        int virtualId = upStreamVertexID;
+        upStreamVertexID = virtualPartitionNodes.get(virtualId).f0;
+        if (partitioner == null) {
+            partitioner = virtualPartitionNodes.get(virtualId).f1;
+        }
+        exchangeMode = virtualPartitionNodes.get(virtualId).f2;
+        addEdgeInternal(
+                upStreamVertexID,
+                downStreamVertexID,
+                typeNumber,
+                partitioner,
+                outputNames,
+                outputTag,
+                exchangeMode,
+                intermediateDataSetId);
+    } else {
+        createActualEdge(
+                upStreamVertexID,
+                downStreamVertexID,
+                typeNumber,
+                partitioner,
+                outputTag,
+                exchangeMode,
+                intermediateDataSetId);
+    }
+}
+```
+
+##### 4.7）LegacySinkTransformationTranslator (print) 转换  LegacySinkTransformation 
+`LegacySinkTransformationTranslator#translateInternal()` 创建 StreamNode & StreamEdge。  
+
+#### 5.StreamWordCount 所有 Transformation 转换后的产物       
 
 
-
-
-
-## Rest Router   
-
-
-
-
-refer   
+refer     
 1.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/maven/          
 2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/overview/        
 3.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/cli/    

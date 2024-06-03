@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-06-01T09:52:50.989Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="B_6BwabyqsP4z3Btmv2d" version="24.1.0" type="device" pages="13">
+<mxfile host="Electron" modified="2024-06-03T06:06:18.856Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="I8_XJmADHn1r2N5MYNxO" version="24.1.0" type="device" pages="15">
   <diagram name="脚本执行脉络图" id="qLQxipcltvYCt7U49bK6">
     <mxGraphModel dx="2074" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -559,7 +559,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="lcUd45Dx6-h70eywLlZR" name="第 7 页">
-    <mxGraphModel dx="2393" dy="1294" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2260" dy="1205" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -743,19 +743,19 @@
         <mxCell id="afrq6dXbt_9K_y63xPV5-55" value="Cli / Flink Web UI&amp;nbsp; = Flink Client" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#dae8fc;strokeColor=default;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="-540" y="20" width="290" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ainDauACQI4bEIsOo-fr-1" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.142;entryY=0.375;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="1" source="afrq6dXbt_9K_y63xPV5-48" target="afrq6dXbt_9K_y63xPV5-51">
+        <mxCell id="ainDauACQI4bEIsOo-fr-1" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.142;entryY=0.375;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" parent="1" source="afrq6dXbt_9K_y63xPV5-48" target="afrq6dXbt_9K_y63xPV5-51" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-170" y="360" as="sourcePoint" />
             <mxPoint x="-120" y="310" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="ainDauACQI4bEIsOo-fr-2" value="Submit Job&amp;nbsp;&lt;br&gt;（send dataflow）" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="ainDauACQI4bEIsOo-fr-2" value="Submit Job&amp;nbsp;&lt;br&gt;（send dataflow）" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="-172" y="240" width="112" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="ainDauACQI4bEIsOo-fr-3" value="JobGraph" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="ainDauACQI4bEIsOo-fr-3" value="JobGraph" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="-190" y="300" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ainDauACQI4bEIsOo-fr-4" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="ainDauACQI4bEIsOo-fr-2">
+        <mxCell id="ainDauACQI4bEIsOo-fr-4" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;" parent="1" target="ainDauACQI4bEIsOo-fr-2" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-130" y="320" as="sourcePoint" />
             <mxPoint x="-80" y="270" as="targetPoint" />
@@ -1136,7 +1136,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="UboRbodNWaCslgfFKsms" name="StreamWordCount StreamExecutionEnvironment">
-    <mxGraphModel dx="5633" dy="1423" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="4590" dy="813" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2356,7 +2356,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="7t3HEscDKxauvtt9oc-1" name="StreamNode">
-    <mxGraphModel dx="4022" dy="1349" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="9700" dy="4670" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -2861,43 +2861,43 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="zGDlXsjfFJK0NR9ummR--1" value="upStreamVertexID&lt;div&gt;（父 StreamNode Id）&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-260" y="-10" width="180" height="40" as="geometry" />
+          <mxGeometry x="-250" y="-190" width="180" height="40" as="geometry" />
         </mxCell>
         <mxCell id="zGDlXsjfFJK0NR9ummR--4" value="if (virtualSideOutputNodes.containsKey(upStreamVertexID))" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="30" y="-80" width="370" height="30" as="geometry" />
+          <mxGeometry x="40" y="-260" width="370" height="30" as="geometry" />
         </mxCell>
         <mxCell id="zGDlXsjfFJK0NR9ummR--5" value="if (virtualSideOutputNodes.containsKey(upStreamVertexID))" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="30" width="370" height="30" as="geometry" />
+          <mxGeometry x="40" y="-180" width="370" height="30" as="geometry" />
         </mxCell>
         <mxCell id="zGDlXsjfFJK0NR9ummR--6" value="createActualEdge()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="30" y="80" width="370" height="30" as="geometry" />
+          <mxGeometry x="40" y="-100" width="370" height="30" as="geometry" />
         </mxCell>
         <mxCell id="zGDlXsjfFJK0NR9ummR--10" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="zGDlXsjfFJK0NR9ummR--4">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-80" y="16" as="sourcePoint" />
-            <mxPoint x="-30" y="-34" as="targetPoint" />
+            <mxPoint x="-70" y="-164" as="sourcePoint" />
+            <mxPoint x="-20" y="-214" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="-80" y="-30" />
-              <mxPoint x="-30" y="-70" />
+              <mxPoint x="-70" y="-210" />
+              <mxPoint x="-20" y="-250" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="zGDlXsjfFJK0NR9ummR--11" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="zGDlXsjfFJK0NR9ummR--5">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-80" y="10" as="sourcePoint" />
-            <mxPoint x="40" y="-55" as="targetPoint" />
+            <mxPoint x="-70" y="-170" as="sourcePoint" />
+            <mxPoint x="50" y="-235" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="-30" y="10" />
+              <mxPoint x="-20" y="-170" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="zGDlXsjfFJK0NR9ummR--12" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="zGDlXsjfFJK0NR9ummR--6">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="-80" y="10" as="sourcePoint" />
-            <mxPoint x="40" y="-55" as="targetPoint" />
+            <mxPoint x="-70" y="-170" as="sourcePoint" />
+            <mxPoint x="50" y="-235" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="-80" y="60" />
-              <mxPoint x="-10" y="90" />
+              <mxPoint x="-70" y="-120" />
+              <mxPoint y="-90" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -2970,6 +2970,170 @@
         <mxCell id="XhlVgphPxxGumR5UFCjM-1" value="StreamEdge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="160" y="880" width="90" height="30" as="geometry" />
         </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-13" value="" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="760" y="740" width="185" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="XhlVgphPxxGumR5UFCjM-14" target="6Hq-SaWg_NJ-vr3cU_1L-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-14" value="inputs" style="rounded=1;whiteSpace=wrap;html=1;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="772.5" y="790" width="62" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-15" value="OneInputTransformation （map）" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="775.5" y="750" width="157.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-16" value="" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="760" y="830" width="295" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-17" value="List&amp;lt;StreamEdge&amp;gt; inEdges" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="780" y="880" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-18" value="List&amp;lt;StreamEdge&amp;gt;&lt;div&gt;outEdges&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="780" y="930" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-19" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;StreamNode&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;fontStyle=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="865" y="830" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="XhlVgphPxxGumR5UFCjM-21" target="XhlVgphPxxGumR5UFCjM-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="XhlVgphPxxGumR5UFCjM-21" target="6Hq-SaWg_NJ-vr3cU_1L-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XhlVgphPxxGumR5UFCjM-21" value="StreamEdge" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="630" y="880" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zXW6csuBfcvomnTUozz5-1" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="-192" as="sourcePoint" />
+            <mxPoint x="420" y="-162" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zXW6csuBfcvomnTUozz5-2" value="那它会进入 该分支" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="580" y="-230" width="130" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="bt0-_6rA4ZnbWoUQ4co_" name="JobGraph">
+    <mxGraphModel dx="1860" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-1" value="StreamJobGraphGenerator" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="-280" y="-150" width="170" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-2" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="VtaYmhyJtf8GmQeGP39d-1">
+          <mxGeometry x="80" y="90" width="10" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-12" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="VtaYmhyJtf8GmQeGP39d-1">
+          <mxGeometry x="91" y="226" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-13" value="" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" target="VtaYmhyJtf8GmQeGP39d-12" parent="VtaYmhyJtf8GmQeGP39d-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="96" y="206" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="126" y="236" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-4" value="StreamGraphUserHashHasher" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="-20" y="-150" width="170" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-5" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="VtaYmhyJtf8GmQeGP39d-4">
+          <mxGeometry x="80" y="120" width="10" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-8" value="" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" target="VtaYmhyJtf8GmQeGP39d-5">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="-190" y="-30" as="sourcePoint" />
+            <mxPoint x="50" y="-30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-9" value="traverseStreamGraphAndGenerateHashes()" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="-60" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-10" value="" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="50" y="30" as="sourcePoint" />
+            <mxPoint x="-190" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-11" value="setChaining()" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="-154" y="56" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-14" value="Loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="-270" y="150" width="560" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-15" value="createChain()" style="text;whiteSpace=wrap;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="-154" y="166" width="84" height="27" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-16" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-189" y="185" width="10" height="205" as="geometry" />
+        </mxCell>
+        <mxCell id="VtaYmhyJtf8GmQeGP39d-17" value="" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" target="VtaYmhyJtf8GmQeGP39d-16" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-184" y="165" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="-154" y="195" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <UserObject label="StreamingJobGraphGenerator#setChaining ()" id="AMMT6w84OHpxJWIgu5hT-5">
+          <mxCell style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+            <mxGeometry x="-337.5" y="790" width="285" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="AMMT6w84OHpxJWIgu5hT-6" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;for&lt;/font&gt;&lt;/b&gt; (OperatorChainInfo info : initialEntryPoints) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;createChain&lt;/font&gt;&lt;/b&gt;(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; info.getStartNodeId(),&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 1, // operators start at position 1 because 0 is for chained source inputs&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; info,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainEntryPoints);&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-337" y="830" width="457" height="130" as="geometry" />
+        </mxCell>
+        <UserObject label="StreamingJobGraphGenerator#createChain()" id="AMMT6w84OHpxJWIgu5hT-7">
+          <mxCell style="text;whiteSpace=wrap;align=center;verticalAlign=middle;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+            <mxGeometry x="340" y="790" width="280" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="AMMT6w84OHpxJWIgu5hT-9" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;for&lt;/font&gt;&lt;/b&gt; (StreamEdge chainable : chainableOutputs) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; transitiveOutEdges.addAll(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; createChain(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainable.getTargetId(),&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainIndex + 1,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainInfo,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainEntryPoints));&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="340" y="960" width="340" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="AMMT6w84OHpxJWIgu5hT-10" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;for&lt;/font&gt;&lt;/b&gt; (StreamEdge outEdge : currentNode.getOutEdges()) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; if (isChainable(outEdge, streamGraph)) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainableOutputs.add(outEdge);&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; } else {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; nonChainableOutputs.add(outEdge);&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="340" y="830" width="350" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="AMMT6w84OHpxJWIgu5hT-11" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;for &lt;/font&gt;&lt;/b&gt;(StreamEdge nonChainable : nonChainableOutputs) {&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; transitiveOutEdges.add(nonChainable);&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; createChain(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; nonChainable.getTargetId(),&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 1, // operators start at position 1 because 0 is for chained source inputs&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainEntryPoints.computeIfAbsent(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; nonChainable.getTargetId(),&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; (k) -&amp;gt; chainInfo.newChain(nonChainable.getTargetId())),&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; chainEntryPoints);&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; }&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="340" y="1100" width="470" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="1740" width="295" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-2" value="List&amp;lt;StreamEdge&amp;gt; inEdges" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="1790" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-3" value="List&amp;lt;StreamEdge&amp;gt;&lt;div&gt;outEdges&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="1840" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-4" value="&lt;span style=&quot;color: rgb(0, 0, 0); font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;StreamNode&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;fontStyle=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="-65" y="1740" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="yMoIXHvU941QhTltO8QN-6" target="yMoIXHvU941QhTltO8QN-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-6" value="StreamEdge 01" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="170" y="1770" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yMoIXHvU941QhTltO8QN-7" target="yMoIXHvU941QhTltO8QN-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="1855" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-7" value="StreamEdge 02" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="170" y="1840" width="90" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Zwwd5CL-Oikeo_Iu2f1q" name="第 15 页">
+    <mxGraphModel dx="1460" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>
