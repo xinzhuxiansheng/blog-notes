@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-06-03T06:06:18.856Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="I8_XJmADHn1r2N5MYNxO" version="24.1.0" type="device" pages="15">
+<mxfile host="Electron" modified="2024-06-03T16:07:33.841Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="w7B_HZldCb7QPWJ4jPTF" version="24.1.0" type="device" pages="15">
   <diagram name="脚本执行脉络图" id="qLQxipcltvYCt7U49bK6">
     <mxGraphModel dx="2074" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3016,7 +3016,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="bt0-_6rA4ZnbWoUQ4co_" name="JobGraph">
-    <mxGraphModel dx="1860" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2244" dy="1470" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -3125,6 +3125,25 @@
         </mxCell>
         <mxCell id="yMoIXHvU941QhTltO8QN-7" value="StreamEdge 02" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="170" y="1840" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yMoIXHvU941QhTltO8QN-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-15" y="2310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-10" value="String userSpecifiedHash = node.getTransformationUID()" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-183.75" y="2180" width="337.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yMoIXHvU941QhTltO8QN-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-15" y="2510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-11" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;判断 userSpecifiedHash&amp;nbsp;&lt;/span&gt;是否为空&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-165" y="2310" width="300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yMoIXHvU941QhTltO8QN-14" value="generateUserSpecifiedHash(node, hasher)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="2520" width="270" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
