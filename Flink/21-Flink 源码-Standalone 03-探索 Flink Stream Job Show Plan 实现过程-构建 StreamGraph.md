@@ -2,21 +2,18 @@
 
 >Flink version: 1.17.2          
 
->注意，该篇 Blog 涉及到的内容较多,本人在阅读源码过程，用“第一性原理”的思路来阐述，对于我来说“太难”，本人无法拿着`Flink confluence FLIP`(https://cwiki.apache.org/confluence/display/FLINK/Flink+Improvement+Proposals)对着它的 `Motivation`直接理解。  
-探索的过程像是剥洋葱一样，从外到内。若做到 do-find-why 即可。          
-
->如果我有表述的不清楚，还麻烦大家给我留言,帮忙修订它。       
+>注意，该篇 Blog 涉及到的内容较多, 如果我有表述的不清楚，还麻烦大家给我留言,帮忙修订它。       
 
 ## 引言     
 在之前的 Blog 内容中，部署了一些 Flink Job，对下面的图(`红色框标记的`)肯定有所了解：         
-![showplan13](images/showplan13.png)        
+![streamgraph_debug01.png](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug01.png)        
 
 它是 Flink Job 的 `Job Graph 拓扑图`，它展示了 Job 的执行计划，拓扑图显示了数据流通过各个算子（operators）的路径，以及每个算子的并行度（Parallelism）。 `It's very important`，它可以帮助我们理解 Job的结构和处理过程，它显示的并行度，可帮助我们优化资源使用和提高处理效率，在后面的 Blog 中，我们会很长时间围绕这 `JobGraph`。         
 
 >在之前的 Blog "Flink 源码 - Standalone - Idea 启动 Standalone 集群 (Session Model)" 内容中提到 `Flink Architecture 的拼图游戏`，那 ”Show Plan“ 涉及到哪些角色呢？  
 
 接下来，我们通过 Job 示例，探索 Show Plan 实现过程，并最终画到架构图上：                
-![showplan14](images/showplan14.png)              
+![streamgraph_debug02](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug02.png)              
 
 ## 开发 Stream WordCount 作业        
 关于从零开始搭建 Flink Job 开发项目，可参考Flink 官网给出的模板示例：`https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/maven/` ，以下是 Example Job 项目搭建过程：         
@@ -221,16 +218,16 @@ No description provided.
 
 **Job 未提交前，查看 Job Plan**         
 
-![showplan15](images/showplan15.png)    
+![streamgraph_debug03](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug03.png)    
 
 **Job 提交后，查看 Job Plan**   
 
-![showplan16](images/showplan16.png)        
+![streamgraph_debug04](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug04.png)        
 
 
 >注意，若你实践过后，一定要得到一个结论：CLI 返回的 Plan JSON信息 并不与 Standalone 集群通信，所以它独立在 Flink Client 完成的。 这点无法在 Flink WEB UI 验证，因为 Flink WEB UI 是由 JobManager 的 Netty Server 提供的。         
 
-![showplan17](images/showplan17.png)        
+![streamgraph_debug05](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug05.png)        
 
 其实，这个结论在 官网也有提到以下内容 :  (https://nightlies.apache.org/flink/flink-docs-master/docs/internals/job_scheduling/)      
 
@@ -239,7 +236,7 @@ The JobManager receives the JobGraph , which is a representation of the data flo
 ```  
  
 JobManager 接受到 JobGraph ..., 那说明 Flink Client 在提交 Job 的时候，会带有 JobGraph 参数给 JobManager。      
-![showplan19](images/showplan19.png)        
+![streamgraph_debug06](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug06.png)        
 
 
 ## 配置源码调试     
@@ -256,7 +253,7 @@ D:\Code\Java\flink-tutorial\flink-blog\target\flink-blog-1.0-SNAPSHOT-jar-with-d
 
 >注意，关于 Flink WEB UI的 API 服务是由 JobManager 的Netty Sever 提供的，在调试`Show Plan` 功能，我们还需找到它对应的 Handler。 接下来，我简单介绍下，也可减少大家定位代码的时间成本。下面是 Netty Server的结构图：     
 
-![showplan12](images/showplan12.png)        
+![streamgraph_debug07](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug07.png)        
 
 可阅读 `RestServerEndpoint#start()` 了解 Netty Server的启动过程，那么 Show Plan 对应的 Handler 是 `JarPlanHandler`, 处理逻辑在 `handleRequest()`; 下面是 `JarPlanHandler#handleRequest()`具体代码：       
 ```java
@@ -286,7 +283,7 @@ protected CompletableFuture<JobPlanInfo> handleRequest(
 
 ## Debug Show Plan Code      
 >我采用的是 Flink WEB UI 远程调试, 如下图所示：         
-![showplan15](images/showplan15.png) 
+![streamgraph_debug03](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug03.png)  
 
 ### PackagedProgram                  
 **JarPlanHandler#handleRequest()**      
@@ -315,13 +312,13 @@ protected CompletableFuture<JobPlanInfo> handleRequest(
 ### 创建 PackagedProgram userCodeClassLoader    
 PackagedProgram 在它的构造方法中，创建了一个自定义类加载器 `FlinkUserCodeClassLoader userCodeClassLoader`。 `FlinkUserCodeClassLoaders#create()`方法会根据 `classloader.resolve-order` 配置项来决定创建的 ChildFirstClassLoader 还是 ParentFirstClassLoader, 这样是为了定义从用户代码加载类时的类解析策略，即是先检查用户代码 jar（“child-first”）还是应用程序类路径（“parent-first”）。默认设置是先从用户代码 jar 加载类，这意味着用户代码 jar 可以包含和加载与 Flink 使用的不同的依赖项。关于这部分的参数可访问 `https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/config/#classloader-resolve-order`。      
 
-![showplan03](images/showplan03.png)  
+![streamgraph_debug08](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug08.png)  
 
 ChildFirstClassLoader 、 ParentFirstClassLoader 是 FlinkUserCodeClassLoader的派生类，且父类 MutableURLClassLoader 继承了 URLClassLoader，也重写了 addURL() 方法，这样就可以动态新的 URL，再使用 loadCLass()方法加载类，从而达到动态 class的效果。          
 **FlinkUserCodeClassLoader 类图：**           
-![showplan02](images/showplan02.png)
+![streamgraph_debug09](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug09.png)
 
-![showplan01](images/showplan01.png)           
+![streamgraph_debug10](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug10.png)           
 
 显然，`child-first` ChildFirstClassLoader 打破了双亲机制，在 `ChildFirstClassLoader#loadClassWithoutExceptionHandling()`方法，首先判断当前class是否已加载，若没有，再去判断当前的 class 是否符合`classloader.parent-first-patterns.default`参数的 package path，
 如果是 true，则会走父类加载。          
@@ -343,16 +340,16 @@ protected Class<?> loadClassWithoutExceptionHandling(String name, boolean resolv
 
 在上面代码中的 alwaysParentFirstPatterns 集合变量，可通过参数配置，参考 Flink 官网 `Configuration`文档，可访问 `https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/config/#classloader-parent-first-patterns-default`    
 
-![showplan20](images/showplan20.png)    
+![streamgraph_debug11](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug11.png)    
 
 
 >双亲委派（Parent Delegation）是 Java 类加载机制中的一种重要的原则，用于保证类的唯一性和安全性。该机制要求类加载器在加载类时首先委派给父类加载器，只有在父类的加载器无法加载该类时，才由子类加载器尝试加载。    
-![showplan05](images/showplan05.png)      
+![streamgraph_debug12](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug12.png)      
 
 对于其他类，先查找 Class，这部分对应的是 ChildFirstClassLoader的构造 方法，传入了 Flink Job的 Jar, 所以 findClass(name)的结果，是可以找到 `com.yzhou.blog.wordcount.StreamWordCount.class`。             
-![showplan06](images/showplan06.png)        
+![streamgraph_debug13](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug13.png)        
 
-![showplan07](images/showplan07.png)        
+![streamgraph_debug14](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug14.png)        
 
 若没有找到，则委托父类加载`c = super.loadClassWithoutExceptionHandling(name, resolve);`         
 ParentFirstClassLoader 类就不需要过多介绍，它遵循的是双亲委派，下面列出
@@ -479,12 +476,12 @@ protected CompletableFuture<JobPlanInfo> handleRequest(
 ```         
 
 下面给出 JobGraph 构造时序图                
-![showplan08](images/showplan08.png)             
+![streamgraph_debug15](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug15.png)             
 
 JobGraph的构造主要部分在`PackagedProgramUtils#createJobGraph(...)`方法的内部，接下来，我们来重点讲解这部分的逻辑。             
 
 ### 创建 Pipeline      
-![showplan09](images/showplan09.png)    
+![streamgraph_debug16](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug16.png)    
 
 **PackagedProgramUtils#createJobGraph(......)**       
 ```java
@@ -495,53 +492,53 @@ final Pipeline pipeline =
 
 `PackagedProgramUtils#getPipelineFromProgram()`方法实现逻辑让我花了些时间去思考。       
 **PackagedProgramUtils#getPipelineFromProgram() 时序图**
-![showplan10](images/showplan10.png)   
+![streamgraph_debug17](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug17.png)   
 
 从 benv 、senv 对象的创建，到 `program#invokeInteractiveModeForExecution()` 内部调用 `PackagedProgram#callMainMethod()` 执行 Flink Job 的 main() 方法。 但在调试过程中发现，callMainMethod() 总是会抛出 `org.apache.flink.client.program.ProgramAbortException`。如下图所示：  
-![showplan21](images/showplan21.png)                 
+![streamgraph_debug18](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug18.png)                 
 
 通过 Idea 查看 `ProgramAbortException`的 usages，如下图所示：        
-![showplan22](images/showplan22.png)        
+![streamgraph_debug19](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug19.png)        
 
 OptimizerPlanEnvironment、StreamPlanEnvironment 正好对应的 benv、senv。分别在它们的 executeAsync() 方法打了断点，可知 
 callMainMethod() 异常是由 `StreamPlanEnvironment#executeAsync()` 抛出。**那是不是意味着 Flink Job StreamWordCount的 main() 在执行的过程中，会调用`StreamPlanEnvironment#executeAsync()`?**。
 
 是的，Debug 过程中，断点进入`StreamPlanEnvironment#executeAsync()`后，通过 Idea 查看 JVM虚拟机栈，可以看到 main()的栈帧，这足够证明 StreamPlanEnvironment 与 Flink Job 的 `env.execute()`的关联性，如下图所示：     
-![showplan23](images/showplan23.png)    
+![streamgraph_debug20](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug20.png)    
 
 接下来，了解 `StreamPlanEnvironment 与 Flink Job 的 env.execute()`是如何关联的。         
 
 #### 1）Flink 源码绑定 StreamWordCount example 项目     
 StreamWordCount.java 是篇章节 “开发 Stream WordCount 作业” 的示例代码，`PackagedProgram#callMainMethod()`通过发射调用`StreamWordCount#main()`方法，而 Flink 源码中是不存在`StreamWordCount.java`, 所以为了调试 StreamWordCount#main(), 我将 示例项目 copy 一份到 Flink的 `flink-examples` 模块下，结构如下图：     
 
-![showplan24](images/showplan24.png)   
+![streamgraph_debug21](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug21.png)   
 
 此时，在 StreamWordCount#main() 打上断点，重新在Flink Web UI 中点击 “Show Plan”，就可以调试了。如下图所示： 
 
-![showplan25](images/showplan25.png)    
+![streamgraph_debug22](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug22.png)    
 
 #### 2）StreamWordCount DataStream API 链路 与 Transformation 关系       
 通过 DataStream<T> 类图可了解到，每个 DataStream<T>内部 都包含一个 Transformation 对象，在后续的代码中可以证实，`DataStream<T> 是 Flink User API 衔接转换的 Object，但其本质是构建出其内部的 Transformation 对象`如下图所示：       
 
-![showplan31](images/showplan31.png)    
+![streamgraph_debug23](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug23.png)    
 
 #### 3）DataStream 派生类中的 Transformation 属性会存放在 StreamExecutionEnvironment.transformations 集合中     
 
 >transformations的类型是 List<Transformation<?>>  
 
 如下图所示, 我将 StreamWordCount 分成两个模块。         
-![showplan27](images/showplan27.png) 
+![streamgraph_debug24](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug24.png) 
 
 在上图中`模块一`代码中，调用 .socketTextStream()、.flatMap()、.map()、.keyBy()、.sum()、.print() 方法, 它会创建不同类型的 DataStream<T> 派生类以及 它内部的 `Transformation<T> transformation` 属性。 StreamWordCount的 链路如下图所示：         
 
-![showplan30](images/showplan30.png)   
-![showplan29](images/showplan29.png)                    
+![streamgraph_debug25](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug25.png)   
+![streamgraph_debug26](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug26.png)                    
 
 Flink 官网文档的code 示例也将中间算子 Transformation 标记出来，可访问`https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/learn-flink/overview/#stream-processing`,如下图所示：   
-![showplan32](images/showplan32.png)        
+![streamgraph_debug27](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug27.png)        
 
 Flink 首先会将该链路算子转成 `Transformation`对象，存储在 `StreamExecutionEnvironment.transformations`集合中，如下图所示(标记出红框)：   
-![showplan26](images/showplan26.png)                   
+![streamgraph_debug28](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug28.png)                   
 
 跟着上面的思路，那 flatMap、map、keyBy、sum 会创建其内部 Transformation 对象，那都会存在 `StreamExecutionEnvironment.transformations`集合中么 ？。                 
 
@@ -582,13 +579,13 @@ OneInputTransformation<T, R> resultTransform =
             false);
 ```
 
-而 this.transformation 是 Source DataStream对象内部的 Transformation。  根据`引用传递`,那 `StreamExecutionEnvironment.transformations`集合 如下图(**图33**)所示：      
-![showplan33](images/showplan33.png)  
+而 this.transformation 是 Source DataStream对象内部的 Transformation。  根据`引用传递`,那 `StreamExecutionEnvironment.transformations`集合 如下图(**图29**)所示：      
+![streamgraph_debug29](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug29.png)  
 
 集合中每个 transformation 的内部属性 inputs 存放了它前面所有的 transformations 引用链路。        
 
 **针对第二个疑惑**：我们知晓调用`StreamExecutionEnvironment#addOperator()`方法，才会将 Transformation 对象添加到 `StreamExecutionEnvironment.transformations`集合中。 关于 `keyBy() 的 PartitionTransformation` 没有加入到 transformations集合中，其原因是 PartitionTransformation 没有继承 `PhysicalTransformation`抽象类，这意味着它在运行时并不会转换为算子。 以 StreamWordCount 为例，看它的 Transformation 的继承关系：        
-![showplan34](images/showplan34.png)        
+![streamgraph_debug30](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug30.png)        
 
 * 继承 `PhysicalTransformation`抽象类的 Transformation 称为 `物理 Transformation`，它会在运行时转换为具体的算子。        
 
@@ -601,12 +598,12 @@ OneInputTransformation<T, R> resultTransform =
 #### 3）List<Transformation<?>> transformations 遍历以及递归的过程  
 在`模块二`中，当执行 `env.execute()`方法时，会传入 `StreamExecutionEnvironment.transformations`集合作为形参来调用 `StreamExecutionEnvironment#getStreamGraph()` 来构造 StreamGraph的。 如下图所示：         
 
-![showplan28](images/showplan28.png)     
+![streamgraph_debug31](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug31.png)     
 
 下面通过 Idea 的 `Call Hierarchy` 查看 StreamGraph 生成的核心方法`StreamGraphGenerator#generate()` 从 StreamWordCount#main() 为入口的调用链路。         
-![showplan35](images/showplan35.png)        
+![streamgraph_debug32](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug32.png)        
 
->注意，`StreamExecutionEnvironment.transformations`集合的结构图(**图33**)请务必记住，在下面的介绍过程中，全部围绕它的结构层次来执行，包括一些递归操作。 `It's very important !!!`。      
+>注意，`StreamExecutionEnvironment.transformations`集合的结构图(**图29**)请务必记住，在下面的介绍过程中，全部围绕它的结构层次来执行，包括一些递归操作。 `It's very important !!!`。      
 
 下面是 `StreamGraphGenerator#generate()` 方法代码。        
 ```java
@@ -647,19 +644,19 @@ public StreamGraph generate() {
 
 **transform(transformation)** 方法，是转换 transformation 的入口 function;      
 
-![showplan36](images/showplan36.png)   
+![streamgraph_debug33](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug33.png)   
 
 其内部先使用`alreadyTransformed`判断是否转换过(这点非常重要，但这也是因为它的数据结构而存在的)，其次它会做一些参数初始化，例如最大并发数`transform.setMaxParallelism`，共享 slot槽 `transform.getSlotSharingGroup().ifPresent` 等配置，等做完这些准备后，transform() 方法会从 一个静态 Map `translatorMap` 获取对应的 translator `translatorMap.get(transform.getClass())`，得到一个 translator。          
 
-![showplan37](images/showplan37.png)     
+![streamgraph_debug34](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug34.png)     
 
 **StreamGraphGenerator#transform(transformation)** 方法, 有了 translator ，会调用`StreamGraphGenerator#translate(translator, transform)`方法，委托 translator 负责转换 transformation 。 但 transformation 自身的数据结构内部是包括 上游 parent Transformations，在转换自身之前，要先判断 parent Transformations 是否都完成转换，其次才是 自己。
 
-![showplan38](images/showplan38.png)                
+![streamgraph_debug35](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug35.png)                
 
 **StreamGraphGenerator#translate(translator, transform)** 方法，在判断当前 transform 是否包含 parent Transformations，会存在递归逻辑，`final List<Collection<Integer>> allInputIds = getParentInputIds(transform.getInputs());` , 若存在 父 Transformation ，则通过 `for (Transformation<?> transformation : parentTransformations)`,遍历它的父 Transformation，`allInputIds.add(transform(transformation));` 调回 `StreamGraphGenerator#transform(transformation)` 这已形成递归调用。        
 
-![showplan39](images/showplan39.png)        
+![streamgraph_debug36](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug36.png)        
 
 
 **StreamGraphGenerator#getParentInputIds()**  
@@ -678,14 +675,14 @@ private List<Collection<Integer>> getParentInputIds(
 }
 ```     
 
-下面，结合(**图33**)，使用一些示例，对 getParentInputIds() 方法进行递归演示：           
-![showplan33](images/showplan33.png)            
+下面，结合(**图29**)，使用一些示例，对 getParentInputIds() 方法进行递归演示：           
+![streamgraph_debug29](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug29.png)            
 
 从 `StreamExecutionEnvironment.transformations`集合取出 `OneInputTransformation （flatMap）`        
 
 1.执行 StreamGraphGenerator#transform(transformation)，先判断 `OneInputTransformation （flatMap）`是否转换过 在从`translatorMap.get(transform.getClass())`取出 translator。             
 
-2.OneInputTransformation （flatMap）和 translator 作为形参，执行`StreamGraphGenerator#translate(translator, transform)`，其内部调用 `StreamGraphGenerator#getParentInputIds()` 判断 OneInputTransformation （flatMap） 是否存在 父 Transformation， 根据 **图33** 可知，flatMap 的 inputs 是 `LegacySourceTransformation (source)`, 不为空，则在调用 `StreamExecutionEnvironment.transformations()`,此时，你会发现，我们现在又回到 step1了。 
+2.OneInputTransformation （flatMap）和 translator 作为形参，执行`StreamGraphGenerator#translate(translator, transform)`，其内部调用 `StreamGraphGenerator#getParentInputIds()` 判断 OneInputTransformation （flatMap） 是否存在 父 Transformation， 根据 **图29** 可知，flatMap 的 inputs 是 `LegacySourceTransformation (source)`, 不为空，则在调用 `StreamExecutionEnvironment.transformations()`,此时，你会发现，我们现在又回到 step1了。 
 
 假设，从 `StreamExecutionEnvironment.transformations`集合取出 `OneInputTransformation （map）`， 那它的 inputs 是 `OneInputTransformation （flatMap）`,而 flatMap 的 inputs 是`LegacySourceTransformation (source)`,  你会发现 如果在 `StreamGraphGenerator#transform(transformation)` 不做 `if (alreadyTransformed.containsKey(transform))` 判断，则会重复转换。       
 
@@ -757,7 +754,7 @@ static {
 
 它给我们构造了以下的关系图：    
 
-![showplan40](images/showplan40.png)      
+![streamgraph_debug37](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug37.png)      
 
 
 那么，我们开始进入 translator 环节          
@@ -795,7 +792,7 @@ StreamNode vertex =
 vertexID : `LegacySourceTransformation (source)`的 id       
 vertexClass: org.apache.flink.streaming.runtime.tasks.SourceStreamTask   
 
-![showplan41](images/showplan41.png)  
+![streamgraph_debug38](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug38.png)  
 
 所以，当 LegacySourceTransformation (source) 转换后，在 StreamGraph 的 `Map<Integer, StreamNode> StreamNodes` 存放 key 为 transformation.id , value 是 StreamNode。 
 
@@ -841,7 +838,7 @@ for (Integer inputId : context.getStreamNodeIds(parentTransformations.get(0))) {
 而 `OneInputTransformation （flatMap）`的 parent Transformation 是 LegacySourceTransformation (source), 所以从`StreamGraphGenerator.alreadyTransformed` 获取 LegacySourceTransformation (source) 的 id。  
 
 下图是 `streamGraph.addEdge(inputId, transformationId, 0);`的 方法调用关系：        
-![showplan42](images/showplan42.png)        
+![streamgraph_debug39](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug39.png)        
 
 那重点来看 `StreamGraph#addEdgeInternal()` 方法。           
 
@@ -850,7 +847,7 @@ for (Integer inputId : context.getStreamNodeIds(parentTransformations.get(0))) {
 2.形参 upStreamVertexID 中的 VertexID 与 tramsformation.id 是对等关系           
 
 首先 StreamGraph#addEdgeInternal() 会根据 上游的 tramsformation.id 作为key，判断它是什么类型节点（virtualSideOutputNode、virtualPartitionNode、StreamNode）
-![showplan43](images/showplan43.png)            
+![streamgraph_debug40](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug40.png)            
 
 在 4.2小节可知道 LegacySourceTransformation (source) 并非 virtualSideOutputNode、virtualPartitionNode， 所以它会执行 `StreamGraph#createActualEdge()`。 
 
@@ -871,13 +868,13 @@ getStreamNode(edge.getSourceId()).addOutEdge(edge);
 getStreamNode(edge.getTargetId()).addInEdge(edge);
 ```
 
-![showplan44](images/showplan44.png)        
+![streamgraph_debug41](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug41.png)        
 
 
 ##### 4.4）OneInputTransformationTranslator (Map) 转换  OneInputTransformation  
 因为 Map 与 FlatMap 都属于 OneInputTransformation.class，所以它的转换逻辑是一致的。
 
-![showplan45](images/showplan45.png)        
+![streamgraph_debug42](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug42.png)        
 
 
 ##### 4.5）PartitionTransformationTranslator (keyBy) 转换  PartitionTransformation     
@@ -908,7 +905,7 @@ ReduceTransformation （sum）与 OneInputTransformation （map） 转换差不�
 
 因为 ReduceTransformation（sum）的 父 Transformation 是 `PartitionTransformation （keyBy）`,它并不是 StreamNode，而是 `VirtualPartitionNode`;       
 
-![showplan46](images/showplan46.png)    
+![streamgraph_debug43](http://img.xinzhuxiansheng.com/blogimgs/flink/streamgraph_debug43.png)    
 
 下面是`if (virtualPartitionNodes.containsKey(upStreamVertexID))`代码，很明显这是一个递归处理逻辑，而跳出递归的判断就是 if 判断条件不成立, 如果当前的父 Transformation 不是 StreamNode，则会拿父 Transformation 的 父 Transformation，后面以此内推，直到条件满足后，执行 `StreamGraph.createActualEdge()`方法。  
 
@@ -953,13 +950,15 @@ private void addEdgeInternal(
 ##### 4.7）LegacySinkTransformationTranslator (print) 转换  LegacySinkTransformation 
 `LegacySinkTransformationTranslator#translateInternal()` 创建 StreamNode & StreamEdge。  
 
-#### 5.StreamWordCount 所有 Transformation 转换后的产物       
+#### 5.总结      
+StreamGraph 有 StreamNodes，StreamEdge，Source，Sink，virtualPartitionNodes 等等，以上这些信息足以构成一个图。          
 
 
-refer     
+>本人在阅读源码过程，用“第一性原理”的思路来阐述，对于我来说“太难”，本人无法拿着`Flink confluence FLIP`(https://cwiki.apache.org/confluence/display/FLINK/Flink+Improvement+Proposals)对着它的 `Motivation`直接理解。对Flink探索的过程像是剥洋葱一样，从外到内。若做到 do-find-why 即可。          
+
+
+refer           
 1.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/maven/          
 2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/configuration/overview/        
 3.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/cli/    
 4.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/operators/overview/        
-
-
