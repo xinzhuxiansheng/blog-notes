@@ -1,4 +1,4 @@
-# Flink 源码-Standalone - 探索 Flink State 入门  
+# Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph
 
 ## 引言     
 
@@ -11,7 +11,7 @@ state.backend: filesystem
 state.backend.incremental: true  # 该参数在 state.backend = rocksdb，才有效  
 state.checkpoints.dir: file:///root/yzhou/flink/flink1172/cppath
 state.savepoints.dir: file:///root/yzhou/flink/flink1172/sppath
-execution.checkpointing.interval: 60000  # 每 60 秒执行一次 checkpoint  
+execution.checkpointing.interval: 60000  # 每 60 秒执行一次 checkpoint
 ```
 
 配置重启 Standalone 集群后，可以在 Flink WEB UI 中看到 state 配置：         
@@ -152,145 +152,15 @@ execution.checkpointing.interval: 86400000
 curl --location --request POST 'http://192.168.0.201:8081/jobs/fdbb23ffb2e6c660892905952e4d0a9d/checkpoints'
 ```
 
-此时，观察 StreamWordCount Job 的 Checkpoints 的 History 页面，列表中的`Trigger Time` 并不是规律的，这显然是手动触发的效果。                
-
+此时，观察 StreamWordCount Job 的 Checkpoints 的 History 页面，列表中的`Trigger Time` 并不是规律的，这显然是手动触发的效果。            
 ![flinkstate03](images/flinkstate03.png)   
 
 现在有了手动触发，那接下来也就方便我们远程调试了，再加上 自动触发 Checkpoint的时间间隔调整到 24小时，所以在这段时间里面，并不会打扰调试的过程。             
 
-### 根据 手动触发 Checkpoint URL 找到 对应的 Netty Handler    
+## 根据 手动触发 Checkpoint URL 找到 对应的 Netty Handler    
 在之前的 Blog “Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph”中的 “Flink WEB UI 远程调试”章节介绍过 Flink WEB UI 是由Netty提供的Server服务 以及它的Handler 查找思路，在这里就不过多介绍，若还有疑问，可翻篇之前的 Blog。     
 
->CheckpointTriggerHandler 是 URL：http://<jobmanager>:8081/jobs/<job_id>/checkpoints 的处理 Handler。      
-
-**在 StreamWordCount#main() 并没有直接使用 State API存放数据，那为什么还会有 Checkpoint？**，答案是存在 Checkpoint的，接下来，通过 sum history 的测试，来验证 Checkpoint 是否生效。             
-
-## 配置 flink-conf.yaml 中 Checkpoint参数 
-### 配置 execution.checkpointing.externalized-checkpoint-retention 参数       
-在做测试之前，建议将 `execution.checkpointing.externalized-checkpoint-retention` 参数修改为 `RETAIN_ON_CANCELLATION`, 它的默认值是`NO_EXTERNALIZED_CHECKPOINTS`。 其目的是为了解决在Flink WEB UI 触发 `Cancel Job`的时候，默认情况下不保留 Checkpoint的目录。               
-
-![flinkstate05](images/flinkstate05.png)    
-
-### 配置 state.checkpoints.num-retained 参数   
-测试阶段，建议将 `state.checkpoints.num-retained` 参数修改大一些，例如 100，它的默认值是 1。 在触发 Checkpoint 后，Flink 会检查 Job 的Checkpoint 保留个数，若是默认值 1，则只会保留最新的 Checkpoint， 这显然无法满足测试和生产的使用情况。          
-
-```shell
-[root@vm01 b00959e4e790420e1510a881d01e1b83]# tree .
-.
-├── chk-1
-│   └── _metadata
-├── chk-2
-│   └── _metadata
-├── chk-3
-│   └── _metadata
-├── chk-4
-│   └── _metadata
-├── shared
-└── taskowned
-```
-
-这部分，可查看 源码中 `CheckpointingOptions.java`的定义。           
-
->可参考访问文档 `https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/config/#checkpointing`    
-
-修改完，记得重启 Standalone 集群。           
-
-## 测试 StreamWordCount Job 从 Checkpoint 恢复作业     
-### 发送测试数据，统计结果     
-
-```shell
-[root@vm01 flink1172]# nc -lk 7777   
-``` 
-
-查看 TaskManager 的 `Stdout` Log         
-
-![flinkstate04](images/flinkstate04.png)       
-
-### 手动触发 Checkpoint   
-```shell  
-[root@vm01 b00959e4e790420e1510a881d01e1b83]# tree .
-.
-├── chk-1
-│   └── _metadata
-├── chk-2
-│   └── _metadata
-├── chk-3
-│   └── _metadata
-├── chk-4
-│   └── _metadata
-├── shared
-└── taskowned
-```
-
-当执行 chk-4 时， word count的统计结果：        
-```bash
-(name,4)
-(yzhou,4)
-(my,4)
-(is,4)
-```
-
-### 从 chk-4 恢复 StreamWordCount Job      
-1）在 Flink WEB UI 触发 `Cancel Job`  
-
-2）在 `Submit New Job` 添加 `Savepoint path` 参数 为 `/root/yzhou/flink/flink1172/cppath/b00959e4e790420e1510a881d01e1b83/chk-4`, 该path 指向的是 chk-x 的具体路径。      
-![flinkstate06](images/flinkstate06.png)   
-
->注意，该操作与 下面的 CLI操作是等同的，内容如下：      
-```shell
-./flink run -s /root/yzhou/flink/flink1172/cppath/b00959e4e790420e1510a881d01e1b83/chk-4 -c com.yzhou.blog.wordcount.StreamWordCount /root/yzhou/flink/flink1172/flink-1.17.2/bin/TMP/flink-blog-1.17-SNAPSHOT-jar-with-dependencies.jar   
-```
-
-3）在 `nc -lk 7777` 发送 `my name is yzhou`， 结果如下：        
-```bash   
-(my,5)
-(is,5)
-(name,5)
-(yzhou,5)  
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+>CheckpointTriggerHandler 是 URL：http://<jobmanager>:8081/jobs/<job_id>/checkpoints 的处理 Handler。               
 
 
 当时
@@ -477,18 +347,7 @@ private CompletableFuture<Void> triggerTasks(
     }
     return FutureUtils.waitForAll(acks);
 }
-```  
-
-
-
-## 
-
-
-
-
-
-
-
+```
 
 
 
@@ -497,9 +356,7 @@ refer
 1.https://nightlies.apache.org/flink/flink-docs-release-1.17/zh/docs/ops/state/checkpoints/     
 2.https://issues.apache.org/jira/browse/FLINK-8531        
 3.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/ops/rest_api/#jobs-jobid-checkpoints-1        
-4.https://nightlies.apache.org/flink/flink-docs-release-1.17/zh/docs/concepts/stateful-stream-processing/     
-5.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/deployment/config/#checkpointing   
-
+4.https://nightlies.apache.org/flink/flink-docs-release-1.17/zh/docs/concepts/stateful-stream-processing/           
 
 
 
