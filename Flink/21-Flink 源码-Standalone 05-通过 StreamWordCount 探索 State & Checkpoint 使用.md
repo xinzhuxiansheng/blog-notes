@@ -1,23 +1,33 @@
-# Flink 源码-Standalone - 探索 Flink State 入门  
+# Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint 使用    
 
-## 引言     
+## 引言  
+在 Flink 中，每个函数和算子都可以是有状态的，而有状态的函数和算子是将 Data 存储在 State 中，所以 State 提供了 Flink 中用于存储计算过程中数据的存储介质。 在 Flink 这种分布式系统中，必然存在 `Fallacies of distributed computing` (https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing) , So Flink 提供了一种叫做 `检查点分布式快照机制`（Checkpoint）,用于保证有状态流处理的容错性，它会定期捕获和保存有状态的快照, 若 Job 发生故障后，Checkpoint允许 Job 在发生故障时恢复到最近的检查点，从而恢复 Job 的状态和处理位置，这样可以确保数据处理的连续性和一致性。     
 
+State 是 Checkpoint 保护的对象，在 每次执行 Checkpoint 时，Flink 会将当前所有状态的快照保存下来。     
 
-## Flink Standalone 集群 配置 Checkpoint Path      
+![flinkstate07](images/flinkstate07.png)   
+
+>关于更多的 State & Checkpoint 可访问官网文档。  
+State 官网文档介绍，可访问 `https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/concepts/stateful-stream-processing/`  
+Checkpoint 官网文档介绍，可访问 `https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/fault-tolerance/checkpointing/`    
+
+接下来，开始介绍基于 Standalone 的 State & Checkpoint 使用
+
+## 配置 Checkpoint Config          
 vim conf/flink-conf.yaml          
 ```bash
 # config checkpoint
 state.backend: filesystem
 state.backend.incremental: true  # 该参数在 state.backend = rocksdb，才有效  
-state.checkpoints.dir: file:///root/yzhou/flink/flink1172/cppath
+state.checkpoints.dir: file:///root/yzhou/flink/flink1172/cppath   
 state.savepoints.dir: file:///root/yzhou/flink/flink1172/sppath
-execution.checkpointing.interval: 60000  # 每 60 秒执行一次 checkpoint  
+execution.checkpointing.interval: 60000  # 每 60 秒执行一次 checkpoint    
 ```
 
-配置重启 Standalone 集群后，可以在 Flink WEB UI 中看到 state 配置：         
+配置重启 Standalone 集群后，可以在 Flink WEB UI 中看到 checkpoint 配置：         
 ![flinkstate01](images/flinkstate01.png)    
 
-## StreamWordCount 示例 获得 Checkpoint 默认配置项       
+## StreamWordCount 示例代码      
 下面的代码是 在之前 Blog “Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph” 中的 `StreamWordCount`示例，接下来，我们仍然会使用该示例来测试。       
 ```java
 public class StreamWordCount {
@@ -60,7 +70,24 @@ public class StreamWordCount {
 }
 ```
 
-`StreamWordCount#main()` 并没有 `Checkpoint` 相关配置，所以在 `flink-conf.yaml`的配置是全局的, 根据下面`调试 tip`操作，可知 `StreamWordCount#main()` 在 创建 StreamExecutionEnvironment 对象时， `StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(new Configuration());` 调用 `StreamExecutionEnvironment#configure()` 配置了关于 Checkpoint 的相关参数, 下面是配置代码块：     
+1）终端执行 `nc -lk 7777`   
+2）通过 Flink WEB UI 提交 StreamWordCount Job  
+3）输入测试数据，最后 word count 的统计结果可在 Task Managers Stdout Log页面查看，如下图所示：                   
+ 
+![flinkstate08](images/flinkstate08.png)              
+
+## 触发 Checkpoint 
+通过 Flink WEB UI 页面，查看 Job 的Checkpoint History，发现每隔 60s触发一次 Checkpoint，可能你会有以下疑问：                    
+1.`StreamWordCount#main()` 没有调用`Checkpoint`相关 API，那 Checkpoint 又是如何生效？   
+2.`StreamWordCount#main()` 没有调用`State`相关 API，那每隔 60s 触发一次 Checkpoint 存储的是什么呢？     
+
+
+针对第一个疑问：`bin/flink-conf.yaml`的配置是全局性,是因为`StreamWordCount#main()` 在创建 StreamExecutionEnvironment 对象时， 会调用 `StreamExecutionEnvironment#configure()`来关联 Checkpoint 的相关参数, 下面是相关代码块：   
+**创建 StreamExecutionEnvironment** 
+```java
+StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(new Configuration());
+```
+**设置 Checkpoint配置**   
 ```java
 public void configure(ReadableConfig configuration, ClassLoader classLoader) {
     // 省略部分代码 
@@ -70,9 +97,10 @@ public void configure(ReadableConfig configuration, ClassLoader classLoader) {
 
 >调试 tip:      
 调试源码过程中，存在源码不知道在哪触发？ 例如 `StreamWordCount#main()` 并没有 `Checkpoint`相关配置，但通过 Flink WEB UI查看作业情况，Checkpoint是生效的， 所以，在源码中搜索`execution.checkpointing.interval`, 然后在获取此参数配置的 `get`方法打断点，再根据 Idea 查看, 例如图片中的示例：          
-![](images/flinkstate02.png)        
+![flinkstate02](images/flinkstate02.png)          
 
-根据 `CheckpointConfig#configure()` 方法，由此可知 `StreamWordCount` Job 启动时，Flink 会默认给他配置的一些参数以及缺省值，内容如下：         
+根据`CheckpointConfig#configure()`方法，由此可知 `StreamWordCount` Job 启动时，Flink 会默认给它配置的一些参数以及缺省值，config 代码如下：                
+**CheckpointConfig#configure()**        
 ```java
 public void configure(ReadableConfig configuration) {
     configuration
@@ -118,12 +146,12 @@ public void configure(ReadableConfig configuration) {
 }
 ```     
 
-总结成以下参数项：      
+通过`CheckpointConfig#configure()`可以总结出配置的具体参数项以及它的默认值，内容如下：                              
 ```bash
-execution.checkpointing.mode - desc: The checkpointing mode (exactly-once vs. at-least-once).       
-execution.checkpointing.interval - desc: Gets the interval in which checkpoints are periodically scheduled.    
-execution.checkpointing.timeout - desc: The maximum time that a checkpoint may take before being discarded.     
-execution.checkpointing.max-concurrent-checkpoints - desc: The maximum number of checkpoint attempts that may be in progress at the same time. If this value is n, then no checkpoints will be triggered while n checkpoint attempts are currently in flight. For the next checkpoint to be triggered, one checkpoint attempt would need to finish or expire.   
+execution.checkpointing.mode
+execution.checkpointing.interval
+execution.checkpointing.timeout    
+execution.checkpointing.max-concurrent-checkpoints 
 execution.checkpointing.min-pause    
 execution.checkpointing.tolerable-failed-checkpoints    
 execution.checkpointing.externalized-checkpoint-retention   
@@ -134,6 +162,16 @@ execution.checkpointing.unaligned.max-subtasks-per-channel-state-file
 execution.checkpointing.unaligned.forced   
 state.checkpoints.dir   
 ```
+
+了解配置参数对于了解 Checkpoint 的机制是个很不错的入口，同样对于 Checkpoint 调优非常重要（`可以不配置，走缺省值，但不能不知道该配置`）。       
+
+到这里，`第一个疑问`应该解释的差不多了，可了解`StreamWordCount#main()`若设置 Checkpoint 配置参数，那它的优先级是高于 `bin/flink-conf.yaml`。                         
+
+接下来，一起探索`第二个疑问`。                  
+
+## 从 检查点（Checkpoint）恢复 StreamWordCount Job      
+
+
 
 
 ## 手动触发 StreamWordCount Job Checkpoint      
@@ -250,250 +288,18 @@ curl --location --request POST 'http://192.168.0.201:8081/jobs/fdbb23ffb2e6c6608
 ```
 
 
+## StreamWordCount#main() 中哪些算子会有 State   
+在 
 
 
 
+refer        
+1.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/concepts/stateful-stream-processing/                  
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-当时
-
-`CheckpointTriggerHandler#handleRequest`
-
-
-`SchedulerBase#triggerCheckpoint()`    
-
-`CheckpointCoordinator#triggerCheckpoint()` 可了解到 Checkpoint 分为 `FULL`,`INCREMENTAL` , 针对 `CONFIGURED` 它的含义是从配置获取，并不代表 Checkpoint 类型。   
-```java
-public CompletableFuture<CompletedCheckpoint> triggerCheckpoint(CheckpointType checkpointType) {
-    if (checkpointType == null) {
-        throw new IllegalArgumentException("checkpointType cannot be null");
-    }
-
-    final SnapshotType snapshotType;
-    switch (checkpointType) {
-        case CONFIGURED:
-            snapshotType = checkpointProperties.getCheckpointType();
-            break;
-        case FULL:
-            snapshotType = FULL_CHECKPOINT;
-            break;
-        case INCREMENTAL:
-            snapshotType = CHECKPOINT;
-            break;
-        default:
-            throw new IllegalArgumentException("unknown checkpointType: " + checkpointType);
-    }
-
-    final CheckpointProperties properties =
-            new CheckpointProperties(
-                    checkpointProperties.forceCheckpoint(),
-                    snapshotType,
-                    checkpointProperties.discardOnSubsumed(),
-                    checkpointProperties.discardOnJobFinished(),
-                    checkpointProperties.discardOnJobCancelled(),
-                    checkpointProperties.discardOnJobFailed(),
-                    checkpointProperties.discardOnJobSuspended(),
-                    checkpointProperties.isUnclaimed());
-    return triggerCheckpointFromCheckpointThread(properties, null, false);
-}
-```
-
-
-`CheckpointCoordinator#triggerCheckpoint(org.apache.flink.runtime.checkpoint.CheckpointProperties, java.lang.String, boolean)`
-
-
-
-触发 checkpoint 的入口方法： `org.apache.flink.runtime.checkpoint.CheckpointCoordinator#startTriggeringCheckpoint()`， 
-
-
-
-`DefaultCheckpointPlanCalculator#calculateCheckpointPlan()` :确保作业不是处于关闭中或未启动的状态    
-```java
-@Override
-public CompletableFuture<CheckpointPlan> calculateCheckpointPlan() {
-    return CompletableFuture.supplyAsync(
-            () -> {
-                try {
-                    if (context.hasFinishedTasks() && !allowCheckpointsAfterTasksFinished) {
-                        throw new CheckpointException(
-                                "Some tasks of the job have already finished and checkpointing with finished tasks is not enabled.",
-                                CheckpointFailureReason.NOT_ALL_REQUIRED_TASKS_RUNNING);
-                    }
-
-                    checkAllTasksInitiated();
-
-                    CheckpointPlan result =
-                            context.hasFinishedTasks()
-                                    ? calculateAfterTasksFinished()
-                                    : calculateWithAllTasksRunning();
-
-                    checkTasksStarted(result.getTasksToWaitFor());
-
-                    return result;
-                } catch (Throwable throwable) {
-                    throw new CompletionException(throwable);
-                }
-            },
-            context.getMainExecutor());
-}
-```
-
-
-`CheckpointCoordinator#createPendingCheckpoint()`
-```java
-private PendingCheckpoint createPendingCheckpoint(
-        long timestamp,
-        CheckpointProperties props,
-        CheckpointPlan checkpointPlan,
-        boolean isPeriodic,
-        long checkpointID,
-        CompletableFuture<CompletedCheckpoint> onCompletionPromise,
-        CompletableFuture<Void> masterTriggerCompletionPromise) {
-
-    synchronized (lock) {
-        try {
-            // since we haven't created the PendingCheckpoint yet, we need to check the
-            // global state here.
-            preCheckGlobalState(isPeriodic);
-        } catch (Throwable t) {
-            throw new CompletionException(t);
-        }
-    }
-
-    PendingCheckpointStats pendingCheckpointStats =
-            trackPendingCheckpointStats(checkpointID, checkpointPlan, props, timestamp);
-
-    final PendingCheckpoint checkpoint =
-            new PendingCheckpoint(
-                    job,
-                    checkpointID,
-                    timestamp,
-                    checkpointPlan,
-                    OperatorInfo.getIds(coordinatorsToCheckpoint),
-                    masterHooks.keySet(),
-                    props,
-                    onCompletionPromise,
-                    pendingCheckpointStats,
-                    masterTriggerCompletionPromise);
-
-    synchronized (lock) {
-        pendingCheckpoints.put(checkpointID, checkpoint);
-
-        ScheduledFuture<?> cancellerHandle =
-                timer.schedule(
-                        new CheckpointCanceller(checkpoint),
-                        checkpointTimeout,
-                        TimeUnit.MILLISECONDS);
-
-        if (!checkpoint.setCancellerHandle(cancellerHandle)) {
-            // checkpoint is already disposed!
-            cancellerHandle.cancel(false);
-        }
-    }
-
-    LOG.info(
-            "Triggering checkpoint {} (type={}) @ {} for job {}.",
-            checkpointID,
-            checkpoint.getProps().getCheckpointType(),
-            timestamp,
-            job);
-    return checkpoint;
-}
-```
-
-
-
-## 发送 Checkpoint 消息     
-`CheckpointCoordinator#triggerTasks()`, Checkpoint 默认情况下 是异步执行  
-```java
-private CompletableFuture<Void> triggerTasks(
-        CheckpointTriggerRequest request, long timestamp, PendingCheckpoint checkpoint) {
-    // no exception, no discarding, everything is OK
-    final long checkpointId = checkpoint.getCheckpointID();
-
-    final SnapshotType type;
-    if (this.forceFullSnapshot && !request.props.isSavepoint()) {
-        type = FULL_CHECKPOINT;
-    } else {
-        type = request.props.getCheckpointType();
-    }
-
-    final CheckpointOptions checkpointOptions =
-            CheckpointOptions.forConfig(
-                    type,
-                    checkpoint.getCheckpointStorageLocation().getLocationReference(),
-                    isExactlyOnceMode,
-                    unalignedCheckpointsEnabled,
-                    alignedCheckpointTimeout);
-
-    // send messages to the tasks to trigger their checkpoints
-    List<CompletableFuture<Acknowledge>> acks = new ArrayList<>();
-    for (Execution execution : checkpoint.getCheckpointPlan().getTasksToTrigger()) {
-        if (request.props.isSynchronous()) {
-            acks.add(
-                    execution.triggerSynchronousSavepoint(
-                            checkpointId, timestamp, checkpointOptions));
-        } else {
-            acks.add(execution.triggerCheckpoint(checkpointId, timestamp, checkpointOptions));
-        }
-    }
-    return FutureUtils.waitForAll(acks);
-}
-```  
-
-
-
-## 
-
-
-
-
-
-
-
-
-
-
-
-refer             
 1.https://nightlies.apache.org/flink/flink-docs-release-1.17/zh/docs/ops/state/checkpoints/     
 2.https://issues.apache.org/jira/browse/FLINK-8531        
 3.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/ops/rest_api/#jobs-jobid-checkpoints-1        
