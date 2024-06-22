@@ -4,7 +4,7 @@
 
 ## 引言 
 在 Flink SQL 领域中 CLI 是非常重要的工具，下面通过一个 Flink SQL Job 开发流程来介绍下，如下图所示：   
-![flinksqlcli01](images/flinksqlcli01.png)  
+![flinksqlcli01](http://img.xinzhuxiansheng.com/blogimgs/flink/flinksqlcli01.png)  
 
 有一个实时需求，目前看可以使用 Flink SQL 实现，首先会根据需求，收集数据，校对多个数据源的表结构以及字段含义，可能这个过程会存在数据并未结构化存储,还需实现数据采集等操作。 有了数据源，会观察数据源的数据，是否需要根据需求对数据进行一些转换操作，最后开发 Flink SQL 实现实时需求。  
 
@@ -66,7 +66,7 @@ SELECT * FROM yzhou_test01;
 ```
 
 Outout log:         
-![flinksqlcli02](images/flinksqlcli02.png)     
+![flinksqlcli02](http://img.xinzhuxiansheng.com/blogimgs/flink/flinksqlcli02.png)     
 
 **小结**    
 该案例中，使用以下3类 Flink SQL：       
@@ -97,7 +97,7 @@ WITH
 #### 案例背景介绍   
 现在有一个 Kafka 的数据源，存放格式为：`{"id":1,"name":"yzhou","addressId":1}`的数据, 还有一个 MySQL 数据源，它是用来存放地址信息，它的字段 id，name，需要使用 Flink SQL 实现 Kafka Join MySQL, 利用 UDF 将 Kafka 中的 name 与 MySQL 中的 name 拼接成 一个新字段 info；如下图所示：        
 
-![flinksqlcli03](images/flinksqlcli03.png)     
+![flinksqlcli03](http://img.xinzhuxiansheng.com/blogimgs/flink/flinksqlcli03.png)     
 
 >注意，上述需求并非不能用系统函数实现，只是通过简化需求来测试 UDF。         
 
@@ -241,7 +241,7 @@ ON A.addressId = B.id;
 >注意：查看执行 SQL 的结果，在 Flink Version 1.17.2 版本中，Job 需触发 Checkpoint 后，终端才会展示 Topic 数据。  
 
 Output log:    
-![flinksqlcli04](images/flinksqlcli04.png)  
+![flinksqlcli04](http://img.xinzhuxiansheng.com/blogimgs/flink/flinksqlcli04.png)  
 
 测试 UDF 功能，测试完成。    
 
@@ -297,4 +297,3 @@ refer
 2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/table/functions/systemfunctions/   
 3.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/table/functions/udfs/      
 4.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/table/sql/overview/        
-
