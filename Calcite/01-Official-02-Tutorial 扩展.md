@@ -53,7 +53,7 @@ sqlline>
 
 >注意：如果你运行环境是 Windows，则命令为 sqlline.bat。       
 
->使用 gradlew 脚本对 calcite源码进行编译，意味着，我们并不需要提前安装 Gradle   
+>使用 gradlew 脚本对 calcite源码进行编译，意味着，我们并不需要提前安装 Gradle, 可参考官网文档给的说明：https://calcite.apache.org/docs/howto.html#gradle-vs-the-gradle-wrapper      
 ![tutorial09](images/tutorial09.png)   
 
 ## 查询
@@ -296,7 +296,7 @@ JSON 并不能让编写长字符串变得容易，因此 Calcite 支持替代语
 ```
 现在我们已经定义了一个视图，我们可以在查询中使用它，就像它是一个表一样。 接下来，我们按照视图示例，在 `model.json` 中添加 `tables` 配置；   
 
->注意：sqlline 退出指令是 `!quit`。     
+>注意：sqlline 退出指令是 `!quit`, 不用‘;’ 结尾。       
 
 再`重新启动 sqlline`后, 执行`!connect jdbc:calcite:model=src/test/resources/model.json admin admin`,然后执行 `FEMALE_EMPS` view的查询。      
 ```sql
@@ -483,7 +483,7 @@ public abstract class CsvRules {
 
 `onMatch() 方法生成一个新的关系表达式并调用 RelOptRuleCall.transformTo() 以指示规则已成功触发`。          
 
-#### The query optimization process (查询优化过程)  
+## The query optimization process (查询优化过程)  
 关于 Calcite 的查询规划器有多么聪明，有很多话要说，但我们在这里不会说。这种聪明的设计是为了减轻你——计划规则的制定者的负担。   
 
 首先，Calcite不会按规定的顺序触发规则。查询优化过程遵循分支树的许多分支，就像下棋程序检查许多可能的移动序列一样。如果规则 A 和 B 都与查询运算符树的给定部分匹配，则 Calcite 可以同时触发这两个规则。    
@@ -498,7 +498,7 @@ Calcite 确实使用成本模型。成本模型决定最终使用哪个计划，
 
 此外（你猜对了）成本模型是可插入的，它所基于的表和查询运算符统计信息也是可插入的。但这可以成为以后的主题。    
 
-### JDBC adapter (JDBC 适配器)  
+## JDBC adapter (JDBC 适配器)  
 JDBC 适配器将 JDBC 数据源中的模式映射为 Calcite 模式。    
 
 例如，此模式从 MySQL“foodmart”数据库读取：  
@@ -525,7 +525,102 @@ JDBC 适配器将 JDBC 数据源中的模式映射为 Calcite 模式。
 
 JDBC 适配器会将尽可能多的处理下推到源系统，同时转换语法、数据类型和内置函数。如果 Calcite 查询基于单个 JDBC 数据库中的表，则原则上整个查询应转到该数据库。如果表来自多个 JDBC 源，或者来自 JDBC 和非 JDBC 的混合，Calcite 将使用它可以使用的最有效的分布式查询方法。      
 
-### The cloning JDBC adapter (克隆 JDBC 适配器) 
+### 使用 Sqlline 演示 JDBC Adapter 使用  
+1）添加 MySQL 依赖jar，加入到 Classpath 中   
+修改`D:\Code\Java\calcite\example\csv\sqlline.bat`, 脚本中添加 Adapter相关jar 路径，修改 Sqlline 的启动命令为 `java -cp ... sqlline.SqlLine`,使用 cp 方式启动，具体内容如下：      
+```bash
+set DIRNAME=%~dp0
+if "%DIRNAME%" == "" set DIRNAME=.
+set CP=%DIRNAME%\build\libs\sqllineClasspath.jar
+
+if not defined CACHE_SQLLINE_CLASSPATH (
+  if exist "%CP%" del "%CP%"
+)
+if not exist "%CP%" (call "%DIRNAME%\..\..\gradlew" --console plain -q :example:csv:buildSqllineClasspath)
+
+set DRIVER_PATH=%DIRNAME%\build\libs\mysql-connector-j-8.0.33.jar;%DIRNAME%\build\libs\calcite-kafka-1.38.0-SNAPSHOT.jar;%DIRNAME%\build\libs\kafka-clients-3.5.2.jar
+set CP=%CP%;%DRIVER_PATH%
+
+
+java -Xmx1g -cp "%CP%" sqlline.SqlLine %*   
+```
+
+2）将 jar 放入 calcite\example\csv\build\libs 目录下，目录结构如下：     
+```bash
+yzhou@DESKTOP-GVIA7JC MINGW64 /d/Code/Java/calcite/example/csv/build/libs (main)
+$ tree .
+.
+|-- calcite-csv-1.38.0-SNAPSHOT-sources.jar
+|-- calcite-csv-1.38.0-SNAPSHOT.jar
+|-- calcite-kafka-1.38.0-SNAPSHOT.jar
+|-- kafka-clients-3.5.2.jar
+|-- mysql-connector-j-8.0.33.jar
+`-- sqllineClasspath.jar
+
+0 directories, 6 files     
+```
+
+3）执行 Sqlline  
+```bash  
+# 启动，添加 -d 指定 driver 类    
+.\sqlline.bat -d com.mysql.cj.jdbc.Driver   
+
+# !connect 添加 mysql 连接信息   
+!connect jdbc:mysql://192.168.0.202:3306/yzhou_test root 123456
+```
+
+Output log:     
+```bash
+PS D:\Code\Java\calcite\example\csv> .\sqlline.bat -d com.mysql.cj.jdbc.Driver
+Building Apache Calcite 1.38.0-SNAPSHOT
+Property "url" is required
+sqlline version 1.12.0
+sqlline> !connect jdbc:mysql://192.168.0.202:3306/yzhou_test root 123456
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+SLF4J(W): Class path contains SLF4J bindings targeting slf4j-api versions 1.7.x or earlier.
+SLF4J(W): Ignoring binding found at [jar:file:/C:/Users/yzhou/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-slf4j-impl/2.17.1/84692d456bcce689355d33d68167875e486954dd/log4j-slf4j-impl-2.17.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J(W): See https://www.slf4j.org/codes.html#ignoredBindings for an explanation.
+0: jdbc:mysql://192.168.0.202:3306/yzhou_test>   
+```
+
+4）查询   
+```shell
+# 查看 table
+!table     
+
+# 查询 Orders 表 
+SELECT * FROM Orders;
+```
+
+```bash
+0: jdbc:mysql://192.168.0.202:3306/yzhou_test> !table
++------------+-------------+--------------+------------+---------+----------+------------+-----------+-----------+
+| TABLE_CAT  | TABLE_SCHEM |  TABLE_NAME  | TABLE_TYPE | REMARKS | TYPE_CAT | TYPE_SCHEM | TYPE_NAME | SELF_REFE |
++------------+-------------+--------------+------------+---------+----------+------------+-----------+-----------+
+| yzhou_test |             | Orders       | TABLE      |         |          |            |           |           |
+| yzhou_test |             | user_address | TABLE      |         |          |            |           |           |
+| yzhou_test |             | yzhou_test01 | TABLE      |         |          |            |           |           |
+| yzhou_test |             | yzhou_test02 | TABLE      |         |          |            |           |           |
++------------+-------------+--------------+------------+---------+----------+------------+-----------+-----------+
+0: jdbc:mysql://192.168.0.202:3306/yzhou_test> SELECT * FROM Orders;
++----------+-----------+---------+-------+---------------------+
+| rowtime  | productId | orderId | units |     update_time     |
++----------+-----------+---------+-------+---------------------+
+| 10:17:00 | 30        | 5       | 4     | 2024-06-22T18:00:18 |
+| 10:17:05 | 10        | 6       | 1     | 2024-06-22T18:00:22 |
+| 10:18:05 | 20        | 7       | 2     | 2024-06-22T18:00:25 |
+| 10:18:07 | 30        | 8       | 20    | 2024-06-22T18:00:30 |
+| 11:02:00 | 10        | 9       | 6     | 2024-06-22T18:00:36 |
+| 11:04:00 | 10        | 10      | 1     | 2024-06-22T18:00:38 |
+| 11:09:30 | 40        | 11      | 12    | 2024-06-22T18:00:41 |
+| 11:24:11 | 10        | 12      | 4     | 2024-06-22T18:00:45 |
++----------+-----------+---------+-------+---------------------+
+8 rows selected (0.017 seconds)
+```
+
+## The cloning JDBC adapter (克隆 JDBC 适配器) 
 克隆 JDBC 适配器创建混合数据库。数据源自 JDBC 数据库，但在第一次访问每个表时被读入内存表中。 Calcite 根据这些内存中的表（实际上是数据库的缓存）评估查询。       
 例如，以下模型从 MySQL“foodmart”数据库读取表：    
 ```json 
@@ -575,6 +670,8 @@ JDBC 适配器会将尽可能多的处理下推到源系统，同时转换语法
   ]
 }   
 ```
+
+## 
 
 你可以使用此方法在任何类型的模式（而不仅仅是 JDBC）上创建克隆模式。   
 克隆适配器并不是万能的。我们计划开发更复杂的缓存策略，以及更完整、更高效的内存表实现，但现在克隆 JDBC 适配器展示了可能性，并允许我们尝试初始实现。   
