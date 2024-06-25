@@ -1,4 +1,4 @@
-# Official - Background 扩展  
+# Calcite - Official - Background 扩展     
 
 ## 引言   
 Apache Calcite是一个动态数据管理框架。它包含了构成典型数据库管理系统的许多部分，但省略了一些关键功能：数据存储、数据处理算法和用于存储元数据的仓库。    
@@ -243,7 +243,7 @@ Calcite 将以 JDBC 的方式执行相同的查询。对于应用程序，数据
 - 查询解析器、验证器和优化器         
 - 支持以 JSON 格式读取模型  
 - 许多标准函数和聚合函数    
-- 针对 Linq4j 和 JDBC 后端的 JDBC 查询  
+- 针对 Linq4j 和 JDBC 后端的 JDBC 查询   
 - Linq4j 前端   
 - SQL 功能：SELECT, FROM（包括 JOIN 语法）、WHERE、GROUP BY（包括 GROUPING SETS）、聚合函数（包括 COUNT(DISTINCT …) 和 FILTER）、HAVING、ORDER BY（包括 NULLS FIRST/LAST）、集合操作（UNION, INTERSECT, MINUS）、子查询（包括相关子查询）、窗口聚合、LIMIT（语法与 Postgres 相同）；SQL 参考中有更多详情 (https://calcite.apache.org/docs/reference.html)  
 - 本地和远程 JDBC 驱动程序；请参阅 Avatica (https://calcite.apache.org/avatica/docs/index.html)     

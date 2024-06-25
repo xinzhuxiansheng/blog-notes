@@ -620,6 +620,12 @@ SELECT * FROM Orders;
 8 rows selected (0.017 seconds)
 ```
 
+输入 `!q`，可退出；            
+```bash
+0: jdbc:mysql://192.168.0.202:3306/yzhou_test> !q              
+PS D:\Code\Java\calcite\example\csv>        
+```    
+
 ## The cloning JDBC adapter (克隆 JDBC 适配器) 
 克隆 JDBC 适配器创建混合数据库。数据源自 JDBC 数据库，但在第一次访问每个表时被读入内存表中。 Calcite 根据这些内存中的表（实际上是数据库的缓存）评估查询。       
 例如，以下模型从 MySQL“foodmart”数据库读取表：    
