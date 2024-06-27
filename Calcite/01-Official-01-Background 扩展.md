@@ -1,4 +1,8 @@
-# Calcite - Official - Background 扩展     
+# Calcite - Official - Background 扩展       
+
+
+## 知识串联   
+
 
 ## 引言   
 Apache Calcite是一个动态数据管理框架。它包含了构成典型数据库管理系统的许多部分，但省略了一些关键功能：数据存储、数据处理算法和用于存储元数据的仓库。    
