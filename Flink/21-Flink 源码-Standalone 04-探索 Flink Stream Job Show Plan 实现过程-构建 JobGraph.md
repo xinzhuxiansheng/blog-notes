@@ -2,6 +2,29 @@
 
 >Flink version: 1.17.2       
 
+## 引言   
+回顾之前 Blog “Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph”中的 `StreamWordCount` 示例中 `.socketTextStream().flatMap().map().keyBy().sum()` API 链路转换成 `transformations` 集合，同时每个 transformations 包含一个序号 id, 经过 `StreamGraphGenerator`会创建一个 StreamGraph 对象，其内部包含 streamNodes (真实节点),virtualPartitionNodes（虚拟节点）同时也会为虚拟节点生成一个 id，StreamGraph的 streamNodes和它每个子项中的 `inEdges`,`outEdges` 构成了一个有向无环图， 而 `virtualPartitionNodes`虚拟节点 它的每个子项是是由虚拟节点的id作为 key，而 value 是由上游的 streamNode id，StreamPartitioner 和 StreamExchangeMode 组成，这里特别注意，`StreamGraph`没有并发数的概念，所以，一个 streamNode，就仅代表一个节点，那 StreamWordCount 案例构成图如下：    
+![jobgraph_tf03](images/jobgraph_tf03.png)
+
+
+**List<Transformation<?>> transformations:**     
+
+transformations 链路的完整性是由 self 和它的 parent inputs 拼接而成的。      
+![jobgraph_tf01](images/jobgraph_tf01.png)   
+
+**StreamGraph.streamNodes:**     
+
+![jobgraph_tf02](images/jobgraph_tf02.png) 
+
+基于上面关于 StreamGraph 的回顾，接下来，主要内容是 StreamGraph 转换成 JobGraph 的过程。    
+
+## StreamGraph 转换成 JobGraph    
+入口`PackagedProgramUtils#createJobGraph()`
+
+
+
+
+
 
 **StreamingJobGraphGenerator#createJobGraph()**     
 ```java
