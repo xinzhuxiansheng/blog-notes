@@ -6,7 +6,6 @@
 回顾之前 Blog “Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph”中的 `StreamWordCount` 示例中 `.socketTextStream().flatMap().map().keyBy().sum()` API 链路转换成 `transformations` 集合，同时每个 transformations 包含一个序号 id, 经过 `StreamGraphGenerator`会创建一个 StreamGraph 对象，其内部包含 streamNodes (真实节点),virtualPartitionNodes（虚拟节点）同时也会为虚拟节点生成一个 id，StreamGraph的 streamNodes和它每个子项中的 `inEdges`,`outEdges` 构成了一个有向无环图， 而 `virtualPartitionNodes`虚拟节点 它的每个子项是是由虚拟节点的id作为 key，而 value 是由上游的 streamNode id，StreamPartitioner 和 StreamExchangeMode 组成，这里特别注意，`StreamGraph`没有并发数的概念，所以，一个 streamNode，就仅代表一个节点，那 StreamWordCount 案例构成图如下：    
 ![jobgraph_tf03](images/jobgraph_tf03.png)
 
-
 **List<Transformation<?>> transformations:**     
 
 transformations 链路的完整性是由 self 和它的 parent inputs 拼接而成的。      
@@ -18,15 +17,26 @@ transformations 链路的完整性是由 self 和它的 parent inputs 拼接而�
 
 基于上面关于 StreamGraph 的回顾，接下来，主要内容是 StreamGraph 转换成 JobGraph 的过程。    
 
-## StreamGraph 转换成 JobGraph    
-入口`PackagedProgramUtils#createJobGraph()`
+## StreamGraph 转换成 JobGrap       
 
+### 回顾入口   
+入口`PackagedProgramUtils#createJobGraph()` 下面是Flink Job `Show Plan`入口流程图： 
+![jobgraph_tf04](images/jobgraph_tf04.png)  
 
+在之前 Blog “Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph”中大部分内容都在介绍 `Pipeline pipeline = getPipelineFromProgram(...)`的执行逻辑，也就是 StreamGraph，接下来关注的核心方法是：       
+```java
+final JobGraph jobGraph =
+    FlinkPipelineTranslationUtil.getJobGraphUnderUserClassLoader(
+            packagedProgram.getUserCodeClassLoader(),
+            pipeline,
+            configuration,
+            defaultParallelism);     
+```
 
+首先使用一个流程图来说明 JobGraph 构造的入口调用关系，从 `PackagedProgramUtils#createJobGraph()` 定位到 `StreamingJobGraphGenerator#createJobGraph()`。              
+![jobgraph_tf05](images/jobgraph_tf05.png)       
 
-
-
-**StreamingJobGraphGenerator#createJobGraph()**     
+### StreamingJobGraphGenerator#createJobGraph()        
 ```java
 private JobGraph createJobGraph() {
     preValidate();
@@ -128,10 +138,25 @@ private JobGraph createJobGraph() {
 
     return jobGraph;
 }
-```
+```  
 
-## 为 StreamNode 生成确定性 hash   
-在`StreamingJobGraphGenerator#createJobGraph()` 方法中 会调用`defaultStreamGraphHasher.traverseStreamGraphAndGenerateHashes()` 为所有节点生成 hash，变量`defaultStreamGraphHasher`是 StreamGraphHasher 接口类型，在 `StreamingJobGraphGenerator`的构造方法中，使用 `this.defaultStreamGraphHasher = new StreamGraphHasherV2();` 作为它的默认实现。 
+### 初始化 JobGraph 对象的一些属性值  
+在创建`StreamingJobGraphGenerator`对象时，也会 `JobGraph` 对象，首先会给 jobGraph 赋值一些属性值，例如 jodID,jobName,jobType 以及开启本地恢复。    
+```java
+jobGraph = new JobGraph(jobID, streamGraph.getJobName());
+
+...省略部分代码 
+
+jobGraph.setJobType(streamGraph.getJobType());
+jobGraph.setDynamic(streamGraph.isDynamic());
+
+jobGraph.enableApproximateLocalRecovery(
+        streamGraph.getCheckpointConfig().isApproximateLocalRecoveryEnabled());
+```    
+
+
+### 为 StreamNode 生成确定性 hash   
+调用`defaultStreamGraphHasher.traverseStreamGraphAndGenerateHashes()` 为所有节点生成 hash，变量`defaultStreamGraphHasher`是 StreamGraphHasher 接口类型，在 `StreamingJobGraphGenerator`的构造方法中，使用 `this.defaultStreamGraphHasher = new StreamGraphHasherV2();` 作为它的默认实现。 
 ```java
 // Generate deterministic hashes for the nodes in order to identify them across
 // submission iff they didn't change.
@@ -139,7 +164,7 @@ Map<Integer, byte[]> hashes =
         defaultStreamGraphHasher.traverseStreamGraphAndGenerateHashes(streamGraph);
 ```     
 
-`StreamGraphHasherV2#traverseStreamGraphAndGenerateHashes()`方法会涉及到图的广度优先遍历算法，这里补充下关于`广度优先遍历`：        
+`StreamGraphHasherV2#traverseStreamGraphAndGenerateHashes()`方法会涉及到图的广度优先遍历算法，这里先补充下关于`广度优先遍历`：          
 >在广度优先遍历中，我们通常使用一个队列（Queue）来存储待访问的节点。初始时，将起始节点放入队列。然后，执行以下操作直到队列为空:           
 1.从队列中取出一个节点。  
 2.访问该节点，并将其标记为已访问。  
