@@ -170,7 +170,7 @@ Map<Integer, byte[]> hashes =
 2.访问该节点，并将其标记为已访问。  
 3.将该节点的所有未被访问的邻近节点加入队列。    
 
-**示例演示流程：**      
+**示例演示流程：**        
 下面是一颗二叉树，现在要其使用广度优先遍历。              
 ![jobgraph_bfs01](images/jobgraph_bfs01.png)  
 
@@ -198,7 +198,7 @@ while((node = Q.poll()!=null)){
 }
 ```
 
-这样就完成了 `广度优先遍历`，其实在图数据结构中，它与树最大不同的是`节点和边可以形成一个循环`，它的节点和边的关系放在`邻接表`。 所以图的广度优先遍历，需要一个集合来判断当前节点是否遍历过，看下图中的 `num23`, 当 `num4`和`num12` 出队后，都读取了`num23`，显然它读取了2遍，所以 判断一个节点是否遍历过，是很重要的。         
+这样就完成了 `广度优先遍历`，其实在图数据结构中，它与树最大不同的是`节点和边可以形成一个循环`，它的节点和边的关系放在`邻接表`。 所以图的广度优先遍历，需要一个集合来判断当前节点是否遍历过，看下图中的 `num23`, 当 `num4`和`num12` 出队后，都读取了`num23`，显然它读取了2遍，所以 `判断一个节点是否遍历过，是很重要的`。           
 ![jobgraph_bfs06](images/jobgraph_bfs06.png)
 
 
@@ -247,7 +247,7 @@ while ((currentNode = remaining.poll()) != null) {
 
 若用户通过 `uid()`函数配置了 `transformationUID`值，则重新初始化 hasher 计算 hash值， 否则调用`generateDeterministicHash()` 创建 hash 值， 不过 `generateDeterministicHash()`方法内部 `generateNodeLocalHash()`方法更让人琢磨不透，似乎 Hasher对象 生成hash 值有某种顺序似的。  
 
-hashes集合 是在 `StreamGraphHasherV2#traverseStreamGraphAndGenerateHashes()` 创建的，在 StreamGraph 的广度遍历过程中，计算 Operator的 Hash值 并放入 hashes 集合中, 下面是`generateNodeLocalHash()`方法的注释，其实目的是一目了然，StreamNode id计算 hash 无法保证它的`不变性`,所以，`它使用 hashes 的下标，因为 StreamGraph 构造的图是一个有向图`。   
+hashes集合是在 `StreamGraphHasherV2#traverseStreamGraphAndGenerateHashes()` 创建的，在 StreamGraph 的广度遍历过程中，计算 Operator的 Hash值 并放入 hashes 集合中, 下面是`generateNodeLocalHash()`方法的注释，其实目的是一目了然，StreamNode id计算 hash 无法保证它的`不变性`,所以，`它使用 hashes 的下标，因为 StreamGraph 构造的图是一个有向图`。     
 ```java
 // Include stream node to hash. We use the current size of the computed
 // hashes as the ID. We cannot use the node's ID, because it is
@@ -270,14 +270,76 @@ if (userSpecifiedHash == null) {
 // ...
 ```
 
-
-
-
-`generateDeterministicHash()` 计算 Node 的 hash 值 与是否能和下游节点 chain一起的个数有关，最后通过`for (StreamEdge inEdge : node.getInEdges())` 确保所有输入节点在进入循环之前已经设置了它们的哈希值（调用这个方法）。然后，对于每个输入边，它获取源节点的哈希值，并检查这个哈希值是否存在。如果不存在，它会抛出一个异常。最后，它使用异或和乘法操作来更新当前节点的哈希值。这个过程会对所有的输入边进行迭代，直到计算出最终的哈希值。          
+为了验证上面需要优先遍历`SourceId`的逻辑，举一个示例说明，注意该示例其实没有什么业务逻辑价值，仅是为了拼凑`Show Plan`的链路，达到验证的效果。     
+**StreamWordCountMultipleSourceVariation.java**  
 ```java
-generateNodeLocalHash(hasher, hashes.size());
+public class StreamWordCountMultipleSourceVariation {
+    private static Logger logger = LoggerFactory.getLogger(StreamWordCountMultipleSourceVariation.class);
+    public static void main(String[] args) throws Exception {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(new Configuration());
+        env.setRestartStrategy(RestartStrategies.fixedDelayRestart(3, Time.of(10, TimeUnit.SECONDS)));
 
-// Include chained nodes to hash
+        DataStreamSource<String> source1 = env.socketTextStream("localhost", 7777);
+        DataStreamSource<String> source2 = env.socketTextStream("localhost", 8888);
+
+        SingleOutputStreamOperator<Tuple2<String, Long>> source2Transformed = source2
+                .flatMap((String line, Collector<String> words) -> {
+                    Arrays.stream(line.split(" ")).forEach(words::collect);
+                })
+                .returns(Types.STRING)
+                .map(word -> Tuple2.of(word, 1L))
+                .returns(Types.TUPLE(Types.STRING, Types.LONG))
+                .setParallelism(2);
+
+        DataStream<String> source1AndTransformedSource2 = source1.union(source2Transformed.map(t -> t.f0).returns(Types.STRING));
+
+        SingleOutputStreamOperator<Tuple2<String, Long>> wordAndOne = source1AndTransformedSource2
+                .flatMap((String line, Collector<String> words) -> {
+                    Arrays.stream(line.split(" ")).forEach(words::collect);
+                })
+                .returns(Types.STRING)
+                .map(word -> Tuple2.of(word, 1L))
+                .returns(Types.TUPLE(Types.STRING, Types.LONG))
+                .setParallelism(2);
+        KeyedStream<Tuple2<String, Long>, String> wordAndOneKS = wordAndOne.keyBy(t -> t.f0);
+        SingleOutputStreamOperator<Tuple2<String, Long>> result = wordAndOneKS.sum(1).setParallelism(1).uid("wc-sum");
+        result.print();
+        env.execute();
+    }
+}
+```  
+
+对上面示例进行打包`mvn clean package`, 然后在 Flink WEB UI 的 `Submit New Job`上传 Jar，点击`Show Plan` 得到下面拓扑图：            
+![jobgraph_tf06](images/jobgraph_tf06.png)     
+
+我对图中的节点进行标记了序号，注意，我们暂时不讨论节点的具体含义，但并没有忽略它与上游节点的关系处理，例如 我们将这种与上游关系的处理成为`handlerUpstreamRelationships()` ，仅是讨论图的广度遍历过程，图片中2个Source 起点，分别是 `num1`，`num5`, 那么按照广度遍历，将 num1,num2放入队列,若 num1 优先出队，num2再放入队列，此时队列中是[num5,num2], 完成读取后，将 num5出队，num6放入队列，此时队列中是[num2,num6], 在这之前每个numx出队都会去处理`handlerUpstreamRelationships()`,接着 num2 出队，你会发现它的上游 num1,`num7`, 我们仅处理了 num1，因为 num6还没有出队，所以`num7`还未处理到，所以 num2 应该延缓到 `num7`处理完后再处理`handlerUpstreamRelationships()`。 
+
+上面的测试 Case，表达的意思是，如果遍历某个节点时，它的上游节点（父节点）没有处理过，那它暂时不能处理，需上游节点处理过后，才能轮到自己。    
+
+那么回到 `StreamGraphHasherV2#generateNodeHash()`方法中的 for循环, 若hashes 处理过的集合中不包含它的上游节点，则返回 false。            
+```java
+ for (StreamEdge inEdge : node.getInEdges()) {
+    // If the input node has not been visited yet, the current
+    // node will be visited again at a later point when all input
+    // nodes have been visited and their hashes set.
+    if (!hashes.containsKey(inEdge.getSourceId())) {
+        return false;
+    }
+}
+```      
+
+若上游节点都遍历过后，会调用`generateDeterministicHash()` 计算 Node 的 hash 值,注意其内部方法`generateNodeLocalHash(hasher, hashes.size())` 将`hashes.size()`作为哈希算法的输入值（即以当前节点在 StreamGraph 中遍历位置作为哈希算法的输入参数）        
+```java
+// Include stream node to hash. We use the current size of the computed
+// hashes as the ID. We cannot use the node's ID, because it is
+// assigned from a static counter. This will result in two identical
+// programs having different hashes.
+generateNodeLocalHash(hasher, hashes.size());    
+```
+
+还需注意它与是否能和下游节点 chain一起的个数有关,通过 for 循环遍历当前节点的 OutEdges,同时判断是否可以 chain在一起。   
+```java
+// Include chained nodes to hash   
 for (StreamEdge outEdge : node.getOutEdges()) {
     if (isChainable(outEdge, isChainingEnabled, streamGraph)) {
 
@@ -286,24 +348,9 @@ for (StreamEdge outEdge : node.getOutEdges()) {
         generateNodeLocalHash(hasher, hashes.size());
     }
 }
-```
+```  
 
-
-
-
-
-
-
-
-
-
-
-
-`StreamingJobGraphGenerator#createJobGraph()` 是构建 JobGraph 对象的方法入口。      
-
-
-
-在生成 chain之前`需要提前判断 2个连接的节点（StreamNode）需满足一定的条件,才能把这2个节点放到一个 chain `，具体判断查看 `StreamingJobGraphGenerator#isChainable()` 和 `StreamingJobGraphGenerator#isChainableInput()` 。 
+>针对`isChainable`的处理逻辑：首选下游节点的 输入边大小只能为1（`downStreamVertex.getInEdges().size() == 1`）; 在 `isSameSlotSharingGroup()`中：上下游 StreamNode 的 `SlotSharingGroup` 需是同一个 且 SlotShargingGroup 在不设置的情况在，它的缺省值是 `default`; 在 `areOperatorsChainable()`中：判断上下游 StreamNode 它是否支持 chain 策略; `arePartitionerAndExchangeModeChainable()` 判断 edge的分区策略;  `upStreamVertex.getParallelism() == downStreamVertex.getParallelism()` 上下游节点的并行度要保持一致; 最后是 StreamGraph 要开启 chaining;      
 
 **StreamingJobGraphGenerator#isChainable()**              
 ```java
@@ -314,7 +361,7 @@ public static boolean isChainable(StreamEdge edge, StreamGraph streamGraph) {
 }
 ```
 
-**StreamingJobGraphGenerator#isChainableInput()**           
+**StreamingJobGraphGenerator#isChainableInput()**             
 ```java
 private static boolean isChainableInput(StreamEdge edge, StreamGraph streamGraph) {
     StreamNode upStreamVertex = streamGraph.getSourceVertex(edge);
@@ -340,26 +387,70 @@ private static boolean isChainableInput(StreamEdge edge, StreamGraph streamGraph
     }
     return true;
 }
+```   
+
+最后通过`for (StreamEdge inEdge : node.getInEdges())` 确保所有输入节点在进入循环之前已经设置了它们的哈希值（调用这个方法）。然后，对于每个输入边，它获取源节点的哈希值，并检查这个哈希值是否存在。如果不存在，它会抛出一个异常。最后，它使用异或和乘法操作来更新当前节点的哈希值。这个过程会对所有的输入边进行迭代，直到计算出最终的哈希值。               
+```java
+generateNodeLocalHash(hasher, hashes.size());
+
+// Include chained nodes to hash
+for (StreamEdge outEdge : node.getOutEdges()) {
+    if (isChainable(outEdge, isChainingEnabled, streamGraph)) {
+
+        // Use the hash size again, because the nodes are chained to
+        // this node. This does not add a hash for the chained nodes.
+        generateNodeLocalHash(hasher, hashes.size());
+    }
+}
+```   
+
+### 处理 UserHash 
+在`StreamGraphHasherV2#generateNodeHash()`处理逻辑可知节点 hash 值可根据`transformationUID`生成, 但也存在另一种: 在 StreamGraph还存在 UserHash 设置， 拿`StreamWordCount`示例进行改造, 针对每个操作符可通过`UidHash()`方法设置 hash 值。
+```java
+SingleOutputStreamOperator<Tuple2<String, Long>> result = wordAndOneKS
+    .sum(1).setParallelism(1).uid("wc-sum").setUidHash("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 ```
 
-判断逻辑是: 首选下游节点的 输入边大小只能为1（`downStreamVertex.getInEdges().size() == 1`）; 在 `isSameSlotSharingGroup()`中：上下游 StreamNode 的 `SlotSharingGroup` 需是同一个 且 SlotShargingGroup 在不设置的情况在，它的缺省值是 `default`; 在 `areOperatorsChainable()`中：判断上下游 StreamNode 它是否支持 chain 策略; `arePartitionerAndExchangeModeChainable()` 判断 edge的分区策略;  `upStreamVertex.getParallelism() == downStreamVertex.getParallelism()` 上下游节点的并行度要保持一致; 最后是 StreamGraph 要开启 chaining;   
+// yzhou TODO  是否存在优先级 ？？  
 
-
-
-
-
+## 设置 Chain链         
+`StreamingJobGraphGenerator#setChaining()`方法是设置 Chain链的入口，在`buildChainedInputsAndGetHeadInputs()`方法会对每个 Source 创建一个 OperatorChainInfo ，它的返回值是一个Map，其结构`chainEntryPoints`是一个以`SourceId`为 key，value 是 new OperatorChainInfo(sourceNodeId, hashes, legacyHashes, chainedSources, streamGraph) 的 Map, 取出 chainEntryPoints的 Value 转换成 `initialEntryPoints`。   
 ```java
-for (StreamEdge outEdge : currentNode.getOutEdges()) {
-    if (isChainable(outEdge, streamGraph)) {
-        chainableOutputs.add(outEdge);
-    } else {
-        nonChainableOutputs.add(outEdge);
+private void setChaining(Map<Integer, byte[]> hashes, List<Map<Integer, byte[]>> legacyHashes) {
+    // we separate out the sources that run as inputs to another operator (chained inputs)
+    // from the sources that needs to run as the main (head) operator.
+    final Map<Integer, OperatorChainInfo> chainEntryPoints =
+            buildChainedInputsAndGetHeadInputs(hashes, legacyHashes);
+    final Collection<OperatorChainInfo> initialEntryPoints =
+            chainEntryPoints.entrySet().stream()
+                    .sorted(Comparator.comparing(Map.Entry::getKey))
+                    .map(Map.Entry::getValue)
+                    .collect(Collectors.toList());
+
+    // iterate over a copy of the values, because this map gets concurrently modified
+    for (OperatorChainInfo info : initialEntryPoints) {
+        createChain(
+                info.getStartNodeId(),
+                1, // operators start at position 1 because 0 is for chained source inputs
+                info,
+                chainEntryPoints);
     }
 }
 ```
 
-遍历当前节点 StreamNode的 输出边 outEdges，首先判断它们是否支持合并 chain,若支持合并，则添加到 `chainableOutputs`集合中，不支持则添加到 `nonChainableOutputs`集合中。  
+### createChain()     
+经过上面的铺垫，在没有开始介绍 createChain()方法之前，不知道你是否有一些预期结果, 再例如下面的图应该不会陌生：    
+![jobgraph_tf07](images/jobgraph_tf07.png)  
 
+图中 DAG1 是 StreamGraph 中 StreamNode构建的有向无环图，而 DAG2 是 Flink WEB UI 展示的 Job Plan 图，拿 Source 和 FlatMap两个 StreamNode 节点合并示例来看，他们合并在一起, 并且有了新的节点名称还有其他的一些设置。 那有了这样的预期，我们再来了解 createChain() 的处理逻辑。      
+
+>调用 createChain()方法传入的形参有: Source节点 Id，chain 下标（下标从 Source 为0 开始，下一个节点是 1）, 算子链 Info，起始链头集合 chainEntryPoints。       
+
+首先从 chainInfo 获取起始节点 Id，那对于 StreamWordCount 案例来说，获取的是 Source 节点 Id，`builtVertices`集合用于存放已经构造的 StreamNode ,避免重复构造，那对于 Source 节点来说是第一次。    
+
+`createChain()`方法中存在3个集合容器，`transitiveOutEdges`存储整个算子链的出边，`chainableOutputs`存储可以构造 Chain链的 StreamEdge，`nonChainableOutputs`存储不可以构造 Chain链的 StreamEdge。   
+
+遍历 当前节点的 OutEdges(出边)，根据 isChainable()方法判断是否可以合并，关于 `isChainable()`在上面生成节点 hash时，已介绍过，此处不再多做介绍，将可以链接的 StreamEdge 和 不可以链接的 StreamEdge 分别添加到对应的集合容器中，然后再分别遍历两个集合容器并且递归调用 `createChain()`, 代码如下：            
 ```java
 for (StreamEdge chainable : chainableOutputs) {
     transitiveOutEdges.addAll(
@@ -369,5 +460,214 @@ for (StreamEdge chainable : chainableOutputs) {
                     chainInfo,
                     chainEntryPoints));
 }
+
+for (StreamEdge nonChainable : nonChainableOutputs) {
+    transitiveOutEdges.add(nonChainable);
+    createChain(
+            nonChainable.getTargetId(),
+            1, // operators start at position 1 because 0 is for chained source inputs
+            chainEntryPoints.computeIfAbsent(
+                    nonChainable.getTargetId(),
+                    (k) -> chainInfo.newChain(nonChainable.getTargetId())),
+            chainEntryPoints);
+}
+```   
+
+可以链接的`chainableOutputs`集合中的递归要与不可以链接的`nonChainableOutputs`集合中的递归结合一起看，因为涉及到 chainInfo、chainEntryPoints 两个变量的改变。   
+
+* 可以链接继续递归 StreamEdge的下游节点，并且 链的下标 + 1；  
+* 不可以链接继续递归 StreamEdge的下游节点，此时重置 chain链的下标为1, 重新开始计数，所以需要重新生成链路信息 chainInfo, 则 StreamEdge 的下游节点作为下次计算 Chain链合并的起点，将新生成的 chainInfo 放入 `chainEntryPoints` 集合中，所以可以从 `chainEntryPoints`集中查看 Chain链的多个起始位置。    
+
+而递归的终止条件是：当前节点没有 OutEdge(出边) 或者当前节点已经完成转换(builtVertices集合已存在) 
+
+**createChain() 递归部分**  
+```java
+private List<StreamEdge> createChain(
+        final Integer currentNodeId,
+        final int chainIndex,
+        final OperatorChainInfo chainInfo,
+        final Map<Integer, OperatorChainInfo> chainEntryPoints) {
+    // 从 chainInfo 获取起始节点 Id 
+    Integer startNodeId = chainInfo.getStartNodeId();
+    // builtVertices 存放已经构建的 StreamNode ID，避免重复构建 
+    if (!builtVertices.contains(startNodeId)) {
+
+        List<StreamEdge> transitiveOutEdges = new ArrayList<StreamEdge>();
+        // chainableOutputs 存放可以构造 Chain链的 StreamEdge 
+        List<StreamEdge> chainableOutputs = new ArrayList<StreamEdge>();
+        // nonChainableOutputs 存放不可以构造 Chain链的 StreamEdge 
+        List<StreamEdge> nonChainableOutputs = new ArrayList<StreamEdge>();
+        // 当前 StreamNode
+        StreamNode currentNode = streamGraph.getStreamNode(currentNodeId);
+        // 遍历当前 StreamNode 的 OutEdges，根据是否能构造 Chain链，分成存储在2个不同的集合中  
+        for (StreamEdge outEdge : currentNode.getOutEdges()) {
+            if (isChainable(outEdge, streamGraph)) {
+                chainableOutputs.add(outEdge);
+            } else {
+                nonChainableOutputs.add(outEdge);
+            }
+        }
+
+        /**
+         * 遍历可以构建算子链的 StreamEdge，递归调用 createChain(), 将所有结果全部添加到 transitiveOutEdges   
+         * 
+         * 
+         * 递归终止：
+         * 当前节点没有 OutEdge
+         * 当前节点已经完成转换 
+         */
+        for (StreamEdge chainable : chainableOutputs) {
+            transitiveOutEdges.addAll(
+                    createChain(
+                            chainable.getTargetId(),
+                            chainIndex + 1,
+                            chainInfo,
+                            chainEntryPoints));
+        }
+
+        /**
+         * 遍历不可以构建算子链的 StreamEdge,将其添加到 transitiveOutEdges
+         * 为什么直接放入 transitiveOutEdges集合中，说明待会要直接创建链接的边
+         * 此时重新构建chainInfo.newChain(nonChainable.getTargetId()) 相当于
+         * startNodeId = TargetId
+         */
+        for (StreamEdge nonChainable : nonChainableOutputs) {
+            transitiveOutEdges.add(nonChainable);
+            createChain(
+                    nonChainable.getTargetId(),
+                    1, // operators start at position 1 because 0 is for chained source inputs
+                    chainEntryPoints.computeIfAbsent(
+                            nonChainable.getTargetId(),
+                            (k) -> chainInfo.newChain(nonChainable.getTargetId())),
+                    chainEntryPoints);
+        }
+
+        省略部分代码  ...
+}
 ```
-`chainableOutputs`集合 若不为空，则会递归遍历 StreamEdge 的下游 targetId (StreamNode)。
+
+`通过递归终止条件可知，整个图的遍历是以深度优先`，所以下面的代码逻辑（下面 createChain() 代码跳过了递归部分）优先处理的是`Print Sink`；   
+
+设置算子链的名称，它是由当前节点 OperatorName 或者 chainEntryPoints中的算子链名称拼接得到；设置算子链的最小资源以及首选资源,仍然与算子链有关；  
+
+`chainInfo.addNodeToChain()`其含义是将当前节点是否处理过 Chain，并添加到`StreamingJobGraphGenerator.OperatorChainInfo#chainedNodes`集合中,也会将节点hash 放入`chainedOperatorHashes` Map中，表示同一个算子链中全部的算子连接关系，key 是算子链的起始节点，value 存放链接关系，集合中的子项 f0是当前节点的 hash 值，f1是 legacyHashes，若操作符并未设置UidHash()，则它默认是 null。 OperatorChainInfo 对象代表一次链路信息，那它内部的 chainedNoeds集合属性代表是其内部节点信息。    
+
+>需特别注意： chainInfo 链路信息，由于存在`chainableOutputs`和`nonChainableOutputs` 两个集合的递归遍历，若从深度优先遍历时，当前节点需判断它与链路信息的起始节点是否一致，可判断出它是可以链路的`chainableOutputs`递归的还是不可以链路`nonChainableOutputs`递归的，这是因为可以链路的`chainableOutputs`递归传入的 chainInfo 始终是上游的，只有在不可以链路的情况下，才会创建新的 chainInfo 链路信息。  
+
+检查当前节点是否有输入或输出格式，如果存在，则将添加到格式容器中。     
+
+```java
+private List<StreamEdge> createChain(
+    final Integer currentNodeId,
+    final int chainIndex,
+    final OperatorChainInfo chainInfo,
+    final Map<Integer, OperatorChainInfo> chainEntryPoints) {
+    
+    省略部分代码 ...  
+
+    // 把当前节点 id对应的
+    chainedNames.put(
+            currentNodeId,
+            createChainedName(
+                    currentNodeId,
+                    chainableOutputs,
+                    Optional.ofNullable(chainEntryPoints.get(currentNodeId))));
+    // chain 的最小资源                 
+    chainedMinResources.put(
+            currentNodeId, createChainedMinResources(currentNodeId, chainableOutputs));
+    // chain 的首选资源        
+    chainedPreferredResources.put(
+            currentNodeId,
+            createChainedPreferredResources(currentNodeId, chainableOutputs));
+    // 将当前节点添加到链中，并获取该节点的操作符 ID
+    OperatorID currentOperatorId =
+            chainInfo.addNodeToChain(
+                    currentNodeId,
+                    streamGraph.getStreamNode(currentNodeId).getOperatorName());
+    // 检查当前节点是否有输入或输出格式，如果存在，则将添加到格式容器中  
+    if (currentNode.getInputFormat() != null) {
+        getOrCreateFormatContainer(startNodeId)
+                .addInputFormat(currentOperatorId, currentNode.getInputFormat());
+    }
+
+    if (currentNode.getOutputFormat() != null) {
+        getOrCreateFormatContainer(startNodeId)
+                .addOutputFormat(currentOperatorId, currentNode.getOutputFormat());
+    }
+    
+    省略部分代码 ...
+}
+```
+
+判断当前节点是否是算子链的起始节点，不是则创建新 StreamConfig 对象，设置 chainIndex、OperatorName、设置当前节点的操作符设置（checkpoint，inputConfig,setTypeSerializerOut,时间语义配置）、链式输出配置（例如侧输出流）。 然后更新 currentNodeId 对应的 StreamConfig; 如果当前节点等于起始节点，则调用`StreamingJobGraphGenerator#createJobVertex()`方法生成 JobVertex,会添加到 JobGraph.taskVertices 属性中。   
+
+```java
+private List<StreamEdge> createChain(
+        final Integer currentNodeId,
+        final int chainIndex,
+        final OperatorChainInfo chainInfo,
+        final Map<Integer, OperatorChainInfo> chainEntryPoints) {
+        
+        省略部分代码 ...  
+
+        /**
+         * 根据当前节点是否是是 Chain链的起始节点，如果是起始节点，则调用 createJobVertex()方法创建它，否则，创建一个新的 StreamConfig 对象  
+         */
+        StreamConfig config =
+                currentNodeId.equals(startNodeId)
+                        ? createJobVertex(startNodeId, chainInfo)
+                        : new StreamConfig(new Configuration());
+        /**
+         * 尝试转换动态分区，AdaptiveBatchScheduler Flink 根据用户作业执行情况，自动设置并行度
+         */
+        tryConvertPartitionerForDynamicGraph(chainableOutputs, nonChainableOutputs);
+        // 设置当前节点的操作符配置
+        setOperatorConfig(currentNodeId, config, chainInfo.getChainedSources());
+        // 
+        setOperatorChainedOutputsConfig(config, chainableOutputs);
+
+        // we cache the non-chainable outputs here, and set the non-chained config later
+        opNonChainableOutputsCache.put(currentNodeId, nonChainableOutputs);
+        // 如果当前节点是起始节点  
+        if (currentNodeId.equals(startNodeId)) {
+            chainInfo.setTransitiveOutEdges(transitiveOutEdges);
+            chainInfos.put(startNodeId, chainInfo);
+
+            config.setChainStart();
+            config.setChainIndex(chainIndex);
+            config.setOperatorName(streamGraph.getStreamNode(currentNodeId).getOperatorName());
+            config.setTransitiveChainedTaskConfigs(chainedConfigs.get(startNodeId));
+
+        } else {
+            // 如果不是构建 Map<Integer, StreamConfig> chainedTaskConfigs   
+            chainedConfigs.computeIfAbsent(
+                    startNodeId, k -> new HashMap<Integer, StreamConfig>());
+        
+            config.setChainIndex(chainIndex);
+            StreamNode node = streamGraph.getStreamNode(currentNodeId);
+            config.setOperatorName(node.getOperatorName());
+            chainedConfigs.get(startNodeId).put(currentNodeId, config);
+        }
+        // 设置当前 operatorId uuid
+        config.setOperatorID(currentOperatorId);
+        // 设置可链接的边 chainEnd 结束标识   
+        if (chainableOutputs.isEmpty()) {
+            config.setChainEnd();
+        }
+        return transitiveOutEdges;
+
+    } else {
+        return new ArrayList<>();
+    }
+}
+```
+
+`opNonChainableOutputsCache`集合用于存放不可链接的节点，   
+
+
+setAllOperatorNonChainedOutputsConfigs(opIntermediateOutputs);
+
+setAllVertexNonChainedOutputsConfigs(opIntermediateOutputs);
+
+
+当算子链完成时，会通过connect()方法创建JobEdge和IntermediateDataSet对象，把这个JobGraph连接起来。
