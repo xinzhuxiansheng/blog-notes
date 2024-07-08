@@ -554,7 +554,7 @@ private List<StreamEdge> createChain(
 
 >需特别注意： chainInfo 链路信息，由于存在`chainableOutputs`和`nonChainableOutputs` 两个集合的递归遍历，若从深度优先遍历时，当前节点需判断它与链路信息的起始节点是否一致，可判断出它是可以链路的`chainableOutputs`递归的还是不可以链路`nonChainableOutputs`递归的，这是因为可以链路的`chainableOutputs`递归传入的 chainInfo 始终是上游的，只有在不可以链路的情况下，才会创建新的 chainInfo 链路信息。  
 
-检查当前节点是否有输入或输出格式，如果存在，则将添加到格式容器中。     
+检查当前节点是否有输入或输出格式，如果存在，则将添加到格式容器中。       
 
 ```java
 private List<StreamEdge> createChain(
@@ -599,7 +599,8 @@ private List<StreamEdge> createChain(
 }
 ```
 
-判断当前节点是否是算子链的起始节点，不是则创建新 StreamConfig 对象，设置 chainIndex、OperatorName、设置当前节点的操作符设置（checkpoint，inputConfig,setTypeSerializerOut,时间语义配置）、链式输出配置（例如侧输出流）。 然后更新 currentNodeId 对应的 StreamConfig; 如果当前节点等于起始节点，则调用`StreamingJobGraphGenerator#createJobVertex()`方法生成 JobVertex,会添加到 JobGraph.taskVertices 属性中。   
+判断当前节点是否是算子链的起始节点，不是则创建新 StreamConfig 对象，设置 chainIndex、OperatorName、设置当前节点的操作符设置（checkpoint，inputConfig,setTypeSerializerOut,时间语义配置）、链式输出配置（例如侧输出流）。 然后更新 currentNodeId 对应的 StreamConfig; 如果当前节点等于起始节点，则调用`StreamingJobGraphGenerator#createJobVertex()`方法生成 JobVertex, 到这里，可以总结一个规律：  
+
 
 ```java
 private List<StreamEdge> createChain(
@@ -662,12 +663,46 @@ private List<StreamEdge> createChain(
 }
 ```
 
+到这里，完成了`setChaining(hashes, legacyHashes)`方法的介绍。  
+
 `opNonChainableOutputsCache`集合用于存放不可链接的节点，   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 setAllOperatorNonChainedOutputsConfigs(opIntermediateOutputs);
 
-setAllVertexNonChainedOutputsConfigs(opIntermediateOutputs);
+### setAllVertexNonChainedOutputsConfigs(opIntermediateOutputs)    
+```java
+private void setAllVertexNonChainedOutputsConfigs(
+        final Map<Integer, Map<StreamEdge, NonChainedOutput>> opIntermediateOutputs) {
+    jobVertices
+            .keySet()
+            .forEach(
+                    startNodeId ->
+                            setVertexNonChainedOutputsConfig(
+                                    startNodeId,
+                                    vertexConfigs.get(startNodeId),
+                                    chainInfos.get(startNodeId).getTransitiveOutEdges(),
+                                    opIntermediateOutputs));
+}
+```
 
 
 当算子链完成时，会通过connect()方法创建JobEdge和IntermediateDataSet对象，把这个JobGraph连接起来。

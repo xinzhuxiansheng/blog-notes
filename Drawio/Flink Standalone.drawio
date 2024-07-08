@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-07-06T07:07:18.117Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="-LWuC-DqjkfbuVIiaNeE" version="24.1.0" type="device" pages="15">
+<mxfile host="Electron" modified="2024-07-08T01:55:14.463Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="dbFO8rQmhjVhmNcZmd0P" version="24.1.0" type="device" pages="15">
   <diagram name="脚本执行脉络图" id="qLQxipcltvYCt7U49bK6">
     <mxGraphModel dx="1834" dy="805" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3500,7 +3500,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="Zwwd5CL-Oikeo_Iu2f1q" name="第 15 页">
-    <mxGraphModel dx="4150" dy="-1195" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3910" dy="-1195" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -3603,6 +3603,74 @@
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-1300.5" y="2240" as="sourcePoint" />
             <mxPoint x="-1300.5" y="2320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-61" value="&amp;nbsp;Map&amp;lt;Integer, OperatorChainInfo&amp;gt; chainEntryPoints" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-1770" y="2890" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BDWNLIg8CkO5gYLb2GCD-62">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1330" y="2965" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-62" value="OperatorChainInfo chainInfo&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1740" y="2940" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-64" value="JobVertex" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1320" y="2940" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-67" value="&lt;span style=&quot;text-align: left;&quot;&gt;StreamingJobGraphGenerator#createJobGraph()&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1570" y="3150" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="BDWNLIg8CkO5gYLb2GCD-68">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-1420" y="3420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-68" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;setChaining(hashes, legacyHashes)&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-1525" y="3280" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=-0.12;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="BDWNLIg8CkO5gYLb2GCD-67" target="BDWNLIg8CkO5gYLb2GCD-68">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-73" value="createChain()" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-1240" y="3320" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-74" value="递归" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-1190" y="3290" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-76" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;dashed=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="BDWNLIg8CkO5gYLb2GCD-68" target="BDWNLIg8CkO5gYLb2GCD-73">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-1200" y="3260" as="sourcePoint" />
+            <mxPoint x="-1150" y="3210" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-1240" y="3310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-77" value="&lt;div style=&quot;text-align: left;&quot;&gt;后续处理&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1525" y="3420" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-79" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="-997.5" y="3100" width="350" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-80" value="&lt;div style=&quot;text-align: left;&quot;&gt;private final Map&amp;lt;Integer, JobVertex&amp;gt; jobVertices;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-985" y="3120" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-81" value="&lt;div style=&quot;text-align: left;&quot;&gt;private final Map&amp;lt;Integer, StreamConfig&amp;gt; vertexConfigs;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-985" y="3160" width="325" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-82" value="&lt;div style=&quot;text-align: left;&quot;&gt;private final Map&amp;lt;Integer, OperatorChainInfo&amp;gt; chainInfos;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-985" y="3200" width="325" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BDWNLIg8CkO5gYLb2GCD-83" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="BDWNLIg8CkO5gYLb2GCD-73" target="BDWNLIg8CkO5gYLb2GCD-79">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-1305" y="3315" as="sourcePoint" />
+            <mxPoint x="-1196" y="3342" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-1050" y="3270" />
+              <mxPoint x="-1030" y="3200" />
+            </Array>
           </mxGeometry>
         </mxCell>
       </root>
