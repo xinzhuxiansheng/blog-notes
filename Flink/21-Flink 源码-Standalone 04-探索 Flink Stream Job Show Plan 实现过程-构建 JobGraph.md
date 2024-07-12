@@ -599,8 +599,7 @@ private List<StreamEdge> createChain(
 }
 ```
 
-判断当前节点是否是算子链的起始节点，不是则创建新 StreamConfig 对象，设置 chainIndex、OperatorName、设置当前节点的操作符设置（checkpoint，inputConfig,setTypeSerializerOut,时间语义配置）、链式输出配置（例如侧输出流）。 然后更新 currentNodeId 对应的 StreamConfig; 如果当前节点等于起始节点，则调用`StreamingJobGraphGenerator#createJobVertex()`方法生成 JobVertex, 到这里，可以总结一个规律：  
-
+判断当前节点是否是算子链的起始节点，不是则创建新 StreamConfig 对象，设置 chainIndex、OperatorName、设置当前节点的操作符设置（checkpoint，inputConfig,setTypeSerializerOut,时间语义配置）、链式输出配置（例如侧输出流）。 然后更新 currentNodeId 对应的 StreamConfig; 如果当前节点等于起始节点，则调用`StreamingJobGraphGenerator#createJobVertex()`方法生成 JobVertex,并且会存储在 `jobVertices`、`jobGraph.taskVertices`集合中，会将当前节点id 存储在 `builtVertices`。 
 
 ```java
 private List<StreamEdge> createChain(
@@ -663,46 +662,70 @@ private List<StreamEdge> createChain(
 }
 ```
 
-到这里，完成了`setChaining(hashes, legacyHashes)`方法的介绍。  
-
-`opNonChainableOutputsCache`集合用于存放不可链接的节点，   
-
+到这里，看似已经完成了`setChaining(hashes, legacyHashes)`方法的介绍, 可能你会像我一样在阅读源码过程中忽略了一些变量的定义和赋值，在`StreamingJobGraphGenerator#setChaining(hashes, legacyHashes)`方法没有返回值，在创建算子链的过程中，会统计当前节点的出边不能合并Chain链的个数，并且添加到`Map<Integer, List<StreamEdge>> StreamingJobGraphGenerator.opNonChainableOutputsCache`中， 避免出现一些遗漏，可参考下图所示处理流程，得到一些集合变量，它们会在后续构建 JobGraph的链路中起到承上启下的作用：       
+![jobgraph_tf08](images/jobgraph_tf08.png)       
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 构建新链路  
+```java
+final Map<Integer, Map<StreamEdge, NonChainedOutput>> opIntermediateOutputs =
+                new HashMap<>();
 setAllOperatorNonChainedOutputsConfigs(opIntermediateOutputs);
+setAllVertexNonChainedOutputsConfigs(opIntermediateOutputs);
+```
+
+### setAllOperatorNonChainedOutputsConfigs(opIntermediateOutputs)  
+`StreamingJobGraphGenerator#setAllOperatorNonChainedOutputsConfigs()`方法中遍历了`StreamingJobGraphGenerator.opNonChainableOutputsCache`集合，它存放的是 StreamNodeId和它下游是不可以合并Chain链的出边信息。 
+该方法传入了一个空集合`final Map<Integer, Map<StreamEdge, NonChainedOutput>> opIntermediateOutputs = new HashMap<>();`, 利用`computeIfAbsent()`方法返回`Value`的引用，再调用`StreamingJobGraphGenerator#setOperatorNonChainedOutputsConfig()`方法设置出边的侧输出流、序列化等配置。       
+![jobgraph_tf09](images/jobgraph_tf09.png)     
 
 ### setAllVertexNonChainedOutputsConfigs(opIntermediateOutputs)    
+`StreamingJobGraphGenerator#setAllVertexNonChainedOutputsConfigs()`方法遍历 StreamNode 转换而来的 JobVertex 的 StreamNodeId,它同时也是每个算子链的 StartNodeId，以 StreamWordCount 为例，5个StreamNode，构建了3个 jobVerties, 如下图所示：  
+![](images/jobgraph_tf10.png)  
+
+>为了避免误导读者，我在上图中将 StreamEdge 标记了差号，因为 JobVertex 中间的边的信息后面会有改变;     
+
+遍历算子链，判断当前算子链是否包含不可以合并Chain链的出边, 对于没有出边仅是更新下 config 信息。而对于存在`不可以合并Chain链的出边`会调用`StreamingJobGraphGenerator#connect()`方法构建新的边。  
+![jobgraph_tf11](images/jobgraph_tf11.png)  
+
+接下来，探索`新的边`的构造流程；            
+
+根据 jobvertex 的出边 StreamEdge 获取 head、downStream 的 jobvertex,在根据数据的分发模式创建`JobEdge jobEdge`, 创建 jobEdge的方法如下： 
 ```java
-private void setAllVertexNonChainedOutputsConfigs(
-        final Map<Integer, Map<StreamEdge, NonChainedOutput>> opIntermediateOutputs) {
-    jobVertices
-            .keySet()
-            .forEach(
-                    startNodeId ->
-                            setVertexNonChainedOutputsConfig(
-                                    startNodeId,
-                                    vertexConfigs.get(startNodeId),
-                                    chainInfos.get(startNodeId).getTransitiveOutEdges(),
-                                    opIntermediateOutputs));
+public JobEdge connectNewDataSetAsInput(  
+        JobVertex input,
+        DistributionPattern distPattern,
+        ResultPartitionType partitionType,
+        IntermediateDataSetID intermediateDataSetId,
+        boolean isBroadcast) {
+
+    IntermediateDataSet dataSet =
+            input.getOrCreateResultDataSet(intermediateDataSetId, partitionType);
+
+    JobEdge edge = new JobEdge(dataSet, this, distPattern, isBroadcast);
+    this.inputs.add(edge);
+    dataSet.addConsumer(edge);
+    return edge;
 }
 ```
 
+根据 headJobVertex#getOrCreateResultDataSet()方法会创建`IntermediateDataSet`对象，在它的构造方法中可了解到，JobEdge 内部`target`指向的是一个 `jobVertex`，`source`指向的是`IntermediateDataSet`对象。 下面是 JobEdge的构造方法：    
+```java
+public JobEdge(
+        IntermediateDataSet source,
+        JobVertex target,
+        DistributionPattern distributionPattern,
+        boolean isBroadcast) {
+    if (source == null || target == null || distributionPattern == null) {
+        throw new NullPointerException();
+    }
+    this.target = target;
+    this.distributionPattern = distributionPattern;
+    this.source = source;
+    this.isBroadcast = isBroadcast;
+}
+```
 
-当算子链完成时，会通过connect()方法创建JobEdge和IntermediateDataSet对象，把这个JobGraph连接起来。
+创建完 jobEdge，会将它添加到 JobVertex.inputs属性中,再将 `jobEdge`添加到`IntermediateDataSet.consumers`集合中。
+
+这
