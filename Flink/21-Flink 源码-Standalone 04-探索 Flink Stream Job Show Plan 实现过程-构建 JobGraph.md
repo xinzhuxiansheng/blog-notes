@@ -4,16 +4,16 @@
 
 ## 引言   
 回顾之前 Blog “Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph”中的 `StreamWordCount` 示例中 `.socketTextStream().flatMap().map().keyBy().sum()` API 链路转换成 `transformations` 集合，同时每个 transformations 包含一个序号 id, 经过 `StreamGraphGenerator`会创建一个 StreamGraph 对象，其内部包含 streamNodes (真实节点),virtualPartitionNodes（虚拟节点）同时也会为虚拟节点生成一个 id，StreamGraph的 streamNodes和它每个子项中的 `inEdges`,`outEdges` 构成了一个有向无环图， 而 `virtualPartitionNodes`虚拟节点 它的每个子项是是由虚拟节点的id作为 key，而 value 是由上游的 streamNode id，StreamPartitioner 和 StreamExchangeMode 组成，这里特别注意，`StreamGraph`没有并发数的概念，所以，一个 streamNode，就仅代表一个节点，那 StreamWordCount 案例构成图如下：    
-![jobgraph_tf03](images/jobgraph_tf03.png)
+![jobgraph_tf03](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf03.png)
 
 **List<Transformation<?>> transformations:**     
 
 transformations 链路的完整性是由 self 和它的 parent inputs 拼接而成的。      
-![jobgraph_tf01](images/jobgraph_tf01.png)   
+![jobgraph_tf01](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf01.png)   
 
 **StreamGraph.streamNodes:**     
 
-![jobgraph_tf02](images/jobgraph_tf02.png) 
+![jobgraph_tf02](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf02.png) 
 
 基于上面关于 StreamGraph 的回顾，接下来，主要内容是 StreamGraph 转换成 JobGraph 的过程。    
 
@@ -21,7 +21,7 @@ transformations 链路的完整性是由 self 和它的 parent inputs 拼接而�
 
 ### 回顾入口   
 入口`PackagedProgramUtils#createJobGraph()` 下面是Flink Job `Show Plan`入口流程图： 
-![jobgraph_tf04](images/jobgraph_tf04.png)  
+![jobgraph_tf04](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf04.png)  
 
 在之前 Blog “Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph”中大部分内容都在介绍 `Pipeline pipeline = getPipelineFromProgram(...)`的执行逻辑，也就是 StreamGraph，接下来关注的核心方法是：       
 ```java
@@ -34,7 +34,7 @@ final JobGraph jobGraph =
 ```
 
 首先使用一个流程图来说明 JobGraph 构造的入口调用关系，从 `PackagedProgramUtils#createJobGraph()` 定位到 `StreamingJobGraphGenerator#createJobGraph()`。              
-![jobgraph_tf05](images/jobgraph_tf05.png)       
+![jobgraph_tf05](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf05.png)       
 
 ### StreamingJobGraphGenerator#createJobGraph()        
 ```java
@@ -172,19 +172,19 @@ Map<Integer, byte[]> hashes =
 
 **示例演示流程：**        
 下面是一颗二叉树，现在要其使用广度优先遍历。              
-![jobgraph_bfs01](images/jobgraph_bfs01.png)  
+![jobgraph_bfs01](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_bfs01.png)  
 
 1）开始访问 `num1`，然后将 `num1` 插入 `队列Q` ,注意这是“首次入队”   
-![jobgraph_bfs02](images/jobgraph_bfs02.png)    
+![jobgraph_bfs02](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_bfs02.png)    
 
 2）从`队列Q`读取 `num1`，获取`num1` 的子节点：`num4` , `num12`，并且依次入队        
-![jobgraph_bfs03](images/jobgraph_bfs03.png)            
+![jobgraph_bfs03](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_bfs03.png)            
 
 3）从`队列Q`读取 `num4`，获取`num4` 的子节点：`num60` , `num23`，并且依次入队        
-![jobgraph_bfs04](images/jobgraph_bfs04.png)    
+![jobgraph_bfs04](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_bfs04.png)    
 
 4）从`队列Q`读取 `num12`，获取`num12` 的子节点：`num71` , `num29`，并且依次入队      
-![jobgraph_bfs05](images/jobgraph_bfs05.png)    
+![jobgraph_bfs05](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_bfs05.png)    
 
 依次类推，
 到这里，差不多可以写出一段伪代码：         
@@ -199,7 +199,7 @@ while((node = Q.poll()!=null)){
 ```
 
 这样就完成了 `广度优先遍历`，其实在图数据结构中，它与树最大不同的是`节点和边可以形成一个循环`，它的节点和边的关系放在`邻接表`。 所以图的广度优先遍历，需要一个集合来判断当前节点是否遍历过，看下图中的 `num23`, 当 `num4`和`num12` 出队后，都读取了`num23`，显然它读取了2遍，所以 `判断一个节点是否遍历过，是很重要的`。           
-![jobgraph_bfs06](images/jobgraph_bfs06.png)
+![jobgraph_bfs06](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_bfs06.png)
 
 
 接下来，看`StreamGraphHasherV2#traverseStreamGraphAndGenerateHashes()`的实现过程。       
@@ -243,7 +243,7 @@ while ((currentNode = remaining.poll()) != null) {
 ```
 
 `StreamGraphHasherV2#generateNodeHash()`方法是生成 Node的hash 值的核心方法，下面是它的流程图：      
-![jobgraph_uid01](images/jobgraph_uid01.png)            
+![jobgraph_uid01](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_uid01.png)            
 
 若用户通过 `uid()`函数配置了 `transformationUID`值，则重新初始化 hasher 计算 hash值， 否则调用`generateDeterministicHash()` 创建 hash 值， 不过 `generateDeterministicHash()`方法内部 `generateNodeLocalHash()`方法更让人琢磨不透，似乎 Hasher对象 生成hash 值有某种顺序似的。  
 
@@ -310,7 +310,7 @@ public class StreamWordCountMultipleSourceVariation {
 ```  
 
 对上面示例进行打包`mvn clean package`, 然后在 Flink WEB UI 的 `Submit New Job`上传 Jar，点击`Show Plan` 得到下面拓扑图：            
-![jobgraph_tf06](images/jobgraph_tf06.png)     
+![jobgraph_tf06](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf06.png)     
 
 我对图中的节点进行标记了序号，注意，我们暂时不讨论节点的具体含义，但并没有忽略它与上游节点的关系处理，例如 我们将这种与上游关系的处理成为`handlerUpstreamRelationships()` ，仅是讨论图的广度遍历过程，图片中2个Source 起点，分别是 `num1`，`num5`, 那么按照广度遍历，将 num1,num2放入队列,若 num1 优先出队，num2再放入队列，此时队列中是[num5,num2], 完成读取后，将 num5出队，num6放入队列，此时队列中是[num2,num6], 在这之前每个numx出队都会去处理`handlerUpstreamRelationships()`,接着 num2 出队，你会发现它的上游 num1,`num7`, 我们仅处理了 num1，因为 num6还没有出队，所以`num7`还未处理到，所以 num2 应该延缓到 `num7`处理完后再处理`handlerUpstreamRelationships()`。 
 
@@ -440,7 +440,7 @@ private void setChaining(Map<Integer, byte[]> hashes, List<Map<Integer, byte[]>>
 
 ### createChain()     
 经过上面的铺垫，在没有开始介绍 createChain()方法之前，不知道你是否有一些预期结果, 再例如下面的图应该不会陌生：    
-![jobgraph_tf07](images/jobgraph_tf07.png)  
+![jobgraph_tf07](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf07.png)  
 
 图中 DAG1 是 StreamGraph 中 StreamNode构建的有向无环图，而 DAG2 是 Flink WEB UI 展示的 Job Plan 图，拿 Source 和 FlatMap两个 StreamNode 节点合并示例来看，他们合并在一起, 并且有了新的节点名称还有其他的一些设置。 那有了这样的预期，我们再来了解 createChain() 的处理逻辑。      
 
@@ -663,7 +663,7 @@ private List<StreamEdge> createChain(
 ```
 
 到这里，看似已经完成了`setChaining(hashes, legacyHashes)`方法的介绍, 可能你会像我一样在阅读源码过程中忽略了一些变量的定义和赋值，在`StreamingJobGraphGenerator#setChaining(hashes, legacyHashes)`方法没有返回值，在创建算子链的过程中，会统计当前节点的出边不能合并Chain链的个数，并且添加到`Map<Integer, List<StreamEdge>> StreamingJobGraphGenerator.opNonChainableOutputsCache`中， 避免出现一些遗漏，可参考下图所示处理流程，得到一些集合变量，它们会在后续构建 JobGraph的链路中起到承上启下的作用：       
-![jobgraph_tf08](images/jobgraph_tf08.png)       
+![jobgraph_tf08](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf08.png)       
 
 
 ## 构建新链路  
@@ -677,16 +677,16 @@ setAllVertexNonChainedOutputsConfigs(opIntermediateOutputs);
 ### setAllOperatorNonChainedOutputsConfigs(opIntermediateOutputs)  
 `StreamingJobGraphGenerator#setAllOperatorNonChainedOutputsConfigs()`方法中遍历了`StreamingJobGraphGenerator.opNonChainableOutputsCache`集合，它存放的是 StreamNodeId和它下游是不可以合并Chain链的出边信息。 
 该方法传入了一个空集合`final Map<Integer, Map<StreamEdge, NonChainedOutput>> opIntermediateOutputs = new HashMap<>();`, 利用`computeIfAbsent()`方法返回`Value`的引用，再调用`StreamingJobGraphGenerator#setOperatorNonChainedOutputsConfig()`方法设置出边的侧输出流、序列化等配置。       
-![jobgraph_tf09](images/jobgraph_tf09.png)     
+![jobgraph_tf09](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf09.png)     
 
 ### setAllVertexNonChainedOutputsConfigs(opIntermediateOutputs)    
 `StreamingJobGraphGenerator#setAllVertexNonChainedOutputsConfigs()`方法遍历 StreamNode 转换而来的 JobVertex 的 StreamNodeId,它同时也是每个算子链的 StartNodeId，以 StreamWordCount 为例，5个StreamNode，构建了3个 jobVerties, 如下图所示：  
-![](images/jobgraph_tf10.png)  
+![](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf10.png)  
 
 >为了避免误导读者，我在上图中将 StreamEdge 标记了差号，因为 JobVertex 中间的边的信息后面会有改变;     
 
 遍历算子链，判断当前算子链是否包含不可以合并Chain链的出边, 对于没有出边仅是更新下 config 信息。而对于存在`不可以合并Chain链的出边`会调用`StreamingJobGraphGenerator#connect()`方法构建新的边。  
-![jobgraph_tf11](images/jobgraph_tf11.png)  
+![jobgraph_tf11](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf11.png)  
 
 接下来，探索`新的边`的构造流程；            
 
@@ -726,6 +726,110 @@ public JobEdge(
 }
 ```
 
-创建完 jobEdge，会将它添加到 JobVertex.inputs属性中,再将 `jobEdge`添加到`IntermediateDataSet.consumers`集合中。
+创建完 jobEdge，会将它添加到 JobVertex.inputs属性中,再将 `jobEdge`添加到`IntermediateDataSet.consumers`集合中。特别注意，JobEdge是如何关联 JobVertex,应该有了大体的了解，如下图：       
+![jobgraph_tf12](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf12.png)   
 
-这
+所以经过 `setAllVertexNonChainedOutputsConfigs()`处理，完成了 JobVertex 的关联关系。   
+![jobgraph_tf13](http://img.xinzhuxiansheng.com/blogimgs/flink/jobgraph_tf13.png)        
+
+### JobGraph 的其他配置   
+对于JobGraph的 图的构造上面已经完成，下面会涉及到一些 JobGraph 实例的其他设置，比如节点的槽位共享组信息设置、资源设置、用户自定义文件设置等。   
+
+>`setPhysicalEdges()`将每个 JobVertex 的入边集合也序列化到该 JobVertex 的 StreamConfig 中, `setSlotSharingAndCoLocation()`为每个 JobVertex 指定所属的 SlotSharingGroup 以及设置 CoLocationGroup；   
+
+后面的一些参数配置，等到它的具体的使用时，介绍会更深刻。此时不能算是该篇的核心。   
+
+```java
+private JobGraph createJobGraph() {
+    
+    // 省略部分代码 ...
+
+    // 设置物理边（Physical Edges）。物理边通常指的是在任务之间实际传输数据的边。
+    setPhysicalEdges();
+    // 标记哪些任务支持并发执行尝试。在某些情况下，Flink 允许任务尝试并发执行，以提高容错性和性能。
+    markSupportingConcurrentExecutionAttempts();
+    // 验证shuffle是否在批处理模式下执行。
+    validateHybridShuffleExecuteInBatchMode();
+    // 设置槽（Slot）共享和协同定位（Co-location）
+    setSlotSharingAndCoLocation();
+
+    // 设置管理的内存比例。这是为了分配和管理 Flink 任务的内存资源 
+    setManagedMemoryFraction(
+            Collections.unmodifiableMap(jobVertices),
+            Collections.unmodifiableMap(vertexConfigs),
+            Collections.unmodifiableMap(chainedConfigs),
+            id -> streamGraph.getStreamNode(id).getManagedMemoryOperatorScopeUseCaseWeights(),
+            id -> streamGraph.getStreamNode(id).getManagedMemorySlotScopeUseCases());
+    // 配置检查点（Checkpointing）。检查点是 Flink 的容错机制，用于在任务失败时恢复状态。
+    configureCheckpointing();
+    // 设置 JobGraph 的保存点（Savepoint）恢复设置
+    jobGraph.setSavepointRestoreSettings(streamGraph.getSavepointRestoreSettings());
+    // 准备用户定义的资源（如文件或对象）
+    final Map<String, DistributedCache.DistributedCacheEntry> distributedCacheEntries =
+            JobGraphUtils.prepareUserArtifactEntries(
+                    streamGraph.getUserArtifacts().stream()
+                            .collect(Collectors.toMap(e -> e.f0, e -> e.f1)),
+                    jobGraph.getJobID());
+    // 将用户定义的资源添加到 JobGraph 中，比如 cache
+    for (Map.Entry<String, DistributedCache.DistributedCacheEntry> entry :
+            distributedCacheEntries.entrySet()) {
+        jobGraph.addUserArtifact(entry.getKey(), entry.getValue());
+    }
+
+    // set the ExecutionConfig last when it has been finalized
+    try {
+        // 设置 JobGraph 的执行配置（ExecutionConfig）。这个配置包含了任务执行时的各种参数和设置。
+        jobGraph.setExecutionConfig(streamGraph.getExecutionConfig());
+    } catch (IOException e) {
+        throw new IllegalConfigurationException(
+                "Could not serialize the ExecutionConfig."
+                        + "This indicates that non-serializable types (like custom serializers) were registered");
+    }
+    // 设置 JobGraph 的作业配置（JobConfiguration）。这通常包含了作业的元数据和其他设置。
+    jobGraph.setChangelogStateBackendEnabled(streamGraph.isChangelogStateBackendEnabled());
+    // 在顶点的名称中添加顶点索引的前缀。这可能是为了更清晰地标识图中的每个顶点。
+    addVertexIndexPrefixInVertexName();
+    // 设置顶点的描述。这通常用于记录或显示顶点的信息，帮助用户或开发者更好地理解图中的每个顶点。
+    setVertexDescription();
+
+    /**
+     * vertexConfigs.values().stream()：从 vertexConfigs 的值中创建一个流。
+     * map：将每个配置对象（config）映射为通过 triggerSerializationAndReturnFuture 方法触发的序列化操作，并返回一个 Future 对象。这个 Future 对象代表了一个异步操作的结果。
+     * collect(Collectors.toList())：将所有 Future 对象收集到一个列表中。
+     * FutureUtils.combineAll(...)：等待所有 Future 对象完成。这通常意味着等待所有配置对象的序列化操作完成。
+     * .get()：阻塞当前线程，直到所有 Future 对象都完成，并获取结果。如果在这个过程中有任何异常发生，它将在此处被抛出。
+     */
+    // Wait for the serialization of operator coordinators and stream config.
+    try {
+        FutureUtils.combineAll(
+                        vertexConfigs.values().stream()
+                                .map(
+                                        config ->
+                                                config.triggerSerializationAndReturnFuture(
+                                                        serializationExecutor))
+                                .collect(Collectors.toList()))
+                .get();
+        /**
+         * 等待序列化完成并更新作业顶点.
+         * 用于确保所有序列化的 Future 对象都已经完成，并更新 JobGraph 中的相关顶点。
+         * 这可能是因为在序列化过程中可能修改了顶点的某些属性或状态，需要更新到 JobGraph 中
+         */
+        waitForSerializationFuturesAndUpdateJobVertices();
+    } catch (Exception e) {
+        throw new FlinkRuntimeException("Error in serialization.", e);
+    }
+
+    /**
+     * 检查 streamGraph 是否有作业状态钩子（JobStatusHooks）。作业状态钩子通常用于在作业生命周期的不同阶段执行自定义逻辑，如作业提交、恢复等。
+     * 如果有，将 streamGraph 中的作业状态钩子设置到 jobGraph 中，以确保这些钩子在 jobGraph 执行时也会被触发。
+     */
+    if (!streamGraph.getJobStatusHooks().isEmpty()) {
+        jobGraph.setJobStatusHooks(streamGraph.getJobStatusHooks());
+    }
+
+    return jobGraph;
+}
+```   
+
+## 总结   
+从 StreamGraph 到 JobGraph 分析完后，感觉自己离真想又更近一步。    
