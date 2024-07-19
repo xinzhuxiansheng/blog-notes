@@ -1,8 +1,6 @@
 # Calcite - Official - Background 扩展       
 
-
-## 知识串联   
-
+>Flink SQL 使用 Calcite 作为其底层 SQL 解析和优化引擎   
 
 ## 引言   
 Apache Calcite是一个动态数据管理框架。它包含了构成典型数据库管理系统的许多部分，但省略了一些关键功能：数据存储、数据处理算法和用于存储元数据的仓库。    
@@ -106,7 +104,7 @@ Output log:
 2.`select d.deptno, min(e.empid) as empid \n` sql中 min()后面需增加 列名定义          
 3.print(resultSet);  改成了 while(resultSet.next()) 打印内容      
 
-![background01](images/background01.png)    
+![background01](http://img.xinzhuxiansheng.com/blogimgs/calcite/background01.png)    
 
 通过上面的案例，再不知道原理情况可得到一些结论：HrSchema.emps、HrSchema.depts 对应的是表名和数据，而 SQL 查询时指定是 hr.emps,hr.depts: 
 ```java
@@ -170,7 +168,7 @@ INSERT INTO `emps` VALUES (100,'Bill',1),(200,'Eric',1),(150,'Sebastian',3);
 UNLOCK TABLES;
 ```   
 如下图所示：  
-![background02](images/background02.png)       
+![background02](http://img.xinzhuxiansheng.com/blogimgs/calcite/background02.png)       
 
 ### 3.HelloCalciteReadMySQLData.java  
 ```java
@@ -255,6 +253,6 @@ Calcite 将以 JDBC 的方式执行相同的查询。对于应用程序，数据
 
 这段文本列出了 Apache Calcite 的一些已完成的关键功能，包括查询解析、验证、优化、对 JSON 格式的模型的支持、多种 SQL 功能和操作、以及对本地和远程 JDBC 驱动程序的支持。还提到了 Calcite 的适配器，这些是连接到不同数据源的关键组件。此外，Avatica 是 Calcite 的一个子项目，提供了一个框架来添加更多的自定义适配器。        
 
-refer   
-1.https://calcite.apache.org/docs/index.html        
-2.https://github.com/zqhxuyuan/tutorials/blob/72740ec130a15331b0b2428b9750099c47073052/middleware/src/main/java/com/zqh/calcite/HelloCalcite.java#L72            
+refer    
+1.https://calcite.apache.org/docs/index.html          
+2.https://github.com/zqhxuyuan/tutorials/blob/72740ec130a15331b0b2428b9750099c47073052/middleware/src/main/java/com/zqh/calcite/HelloCalcite.java#L72              
