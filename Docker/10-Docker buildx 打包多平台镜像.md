@@ -7,7 +7,7 @@
 
 ## 了解 Docker Image 的 OS/ARCH  
 我以 DockerHub中的 Flink 镜像为例，访问`https://hub.docker.com/_/flink/tags`,查看 Flink镜像的 TAG 信息，可看到它的`OS/ARCH`：   
-![buildx01](images/buildx01.png)   
+![buildx01](http://img.xinzhuxiansheng.com/blogimgs/docker/buildx01.png)   
 
 从图片可以看到 TAG:scala_2.12-java8 的 Flink 镜像，它的`OS/ARCH`分别包含 `linux/amd64`,`linux/arm64`。针对`docker pull`可以跟随系统配置自动拉取对应的架构的 Docker Image来说，也可以通过`--platform`参数来指定 OS 信息，如下：   
 ```shell
