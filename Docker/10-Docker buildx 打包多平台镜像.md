@@ -197,6 +197,11 @@ docker buildx use --default buildxtest01
 `--push` 是配合 docker login执行的，它是将打包后的 Docker Image 推送到 Docker 私服仓库去。      
 ```shell
 docker buildx build -f Dockerfile --platform linux/arm64 -t [docker images name:tag] . --push       
+```  
+
+### 6.docker buildx imagetools inspect 查看镜像信息
+```shell
+docker buildx imagetools inspect [docker images name:tag]  
 ```
 
 ## 总结   
