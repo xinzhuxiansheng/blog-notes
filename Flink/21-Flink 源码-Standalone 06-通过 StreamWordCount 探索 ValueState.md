@@ -2,7 +2,7 @@
 
 ## 引言
 
-Flink 提供的用于编写有状态程序的 API, 在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”
+Flink 提供的用于编写有状态程序的 API, 在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”介绍 State 的使用
 
 > 注意：该篇 Blog 中 Job 运行环境依赖 `之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”` 的 Standalone 集群配置。
 
@@ -198,7 +198,7 @@ this.runtimeContext =
 
 
 
-### `KeyedProcessFunction` 是什么？ 它与 `ProcessFunction`有什么区别？
+### `KeyedProcessFunction` 是什么？ 它与 `ProcessFunction`有什么区别？     
 
 ## 为什么没有 Key
 
