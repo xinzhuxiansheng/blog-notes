@@ -1,13 +1,11 @@
-# Flink 源码-Standalone 06-通过 StreamWordCount 探索 ValueState
+# Flink 源码-Standalone 06-通过 StreamWordCount 探索 ValueState   
 
-## 引言
-
-Flink 提供的用于编写有状态程序的 API, 在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”介绍 State 的使用
+## 引言  
+在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”的`StreamWordCount`案例中介绍了sum 算子其内部会自动使用 State存储统计后的结果，这对于我们来说是有些不透明的，但 Flink 也提供了用于编写有状态的 API。接下来，基于`StreamWordCount`示例代码改造来说明显示调用`Managed State`的处理逻辑。        
 
 > 注意：该篇 Blog 中 Job 运行环境依赖 `之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”` 的 Standalone 集群配置。
 
-## StreamWordCountUseState 示例代码
-
+## StreamWordCountUseState 示例代码   
 `StreamWordCountUseState.java` 是以之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”的`StreamWordCount.java`为基础做了修改，继承了`KeyedProcessFunction`，并且使用`ValueState`存储 Word Count 的统计结果。
 
 ```java
@@ -89,23 +87,20 @@ public class StreamWordCountUseState {
 }
 ```
 
-### 测试统计结果
+### 测试统计结果  
+1）终端执行 `nc -lk 7777`，发送四次`my name is yzhou`内容     
+2）通过 Flink WEB UI 提交 StreamWordCount Job     
+3）输入测试数据，最后 word count 的统计结果可在 Task Managers Stdout Log 页面查看，如下图所示：    
+![keyedstate01](images/keyedstate01.png)    
 
-1）终端执行 `nc -lk 7777`，发送四次`my name is yzhou`内容
-2）通过 Flink WEB UI 提交 StreamWordCount Job  
-3）输入测试数据，最后 word count 的统计结果可在 Task Managers Stdout Log 页面查看，如下图所示：  
-![keyedstate01](images/keyedstate01.png)
-
-### 手动触发 Checkpoint
-
-手动触发的 REST API URL： `http://<jobmanager>:8081/jobs/<job_id>/checkpoints`
-
+### 手动触发 Checkpoint    
+手动触发的 REST API URL： `http://<jobmanager>:8081/jobs/<job_id>/checkpoints`      
 ```shell
 curl --location --request POST 'http://192.168.0.201:8081/jobs/7efe25434fac95d405d15fa834ee378a/checkpoints'
 ```
 
-观察 Checkpoint 的存储目录。  
-**Checkpoint Path:**
+观察 Checkpoint 的存储目录。     
+**Checkpoint Path:**     
 
 ```bash
 [root@vm01 7efe25434fac95d405d15fa834ee378a]# tree .
@@ -118,13 +113,11 @@ curl --location --request POST 'http://192.168.0.201:8081/jobs/7efe25434fac95d40
 └── taskowned
 ```
 
-### 从 Checkpoint 恢复作业，验证 ValueState 是否恢复存储值
+### 从 Checkpoint 恢复作业，验证 ValueState 是否恢复存储值   
+在 `Submit New Job`添加 Checkpoint Path`/root/yzhou/flink/flink1172/cppath/7efe25434fac95d405d15fa834ee378a/chk-2` 再提交。     
+![keyedstate02](images/keyedstate02.png)     
 
-在 `Submit New Job`添加 Checkpoint Path`/root/yzhou/flink/flink1172/cppath/7efe25434fac95d405d15fa834ee378a/chk-2` 再提交。  
-![keyedstate02](images/keyedstate02.png)
-
-同样发送`my name is yzhou`,可在 TaskManager 的 `Stdout log`看到以下统计结果：
-
+同样发送`my name is yzhou`,可在 TaskManager 的 `Stdout log`看到以下统计结果：        
 ```bash
 (name,5)
 (is,5)
@@ -132,20 +125,18 @@ curl --location --request POST 'http://192.168.0.201:8081/jobs/7efe25434fac95d40
 (yzhou,5)
 ```
 
-**小结**  
-`StreamWordCountUseState.java`的测试结果与 Blog "Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint"的`StreamWordCount.java`的测试结果是一致的，也符合预期。
+**小结**   
+`StreamWordCountUseState.java`的测试结果与 Blog "Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint"的`StreamWordCount.java`的测试结果是一致的，也符合预期。    
 
-基于上面的案例，不知道你会不会有一些疑问：
+基于上面的案例，不知道你会不会有一些疑问：      
+- 第一个疑问是：`KeyedProcessFunction` 是什么？ 它与 `ProcessFunction`有什么区别？      
+- 第二个疑问是：Word Count 的统计结果是 K，V 结构，可在`WordCountProcessFunction#processElement()`方法中，使用`Long currentCount = countState.value();`方法获取计数值，调用`countState.update(currentCount);`更新计数值，那它是如何知道 K 是哪个呢？例如，过来的数据是`my`,`name`,`is`,`yzhou`, `countState`是怎么知道的？      
 
-- 第一个疑问是：`KeyedProcessFunction` 是什么？ 它与 `ProcessFunction`有什么区别？
-- 第二个疑问是：Word Count 的统计结果是 K，V 结构，可在`WordCountProcessFunction#processElement()`方法中，使用`Long currentCount = countState.value();`方法获取计数值，调用`countState.update(currentCount);`更新计数值，那它是如何知道 K 是哪个呢？例如，过来的数据是`my`,`name`,`is`,`yzhou`, `countState`是怎么知道的？
+若你存在其他的疑问，可留言给我，一起探索其他疑问点。        
 
-若你存在其他的疑问，可留言给我，一起探索其他疑问点。
-
-> 其实接下来，才是该篇 Blog 的重点，上面的示例提出一些思考点将读者带入到下面内容中来。
-
-## ProcessFunction
-
+> 其实接下来，才是该篇 Blog 的重点，上面的示例提出一些思考点将读者带入到下面内容中来。        
+ 
+## ProcessFunction  
 > 非常建议在没有开始阅读下面介绍之前，先阅读`ProcessFunction`文档（https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/operators/process_function/）。
 
 ```bash
@@ -166,7 +157,161 @@ The timers allow applications to react to changes in processing time and in even
     If you want to access keyed state and timers you have to apply the ProcessFunction on a keyed stream:
 
 stream.keyBy(...).process(new MyProcessFunction());
+```   
+
+根据官网解释：ProcessFunction 是一种低级流处理操作（这里的`低级`体现于它是通用函数，在实际使用时，你需要扩展 ProcessFunction类并重写它的方法），但同时也给出了它的使用边界，例如它的 state、timers only on keyed stream(仅在Keyed Stream 生效)。 要是没有理解，大家可看`StreamWordCountUseState`示例中的代码片段：                  
+```java
+// 4. 分组
+KeyedStream<Tuple2<String, Long>, String> wordAndOneKS = wordAndOne
+        .keyBy(t -> t.f0);
+// 5. 求和
+SingleOutputStreamOperator<Tuple2<String, Long>> result = wordAndOneKS
+        .process(new WordCountProcessFunction())
+        .setParallelism(1).uid("wc-sum");
 ```
+
+`.process()`调用链路是在类型为 KeyedStram 的`wordAndOneKS`变量后面，注意该示例中的`WordCountProcessFunction`并没有重写`onTimer()`,所以暂未涉及到 timers特性。下面是 ProcessFunction的类图：          
+![keyedstate03](images/keyedstate03.png)     
+
+`ProcessFunction` 提供了以下两个方法:    
+### processElement():    
+1. void processElement(I value, Context ctx,Collector<O>out)   
+该方法用于处理输入数据，每输入一条数据就调用一次该方法，然后不输出数据或者输出多条数据。从ProcessFunction提供的processElement()方法可以看出，ProcessFunction就是一个增强版的FlatMapFunction，两者处理输入数据的逻辑是相同的。ProcessFunction的入参value和out分别代表输入数据以及输出数据的收集器，入参ctx代表运行时上下文Context。  
+
+内部 Context抽象类提供了以下3个方法用于访问数据的时间戳、注册和删除定时器以及进行旁路数据处理：         
+![keyedstate04](images/keyedstate04.png)       
+* timestamp()：用于访问数据的时间戳，单位为ms。数据的时间戳是指StreamRecord中timestamp字段保存的时间戳。当使用Watermark生成策略获取数据时间戳时，Flink会将数据时间戳保存在StreamRecord的timestamp字段中。注意，如果没有使用Watermark生成策略来获取数据时间戳，那么该方法的返回值为null，而在处理时间语义下，通常不会用到Watermark生成策略，因此方法返回值也为null。         
+* timerService()：该方法会返回TimerService（定时器服务）,TimerService接口的定义和窗口触发器Trigger抽象类中的TriggerContext接口提供的方法一样，两者都提供了获取SubTask时钟、注册定时器和删除定时器的功能。其中longcurrentProcessingTime()方法用于获取当前SubTask的处理时间时钟的时间戳，long currentWatermark()方法用于获取当前SubTask的事件时间时钟的时间戳，两个方法返回值的单位都为ms。          
+* output(): 用于将数据输出到旁路中。入参outputTag是用于标记旁路的标签，value是需要输出到旁路的数据。ProcessOperator在执行旁路输出时，相当于给每一条输出到旁路的数据打了一个标签，当下游使用到某个标签的旁路数据时，ProcessOperator会直接将这个标签下的所有数据发给下游算子，而不是将所有的数据发送到下游算子，这样可以有效减少算子间传输的数据量。     
+
+### onTimer():  
+该方法会在定时器触发时调用。入参 timestamp 代表当前触发的定时器的时间戳，out代表输出数据的收集器，ctx代表定时器的上下文 OnTimerContext，OnTimerContext继承自Context，因此通过 OnTimerContext 可以访问数据的时间戳、注册和删除定时器以及进行旁路数据处理。       
+
+此外，OnTimerContext 相比于Context多了一个`TimeDomain timeDomain()`方法，该方法的返回值 TimeDomain 代表当前触发的定时器的时间语义。TimeDomain 是一个枚举类型，包含EVENT_TIME 和 PROCESSING_TIME两个枚举值，如果值为EVENT_TIME，则代表当前触发的定时器是事件时间语义，如果值为PROCESSING_TIME，则代表当前触发的定时器是处理时间语义。
+通过ProcessFunction提供的方法的定义，我们知道ProcessFunction可以实现自由访问一个流处理作业的事件数据、状态数据和定时器（事件时间定时器或处理时间定时器）的原因了。
+
+## KeyedProcessFunction    
+Flink 提供了多种不同场景下的处理函数，例如`键值数据流处理场景 KeyedProcessFunction`、`数据连接处理场景 CoProcessFunction`、`窗口数据处理场景 ProcessWindowFunction和ProcessAllWindowFunction`、`时间区间Join场景 ProcessJoinFunction`、`广播状态数据处理场景 BroadcastProcessFunction和KeyedBroadcastProcessFunction`。              
+
+```bash
+KeyedProcessFunction, as an extension of ProcessFunction, gives access to the key of timers in its onTimer(...) method.   
+```
+
+根据官网的定义，KeyedProcessFunction 是`ProcessFunction`处理函数的一种扩展, 在`StreamWordCountUseState`示例代码中可了解到`KeyedProcessFunction`包含3个参数，K、 I、O，其中的 K是指 KeyedStream的分区键(key), 这部分也体现了与 ProcessFunction 区别：`KeyedProcessFunction 中的Context和OnTimerContext相比于ProcessFunction的Context和OnTimerContext仅多了一个K getCurrentKey()的方法`, 下面是 KeyedProcessFunction的 Context 类型：    
+![keyedstate05](images/keyedstate05.png)     
+
+在 KeyedProcessFunction 的 processElement()方法中，使用K getCurrentKey()方法可以获取当前处理的数据的key，在 KeyedProcessFunction 的onTimer() 方法中，使用KgetCurrentKey()方法可以获取当前触发的定时器的key。其他方法的执行逻辑和ProcessFunction完全相同。    
+
+>基于上述，第一个疑问的答案已阐述。           
+
+
+
+
+
+`TtlStateFactory#createStateAndWrapWithTtlIfEnabled()` 方法主要用于创建带有过期时间配置的 State，判断 `stateDesc.getTtlConfig()`是否开启，如果开启则调用 `createState()`方法创建状态,否则调用 `KeyedStateFactory#createOrUpdateInternalState()`方法创建状态。     
+
+>注意：stateDesc.getTtlConfig() 默认是不开启的。         
+```java
+@Nonnull private StateTtlConfig ttlConfig = StateTtlConfig.DISABLED;       
+```        
+
+在`StreamWordCountUseState`示例代码中，State 存储的是统计结果，显然数据是不能过期，那接下来，我们来看`KeyedStateFactory#createOrUpdateInternalState()`创建 State的流程。`KeyedStateFactory`是一个接口，在流处理场景中对应的`HeapKeyedStateBackend`实现类，所以 State 创建的入口如下图所示：     
+![keyedstate06](images/keyedstate06.png)        
+
+下面是创建 State 的代码:     
+```java
+@Override
+@Nonnull
+public <N, SV, SEV, S extends State, IS extends S> IS createOrUpdateInternalState(
+        @Nonnull TypeSerializer<N> namespaceSerializer,
+        @Nonnull StateDescriptor<S, SV> stateDesc,
+        @Nonnull StateSnapshotTransformFactory<SEV> snapshotTransformFactory,
+        boolean allowFutureMetadataUpdates)
+        throws Exception {
+        StateTable<K, N, SV> stateTable =
+                tryRegisterStateTable(
+                        namespaceSerializer,
+                        stateDesc,
+                        getStateSnapshotTransformFactory(stateDesc, snapshotTransformFactory),
+                        allowFutureMetadataUpdates);
+
+        @SuppressWarnings("unchecked")
+        IS createdState = (IS) createdKVStates.get(stateDesc.getName());
+        if (createdState == null) {
+                StateCreateFactory stateCreateFactory = STATE_CREATE_FACTORIES.get(stateDesc.getType());
+                if (stateCreateFactory == null) {
+                throw new FlinkRuntimeException(stateNotSupportedMessage(stateDesc));
+                }
+                createdState =
+                        stateCreateFactory.createState(stateDesc, stateTable, getKeySerializer());
+        } else {
+                StateUpdateFactory stateUpdateFactory = STATE_UPDATE_FACTORIES.get(stateDesc.getType());
+                if (stateUpdateFactory == null) {
+                throw new FlinkRuntimeException(stateNotSupportedMessage(stateDesc));
+                }
+                createdState = stateUpdateFactory.updateState(stateDesc, stateTable, createdState);
+        }
+
+        createdKVStates.put(stateDesc.getName(), createdState);
+        return createdState;
+}
+```   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`latencyTracking`是 Flink 中的一种功能，它可以使用 State时跟踪和记录延迟信息，这个功能有助于监控和优化作业性能，特别是当你希望了解 State 操作的延迟情况时。Flink 提供了以下参数进行设置：                       
+* state.backend.latency-track.keyed-state-enabled     
+* state.backend.latency-track.sample-interval     
+* state.backend.latency-track.history-size     
+* state.backend.latency-track.state-name-as-variable       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 RuntimeContext runtimeContext 是 StreamRuntimeContext
 
@@ -210,4 +355,5 @@ Long currentCount = countState.value();
 
 refer  
 1.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/fault-tolerance/state/  
-2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/operators/process_function/
+2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/operators/process_function/   
+3.'Flink SQL与DataStream：入门、进阶与实战'   
