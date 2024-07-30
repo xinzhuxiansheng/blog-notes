@@ -1,7 +1,7 @@
 # Flink 源码-Standalone 06-通过 StreamWordCount 探索 ValueState   
 
 ## 引言  
-在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”的`StreamWordCount`案例中介绍了sum 算子其内部会自动使用 State存储统计后的结果，这对于我们来说是有些不透明的，但 Flink 也提供了用于编写有状态的 API。接下来，基于`StreamWordCount`示例代码改造来说明显示调用`Managed State`的处理逻辑。        
+在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”的`StreamWordCount`案例中介绍了sum 算子其内部会自动使用 State存储统计后的结果，这对于我们来说是有些不透明的，但 Flink 也提供了用于编写有状态的 API。接下来，基于`StreamWordCount`示例代码改造来说明显示调用`Manag`的处理逻辑。        
 
 > 注意：该篇 Blog 中 Job 运行环境依赖 `之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”` 的 Standalone 集群配置。
 
@@ -204,7 +204,7 @@ KeyedProcessFunction, as an extension of ProcessFunction, gives access to the ke
 
 >基于上述，第一个疑问的答案已阐述,也同时涉及到第二个疑问，因为 KeyedProcessFunction 的context包含 getCurrentKey()，因为它的存在，我们不需要关心 Key的定义。           
 
-## WordCountProcessFunction 的 countState  
+## WordCountProcessFunction 的 countState 创建
 countState 是用来存储统计结果的变量，它的创建是在 open()方法中的`getRuntimeContext().getState(descriptor)`发生的，这的确让人很难想象，首先 `getRuntimeContext()`是一个类型为`StreamingRuntimeContext`的变量，当 Flink Job 完成执行计划转换到创建 StreamTask 过程中（后面的 Blog 会介绍 ExecutionGraph 中涉及到），会为每个Task 创建一个 StreamingRuntimeContext (),若存在自定义算子，例如 WordCountProcessFunction，执行它的 open()方法, 此时的 State 若不存在，需创建新的 State。  
 
 你可以将断点打在`AbstractStreamOperator#setup()`的 216行，代码如下：            
@@ -273,7 +273,8 @@ public <N, S extends State, V> S getOrCreateKeyedState(
 在`StreamWordCountUseState`示例代码中，State 存储的是统计结果，显然数据是不能过期，那接下来，我们来看`KeyedStateFactory#createOrUpdateInternalState()`创建 State的流程。`KeyedStateFactory`是一个接口，在流处理场景中对应的`HeapKeyedStateBackend`实现类，所以 State 创建的入口如下图所示：     
 ![keyedstate06](images/keyedstate06.png)        
 
-下面是创建 State 的代码:       
+下面是创建 State 的代码:
+**HeapKeyedStateBackend#createOrUpdateInternalState()**            
 ```java
 @Override
 @Nonnull
@@ -354,6 +355,95 @@ return (IS)
 createdState =
         stateCreateFactory.createState(stateDesc, stateTable, getKeySerializer());    
 ```
+
+根据对象引用传递，createdState返回给了`WordCountProcessFunction.countState`,此时 countState 的类型是`HeapValueState`。      
+![keyedstate12](images/keyedstate12.png)     
+
+## WordCountProcessFunction 的 countState 更新  
+`StreamWordCountUseState.WordCountProcessFunction#processElement()`方法, 若当前 key 对应的 value 不为 null，则进行加1，下面是逻辑代码：  
+```java
+@Override
+public void processElement(
+        Tuple2<String, Long> value,
+        Context ctx,
+        Collector<Tuple2<String, Long>> out) throws Exception {
+
+        // 获取当前单词的计数状态
+        Long currentCount = countState.value();
+
+        // 初始化状态
+        if (currentCount == null) {
+        currentCount = 0L;
+        }
+
+        // 自增并更新状态
+        currentCount += value.f1;
+        countState.update(currentCount);
+
+        // 输出当前单词的计数结果
+        out.collect(new Tuple2<>(value.f0, currentCount));
+}
+```
+
+`countState.update(currentCount);`负责对 state的值进行更新，此时 update()方法对应的是`HeapValueState#update()`方法。    
+```java
+@Override
+public void update(V value) {
+
+if (value == null) {
+        clear();
+        return;
+}
+
+stateTable.put(currentNamespace, value);   
+}
+```
+
+`stateTable 是什么？` 在上面的内容中多次出现，但我并没有介绍过，我们再回到 State创建方法中`HeapKeyedStateBackend#createOrUpdateInternalState()`,首先通过`tryRegisterStateTable()`方法创建 `stateTable`, 创建 State时，将 stateTable 当作形参传递过去。 接下来，我们还是已 stateTable.put 为入口，了解它是如何使用的？   
+
+![keyedstate13](images/keyedstate13.png)  
+通过上图可了解到，stateTable 是`CopyOnWriteStateTable`类型，其次 currentNamespace是`VoidNamespace`, 它的主要作用是用于对状态（state）进行逻辑隔离，而VoidNamespace 是 State的默认的命名空间类型。     
+
+**StateTable#put()**  
+```java
+public void put(N namespace, S state) {
+put(keyContext.getCurrentKey(), keyContext.getCurrentKeyGroupIndex(), namespace, state);
+}
+```
+
+put()方法中除了`keyContext.getCurrentKeyGroupIndex()`非常陌生，其他形参都已介绍过, `keyContext.getCurrentKeyGroupIndex()`方法用于获取当前处理的键所属的键组（Key Group）索引。键组（Key Group）是 Flink 中状态分区的基本单位，用于将键空间划分为多个部分，以便更好地管理和分配状态。KeyGroup 是 Flink 的状态后端用于在并行子任务（parallel subtasks）之间分配状态的一种机制。每个键组对应一个唯一的索引值，范围从 0 到 maxParallelism - 1。maxParallelism 是一个配置参数，表示状态操作的最大并行度。Flink 将所有键映射到这些键组中，然后将键组分配给不同的并行子任务。       
+
+关于`keyContext.getCurrentKeyGroupIndex()` 的生成逻辑，可参考`AbstractKeyedStateBackend#setCurrentKey()`和`KeyGroupRangeAssignment#computeKeyGroupForKeyHash()` 两个方法，KeyGroupIndex 是根据 `key.hashCode()`经过 MurmurHash运算后，将结果对`maxParallelism`取模，所以它的范围是从 0 到 maxParallelism - 1。  
+**KeyGroupRangeAssignment#computeKeyGroupForKeyHash()**                 
+```java
+public static int computeKeyGroupForKeyHash(int keyHash, int maxParallelism) {
+    return MathUtils.murmurHash(keyHash) % maxParallelism;
+}
+```
+
+获取到 keyGroupIndex, 紧接着校验 key,namespace 的合法性，根据 keyGroupIndex 获取`StateTable对象下的 StateMap<K, N, S>[] keyGroupedStateMaps`值, 此时返回的是 `CopyOnWriteStateMap`类型对象。  
+**StateTable#put()**  
+```java
+public void put(K key, int keyGroup, N namespace, S state) {
+checkKeyNamespacePreconditions(key, namespace);
+getMapForKeyGroup(keyGroup).put(key, namespace, state);
+}
+```
+
+通过 putEntry()方法，找到 key，namespace 对应的 Entry，然后将 value 赋值给 Entry 的 state。 注意，这里其实可以有很大篇幅介绍`CopyOnWriteStateMap`的增删改查逻辑，其实就像 Java 中的 HashMap分析逻辑一样，所以该篇不过多介绍，会在后续的 Blog中介绍`CopyOnWriteStateMap`数据结构。      
+**CopyOnWriteStateMap#put()**   
+```java
+@Override
+public void put(K key, N namespace, S value) {
+final StateMapEntry<K, N, S> e = putEntry(key, namespace);
+
+e.state = value;
+e.stateVersion = stateMapVersion;
+}
+```
+
+## 总结   
+关于 State 注册过程，并没有过多介绍，等后面深入探究后，再进行介绍。该篇介绍了`ProcessFunction`,`StreamingRuntimeContext` 的使用、StreamWordCountUseState示例中 ValueState的创建流程，如果大家有时间可以思考一个点，KeyGroup 和 KeyGroupIndex 对于 State的操作来说有什么帮助？      
 
 refer  
 1.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/fault-tolerance/state/      
