@@ -202,11 +202,66 @@ KeyedProcessFunction, as an extension of ProcessFunction, gives access to the ke
 
 在 KeyedProcessFunction 的 processElement()方法中，使用K getCurrentKey()方法可以获取当前处理的数据的key，在 KeyedProcessFunction 的onTimer() 方法中，使用KgetCurrentKey()方法可以获取当前触发的定时器的key。其他方法的执行逻辑和ProcessFunction完全相同。    
 
->基于上述，第一个疑问的答案已阐述。           
+>基于上述，第一个疑问的答案已阐述,也同时涉及到第二个疑问，因为 KeyedProcessFunction 的context包含 getCurrentKey()，因为它的存在，我们不需要关心 Key的定义。           
 
+## WordCountProcessFunction 的 countState  
+countState 是用来存储统计结果的变量，它的创建是在 open()方法中的`getRuntimeContext().getState(descriptor)`发生的，这的确让人很难想象，首先 `getRuntimeContext()`是一个类型为`StreamingRuntimeContext`的变量，当 Flink Job 完成执行计划转换到创建 StreamTask 过程中（后面的 Blog 会介绍 ExecutionGraph 中涉及到），会为每个Task 创建一个 StreamingRuntimeContext (),若存在自定义算子，例如 WordCountProcessFunction，执行它的 open()方法, 此时的 State 若不存在，需创建新的 State。  
 
+你可以将断点打在`AbstractStreamOperator#setup()`的 216行，代码如下：            
+```java
+this.runtimeContext =
+        new StreamingRuntimeContext(
+                environment,
+                environment.getAccumulatorRegistry().getUserMap(),
+                getMetricGroup(),
+                getOperatorID(),
+                getProcessingTimeService(),
+                null,
+                environment.getExternalResourceInfoProvider());
+```
 
+下面是`WordCountProcessFunction#open()`为入口，State 的创建入口：   
+![keyedstate11](images/keyedstate11.png)   
 
+**AbstractKeyedStateBackend#getOrCreateKeyedState()**  
+```java
+public <N, S extends State, V> S getOrCreateKeyedState(
+            final TypeSerializer<N> namespaceSerializer, StateDescriptor<S, V> stateDescriptor)
+            throws Exception {
+        // 检查序列化器
+        checkNotNull(namespaceSerializer, "Namespace serializer");
+        checkNotNull(
+                keySerializer,
+                "State key serializer has not been configured in the config. "
+                        + "This operation cannot use partitioned state.");
+        // 从缓存中获取与状态名称关联的内部键值状态  
+        InternalKvState<K, ?, ?> kvState = keyValueStatesByName.get(stateDescriptor.getName());
+        if (kvState == null) {
+            if (!stateDescriptor.isSerializerInitialized()) {
+                stateDescriptor.initializeSerializerUnlessSet(executionConfig);
+            }
+            // 创建一个具有TTL（如果启用）和延迟跟踪（如果启用）的内部键值状态
+            kvState =
+                    LatencyTrackingStateFactory.createStateAndWrapWithLatencyTrackingIfEnabled(
+                            TtlStateFactory.createStateAndWrapWithTtlIfEnabled(
+                                    namespaceSerializer, stateDescriptor, this, ttlTimeProvider),
+                            stateDescriptor,
+                            latencyTrackingStateConfig);
+            // 将新创建的状态添加到缓存中                
+            keyValueStatesByName.put(stateDescriptor.getName(), kvState);
+            // 如果状态可以被查询，则发布它
+            publishQueryableStateIfEnabled(stateDescriptor, kvState);
+        }
+        // 将内部键值状态强制转换为指定的状态类型并返回
+        return (S) kvState;
+}
+```  
+
+`latencyTracking`是 Flink 中的一种功能，它可以使用 State时跟踪和记录延迟信息，这个功能有助于监控和优化作业性能，特别是当你希望了解 State 操作的延迟情况时。Flink 提供了以下参数进行设置：                         
+* state.backend.latency-track.keyed-state-enabled        
+* state.backend.latency-track.sample-interval        
+* state.backend.latency-track.history-size       
+* state.backend.latency-track.state-name-as-variable         
 
 `TtlStateFactory#createStateAndWrapWithTtlIfEnabled()` 方法主要用于创建带有过期时间配置的 State，判断 `stateDesc.getTtlConfig()`是否开启，如果开启则调用 `createState()`方法创建状态,否则调用 `KeyedStateFactory#createOrUpdateInternalState()`方法创建状态。     
 
@@ -218,7 +273,7 @@ KeyedProcessFunction, as an extension of ProcessFunction, gives access to the ke
 在`StreamWordCountUseState`示例代码中，State 存储的是统计结果，显然数据是不能过期，那接下来，我们来看`KeyedStateFactory#createOrUpdateInternalState()`创建 State的流程。`KeyedStateFactory`是一个接口，在流处理场景中对应的`HeapKeyedStateBackend`实现类，所以 State 创建的入口如下图所示：     
 ![keyedstate06](images/keyedstate06.png)        
 
-下面是创建 State 的代码:     
+下面是创建 State 的代码:       
 ```java
 @Override
 @Nonnull
@@ -257,103 +312,50 @@ public <N, SV, SEV, S extends State, IS extends S> IS createOrUpdateInternalStat
 }
 ```   
 
+先从已创建的状态映射中获取指定名称的状态对象，`createdKVStates`是一个 Map<String, State> 类型变量，它的 Key 对应的是 State 的名称 (例如 `WordCountProcessFunction.countState`,它的 name 是`wordCountState`)，如下图所示：    
+![keyedstate07](images/keyedstate07.png)     
 
+从 Map中获取 State 对象为空，表示尚未创建，则利用 State创建工厂来创建对应的  State，`这部分涉及到泛型映射`，根据状态类型从`STATE_CREATE_FACTORIES`获取对应的状态创建工厂，而`STATE_CREATE_FACTORIES`是一个静态变量，它会类加载的时候初始化它的集合项, 注意：它的每个子项中的第二个元素是方法引用传递,`::create`是缩写方式。     
+![keyedstate08](images/keyedstate08.png)        
 
+泛型映射：   
+![keyedstate09](images/keyedstate09.png)    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-`latencyTracking`是 Flink 中的一种功能，它可以使用 State时跟踪和记录延迟信息，这个功能有助于监控和优化作业性能，特别是当你希望了解 State 操作的延迟情况时。Flink 提供了以下参数进行设置：                       
-* state.backend.latency-track.keyed-state-enabled     
-* state.backend.latency-track.sample-interval     
-* state.backend.latency-track.history-size     
-* state.backend.latency-track.state-name-as-variable       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-RuntimeContext runtimeContext 是 StreamRuntimeContext
-
-在上面的`StreamWordCountUseState`案例中，使用了`KeyedProcessFunction`抽象类实现了 Word Count 统计结果，
-
-AbstractRichFunction 包含 RuntimeContext runtimeContext 属性值，
-RuntimeContext runtimeContext 的类型是： StreamRuntimeContext， 那它是谁的上下文，边界怎么定义， 谁给它赋值
-
-AbstractStreamOperator#setup() 会创建 StreamingRuntimeContext 对象，
+当时看到`(StateCreateFactory) HeapValueState::create` 这行代码本人有些懵，在方法引用前面添加强制转换，并且`StateCreateFactory`接口没有找到其实现类。      
+![keyedstate10](images/keyedstate10.png)      
 ```java
-this.runtimeContext =
-        new StreamingRuntimeContext(
-                environment,
-                environment.getAccumulatorRegistry().getUserMap(),
-                getMetricGroup(),
-                getOperatorID(),
-                getProcessingTimeService(),
-                null,
-                environment.getExternalResourceInfoProvider());
+private interface StateCreateFactory {
+<K, N, SV, S extends State, IS extends S> IS createState(
+        StateDescriptor<S, SV> stateDesc,
+        StateTable<K, N, SV> stateTable,
+        TypeSerializer<K> keySerializer)
+        throws Exception;
+}
 ```
 
-那么 AbstractStreamOperator 与 AbstractRichFunction 有什么关系么 ？    
-
-
-
-
-
-
-
-
-
-### `KeyedProcessFunction` 是什么？ 它与 `ProcessFunction`有什么区别？     
-
-## 为什么没有 Key
-
+后来了解其目的是将 HeapValueState 、HeapListState 等等，它们的create()作为 `StateCreateFactory` 接口的实现，这样，当你调用 StateCreateFactory接口的 createState() 方法时，实际调用的是 HeapValueState类的 create()方法。`注意前提是 create()方法签名与 StateCreateFactory接口的 createState() 方法匹配`, 下面是`HeapValueState#create()`代码：     
 ```java
-Long currentCount = countState.value();
+static <K, N, SV, S extends State, IS extends S> IS create(
+        StateDescriptor<S, SV> stateDesc,
+        StateTable<K, N, SV> stateTable,
+        TypeSerializer<K> keySerializer) {
+return (IS)
+        new HeapValueState<>(
+                stateTable,
+                keySerializer,
+                stateTable.getStateSerializer(),
+                stateTable.getNamespaceSerializer(),
+                stateDesc.getDefaultValue());
+}
 ```
 
-## ValueState 与 MapState 区别
+经过上述得到的结论是，调用`stateCreateFactory.createState`,其内部调用的是`HeapValueState#create()`,而 create()方法的形参就是createState()方法的形参。      
+```java
+createdState =
+        stateCreateFactory.createState(stateDesc, stateTable, getKeySerializer());    
+```
 
 refer  
-1.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/fault-tolerance/state/  
-2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/operators/process_function/   
-3.'Flink SQL与DataStream：入门、进阶与实战'   
+1.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/fault-tolerance/state/      
+2.https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/dev/datastream/operators/process_function/       
+3.'Flink SQL与DataStream：入门、进阶与实战'     
