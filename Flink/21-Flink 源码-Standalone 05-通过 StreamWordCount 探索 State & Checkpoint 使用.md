@@ -1,4 +1,4 @@
-# Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint     
+# Flink 源码 - Standalone - 通过 StreamWordCount 探索 State & Checkpoint     
 
 ## 引言  
 在 Flink 中，每个函数和算子都可以是有状态的，而有状态的函数和算子是将 Data 存储在 State 中，所以 State 提供了 Flink 中用于存储计算过程中数据的存储介质。 在 Flink 这种分布式系统中，必然存在 `Fallacies of distributed computing` (https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing) , So Flink 提供了一种叫做 `检查点分布式快照机制`（Checkpoint）,用于保证有状态流处理的容错性，它会定期捕获和保存有状态的快照, 若 Job 发生故障后，Checkpoint允许 Job 在发生故障时恢复到最近的检查点，从而恢复 Job 的状态和处理位置，这样可以确保数据处理的连续性和一致性。     

@@ -1,7 +1,7 @@
-# Flink 源码-Standalone 06-通过 StreamWordCount 探索 ValueState   
+# Flink 源码 - Standalone - 通过 StreamWordCount 探索 ValueState   
 
 ## 引言  
-在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”的`StreamWordCount`案例中介绍了sum 算子其内部会自动使用 State存储统计后的结果，这对于我们来说是有些不透明的，但 Flink 也提供了用于编写有状态的 API。接下来，基于`StreamWordCount`示例代码改造来说明显示调用`Manag`的处理逻辑。        
+在之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”的`StreamWordCount`案例中介绍了sum 算子其内部会自动使用 State存储统计后的结果，这对于我们来说是有些不透明的，但 Flink 也提供了用于编写有状态的 API。接下来，基于`StreamWordCount`示例代码改造来说明显示调用`Managed State`的处理逻辑。        
 
 > 注意：该篇 Blog 中 Job 运行环境依赖 `之前 Blog “Flink 源码-Standalone - 通过 StreamWordCount 探索 State & Checkpoint”` 的 Standalone 集群配置。
 
@@ -91,7 +91,7 @@ public class StreamWordCountUseState {
 1）终端执行 `nc -lk 7777`，发送四次`my name is yzhou`内容     
 2）通过 Flink WEB UI 提交 StreamWordCount Job     
 3）输入测试数据，最后 word count 的统计结果可在 Task Managers Stdout Log 页面查看，如下图所示：    
-![keyedstate01](images/keyedstate01.png)    
+![keyedstate01](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate01.png)    
 
 ### 手动触发 Checkpoint    
 手动触发的 REST API URL： `http://<jobmanager>:8081/jobs/<job_id>/checkpoints`      
@@ -115,7 +115,7 @@ curl --location --request POST 'http://192.168.0.201:8081/jobs/7efe25434fac95d40
 
 ### 从 Checkpoint 恢复作业，验证 ValueState 是否恢复存储值   
 在 `Submit New Job`添加 Checkpoint Path`/root/yzhou/flink/flink1172/cppath/7efe25434fac95d405d15fa834ee378a/chk-2` 再提交。     
-![keyedstate02](images/keyedstate02.png)     
+![keyedstate02](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate02.png)     
 
 同样发送`my name is yzhou`,可在 TaskManager 的 `Stdout log`看到以下统计结果：        
 ```bash
@@ -171,7 +171,7 @@ SingleOutputStreamOperator<Tuple2<String, Long>> result = wordAndOneKS
 ```
 
 `.process()`调用链路是在类型为 KeyedStram 的`wordAndOneKS`变量后面，注意该示例中的`WordCountProcessFunction`并没有重写`onTimer()`,所以暂未涉及到 timers特性。下面是 ProcessFunction的类图：          
-![keyedstate03](images/keyedstate03.png)     
+![keyedstate03](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate03.png)     
 
 `ProcessFunction` 提供了以下两个方法:    
 ### processElement():    
@@ -179,7 +179,7 @@ SingleOutputStreamOperator<Tuple2<String, Long>> result = wordAndOneKS
 该方法用于处理输入数据，每输入一条数据就调用一次该方法，然后不输出数据或者输出多条数据。从ProcessFunction提供的processElement()方法可以看出，ProcessFunction就是一个增强版的FlatMapFunction，两者处理输入数据的逻辑是相同的。ProcessFunction的入参value和out分别代表输入数据以及输出数据的收集器，入参ctx代表运行时上下文Context。  
 
 内部 Context抽象类提供了以下3个方法用于访问数据的时间戳、注册和删除定时器以及进行旁路数据处理：         
-![keyedstate04](images/keyedstate04.png)       
+![keyedstate04](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate04.png)       
 * timestamp()：用于访问数据的时间戳，单位为ms。数据的时间戳是指StreamRecord中timestamp字段保存的时间戳。当使用Watermark生成策略获取数据时间戳时，Flink会将数据时间戳保存在StreamRecord的timestamp字段中。注意，如果没有使用Watermark生成策略来获取数据时间戳，那么该方法的返回值为null，而在处理时间语义下，通常不会用到Watermark生成策略，因此方法返回值也为null。         
 * timerService()：该方法会返回TimerService（定时器服务）,TimerService接口的定义和窗口触发器Trigger抽象类中的TriggerContext接口提供的方法一样，两者都提供了获取SubTask时钟、注册定时器和删除定时器的功能。其中longcurrentProcessingTime()方法用于获取当前SubTask的处理时间时钟的时间戳，long currentWatermark()方法用于获取当前SubTask的事件时间时钟的时间戳，两个方法返回值的单位都为ms。          
 * output(): 用于将数据输出到旁路中。入参outputTag是用于标记旁路的标签，value是需要输出到旁路的数据。ProcessOperator在执行旁路输出时，相当于给每一条输出到旁路的数据打了一个标签，当下游使用到某个标签的旁路数据时，ProcessOperator会直接将这个标签下的所有数据发给下游算子，而不是将所有的数据发送到下游算子，这样可以有效减少算子间传输的数据量。     
@@ -198,7 +198,7 @@ KeyedProcessFunction, as an extension of ProcessFunction, gives access to the ke
 ```
 
 根据官网的定义，KeyedProcessFunction 是`ProcessFunction`处理函数的一种扩展, 在`StreamWordCountUseState`示例代码中可了解到`KeyedProcessFunction`包含3个参数，K、 I、O，其中的 K是指 KeyedStream的分区键(key), 这部分也体现了与 ProcessFunction 区别：`KeyedProcessFunction 中的Context和OnTimerContext相比于ProcessFunction的Context和OnTimerContext仅多了一个K getCurrentKey()的方法`, 下面是 KeyedProcessFunction的 Context 类型：    
-![keyedstate05](images/keyedstate05.png)     
+![keyedstate05](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate05.png)     
 
 在 KeyedProcessFunction 的 processElement()方法中，使用K getCurrentKey()方法可以获取当前处理的数据的key，在 KeyedProcessFunction 的onTimer() 方法中，使用KgetCurrentKey()方法可以获取当前触发的定时器的key。其他方法的执行逻辑和ProcessFunction完全相同。    
 
@@ -221,7 +221,7 @@ this.runtimeContext =
 ```
 
 下面是`WordCountProcessFunction#open()`为入口，State 的创建入口：   
-![keyedstate11](images/keyedstate11.png)   
+![keyedstate11](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate11.png)   
 
 **AbstractKeyedStateBackend#getOrCreateKeyedState()**  
 ```java
@@ -271,7 +271,7 @@ public <N, S extends State, V> S getOrCreateKeyedState(
 ```        
 
 在`StreamWordCountUseState`示例代码中，State 存储的是统计结果，显然数据是不能过期，那接下来，我们来看`KeyedStateFactory#createOrUpdateInternalState()`创建 State的流程。`KeyedStateFactory`是一个接口，在流处理场景中对应的`HeapKeyedStateBackend`实现类，所以 State 创建的入口如下图所示：     
-![keyedstate06](images/keyedstate06.png)        
+![keyedstate06](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate06.png)        
 
 下面是创建 State 的代码:
 **HeapKeyedStateBackend#createOrUpdateInternalState()**            
@@ -314,16 +314,16 @@ public <N, SV, SEV, S extends State, IS extends S> IS createOrUpdateInternalStat
 ```   
 
 先从已创建的状态映射中获取指定名称的状态对象，`createdKVStates`是一个 Map<String, State> 类型变量，它的 Key 对应的是 State 的名称 (例如 `WordCountProcessFunction.countState`,它的 name 是`wordCountState`)，如下图所示：    
-![keyedstate07](images/keyedstate07.png)     
+![keyedstate07](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate07.png)     
 
 从 Map中获取 State 对象为空，表示尚未创建，则利用 State创建工厂来创建对应的  State，`这部分涉及到泛型映射`，根据状态类型从`STATE_CREATE_FACTORIES`获取对应的状态创建工厂，而`STATE_CREATE_FACTORIES`是一个静态变量，它会类加载的时候初始化它的集合项, 注意：它的每个子项中的第二个元素是方法引用传递,`::create`是缩写方式。     
-![keyedstate08](images/keyedstate08.png)        
+![keyedstate08](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate08.png)        
 
 泛型映射：   
-![keyedstate09](images/keyedstate09.png)    
+![keyedstate09](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate09.png)    
 
 当时看到`(StateCreateFactory) HeapValueState::create` 这行代码本人有些懵，在方法引用前面添加强制转换，并且`StateCreateFactory`接口没有找到其实现类。      
-![keyedstate10](images/keyedstate10.png)      
+![keyedstate10](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate10.png)      
 ```java
 private interface StateCreateFactory {
 <K, N, SV, S extends State, IS extends S> IS createState(
@@ -357,7 +357,7 @@ createdState =
 ```
 
 根据对象引用传递，createdState返回给了`WordCountProcessFunction.countState`,此时 countState 的类型是`HeapValueState`。      
-![keyedstate12](images/keyedstate12.png)     
+![keyedstate12](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate12.png)     
 
 ## WordCountProcessFunction 的 countState 更新  
 `StreamWordCountUseState.WordCountProcessFunction#processElement()`方法, 若当前 key 对应的 value 不为 null，则进行加1，下面是逻辑代码：  
@@ -401,7 +401,7 @@ stateTable.put(currentNamespace, value);
 
 `stateTable 是什么？` 在上面的内容中多次出现，但我并没有介绍过，我们再回到 State创建方法中`HeapKeyedStateBackend#createOrUpdateInternalState()`,首先通过`tryRegisterStateTable()`方法创建 `stateTable`, 创建 State时，将 stateTable 当作形参传递过去。 接下来，我们还是已 stateTable.put 为入口，了解它是如何使用的？   
 
-![keyedstate13](images/keyedstate13.png)  
+![keyedstate13](http://img.xinzhuxiansheng.com/blogimgs/flink/keyedstate13.png)  
 通过上图可了解到，stateTable 是`CopyOnWriteStateTable`类型，其次 currentNamespace是`VoidNamespace`, 它的主要作用是用于对状态（state）进行逻辑隔离，而VoidNamespace 是 State的默认的命名空间类型。     
 
 **StateTable#put()**  
