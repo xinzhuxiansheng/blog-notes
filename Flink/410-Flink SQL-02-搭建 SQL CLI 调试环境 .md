@@ -1,6 +1,14 @@
 # Flink SQL - 搭建 SQL CLI 调试环境    
 
->Flink version: 1.17.2       
+>Flink version: 1.17.2          
+
+## 优化     
+在之前的两篇 Blog `Flink 源码 - Standalone - 通过 CliFrontend 提交 Job 到 Standalone 集群` 和 `Flink 源码 - Standalone - 通过 CliFrontend 提交 Job 到 Standalone 集群` 中涉及到 Idea 配置启动项时手动对每个 devlib/下的 jar 添加到 classpath中，如下图：  
+![standalonedebug04](http://img.xinzhuxiansheng.com/blogimgs/flink/standalonedebug04.png)    
+
+上述操作不是最优解，在 Idea 中打开项目的`Project Structure` 
+![sqlclidebug01](images/sqlclidebug01.png)   
+
 
 ## 引言   
 
@@ -26,7 +34,29 @@ root      11770  62445 28 21:21 pts/0    00:00:05 /data/jdk1.8.0_391/bin/java -D
 >特别注意，Idea 配置 SqlClient的调试环境，是基于之前 Blog `Flink 源码 - Standalone - 通过 CliFrontend 提交 Job 到 Standalone 集群`中`devcliconf`目录下的配置，例如将 devcliconf/ 目录 拷贝一份，命名为 devsqlclientconf，其目的是为了保证配置隔离开，避免在做一些测试时影响到其他服务调试。        
 
 ## 配置 Idea 启动 SqlClient      
-首先，我们在项目根目录下创建一个 `devconf` 文件夹，将 `devconf`下的文件 copy 到 devcliconf 文件夹下。 
+首先，我们在项目根目录下创建一个 `devsqlclientconf` 文件夹，将 `devcliconf`下的文件 copy 到 devsqlclientconf 文件夹下。(具体内容可访问 https://github.com/xinzhuxiansheng/flink/tree/yzhou/release-1.17 查看 devsqlclientconf/  )      
+
+
+### 1）配置 SqlClient 启动项    
+配置启动类：`org.apache.flink.table.client.SqlClient`           
+JDK: 1.8    
+Module: `flink-sql-clients`   
+VM options:   
+```shell 
+-Dlog.file=./log/flink-root-sql-client-local.log
+-Dlog4j.configuration=./devsqlclientconf/log4j-cli.properties
+-Dlog4j.configurationFile=./devsqlclientconf/log4j-cli.properties
+-Dlogback.configurationFile=./devsqlclientconf/logback.xml
+```
+
+Main class: org.apache.flink.table.client.SqlClient     
+Program arguments:  --jar [flink-sql-client 模块编译打包后的 jar], 下面是本人的示例路径：`D:\Code\Java\flink-all\flink_release-1.17\flink-table\flink-sql-client\target\flink-sql-client-1.17-SNAPSHOT.jar`    
+Environment variables: FLINK_CONF_DIR=./devcliconf     
+Modify classpath: 选择 `Include` 且指定 devlib 的目录下的`jar`。   `需特别注意, 选择目录无效，需分别添加 jar`                 
+
+>注意：新增了 `Environment variables: FLINK_CONF_DIR=./devcliconf`, 在之前 启动 StandaloneSessionClusterEntrypoint(Jobmanager)、TaskManagerRunner(Taskmanager) 是在 main()方法 添加 `--configDir devconf`。 为啥会以环境变量方式添加？         
+
+CLI 在提交作业之后，会调用 CliFrontend#getConfigurationDirectoryFromEnv() 方法获取 conf/flink-conf.yaml 配置，首先会从 `FLINK_CONF_DIR 环境变量`获取 conf/ 路径，其次是其他路径判断。（坑了我较长时间，因为不添加它时，console log 没有展示异常信息，凡是别慌，看下源码 (￣▽￣)σ" ）       
 
 
 
