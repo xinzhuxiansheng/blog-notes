@@ -60,8 +60,8 @@ WITH
     'password' = '123456',
     'connector' = 'jdbc',
     'table-name' = 'user_address',
-    'url' = 'jdbc:mysql://192.168.0.5:3306/drc_test',
-    'username' = 'dp_test'
+    'url' = 'jdbc:mysql://192.168.xxx.xxx:3306/yzhou_test',
+    'username' = 'root'
 );
 ``` 
 
@@ -93,8 +93,8 @@ WITH
     'password' = '123456',
     'connector' = 'jdbc',
     'table-name' = 'user_info_out',
-    'url' = 'jdbc:mysql://192.168.0.5:3306/drc_test',
-    'username' = 'dp_test'
+    'url' = 'jdbc:mysql://192.168.xxx.xxx:3306/yzhou_test',
+    'username' = 'root'
 );
 ```
 

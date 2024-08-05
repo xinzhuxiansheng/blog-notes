@@ -1,4 +1,4 @@
-# Flink SQL - SQL CLI 的使用  
+# Flink SQL - SQL Client - SQL CLI 的使用  
 
 >Flink version: 1.17.2   
 

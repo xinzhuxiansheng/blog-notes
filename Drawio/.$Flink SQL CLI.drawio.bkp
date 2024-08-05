@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-06-24T04:08:48.420Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="2tWtyZLnezZDoV2Z9qlL" version="24.1.0" type="device">
-  <diagram name="第 1 页" id="YL47JlAGUUtBwKxKtPTE">
-    <mxGraphModel dx="794" dy="625" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile host="Electron" modified="2024-08-05T04:02:46.131Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="ShH5_MRUX9dsFPWpeseT" version="24.1.0" type="device" pages="2">
+  <diagram name="开发流程" id="YL47JlAGUUtBwKxKtPTE">
+    <mxGraphModel dx="985" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -56,6 +56,23 @@
         </mxCell>
         <mxCell id="Pp3jxUVswInTaNemzzxk-14" value="Flink SQL Cli + Standalone 集群&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
           <mxGeometry x="900" y="670" width="190" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="N7YUFuowGtmO8gIGPzGh" name="第 2 页">
+    <mxGraphModel dx="1385" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hYuIp_sJQfJsNLxbWSyT-3" value="CliClient#print()" style="rounded=1;whiteSpace=wrap;html=1;gradientColor=none;fillColor=default;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="210" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hYuIp_sJQfJsNLxbWSyT-4" value="StatementResultPrinter#StatementResultPrinter()" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="80" y="310" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="hYuIp_sJQfJsNLxbWSyT-6" value="&lt;span style=&quot;text-align: left;&quot;&gt;CliClient#getAndExecuteStatements()&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="110" width="240" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
