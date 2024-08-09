@@ -51,7 +51,7 @@ VM options:
 
 Main class: org.apache.flink.table.client.SqlClient     
 Program arguments:  --jar [flink-sql-client 模块编译打包后的 jar], 下面是本人的示例路径：`D:\Code\Java\flink-all\flink_release-1.17\flink-table\flink-sql-client\target\flink-sql-client-1.17-SNAPSHOT.jar`    
-Environment variables: FLINK_CONF_DIR=./devcliconf       
+Environment variables: FLINK_CONF_DIR=./devsqlclientconf       
 
 打开项目的`Project Structure`窗口，选择`flink-sql-clients`Module,再添加 Dependencies。     
 ![sqlclidebug01](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclidebug01.png)          
