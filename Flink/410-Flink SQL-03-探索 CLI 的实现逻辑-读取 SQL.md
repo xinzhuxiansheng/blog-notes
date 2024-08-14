@@ -62,22 +62,22 @@ Note SQL Client only supports connecting to the REST Endpoint since version v2.
 See SQL Client startup options below for more details.
 ``` 
 
-![sqlclientstartup03](images/sqlclientstartup03.png)   
+![sqlclientstartup03](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup03.png)   
 
 接下来，我们接着探索`org.apache.flink.table.client.SqlClient#main()`的实现逻辑。     
 
 >### Jline3   
 Flink SQL Cli 终端交互是使用`Jline3`,在很多 Java开发的 Cli 项目中使用的是 Jline3或者 Jline（版本差异），它确实非常好用，大家可访问官网地址：https://github.com/jline/jline3，了解更多它的实现细节，上手的话，可从官网提供的 Demo 入手`https://github.com/jline/jline3/wiki/Demos`, 如果你要调试 Jline3 的 Demo (有2处需要注意：第一处jline-terminal-ffm 需要jdk 22，其他是 jdk1.8， 第二处：若是 使用Windows，建议使用 `JetBrains GateWay`开发工具对 Linux平台远程开发，避免不兼容 Windows)。
 
-![sqlclientstartup04](images/sqlclientstartup04.png)     
+![sqlclientstartup04](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup04.png)     
 
 Jline3 仅是 SQL 输入方式和输出方式的一种实现，该篇 Blog 不会太多介绍如何输入，若将 Jline3换成 Web CLI 仅仅是输入、输出方式发生改变，但并不会影响其内部实现，关于 Jline3所关心的重心是 SQL 是从 Jline3的哪个方法读取出来的，针对多行是如何处理，怎么判断SQL输入结束。对于Jline3的使用，大多数是混个`脸熟`。   
 
-![sqlclientstartup05](images/sqlclientstartup05.png)          
+![sqlclientstartup05](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup05.png)          
 
 ## 入口 main   
 `org.apache.flink.table.client.SqlClient#main()`是 Sql Cli 的入口 main()方法, 下面通过一个逻辑图快速的跳入`SqlClient#start()`方法。     
-![sqlclientstartup06](images/sqlclientstartup06.png)    
+![sqlclientstartup06](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup06.png)    
 
 **SqlClient#start()**  
 ```java
@@ -114,7 +114,9 @@ EmbeddedGateway embeddedGateway = EmbeddedGateway.create(defaultContext);
 ```
 `EmbeddedGateway.create()`创建了一个 HTTP Server 服务，因为它是内嵌模式，所以它的 host 值是`localhost`,其 port 是由`NetUtils#getAvailablePort()`方法随机生成的，因为它使用`ServerSocket serverSocket = new ServerSocket(0)`,当 ServerSocket 构造方法传入的是 0时，会请求系统分配一个空闲端口，还有特别的 `FileLock` 文件锁的处理逻辑。像 SqlClient进程，经常会出现在同一台机器上可能启动多个，它们都需要动态分配端口，那么文件锁可以确保在同一时间只有一个进程能够成功锁定一个特定的端口文件，确保端口唯一性和进程间的互斥访问。`这是个不错的解决方案`。     
 
-![sqlclientstartup08](images/sqlclientstartup08.png)       
+![sqlclientstartup08](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup08.png)     
+
+![sqlclientstartup08](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup07.png)  
 
 ```java
 public static EmbeddedGateway create(DefaultContext defaultContext) {
@@ -143,7 +145,7 @@ public static EmbeddedGateway create(DefaultContext defaultContext) {
 ```
 
 create()方法中创建 SqlGateway 对象，这里我们先忽略一些非主干的逻辑（当时认为的非主干，大多数用到，再去看会更深刻），通过`SqlGateway#start()`调用到`endpoint.start()`。    
-![sqlclientstartup09](images/sqlclientstartup09.png)  
+![sqlclientstartup09](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup09.png)  
 
 **SqlGateway#start()**  
 ```java
@@ -168,12 +170,12 @@ public void start() throws Exception {
 `SqlGatewayEndpointFactoryUtils.createSqlGatewayEndpoint()` 得到的是`SqlGatewayRestEndpoint`对象，在调用`endpoint.start()`方法时触发的是`RestServerEndpoint#start()`方法。     
 
 如果你看过我之前 Blog`Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph`，内容中简单介绍过`Flink Web UI`的`WebMonitorEndpoint`的启动过程，Flink Web UI的 HTTP Server 是由`WebMonitorEndpoint`提供的（它是由 Netty实现的 Server），我在调试`Show Plan`功能时会频繁涉及到 Netty Handler的处理流程，如下图：   
-![sqlclientstartup01](images/sqlclientstartup01.png)     
+![sqlclientstartup01](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup01.png)     
 
-![sqlclientstartup02](images/sqlclientstartup02.png)
+![sqlclientstartup02](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup02.png)
  
 那看下 `SqlGatewayRestEndpoint类图`：     
-![sqlclientstartup10](images/sqlclientstartup10.png)   
+![sqlclientstartup10](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup10.png)   
 
 SqlGatewayRestEndpoint 和 WebMonitorEndpoint 同样继承 RestServerEndpoint，其实到这里，`盲猜`都可以理解到任何一个类继承了`RestServerEndpoint` 代表着会启动一个 Netty Server。 :)    
 
@@ -197,7 +199,7 @@ Netty Server 的 `Handlers` 才是 Server的处理核心,若这句话不太了�
 ```
 
 下面图片展示的是`Executor.create()` 的核心流程。     
-![sqlclientstartup11](images/sqlclientstartup11.png)     
+![sqlclientstartup11](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup11.png)     
 
 首先是创建线程池用于初始化`RestClient`（后续网络是由 RestClient 发起），拼接`v2/seesion`请求，首次进行网络请求，参数中包含 sessionName 和 flink 配置参数，其中 sessionName 默认是"default"，SqlGatewayRestEndpoint 的 `OpenSessionHandler#handleRequest()`方法来处理`v2/seesion`请求，它会返回一个唯一的 UUID，作为当前 Seesion 标识；     
 
@@ -243,10 +245,10 @@ registry.registerCloseable(restClient);
 
 在之前 Blog`Flink 源码 - Standalone - 通过 StreamWordCount 探索 ValueState`介绍过根据 type 创建对应的 State，若读者看过之后，暂时没有印象，可回去阅读 Blog`Flink 源码 - Standalone - 通过 StreamWordCount 探索 ValueState`。        
 如下图所示：    
-![sqlclientstartup12](images/sqlclientstartup12.png)     
+![sqlclientstartup12](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup12.png)     
 
 `executorService::shutdownNow`与 `(StateCreateFactory) HeapValueState::create`使用略微有些不同，在之前 Blog`Flink 源码 - Standalone - 通过 StreamWordCount 探索 ValueState`介绍`(StateCreateFactory) HeapValueState::create`的时候，强调过`StateCreateFactory`接口的`createState()`方法与`HeapValueState::create`方法的返回值和形参是一模一样，但`executorService::shutdownNow`并不是，它返回的是`List<Runnable>`, 我自己当时看到的时候也很懵逼，这块大家可以这么理解：
-![sqlclientstartup13](images/sqlclientstartup13.png)    
+![sqlclientstartup13](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup13.png)    
  
 首先，方法引用会被自动转换为一个符合目标函数式接口的实例,当`executorService::shutdownNow` 被传递给 `registerCloseable()`方法时，它期待一个 AutoCloseable 实例。而 AutoCloseable 接口只有一个方法：   
 ```java
@@ -339,14 +341,14 @@ Mode "embedded" (default) submits Flink jobs from the local machine.
 `cli.executeInInteractiveMode();`是我们要重点关注的方法，获取Jline3 `terminal`,创建`LineReader`对象读取输入的 SQL 内容;      
 
 若你和我一样，对 Jline3 没有深入了解过，我觉得也没必要过多补它的知识点，因为 Jline3 它的几个核心类负责的功能模块划分的挺清晰的（可以把 Jline3 源码中demo 示例跑一跑），例如： LineReader 负责读取输入内容，但它在`CliClient#getAndExecuteStatements()`方法中依然是通过`While(true)`来拼接输入内容。       
-![sqlclientstartup14](images/sqlclientstartup14.png)   
+![sqlclientstartup14](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup14.png)   
 
 ```java
 LineReader lineReader = createLineReader(terminal, ExecutionMode.INTERACTIVE_EXECUTION);     
 ```
 `createLineReader()`方法创建了 Jline3的核心类，它负责读取输入的内容，这里特别注意`SqlMultiLineParser`,它会作为 LineReader对象的一部分，负责对输入的内容进行解析。它继承了`Jline3 的 DefaultParser`，它是一种默认实现（在 Jline3 源码中Repl demo示例中直接使用了`DefaultParser`）  
 **Jline3 源码 org.jline.demo.Repl#main()**  
-![sqlclientstartup15](images/sqlclientstartup15.png)      
+![sqlclientstartup15](http://img.xinzhuxiansheng.com/blogimgs/flink/sqlclientstartup15.png)      
 
 **SqlMultiLineParser#parse()**  
 ```java   
