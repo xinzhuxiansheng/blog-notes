@@ -84,7 +84,7 @@ WITH
 (
   'connector' = 'jdbc',
   'table-name' = 'yzhou_test02',
-  'url' = 'jdbc:mysql://192.168.0.202:3306/yzhou_test',
+  'url' = 'jdbc:mysql://192.168.0.201:3306/yzhou_test',
   'username' = 'root',
   'password' = '123456'
 );
