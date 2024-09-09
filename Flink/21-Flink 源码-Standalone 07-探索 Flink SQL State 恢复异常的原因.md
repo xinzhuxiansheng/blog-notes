@@ -1,10 +1,10 @@
 # Flink 源码 - Standalone - 探索 Flink SQL State 恢复异常的原因
 
->Flink version: 1.15.1，1.15.4      
+>Flink version: 1.15.1，1.15.4        
 
 ## 引言(背景)   
 使用 Flink Table API 开发的的一个 Jar Job，使用 Flink WEB UI “Submit New Job”功能部署 Job，发现在 Flink 1.15.1的 Standalone集群部署 Job 时，无法从 Checkpoint/Savepoint 恢复 Job（注意，Jar Job并没有做任何调整）。       
-![useckrecoverysqljob01](images/useckrecoverysqljob01.png)       
+![useckrecoverysqljob01](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob01.png)       
 
 **Flink Standalone Log（`flink-root-standalonesession-xxx.log`） 会报出以下异常信息：**        
 ```bash
@@ -140,20 +140,20 @@ git switch new-branch
 ```
 
 **3.配置 Remote JVM Debug**   
-![useckrecoverysqljob02](images/useckrecoverysqljob02.png)      
+![useckrecoverysqljob02](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob02.png)      
 
 ### 2.定位异常点      
 ```java
 at org.apache.flink.runtime.checkpoint.Checkpoints.throwNonRestoredStateException(Checkpoints.java:233) ~[flink-dist-1.15.1.jar:1.15.1]
 ```
-![useckrecoverysqljob03](images/useckrecoverysqljob03.png)    
+![useckrecoverysqljob03](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob03.png)    
 
 >此处特别注意： 源码要与异常信息中提示的类名，行号都要对应上。     
 
 ## 分析异常  
 ### 1.定位代码，了解异常方法的上下调用关系      
 在 Idea 中通过断点调试查看`方法栈`的链路关系，或者通过`Hierarchy`查看调用关系，大多数情况下，断点调试的`方法栈`更让我们可以快速了解方法的调用关系以及`栈帧`中涉及到的变量值。（具备代码定位能力也非常重要， 而理解代码处理逻辑就交给 Chatgpt来吧， 开个玩笑，但借助AI 理解代码也是一个不错的方式，当然准确性还需你抉择）     
-![useckrecoverysqljob04](images/useckrecoverysqljob04.png)    
+![useckrecoverysqljob04](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob04.png)    
 
 ### 2.源码分析   
 通过`开启远程调试，观察 Idea 的方法栈`，很容易定位到`Checkpoints#loadAndValidateCheckpoint()并且 行号：197 行`方法 。   
@@ -263,10 +263,10 @@ public static CompletedCheckpoint loadAndValidateCheckpoint(
 若`operatorSubtaskState.hasState()`存在 State,则会报出`Cannot map checkpoint/savepoint state for operator`（Flink 优秀的开发者他们定义变量名时太准确了）。       
 
 查看`Checkpoints#loadAndValidateCheckpoint()`中的 if else 语句，了解是什么情况会进去`该 else`以及我们期望它应该进入哪个？。         
-![useckrecoverysqljob05](images/useckrecoverysqljob05.png)    
+![useckrecoverysqljob05](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob05.png)    
 
 `allowNonRestoredState else`很容易排除，因为我没有设置`allowNonRestoredState=true`，剩下的就只剩`executionJobVertex !=null`;      
-![useckrecoverysqljob06](images/useckrecoverysqljob06.png)     
+![useckrecoverysqljob06](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob06.png)     
 
 通过`operatorToJobVertexMapping.get(operatorState.getOperatorID());` 判断operatorId 是否存在，正确情况下，若要 State 完全恢复，则作业的算子 hash 要与 State记录的 operatorId 保持一致，所以在该案例中，DAG 和并行度不调整情况下，理因做到100% 匹配。   
 
@@ -275,10 +275,10 @@ public static CompletedCheckpoint loadAndValidateCheckpoint(
 ### 变（算子 Hash 值） 
 在 `Flink 1.15.1` 中 ，作业从 Checkpoint/Savepoint 恢复作业时，从两次执行结果来看，他们的 jobGraph 中的算子节点 Id是`不相同`。   
 **第一次**   
-![useckrecoverysqljob07](images/useckrecoverysqljob07.png)       
+![useckrecoverysqljob07](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob07.png)       
 
 **第二次**     
-![useckrecoverysqljob08](images/useckrecoverysqljob08.png)        
+![useckrecoverysqljob08](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob08.png)        
 
 `EmbeddedExecutor#submitAndGetJobClientFuture()`方法生成的 jobGraph时, 每个Chain 链对应的顶点节点以及内部 operatorIDS 不同的。    
 
@@ -286,26 +286,26 @@ public static CompletedCheckpoint loadAndValidateCheckpoint(
 在 `Flink 1.15.4` 中，作业从 Checkpoint/Savepoint 恢复作业时，从两次执行结果来看，他们的 jobGraph 中的算子节点 Id 是`相同的`。   
 
 **第一次**  
-![useckrecoverysqljob09](images/useckrecoverysqljob11.png)     
+![useckrecoverysqljob09](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob11.png)     
 
 **第二次**  
-![useckrecoverysqljob10](images/useckrecoverysqljob10.png)     
+![useckrecoverysqljob10](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob10.png)     
 
 `EmbeddedExecutor#submitAndGetJobClientFuture()`方法生成的 jobGraph时, 每个Chain 链对应的顶点节点以及内部 operatorIDS 是相同的。      
 
 
 ### 小结 
 同样的作业 Jar，在改变 DAG和并行度的情况的，使用 Flink 1.15.1 恢复作业时，算子 Hash 值会变，我们也可以对比下 1.15.1 下的 DAG 与 1.15.4 下的 DAG 图两者没有区别 
-![useckrecoverysqljob12](images/useckrecoverysqljob12.png) 
-![useckrecoverysqljob13](images/useckrecoverysqljob13.png)   
+![useckrecoverysqljob12](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob12.png) 
+![useckrecoverysqljob13](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob13.png)   
 
 
 ## 算子 hash值  
 在"变与不变"的章节中算子 ID对比结果来看，在开启Checkpoint 之后，若作业要从 State正确恢复，那它的算子ID 是不应该发生改变的。在`StreamingJobGraphGenerator#createJobGraph()`方法在创建 JobGraph的时候，会先利用 StreamGraph 的 StreamNode 关系，根据是否可以构建 Chain 链路 来生成算子 hash值。   
-![useckrecoverysqljob14](images/useckrecoverysqljob14.png) 
+![useckrecoverysqljob14](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob14.png) 
 
 **StreamingJobGraphGenerator#createJobGraph():**    
-![useckrecoverysqljob15](images/useckrecoverysqljob15.png)    
+![useckrecoverysqljob15](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob15.png)    
 
 >关于 Flink Job 构建 StreamGraph以及 StreamGraph转 JobGraph 过程，可参考之前 Blog `Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 StreamGraph`,`Flink 源码 - Standalone - 探索 Flink Stream Job Show Plan 实现过程 - 构建 JobGraph`， **这两篇对于解决该问题尤其重要，因为该篇不会梳理整体流程，而是关注重点。**  
 
@@ -376,9 +376,18 @@ private boolean generateNodeHash(
 }
 ```
 `StreamGraphHasherV2#generateNodeHash()` 方法会优先根据`TransformationUID`来生成 hash，注意，此时的 hash 与以往不同，它是根据 chain 链中的节点个数来确定生成。 此时，我们分别调试下 Flink 1.15.4 和 Flink 1.15.1 的代码实现：    
-![useckrecoverysqljob16](images/useckrecoverysqljob16.png)  
+![useckrecoverysqljob16](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob16.png)  
 
-此时你应该看出他们的差别点： Flink 1.15.1 会给 StreamNode 赋值一个 `transformationUID`(例如：`1_stream-exec-table-source-scan_1_source`), 而 Flink 1.15.4 默认是 null, 大家可以将断点打到 `ExecNodeContext#generateUid()`方法上，
+此时你应该看出他们的差别点： Flink 1.15.1 会给 StreamNode 赋值一个 `transformationUID`(例如：`1_stream-exec-table-source-scan_1_source`), 而 Flink 1.15.4 默认是 null, 很显然 Flink 1.15.4会走 `if逻辑`，而 Flink 1.15.1 会走 `else逻辑`, 在 else逻辑中会调用`StreamGraphHasherV2#generateUserSpecifiedHash()`方法，它直接将`ode.getTransformationUID()`放入 hasher集合中。    
+```java
+private byte[] generateUserSpecifiedHash(StreamNode node, Hasher hasher) {
+    hasher.putString(node.getTransformationUID(), Charset.forName("UTF-8"));
+
+    return hasher.hash().asBytes();
+}
+```
+
+关于 transformationUID赋值逻辑，可在`ExecNodeContext#generateUid()`方法上打上断点调试。     
 ```java
 public String generateUid(String transformationName) {
     if (!transformationNamePattern.matcher(transformationName).matches()) {
@@ -391,7 +400,7 @@ public String generateUid(String transformationName) {
     return String.format("%s_%s_%s", getId(), getTypeAsString(), transformationName);
 }
 ```   
-![useckrecoverysqljob17](images/useckrecoverysqljob17.png)    
+![useckrecoverysqljob17](http://img.xinzhuxiansheng.com/blogimgs/flink/useckrecoverysqljob17.png)    
 
 由`ExecNodeContext#generateUid()`方法可知，Flink SQL 的`TransformationUID` 由3个元素组成`String.format("%s_%s_%s", getId(), getTypeAsString(), transformationName)`, 在 Flink getId()是一个单调递增的数值，所以在 Flink Standalone集群模式下部署 Job，getId()一定是改变的。    
 
