@@ -416,8 +416,139 @@ if (configuration.getBoolean(DeploymentOptions.ATTACHED)
 ### 运行任务  
 ```java
 runJob(createJobMasterRunner(jobGraph), ExecutionType.SUBMISSION);
-```
+```   
 
+
+创建 JobManagerRunner   
+
+
+
+每提交一个Flink Job 都会创建 JobManagerRunner 
+
+
+这段代码的主要功能是创建一个 `JobManagerRunner` 实例，用于在 Flink 中管理作业的执行。`JobManagerRunner` 是 Flink 的核心组件之一，负责协调和控制分布式作业的生命周期、资源调度、高可用性（HA）、容错处理等。
+
+以下是代码的详细解释：
+
+### 方法签名
+```java
+public JobManagerRunner createJobManagerRunner(
+        JobGraph jobGraph,
+        Configuration configuration,
+        RpcService rpcService,
+        HighAvailabilityServices highAvailabilityServices,
+        HeartbeatServices heartbeatServices,
+        JobManagerSharedServices jobManagerServices,
+        JobManagerJobMetricGroupFactory jobManagerJobMetricGroupFactory,
+        FatalErrorHandler fatalErrorHandler,
+        long initializationTimestamp)
+        throws Exception
+```
+- **参数**：
+  - `JobGraph jobGraph`：Flink 作业的有向无环图（DAG），定义了作业的计算拓扑结构。
+  - `Configuration configuration`：包含作业和集群的配置信息。
+  - `RpcService rpcService`：远程过程调用服务，支持 Flink 分布式组件之间的通信。
+  - `HighAvailabilityServices highAvailabilityServices`：高可用服务，支持在发生故障时恢复作业状态。
+  - `HeartbeatServices heartbeatServices`：心跳服务，监控分布式组件的存活状态。
+  - `JobManagerSharedServices jobManagerServices`：JobManager 的共享服务，如 I/O 线程池和缓存管理等。
+  - `JobManagerJobMetricGroupFactory jobManagerJobMetricGroupFactory`：用于创建度量指标组，用于监控作业的运行状况。
+  - `FatalErrorHandler fatalErrorHandler`：处理运行期间发生的致命错误。
+  - `initializationTimestamp`：作业初始化的时间戳。
+
+### 主要代码解释
+
+1. **检查作业是否为空**：
+   ```java
+   checkArgument(jobGraph.getNumberOfVertices() > 0, "The given job is empty");
+   ```
+   - 确保 `JobGraph` 中至少有一个顶点（任务）。如果作业为空，则抛出异常。
+
+2. **创建 `JobMasterConfiguration`**：
+   ```java
+   final JobMasterConfiguration jobMasterConfiguration =
+            JobMasterConfiguration.fromConfiguration(configuration);
+   ```
+   - 从传入的 `Configuration` 创建 `JobMasterConfiguration`，用于配置 `JobMaster`，包括调度器模式、容错设置等。
+
+3. **获取作业结果存储（JobResultStore）**：
+   ```java
+   final JobResultStore jobResultStore = highAvailabilityServices.getJobResultStore();
+   ```
+   - 通过高可用服务获取 `JobResultStore`，用于存储作业的最终结果，支持在高可用模式下恢复。
+
+4. **获取领导选举服务（LeaderElectionService）**：
+   ```java
+   final LeaderElectionService jobManagerLeaderElectionService =
+            highAvailabilityServices.getJobManagerLeaderElectionService(jobGraph.getJobID());
+   ```
+   - 为当前 `JobGraph` 的 `JobID` 获取领导选举服务，用于选举出 JobManager 的领导实例，在高可用模式下确保作业有唯一的主控节点。
+
+5. **创建 Slot Pool 和调度器工厂**：
+   ```java
+   final SlotPoolServiceSchedulerFactory slotPoolServiceSchedulerFactory =
+            DefaultSlotPoolServiceSchedulerFactory.fromConfiguration(
+                    configuration, jobGraph.getJobType(), jobGraph.isDynamic());
+   ```
+   - 创建 `SlotPoolServiceSchedulerFactory`，根据作业的类型和配置生成 Slot Pool（管理 TaskManager 的计算资源）和调度器工厂。
+   - 如果 `JobMasterConfiguration` 的调度模式为 `REACTIVE`，则检查是否使用了自适应调度器（Adaptive Scheduler）。
+
+6. **管理类加载器的租赁**：
+   ```java
+   final LibraryCacheManager.ClassLoaderLease classLoaderLease =
+            jobManagerServices.getLibraryCacheManager()
+                    .registerClassLoaderLease(jobGraph.getJobID());
+   final ClassLoader userCodeClassLoader =
+            classLoaderLease.getOrResolveClassLoader(
+                    jobGraph.getUserJarBlobKeys(), jobGraph.getClasspaths())
+                    .asClassLoader();
+   ```
+   - 获取类加载器租赁，用于加载用户提交的作业代码和依赖的 Jar 包。`getOrResolveClassLoader()` 负责根据作业的依赖创建类加载器。
+
+7. **创建 `JobMasterServiceFactory`**：
+   ```java
+   final DefaultJobMasterServiceFactory jobMasterServiceFactory =
+            new DefaultJobMasterServiceFactory(
+                    jobManagerServices.getIoExecutor(),
+                    rpcService,
+                    jobMasterConfiguration,
+                    jobGraph,
+                    highAvailabilityServices,
+                    slotPoolServiceSchedulerFactory,
+                    jobManagerServices,
+                    heartbeatServices,
+                    jobManagerJobMetricGroupFactory,
+                    fatalErrorHandler,
+                    userCodeClassLoader,
+                    initializationTimestamp);
+   ```
+   - 创建 `JobMasterServiceFactory`，用于生成 `JobMaster` 服务实例。`JobMaster` 负责调度作业和管理资源。
+   - 其中包含 `RpcService`、心跳服务、调度器、类加载器、I/O 线程池等必要的服务和资源。
+
+8. **创建 `JobMasterServiceProcessFactory`**：
+   ```java
+   final DefaultJobMasterServiceProcessFactory jobMasterServiceProcessFactory =
+            new DefaultJobMasterServiceProcessFactory(
+                    jobGraph.getJobID(),
+                    jobGraph.getName(),
+                    jobGraph.getCheckpointingSettings(),
+                    initializationTimestamp,
+                    jobMasterServiceFactory);
+   ```
+   - 创建 `JobMasterServiceProcessFactory`，用于管理 `JobMaster` 服务的生命周期，处理作业检查点和作业恢复。
+
+9. **返回 `JobMasterServiceLeadershipRunner` 实例**：
+   ```java
+   return new JobMasterServiceLeadershipRunner(
+            jobMasterServiceProcessFactory,
+            jobManagerLeaderElectionService,
+            jobResultStore,
+            classLoaderLease,
+            fatalErrorHandler);
+   ```
+   - 最终返回 `JobMasterServiceLeadershipRunner`，它结合了领导选举服务、作业结果存储和类加载器租赁，负责启动和管理 `JobMaster`，并在领导选举中胜出时掌管作业执行。
+
+### 总结
+这段代码的作用是通过各种配置和服务，生成一个用于作业管理的 `JobManagerRunner`。它通过心跳机制、领导选举、高可用性服务等机制确保 Flink 作业能够可靠、高效地在分布式环境中执行，并具备故障恢复能力。
 
 
 
