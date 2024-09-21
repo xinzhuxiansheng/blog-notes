@@ -386,6 +386,29 @@ public class StreamWordCount {
 以上操作，我们完成了 Flink Standalone HA的测试，让我们回到主线，`Dispatcher#persistAndRunJob()`中的`jobGraphWriter`, 在 Standalone HA模式下它对应的实现类是`DefaultJobGraphStore`。      
 ![executiongraph06](images/executiongraph06.png)      
 
+**hdfs 存储**  
+![executiongraph08](images/executiongraph08.png)   
+
+**zookeeper 存储**    
+zookeeper 中记录的 JobGraph 提交的 Client IP，提交作业时会创建`/{zookeeper.path.root}/{cluster-id}/jobgraphs/{jobID}`路径。
+
+```bash
+[zk: localhost:2181(CONNECTED) 15]
+[zk: localhost:2181(CONNECTED) 15]
+[zk: localhost:2181(CONNECTED) 15] ls /flink-standalone-ha/standalone-cluster/jobgraphs
+[7d616f96620eceb016e69441fd3dd046]
+[zk: localhost:2181(CONNECTED) 16] ls /flink-standalone-ha/standalone-cluster/jobgraphs/7d616f96620eceb016e69441fd3dd046
+[locks]
+[zk: localhost:2181(CONNECTED) 17] ls /flink-standalone-ha/standalone-cluster/jobgraphs/7d616f96620eceb016e69441fd3dd046/locks
+[]
+[zk: localhost:2181(CONNECTED) 18] get /flink-standalone-ha/standalone-cluster/jobgraphs/7d616f96620eceb016e69441fd3dd046/locks
+192.168.0.201
+[zk: localhost:2181(CONNECTED) 19]
+```
+
+>注意，这里涉及到 JobManager的一个组件 BlobServer，它主要负责管理二进制大文件的服务，比如保存用户上传的 Jar 文件，该篇 Blog 不做过多介绍，后面的文章中会再介绍。    
+
+
 ### 根据过期时间配置心跳任务    
 ```java
 initJobClientExpiredTime(jobGraph);
@@ -551,6 +574,13 @@ public JobManagerRunner createJobManagerRunner(
 这段代码的作用是通过各种配置和服务，生成一个用于作业管理的 `JobManagerRunner`。它通过心跳机制、领导选举、高可用性服务等机制确保 Flink 作业能够可靠、高效地在分布式环境中执行，并具备故障恢复能力。
 
 
+
+
+
+
+
+
+`Dispatcher`为每个作业创建一个 JobManagerRunner，
 
 
 

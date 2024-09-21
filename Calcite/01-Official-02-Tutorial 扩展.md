@@ -1,4 +1,4 @@
-# Official - Tutorial 扩展
+# Calcite - Official - Tutorial 扩展     
 
 ## 引言  
 这是一个分步教程，展示如何构建和连接到 Calcite。 它使用一个简单的适配器，使 CSV 文件的目录看起来像是包含表的架构。 Calcite 完成剩下的工作，并提供完整的 SQL 接口。  
@@ -54,7 +54,7 @@ sqlline>
 >注意：如果你运行环境是 Windows，则命令为 sqlline.bat。       
 
 >使用 gradlew 脚本对 calcite源码进行编译，意味着，我们并不需要提前安装 Gradle, 可参考官网文档给的说明：https://calcite.apache.org/docs/howto.html#gradle-vs-the-gradle-wrapper      
-![tutorial09](images/tutorial09.png)   
+![tutorial09](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial09.png)   
 
 ## 查询
 现在让我们使用 sqlline（本项目中包含的 SQL shell）连接到 Calcite。      
@@ -79,7 +79,7 @@ Transaction isolation level TRANSACTION_REPEATABLE_READ is not supported. Defaul
 ```shell
 0: jdbc:calcite:model=src/test/resources/mode> !tables  
 ``` 
-![tutorial01](images/tutorial01.png)     
+![tutorial01](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial01.png)     
 
 （JDBC 请注意：sqlline 的 !tables 命令只是在后台执行 DatabaseMetaData.getTables()。它还有其他命令来查询 JDBC 元数据，例如 !columns 和 !describe。）         
 
@@ -91,7 +91,7 @@ Transaction isolation level TRANSACTION_REPEATABLE_READ is not supported. Defaul
 ```shell    
 0: jdbc:calcite:model=src/test/resources/mode> SELECT * FROM emps;  
 ``` 
-![tutorial02](images/tutorial02.png)        
+![tutorial02](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial02.png)        
 
 Now JOIN and GROUP BY:      
 ```sql
@@ -99,13 +99,13 @@ SELECT d.name, COUNT(*)
 FROM emps AS e JOIN depts AS d ON e.deptno = d.deptno
 GROUP BY d.name;
 ```
-![tutorial03](images/tutorial03.png)    
+![tutorial03](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial03.png)    
 
 最后，VALUES 运算符生成单行，是测试表达式和 SQL 内置函数的便捷方法：    
 ```shell
 0: jdbc:calcite:model=src/test/resources/mode> VALUES CHAR_LENGTH('Hello, ' || 'world!');   
 ```
-![tutorial04](images/tutorial04.png)    
+![tutorial04](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial04.png)    
 
 Calcite 还有许多其他 SQL 功能。我们没有时间在这里介绍它们。编写更多查询来进行实验。      
 
@@ -302,7 +302,7 @@ JSON 并不能让编写长字符串变得容易，因此 Calcite 支持替代语
 ```sql
 SELECT e.name, d.name FROM female_emps AS e JOIN depts AS d on e.deptno = d.deptno; 
 ```
-![tutorial05](images/tutorial05.png)  
+![tutorial05](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial05.png)  
 
 ### Custom tables 
 自定义表是其实现由用户定义的代码驱动的表, 它们不需要存在于`custom schema`中。         
@@ -345,7 +345,7 @@ cd calcite/example/csv
 SELECT empno, name FROM custom_table.emps;    
 ``` 
 
-![tutorial06](images/tutorial06.png)  
+![tutorial06](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial06.png)  
 
 该Schema 是常规模式，包含一个由 org.apache.calcite.adapter.csv.CsvTableFactory 支持的自定义表，该表实现了 Calcite 接口 TableFactory。它的 create 方法实例化一个 `CsvScannableTable`，传入模型文件中的文件参数：   
 ```java 
@@ -395,7 +395,7 @@ public CsvTable create(SchemaPlus schema, String name,
 
 explain plan for select name from emps;  
 ```
-![tutorial07](images/tutorial07.png)  
+![tutorial07](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial07.png)  
 
 ```shell
 ./sqlline
@@ -404,7 +404,7 @@ explain plan for select name from emps;
 explain plan for select name from emps;   
 ```  
 
-![tutorial08](images/tutorial08.png)    
+![tutorial08](http://img.xinzhuxiansheng.com/blogimgs/calcite/tutorial08.png)    
 
 `是什么原因导致计划出现差异？`让我们追踪证据的踪迹。在 smart.json 模型文件中，只有一行：  
 ```
@@ -677,13 +677,11 @@ PS D:\Code\Java\calcite\example\csv>
 }   
 ```
 
-## 
-
 你可以使用此方法在任何类型的模式（而不仅仅是 JDBC）上创建克隆模式。   
 克隆适配器并不是万能的。我们计划开发更复杂的缓存策略，以及更完整、更高效的内存表实现，但现在克隆 JDBC 适配器展示了可能性，并允许我们尝试初始实现。   
 
 ### Further topics (更多主题)   
 还有许多其他方法可以扩展 Calcite，本教程中尚未描述。适配器(https://calcite.apache.org/docs/adapter.html)规范描述了所涉及的 API。       
 
-refer 
-1.https://calcite.apache.org/docs/tutorial.html      
+refer   
+1.https://calcite.apache.org/docs/tutorial.html           
