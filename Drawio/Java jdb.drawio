@@ -1,0 +1,46 @@
+<mxfile host="Electron" modified="2024-09-21T15:16:14.132Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="zcg3bBKufZj3NSZVdUmh" version="24.1.0" type="device">
+  <diagram name="第 1 页" id="ctdspbpMPcjvzOSW9V5R">
+    <mxGraphModel dx="1769" dy="1070" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="140" y="190" width="470" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-2" value="linux server env" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="140" y="160" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-3" value="my java service (JVM)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="200" y="310" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#66B2FF;" edge="1" parent="1" source="oRWoxHyqN81-MnH7r5Js-4" target="oRWoxHyqN81-MnH7r5Js-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#97D077;" edge="1" parent="1" source="oRWoxHyqN81-MnH7r5Js-4" target="oRWoxHyqN81-MnH7r5Js-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-4" value="Start a JDB Session" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="140" y="610" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-5" value="使用 JDB 替代 JAVA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="360" y="510" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-6" value="使用 JDB Remote JVM Debug" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="360" y="700" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-10" value="Breakpoints" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="710" y="610" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-11" value="stop at (eg: MyClass:22)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="980" y="470" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-12" value="stop in (eg: MyClass:22)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="980" y="610" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="oRWoxHyqN81-MnH7r5Js-13" value="stop in (eg: MyClass.&amp;lt;clinit&amp;gt;)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="980" y="750" width="230" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
