@@ -1,10 +1,10 @@
 # JDK Tools - jdb - 入门与实践    
 
->Java version: 11
+>Java version: 11    
 
 ## 背景  
 "假设" 你身处一个`无可视化`环境中，如何对 java 程序进行排错呢？（ps：在无特别说明的情况下，默认是 Linux Server环境，不包含桌面）。    
-![javajdb01](images/javajdb01.png)       
+![javajdb01](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb01.png)       
 
 通过上面描述的背景，来引出 jdb。     
 
@@ -22,8 +22,7 @@
 **2.** Synopsis 如下：  
 ```bash
 jdb [options] [classname] [arguments]   
-```
-
+```   
 `options`           
 This represents the jdb command-line options. See Options for the jdb command.          
 
@@ -33,11 +32,7 @@ This represents the name of the main class to debug.
 `arguments`             
 This represents the arguments that are passed to the main() method of the class.
 
-
-
-
-
-下面我们通过 `jdb --help`了解它包含的参数 
+>下面我们通过 `jdb --help`了解它包含的参数 
 
 ```bash
 [root@vm03 bin]# jdb --help
@@ -321,13 +316,13 @@ jdb -classpath javamain-netty-1.0-SNAPSHOT.jar com.javamain.netty.example02.Nett
 **1.** 使用 JDB 替代 JAVA 启动程序     
 **2.** 使用 JDB Remote JVM Debug               
 
-![javajdb04](images/javajdb04.png)               
+![javajdb04](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb04.png)               
 
 下面来分别介绍它们。    
 
 ### 使用 jdb 替代 java 启动程序    
 执行 `jdb -classpath javamain-netty-1.0-SNAPSHOT.jar com.javamain.netty.example02.NettyHttpServer` 命令后，终端会进入一个交互输入的界面： 
-![](images/javajdb02.png)     
+![](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb02.png)     
 
 ```bash
 [root@vm03 service]# jdb -classpath javamain-netty-1.0-SNAPSHOT.jar com.javamain.netty.example02.NettyHttpServer
@@ -337,7 +332,7 @@ Initializing jdb ...
 
 此时输入 `run`   
 
-![javajdb03](images/javajdb03.png)   
+![javajdb03](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb03.png)   
 
 回车后，会发现终端会打印 Netty Http Server启动 log：            
 ```bash
@@ -371,7 +366,7 @@ nohup java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 
 **2.** 执行`sh start.sh` 命令，启动 Netty Http Server。再调用 curl 请求接口，判断服务是否正常启动。     
 
 **3.** 执行 `jdb -attach 5005` 访问远程调试端口     
-![javajdb05](images/javajdb05.png)
+![javajdb05](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb05.png)
 
 因为远程调试时可通过`suspend=y/n` 配置控制服务可调试的启动阶段不同，所以远程调试与 使用 jdb 替代 java 启动程序在`代码调试范围没有什么差异`。   
 
@@ -383,39 +378,267 @@ nohup java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 
 
 >When a method is overloaded, you must also specify its argument types so that the proper method can be selected for a breakpoint. For example, MyClass.myMethod(int,java.lang.String) or MyClass.myMethod().   
 
->The clear command removes breakpoints using the following syntax: clear MyClass:45. Using the clear or stop command with no argument displays a list of all breakpoints currently set. The cont command continues execution.      
+>The clear command removes breakpoints using the following syntax: clear MyClass:45. Using the clear or stop command with no argument displays a list of all breakpoints currently set. The cont command continues execution.        
+
+![javajdb10](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb10.png)   
 
 ### stop at (eg: MyClass:22)          
-我们将断点打到 `com.javamain.netty.example02.NettyHttpServer:76`      
+我们将断点打到 `com.javamain.netty.example02.NettyHttpServer$HttpServerHandler:76`, 此处特别需要注意的是`getUserInfo()`方法是`HttpServerHandler`静态类的方法，所以此处会涉及到`$`符号。           
 ```java
-stop at com.javamain.netty.example02.NettyHttpServer:76     
+stop at com.javamain.netty.example02.NettyHttpServer$HttpServerHandler:76   
+```     
+![javajdb07](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb07.png)   
+
+演示步骤说明：            
+```shell
+# jdb 链接远程端口   
+jdb -attach 5005   
+
+# 设置断点
+stop at com.javamain.netty.example02.NettyHttpServer$HttpServerHandler:76   
+
+# 模拟接口请求 
+curl -X POST http://localhost:8080/netty/api/getUserInfo -H "Content-Type: application/json" -d '{"id":1}'
+
+# 打印 userId参数值， 使用 print 或者 eval 命令都可以   
+print userId    
+
+# 跳过断点继续执行后续   
+cont
+```   
+
+**完成示例**      
+```shell
+[root@vm03 service]# jdb -attach 5005
+Set uncaught java.lang.Throwable
+Set deferred uncaught java.lang.Throwable
+Initializing jdb ...
+> stop at com.javamain.netty.example02.NettyHttpServer$HttpServerHandler:76
+Deferring breakpoint com.javamain.netty.example02.NettyHttpServer$HttpServerHandler:76.
+It will be set after the class is loaded.
+> Set deferred breakpoint com.javamain.netty.example02.NettyHttpServer$HttpServerHandler:76
+
+Breakpoint hit: "thread=nioEventLoopGroup-3-1", com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo(), line=76 bci=0
+
+nioEventLoopGroup-3-1[1] print userId
+ userId = 1
+nioEventLoopGroup-3-1[1] stop
+Breakpoints set:
+        breakpoint com.javamain.netty.example02.NettyHttpServer$HttpServerHandler:76
+nioEventLoopGroup-3-1[1] cont
+>
+```    
+
+注意：打印变量或者对象值时可使用`eval` 命令, `Breakpoint hit` 关键字。      
+
+>注意：在调试过程中，发现 jdb 不生效，可重启 java 服务重新创建 jdb session。      
+
+### stop in (eg: java.lang.String.length)     
+我们希望将断点打到`com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo`方法上。   
+```bash
+stop in com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo
 ```
 
+演示步骤说明：          
+```shell
+# jdb 链接远程端口   
+jdb -attach 5005   
 
-### stop in (eg: java.lang.String.length)
+# 设置断点
+stop in com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo  
 
+# 模拟接口请求 
+curl -X POST http://localhost:8080/netty/api/getUserInfo -H "Content-Type: application/json" -d '{"id":1}'
+
+# 查看当前线程调用的堆栈，并确认程序是否正在执行 getUserInfo   
+where
+
+# 打印 userId参数值， 使用 print 或者 eval 命令都可以 
+eval userId    
+
+# 跳过断点继续执行后续
+cont
+```
+
+**完成示例**     
 ```bash
 [root@vm03 service]# jdb -attach 5005
 Set uncaught java.lang.Throwable
 Set deferred uncaught java.lang.Throwable
 Initializing jdb ...
-> stop
-No breakpoints set.
-> stop in java.lang.String.length
-Set breakpoint java.lang.String.length
-> stop
-Breakpoints set:
-        breakpoint java.lang.String.length
+> stop in com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo
+Deferring breakpoint com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo.
+It will be set after the class is loaded.
+> Set deferred breakpoint com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo
 
+Breakpoint hit: "thread=nioEventLoopGroup-3-1", com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo(), line=76 bci=0
+
+nioEventLoopGroup-3-1[1] where
+  [1] com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.getUserInfo (NettyHttpServer.java:76)
+  [2] com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.channelRead0 (NettyHttpServer.java:65)
+  [3] com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.channelRead0 (NettyHttpServer.java:54)
+  [4] io.netty.channel.SimpleChannelInboundHandler.channelRead (SimpleChannelInboundHandler.java:105)
+  [5] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:374)
+  [6] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:360)
+  [7] io.netty.channel.AbstractChannelHandlerContext.fireChannelRead (AbstractChannelHandlerContext.java:352)
+  [8] io.netty.handler.codec.ByteToMessageDecoder.channelRead (ByteToMessageDecoder.java:301)
+  [9] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:374)
+  [10] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:360)
+  [11] io.netty.channel.AbstractChannelHandlerContext.fireChannelRead (AbstractChannelHandlerContext.java:352)
+  [12] io.netty.handler.codec.MessageToMessageDecoder.channelRead (MessageToMessageDecoder.java:102)
+  [13] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:374)
+  [14] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:360)
+  [15] io.netty.channel.AbstractChannelHandlerContext.fireChannelRead (AbstractChannelHandlerContext.java:352)
+  [16] io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead (CombinedChannelDuplexHandler.java:438)
+  [17] io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead (ByteToMessageDecoder.java:323)
+  [18] io.netty.handler.codec.ByteToMessageDecoder.channelRead (ByteToMessageDecoder.java:297)
+  [19] io.netty.channel.CombinedChannelDuplexHandler.channelRead (CombinedChannelDuplexHandler.java:253)
+  [20] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:374)
+  [21] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:360)
+  [22] io.netty.channel.AbstractChannelHandlerContext.fireChannelRead (AbstractChannelHandlerContext.java:352)
+  [23] io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead (DefaultChannelPipeline.java:1,408)
+  [24] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:374)
+  [25] io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead (AbstractChannelHandlerContext.java:360)
+  [26] io.netty.channel.DefaultChannelPipeline.fireChannelRead (DefaultChannelPipeline.java:930)
+  [27] io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read (AbstractNioByteChannel.java:163)
+  [28] io.netty.channel.nio.NioEventLoop.processSelectedKey (NioEventLoop.java:682)
+  [29] io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized (NioEventLoop.java:617)
+  [30] io.netty.channel.nio.NioEventLoop.processSelectedKeys (NioEventLoop.java:534)
+  [31] io.netty.channel.nio.NioEventLoop.run (NioEventLoop.java:496)
+  [32] io.netty.util.concurrent.SingleThreadEventExecutor$5.run (SingleThreadEventExecutor.java:906)
+  [33] io.netty.util.internal.ThreadExecutorMap$2.run (ThreadExecutorMap.java:74)
+  [34] io.netty.util.concurrent.FastThreadLocalRunnable.run (FastThreadLocalRunnable.java:30)
+  [35] java.lang.Thread.run (Thread.java:834)
+nioEventLoopGroup-3-1[1] eval userId
+ userId = 1
+nioEventLoopGroup-3-1[1] cont
+>
+```    
+![javajdb06](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb06.png)         
+
+
+### stop in (eg: MyClass.<clinit>)       
+stop in MyClass.`<clinit>` 是用来设置静态初始化代码(静态代码块)的断点。    
+
+为了演示该案例，我在`HttpServerHandler`静态类中添加 static 静态代码块，代码如下：   
+![javajdb08](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb08.png)   
+
+```java
+static {
+    HashMap map = new HashMap();
+    map.put("id",1);
+    map.put("name","yzhou");
+    map.put("address","China");
+}
+```
+>注意，添加代码后，上面的演示 demo 的行号也会出现变化，所以行号部分请根据代码修改。     
+
+演示步骤说明：          
+```shell
+# jdb 链接远程端口   
+jdb -attach 5005   
+
+# 设置断点
+stop in com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit>
+
+# 模拟接口请求 
+curl -X POST http://localhost:8080/netty/api/getUserInfo -H "Content-Type: application/json" -d '{"id":1}'
+
+# 查看当前线程调用的堆栈，并确认程序是否正在执行 static 静态代码块   
+where
+
+# 打印 userId参数值， 使用 print 或者 eval 命令都可以 
+eval map 
+
+# 执行下一行 
+next   
+
+# 打印 map  
+eval map  
+
+# 执行下一行 
+next 
+
+# 打印 map  
+eval map
+
+# 跳过断点继续执行后续
+cont
 ```
 
-### stop in (eg: MyClass.<clinit>)
+**完整示例**        
+```bash
+[root@vm03 service]# jdb -attach 5005
+Set uncaught java.lang.Throwable
+Set deferred uncaught java.lang.Throwable
+Initializing jdb ...
+> stop in com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit>
+Deferring breakpoint com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit>.
+It will be set after the class is loaded.
+> Set deferred breakpoint com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit>
 
+Breakpoint hit: "thread=nioEventLoopGroup-3-1", com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit>(), line=57 bci=0
 
+nioEventLoopGroup-3-1[1] where
+  [1] com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit> (NettyHttpServer.java:57)
+  [2] com.javamain.netty.example02.NettyHttpServer$1.initChannel (NettyHttpServer.java:41)
+  [3] com.javamain.netty.example02.NettyHttpServer$1.initChannel (NettyHttpServer.java:33)
+  [4] io.netty.channel.ChannelInitializer.initChannel (ChannelInitializer.java:129)
+  [5] io.netty.channel.ChannelInitializer.handlerAdded (ChannelInitializer.java:112)
+  [6] io.netty.channel.AbstractChannelHandlerContext.callHandlerAdded (AbstractChannelHandlerContext.java:969)
+  [7] io.netty.channel.DefaultChannelPipeline.callHandlerAdded0 (DefaultChannelPipeline.java:610)
+  [8] io.netty.channel.DefaultChannelPipeline.access$100 (DefaultChannelPipeline.java:46)
+  [9] io.netty.channel.DefaultChannelPipeline$PendingHandlerAddedTask.execute (DefaultChannelPipeline.java:1,461)
+  [10] io.netty.channel.DefaultChannelPipeline.callHandlerAddedForAllHandlers (DefaultChannelPipeline.java:1,126)
+  [11] io.netty.channel.DefaultChannelPipeline.invokeHandlerAddedIfNeeded (DefaultChannelPipeline.java:651)
+  [12] io.netty.channel.AbstractChannel$AbstractUnsafe.register0 (AbstractChannel.java:515)
+  [13] io.netty.channel.AbstractChannel$AbstractUnsafe.access$200 (AbstractChannel.java:428)
+  [14] io.netty.channel.AbstractChannel$AbstractUnsafe$1.run (AbstractChannel.java:487)
+  [15] io.netty.util.concurrent.AbstractEventExecutor.safeExecute (AbstractEventExecutor.java:163)
+  [16] io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks (SingleThreadEventExecutor.java:405)
+  [17] io.netty.channel.nio.NioEventLoop.run (NioEventLoop.java:500)
+  [18] io.netty.util.concurrent.SingleThreadEventExecutor$5.run (SingleThreadEventExecutor.java:906)
+  [19] io.netty.util.internal.ThreadExecutorMap$2.run (ThreadExecutorMap.java:74)
+  [20] io.netty.util.concurrent.FastThreadLocalRunnable.run (FastThreadLocalRunnable.java:30)
+  [21] java.lang.Thread.run (Thread.java:834)
+nioEventLoopGroup-3-1[1] eval map
+com.sun.tools.example.debug.expr.ParseException: Name unknown: map
+ map = null
+nioEventLoopGroup-3-1[1] next
+>
+Step completed: "thread=nioEventLoopGroup-3-1", com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit>(), line=58 bci=8
 
+nioEventLoopGroup-3-1[1] eval map
+ map = "{}"
+nioEventLoopGroup-3-1[1] next
+>
+Step completed: "thread=nioEventLoopGroup-3-1", com.javamain.netty.example02.NettyHttpServer$HttpServerHandler.<clinit>(), line=59 bci=19
 
+nioEventLoopGroup-3-1[1] eval map
+ map = "{id=1}"
+nioEventLoopGroup-3-1[1]  
+```
+![javajdb09](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb09.png)   
 
+>注意：next 命令含义是执行下一行， 还有另一个命令 step 命令，它的含义是单步执行当前代码行，并在遇到方法调用时会进入该方法内部。     
+
+## Debug Control       
+![javajdb11](http://img.xinzhuxiansheng.com/blogimgs/java/javajdb11.png)    
+
+| Item      |    Value | 
+| :-------- | --------:| 
+| next  |  执行下一行，遇到方法时并不会进入该方法内部  |
+| step     |   单步执行当前代码行，并在遇到方法调用时会进入该方法内部 |
+| where      |    查看当前线程调用的堆栈 |  
+| threads      |    查看当前线程 | 
+| ...      |    ...  |          
+
+上面几个命令在示例演示时，几乎都已经使用过，所以不做过多介绍，针对一些其他命令，在后续的时候过程中，会再补充进来。              
+
+## 总结   
+jdb 在 linux server 环境中是一个非常好的调试工具，但它的弊端是它会阻塞代码执行，所以它大多数在测试环境 、线上具有灰度发布、脱离 Cluster 场景下使用，避免影响使用服务的用户。            
+
+该篇 Blog 没有将 jdb 的参数全部介绍，主要内容是介绍调试过程中绝大多数使用的命令，若后续使用过程中发现一些其他功能点，会再持续补充。                  
  
-
-refer       
-1.https://docs.oracle.com/en/java/javase/11/tools/jdb.html    
+refer           
+1.https://docs.oracle.com/en/java/javase/11/tools/jdb.html           
