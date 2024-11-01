@@ -19,4 +19,3 @@ Consumer -> broker 读数据（⽹络）（⽹卡接收consumer数据->broker读
 
 **使⽤SendFile技术后，数据在⽹卡端的发送链路**      
 ![zerocopy02](images/zerocopy02.png)     
-
