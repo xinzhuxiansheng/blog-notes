@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-07-09T05:32:22.801Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.1.2 Chrome/106.0.5249.199 Electron/21.4.3 Safari/537.36" etag="U8IQcvZfnjv4Zc0yX4V8" version="21.1.2" type="device" pages="6">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17" pages="7">
   <diagram id="dMJWB7O2TPQu927oxFyo" name="Java BIO">
     <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -655,6 +655,35 @@
         </mxCell>
         <mxCell id="f7-0t3wRTKnsoMGcMLGQ-10" value="返回消息" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="360" y="379" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="RRBGxld8OV6TF49MM7gv" name="第 7 页">
+    <mxGraphModel dx="1194" dy="824" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fiEXuSIVnIEjj1-Z6PfX-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="70" y="160" width="460" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="fiEXuSIVnIEjj1-Z6PfX-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="160" y="230" width="340" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="fiEXuSIVnIEjj1-Z6PfX-5" value="HttpServer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="70" y="130" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fiEXuSIVnIEjj1-Z6PfX-6" value="HttpServerInitializer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="160" y="200" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fiEXuSIVnIEjj1-Z6PfX-7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="260" y="280" width="210" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="fiEXuSIVnIEjj1-Z6PfX-8" value="HttpServer" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="260" y="250" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="fiEXuSIVnIEjj1-Z6PfX-9" value="&lt;p class=&quot;p1&quot; style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-size-adjust: none; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; line-height: normal; color: rgb(0, 98, 122); text-align: start;&quot;&gt;channelRead0()&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;" vertex="1" parent="1">
+          <mxGeometry x="320" y="300" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
