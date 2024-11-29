@@ -414,8 +414,8 @@ zookeeper 中记录的 JobGraph 提交的 Client IP，提交作业时会创建`/
 initJobClientExpiredTime(jobGraph);
 ```
 
-`Dispatcher#initJobClientExpiredTime()`会从 jobGraph 获取客户端的心跳超时时间，如果心跳超时时间大于0会创建一个定时任务，它会通过 Flink RPC服务的调度器来执行，其目的是检查客户端而存活信息。我们看`JobGraph#getInitialClientHeartbeatTimeout()`方法，如果`initialClientHeartbeatTimeout`参数不存在，则默认值 `Long.MIN_VALUE`（负数）。 
-**JobGraph#setInitialClientHeartbeatTimeout()**   
+`Dispatcher#initJobClientExpiredTime()`会从 jobGraph 获取客户端的心跳超时时间，如果心跳超时时间大于0会创建一个定时任务，它会通过 Flink RPC服务的调度器来执行，其目的是检查客户端而存活信息。我们看`JobGraph#getInitialClientHeartbeatTimeout()`方法，如果`initialClientHeartbeatTimeout`参数不存在，则默认值 `Long.MIN_VALUE`（负数）。             
+**JobGraph#setInitialClientHeartbeatTimeout()方法代码：**       
 ```java
 public void setInitialClientHeartbeatTimeout(long initialClientHeartbeatTimeout) {
     jobConfiguration.setLong(INITIAL_CLIENT_HEARTBEAT_TIMEOUT, initialClientHeartbeatTimeout);
@@ -426,7 +426,7 @@ public long getInitialClientHeartbeatTimeout() {
 }
 ```
 
-如下图所示， 接着看下`setInitialClientHeartbeatTimeout()`方法调用的地方`executors.PipelineExecutorUtils#getJobGraph()`方法, 当通过 client 配置`execution.attached`参数提交作业时才会将`client.heartbeat.timeout`参数赋值给 `initialClientHeartbeatTimeout`， 很显然该示例是通过 Flink WEB UI 提交Job,所以此时`initialClientHeartbeatTimeout`会赋值默认值。  
+如下图所示， 接着看下`setInitialClientHeartbeatTimeout()`方法调用的地方`executors.PipelineExecutorUtils#getJobGraph()`方法, 当通过 client 配置`execution.attached`参数提交作业时才会将`client.heartbeat.timeout`参数赋值给 `initialClientHeartbeatTimeout`， 很显然该示例是通过 Flink WEB UI 提交Job,所以此时`initialClientHeartbeatTimeout`会赋值默认值。        
 ```java
 if (configuration.getBoolean(DeploymentOptions.ATTACHED)
         && configuration.getBoolean(DeploymentOptions.SHUTDOWN_IF_ATTACHED)) {
@@ -434,11 +434,14 @@ if (configuration.getBoolean(DeploymentOptions.ATTACHED)
             configuration.getLong(ClientOptions.CLIENT_HEARTBEAT_TIMEOUT));
 }
 ```
-![executiongraph07](images/executiongraph07.png)  
+![executiongraph07](images/executiongraph07.png)     
+
+`变量 initialClientHeartbeatTimeout`被赋值`Long.MIN_VALUE`, 则后面的 if逻辑不会处理，所以暂时不讨论；       
+![executiongraph09](images/executiongraph09.png)       
  
 ### 运行任务  
 ```java
-runJob(createJobMasterRunner(jobGraph), ExecutionType.SUBMISSION);
+runJob(createJobMasterRunner(jobGraph), ExecutionType.SUBMISSION);    
 ```   
 
 
