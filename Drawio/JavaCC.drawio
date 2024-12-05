@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17" pages="2">
   <diagram name="第 1 页" id="suDxMyHsH5viyTZhauGh">
     <mxGraphModel dx="2825" dy="1614" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -63,6 +63,57 @@
         </mxCell>
         <mxCell id="NkmNCjnCzAlUHrdcnsfF-16" value="该图仅是一个示例，不代表全部内容" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=17;" vertex="1" parent="1">
           <mxGeometry x="50" y="270" width="350" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="GpAkITHtYQ-aR3Y7hXRr" name="示例">
+    <mxGraphModel dx="2425" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Helvetica;fontColor=default;labelBackgroundColor=none;" edge="1" parent="1" source="hyS4CN7HlEP4d3Pmc-07-1" target="hyS4CN7HlEP4d3Pmc-07-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-1" value="&lt;span style=&quot;text-align: start;&quot; class=&quot;s1&quot;&gt;void&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: start;&quot; class=&quot;s2&quot;&gt;SelectExpr&lt;/span&gt;&lt;span style=&quot;text-align: start;&quot;&gt;(String sql)&lt;/span&gt;&lt;span style=&quot;text-align: start;&quot; class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;labelBackgroundColor=none;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="240" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="hyS4CN7HlEP4d3Pmc-07-2" target="hyS4CN7HlEP4d3Pmc-07-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-2" value="匹配&amp;nbsp;&lt;span style=&quot;text-align: start;&quot;&gt;Expression&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontFamily=Helvetica;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="170" y="360" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-5" value="匹配&amp;nbsp;&lt;span style=&quot;font-family: Courier; text-align: start; background-color: initial;&quot;&gt;Number&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontFamily=Helvetica;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="360" y="480" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-7" value="&lt;p class=&quot;p1&quot; style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-size-adjust: none; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; line-height: normal; font-family: Courier; color: rgb(8, 8, 8); text-align: start; font-size: 13px;&quot;&gt;&lt;span class=&quot;s1&quot; style=&quot;color: rgb(0, 51, 179); font-size: 13px;&quot;&gt;int &lt;/span&gt;&lt;span class=&quot;s2&quot; style=&quot;color: rgb(0, 98, 122); font-size: 13px;&quot;&gt;Expression&lt;/span&gt;() :&lt;br style=&quot;font-size: 13px;&quot;&gt;{&lt;span class=&quot;s3&quot; style=&quot;background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot; style=&quot;color: rgb(0, 51, 179); background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;int &lt;/span&gt;&lt;span class=&quot;s3&quot; style=&quot;background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;res = &lt;/span&gt;&lt;span class=&quot;s5&quot; style=&quot;color: rgb(23, 80, 235); background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;s3&quot; style=&quot;background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s4&quot; style=&quot;color: rgb(0, 51, 179); background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;int &lt;/span&gt;&lt;span class=&quot;s3&quot; style=&quot;background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;v;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/span&gt;}&lt;br style=&quot;font-size: 13px;&quot;&gt;{&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span class=&quot;s6&quot; style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;res &lt;/span&gt;= Number()&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;(&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span class=&quot;s7&quot; style=&quot;color: rgb(135, 16, 148); font-size: 13px;&quot;&gt;&amp;lt;ADD&amp;gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s6&quot; style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;v &lt;/span&gt;= Number()&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;{&lt;span class=&quot;s6&quot; style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;res &lt;/span&gt;+= &lt;span class=&quot;s6&quot; style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;v&lt;/span&gt;;}&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;|&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;span class=&quot;s7&quot; style=&quot;color: rgb(135, 16, 148); font-size: 13px;&quot;&gt;&amp;lt;SUB&amp;gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;s6&quot; style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;v &lt;/span&gt;= Number()&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;{&lt;span class=&quot;s6&quot; style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;res &lt;/span&gt;-= &lt;span class=&quot;s6&quot; style=&quot;color: rgb(0, 0, 0); font-size: 13px;&quot;&gt;v&lt;/span&gt;;}&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;)*&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot; style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/span&gt;{&lt;span class=&quot;s4&quot; style=&quot;color: rgb(0, 51, 179); background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;return &lt;/span&gt;&lt;span class=&quot;s3&quot; style=&quot;background-color: rgb(237, 252, 237); font-size: 13px;&quot;&gt;res;&lt;/span&gt;}&lt;br style=&quot;font-size: 13px;&quot;&gt;}&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="640" width="260" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-8" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="250" y="790" as="sourcePoint" />
+            <mxPoint x="140" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-9" value="首先判断是否是数字" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="770" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-10" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeColor=#FF0000;" vertex="1" parent="1">
+          <mxGeometry x="10" y="820" width="150" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="270" y="884.5" as="sourcePoint" />
+            <mxPoint x="160" y="884.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="hyS4CN7HlEP4d3Pmc-07-12" value="该括号表示一个整体，后面跟着 *，表示 0个或者多个&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;先根据 ADD，SUB 判断是 加法还是减法，| 表示或的意思，&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="845" width="370" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

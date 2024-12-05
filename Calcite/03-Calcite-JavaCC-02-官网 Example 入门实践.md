@@ -21,7 +21,7 @@ Home > Documentation > Index
 在学习实践过程中，我大多数时间都在写 jj 文件，再利用 javacc 工具编译 jj 文件，生成 java 代码，最后在项目代码中调用生成的 java 代码，以此达到解析功能的实现。     
 
 接下来，先了解下 jj 语法规则，可访问 `JavaCC Grammar` (https://javacc.github.io/javacc/documentation/grammar.html) , 关于 JavaCC 语法理解部分，官网内容就像是一颗多叉树一样，入下图 (注意它不展示全部内容):        
-![javaccpractice01](images/javaccpractice01.png)
+![javaccpractice01](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice01.png)
 
 首先在`JavaCC Grammar`文档内容中看到 `File structure`（文件结构），它告诉我们包含 `javacc_options`, `PARSER_BEGIN/ PARSER_END`、production 一直到 <EOF>终止符。紧接着下面会再给你介绍 `javacc_options`、`production` 等等， `自上而下就构成一个多叉树结构的文档目录`。 有了结构关系，实践 jj就变得简单多了。     
 
@@ -71,7 +71,7 @@ PARSER_END(解析器类名)
 ```
 ## 工程化     
 为了更好的方便测试生成后的 java 代码，创建 javacc项目，如下图所示：      
-![javaccpractice02](images/javaccpractice02.png)   
+![javaccpractice02](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice02.png)   
 
 生成 java 代码，可直接在终端执行 javacc xxx.jj 即可，（注意，前提是配置了相应的环境变量，这部分可参考 `介绍及安装`）
 
@@ -150,7 +150,7 @@ Parser generated successfully.
 ```
 
 此时 `official.examples`包下会生成以下 java 文件：        
-![javaccpractice03](images/javaccpractice03.png)     
+![javaccpractice03](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice03.png)     
 
 ### 执行 & 验证   
 idea 中运行`Example`类的 main() 方法：   
@@ -248,7 +248,7 @@ void MatchedBraces() :
 ## 示例02 - SKIP 跳过某些字符校验   
 >参考：https://javacc.github.io/javacc/tutorials/examples.html#javacc-example-2， 有了`示例01`的基础，后面的了解估计你也会得心应手。    
 项目结构如下图：      
-![javaccpractice04](images/javaccpractice04.png)    
+![javaccpractice04](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice04.png)    
 
 ```bash
 options{
@@ -340,7 +340,7 @@ Disconnected from the target VM, address: '127.0.0.1:50772', transport: 'socket'
 
 那么 Example2.jj的 SKIP 就是为了扩展以上特殊的符号， 关于 SKIP的定义可参考`regexpr-kind` https://javacc.github.io/javacc/documentation/grammar.html#regexpr-kind     
 
-![javaccpractice05](images/javaccpractice05.png)      
+![javaccpractice05](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice05.png)      
 
 ### 生成 Java代码 & 演示   
 通过 javacc Example2.jj，得到 java 代码。    
@@ -364,12 +364,12 @@ Disconnected from the target VM, address: '127.0.0.1:50772', transport: 'socket'
 ```
 
 ### 案例总结  
-解析规则会跳过 `SKIP`定义的字符。       
+解析规则会跳过 `SKIP`定义的字符, 关于 SKIP 可访问： https://javacc.github.io/javacc/faq.html#what-are-token-skip-and-special_token           
 
 ## 示例03 - TOKEN 变量的定义    
 >参考：https://javacc.github.io/javacc/tutorials/examples.html#javacc-example-3       
 
-![javaccpractice07](images/javaccpractice07.png)    
+![javaccpractice07](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice07.png)    
 
 **修改后的 jj 文件**     
 ```bash
@@ -429,7 +429,7 @@ int MatchedBraces() :
 添加通过 options参数和 package参数，我们重点讨论 TOKEN以下部分：      
 * TOKEN: {}，请参考：https://javacc.github.io/javacc/documentation/bnf.html#separators      
 
-![javaccpractice06](images/javaccpractice06.png)  
+![javaccpractice06](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice06.png)  
 定义 `左花括号`、`右花括号`两个 TOKEN。       
 
 * { int count; }, 上面的`示例01`,`示例02`，并没有在第一个花括号中定义什么, 而第一个花括号{}是为`语义动作块`预留的，它用于声明和初始化解析过程中需要用到的变量或状态。 （我想这并不陌生，定义了一个 int count）     
