@@ -129,7 +129,7 @@ source .bash_profile
 JAVACC_HOME:D:\Software\Dev\javacc-javacc-7.0.13   
 
 2.在 PATH 中配置  
-%JAVACC_HOME%\scripts
+%JAVACC_HOME%\scripts    
 
 3.配置 
 在根目录下创建 `target`文件夹，将`bootstrap/javacc.jar`拷贝到 target文件件    
