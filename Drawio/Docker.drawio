@@ -1,36 +1,36 @@
-<mxfile host="Electron" modified="2023-11-15T19:05:06.955Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="imfccmc0TtwCu_Oz9DWr" version="22.0.3" type="device" pages="2">
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17" pages="3">
   <diagram name="Docker命令总结" id="MsAvJ8Psn0gxqY2eIk2R">
-    <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2317" dy="1070" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="N8VLz7CXJd6VBNPQUqYb-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="4uQlipzQtvqW4cy2oqtc-1">
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" source="4uQlipzQtvqW4cy2oqtc-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="400" y="250" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="4uQlipzQtvqW4cy2oqtc-1" value="Docker 命令总结" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-1" value="Docker 命令总结" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="340" y="120" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="N8VLz7CXJd6VBNPQUqYb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" edge="1" parent="1" source="4uQlipzQtvqW4cy2oqtc-2" target="N8VLz7CXJd6VBNPQUqYb-1">
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" source="4uQlipzQtvqW4cy2oqtc-2" target="N8VLz7CXJd6VBNPQUqYb-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="4uQlipzQtvqW4cy2oqtc-2" value="Docker 环境" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-2" value="Docker 环境" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="70" y="280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4uQlipzQtvqW4cy2oqtc-3" value="容器生命周期" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-3" value="容器生命周期" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="250" y="280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4uQlipzQtvqW4cy2oqtc-4" value="容器运维" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-4" value="容器运维" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="430" y="280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="4uQlipzQtvqW4cy2oqtc-5" value="容器rootfs" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="4uQlipzQtvqW4cy2oqtc-5" value="容器rootfs" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="610" y="280" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="N8VLz7CXJd6VBNPQUqYb-1" value="docker info" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-1" value="docker info" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="-130" y="380" width="180" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="N8VLz7CXJd6VBNPQUqYb-4" value="示例：&amp;nbsp; 创建 Docker docker create -it --name nginx nginx:1.14&lt;br style=&quot;font-size: 13px;&quot;&gt;可通过 docker create --help 查看 参数&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;查看 docker ps&lt;br style=&quot;font-size: 13px;&quot;&gt;docker&amp;nbsp; ps -a&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;启动 Docker docker start nginx&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;docker unpause id&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;关闭 Docker docker kill id&lt;br style=&quot;font-size: 13px;&quot;&gt;docker stop id&lt;br style=&quot;font-size: 13px;&quot;&gt;docker pause id&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;创建并启动 docker run&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;重命名 docker rename c nginx" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="N8VLz7CXJd6VBNPQUqYb-4" value="示例：&amp;nbsp; 创建 Docker docker create -it --name nginx nginx:1.14&lt;br style=&quot;font-size: 13px;&quot;&gt;可通过 docker create --help 查看 参数&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;查看 docker ps&lt;br style=&quot;font-size: 13px;&quot;&gt;docker&amp;nbsp; ps -a&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;启动 Docker docker start nginx&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;docker unpause id&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;关闭 Docker docker kill id&lt;br style=&quot;font-size: 13px;&quot;&gt;docker stop id&lt;br style=&quot;font-size: 13px;&quot;&gt;docker pause id&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;创建并启动 docker run&amp;nbsp;&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;br style=&quot;font-size: 13px;&quot;&gt;重命名 docker rename c nginx" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Comic Sans MS;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="70" y="500" width="450" height="290" as="geometry" />
         </mxCell>
       </root>
@@ -58,6 +58,152 @@
         </mxCell>
         <mxCell id="Mw8VMHpUXd0KzHonvc4w-7" value="docker.com 维护的商业版" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="-80" y="225" width="410" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="a09BKoO272pbY-17VrJ7" name="Skopeo工具">
+    <mxGraphModel dx="2600" dy="1470" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3GMllwZksfh-4erV4DUp-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-1" target="3GMllwZksfh-4erV4DUp-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-1" value="A Docker 私服" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="-120" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-2" value="B Docker 私服" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="390" y="-120" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-4" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="340" as="sourcePoint" />
+            <mxPoint x="120" y="-310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-5" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-1" target="3GMllwZksfh-4erV4DUp-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" as="sourcePoint" />
+            <mxPoint x="120" y="-50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-6" value="A 与 B 的网络环境不通" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="55" y="-126" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-9" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fontColor=#000000;fillColor=#FF0000;" vertex="1" parent="1">
+          <mxGeometry x="105" y="-96" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-13" value="A CentOS Docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="-320" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-14" value="B CentOS Docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="450" y="150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-16" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-2" target="3GMllwZksfh-4erV4DUp-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="20" y="250" as="sourcePoint" />
+            <mxPoint x="70" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-19" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fontColor=#000000;fillColor=#FF0000;" vertex="1" parent="1">
+          <mxGeometry x="63" y="49" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-20" value="docker pull xxx:xxx" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-320" y="40" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-21" value="docker pull xxx:xxx" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="79" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-22" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.021;entryY=0.117;entryDx=0;entryDy=0;exitX=1;exitY=1;exitDx=0;exitDy=0;dashed=1;entryPerimeter=0;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-1" target="3GMllwZksfh-4erV4DUp-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="-30" as="sourcePoint" />
+            <mxPoint x="-190" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-23" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fontColor=#000000;fillColor=#FF0000;" vertex="1" parent="1">
+          <mxGeometry x="152" y="49" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-24" value="docker pull xxx:xxx" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="270" y="79" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="-40" as="sourcePoint" />
+            <mxPoint x="510" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-26" value="docker pull xxx:xxx" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="450" y="40" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-28" target="3GMllwZksfh-4erV4DUp-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-28" target="3GMllwZksfh-4erV4DUp-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-28" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-385" y="860" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-29" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="385" y="860" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-31" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-28" target="3GMllwZksfh-4erV4DUp-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="65" y="980" as="sourcePoint" />
+            <mxPoint x="115" y="930" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-32" value="A 与 B 的网络环境不通" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="854" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-33" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.x;fontColor=#000000;fillColor=#FF0000;" vertex="1" parent="1">
+          <mxGeometry x="100" y="884" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-34" value="A CentOS Docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="-325" y="1130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-35" value="B CentOS Docker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="445" y="1130" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-38" value="docker pull&amp;nbsp;&lt;span style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; white-space: pre;&quot;&gt;xxx.com/service/servera:0.0.1&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=none;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-420" y="1020" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="505" y="940" as="sourcePoint" />
+            <mxPoint x="505" y="1130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-45" value="A Docker 私服" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-385" y="830" width="115" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-46" value="servera:0.0.1 (amd64,arm64)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-370" y="880" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-47" value="A Docker 私服" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="385" y="830" width="115" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-48" value="servera:0.0.1 (amd64,arm64)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="397.5" y="880" width="92.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-49" value="docker pull&amp;nbsp;&lt;span style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; white-space: pre;&quot;&gt;xxx.com/service/servera:0.0.1&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=none;fontColor=default;" vertex="1" parent="1">
+          <mxGeometry x="335" y="1020" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-52" value="导出" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="-145" y="720" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="3GMllwZksfh-4erV4DUp-53" target="3GMllwZksfh-4erV4DUp-47">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-53" value="导入" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=15;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="250" y="720" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3GMllwZksfh-4erV4DUp-55" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="105" y="1204" as="sourcePoint" />
+            <mxPoint x="105" y="594" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

@@ -13,7 +13,7 @@ CSV 还可以用作构建其他数据格式适配器的模板。 虽然代码不
 * 确定表的记录类型；        
 * Table 的简单实现，使用 ScannableTable 接口，直接枚举所有行；      
 * 更高级的实现，实现了FilterableTable，并且可以根据简单的谓词过滤掉行；         
-* Table 的高级实现，使用 TranslatableTable，使用规划器规则转换为关系运算符。        
+* Table 的高级实现，使用 TranslatableTable，使用规划器规则转换为关系运算符。              
 
 ## 下载并构建  
 你需要 Java（版本 8、9 或 10）和 Git。      

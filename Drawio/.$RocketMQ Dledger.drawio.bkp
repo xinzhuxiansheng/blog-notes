@@ -5,10 +5,13 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="5ce-stLzMAnzuXtB1dan-1" value="DLedgerManager" style="text;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="-120" y="230" width="150" height="50" as="geometry" />
+          <mxGeometry x="-40" y="280" width="150" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="5ce-stLzMAnzuXtB1dan-2" value="&lt;span class=&quot;s1&quot;&gt;private final &lt;/span&gt;ConcurrentHashMap&lt;span class=&quot;s2&quot;&gt;&amp;lt;&lt;/span&gt;String&lt;span class=&quot;s2&quot;&gt;, &lt;/span&gt;DLedgerServer&lt;span class=&quot;s2&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;servers&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;;&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="10" y="290" width="390" height="40" as="geometry" />
+        <mxCell id="5ce-stLzMAnzuXtB1dan-2" value="&lt;span class=&quot;s1&quot;&gt;private final &lt;/span&gt;ConcurrentHashMap&lt;span class=&quot;s2&quot;&gt;&amp;lt;&lt;/span&gt;String&lt;span class=&quot;s2&quot;&gt;, &lt;/span&gt;DLedgerServer&lt;span class=&quot;s2&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;s3&quot;&gt;servers&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;;&lt;/span&gt;" style="text;whiteSpace=wrap;html=1;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="90" y="340" width="390" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5ce-stLzMAnzuXtB1dan-3" value="&lt;p style=&quot;margin: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-size-adjust: none; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-stretch: normal; line-height: normal; font-family: Courier; color: rgb(0, 98, 122); text-align: start;&quot; class=&quot;p1&quot;&gt;new DLedgerProxy()&lt;/p&gt;" style="text;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="-160" y="220" width="150" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

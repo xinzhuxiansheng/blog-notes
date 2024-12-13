@@ -5,7 +5,7 @@
 ## 前置条件     
 估计你应该也看到来自官网的介绍`Java Compiler Compiler (JavaCC) is the most popular parser generator for use with Java applications.` 但我不知道你是否跟我一样，一脸愁，Calcite 还没弄明白，怎么还多了一个 JavaCC，这又是什么鬼，双重的打击以至于我仍然游走在入门阶段。          
 
->虽然我个人也想在我的 Blog 中详细介绍 JavaCC，但实属本人技术不过关呀。所以为了不误导大家，建议一定要了解下面文档目录的大概内容。(我的实践案例可帮助大家进一步理解)             
+>建议一定要了解下面文档目录的大概内容。(我的实践案例可帮助大家进一步理解)             
 
 ```bash
 Home > Documentation > Index  
@@ -15,12 +15,12 @@ Home > Documentation > Index
 4.JavaCC API (https://javacc.github.io/javacc/documentation/api.html)   
 5.JJTree (https://javacc.github.io/javacc/documentation/jjtree.html)      
 6.JJDoc (https://javacc.github.io/javacc/documentation/jjdoc.html)   
-```
+```     
 
 ## 了解 .jj    
 在学习实践过程中，我大多数时间都在写 jj 文件，再利用 javacc 工具编译 jj 文件，生成 java 代码，最后在项目代码中调用生成的 java 代码，以此达到解析功能的实现。     
 
-接下来，先了解下 jj 语法规则，可访问 `JavaCC Grammar` (https://javacc.github.io/javacc/documentation/grammar.html) , 关于 JavaCC 语法理解部分，官网内容就像是一颗多叉树一样，入下图 (注意它不展示全部内容):        
+接下来，先了解下 jj 语法规则，可访问 `JavaCC Grammar` (https://javacc.github.io/javacc/documentation/grammar.html) , 关于 JavaCC 语法理解部分，官网内容就像是一颗多叉树一样，入下图 (注意它不展示全部内容):             
 ![javaccpractice01](http://img.xinzhuxiansheng.com/blogimgs/calcite/javaccpractice01.png)
 
 首先在`JavaCC Grammar`文档内容中看到 `File structure`（文件结构），它告诉我们包含 `javacc_options`, `PARSER_BEGIN/ PARSER_END`、production 一直到 <EOF>终止符。紧接着下面会再给你介绍 `javacc_options`、`production` 等等， `自上而下就构成一个多叉树结构的文档目录`。 有了结构关系，实践 jj就变得简单多了。     
