@@ -8,7 +8,7 @@ LONG LONG AGO，我在开发 Kafka Cluster 管理平台时候，有个开源产�
 >注意：无特殊说明情况下，`KSQL` 代表的是 Kafka Eagle KSQL 功能，不是 confluent ksql。     
 
 下面是我基于`v3.0.1`版本搭建的 Kafka Eagle `KSQL`功能的交互截图：        
-![efak01](images/efak01.png)     
+![efak01](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak01.png)     
 
 如果大家想要更好的了解 KSQL,可访问`Kafka Eagle`官网 `https://docs.kafka-eagle.org/3.quickstart/7.ksql`。             
 
@@ -18,7 +18,7 @@ LONG LONG AGO，我在开发 Kafka Cluster 管理平台时候，有个开源产�
 
 ## 了解 KSQL      
 让我们先从这张图开始：      
-![efak02](images/efak02.png)        
+![efak02](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak02.png)        
 
 ## 了解支持输入的查询语句  
 首先通过 KSQL 文档`https://docs.kafka-eagle.org/3.quickstart/7.ksql`，了解到它支持查询：       
@@ -30,10 +30,10 @@ LONG LONG AGO，我在开发 Kafka Cluster 管理平台时候，有个开源产�
 
 ## KSQL 处理逻辑 
 浏览器 F12 查看 KSQL 的查询请求接口 `/topic/logical/commit` GET (http://192.168.0.201:8048/topic/logical/commit/?sql=select * from yzhoutpjson01 where `partition` in (0) limit 10&jobId=job_id_1734760020607)：          
-![efak03](images/efak03.png)       
+![efak03](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak03.png)       
 
 有了调用入口，可以很快梳理到 `KafkaSqlParser#execute()`。    
-![efak12](images/efak12.png)      
+![efak12](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak12.png)      
 
 **KafkaSqlParser#execute()**   
 ```java
@@ -90,7 +90,7 @@ public static String execute(String clusterAlias, String sql) {
 
 ### kafkaService.parseSql() 解析 SQL   
 下面是解析 SQL 的方法调用链路图：     
-![](images/efak11.png)   
+![](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak11.png)   
 
 `kafkaService.parseSql()`方法其内部调用`KafkaServiceImpl#segments()`方法，使用 Calcite的 SqlParser类将 SQL 解析成 SqlNode，内部嵌套递归调用，将不同的 SQL 部分解析后赋值给 `TopicPartitionSchema tps`对象。 
 
@@ -221,7 +221,7 @@ if (tps != null && !"".equals(tps.getTopic())) {
 * tps.getLimit()   
 
 知道了 SQL 解析需要得到的值，那么在继续看`KSqlParser#parserTopic()`方法是如何解析抽象语法树 AST。        
-![efak04](images/efak04.png)         
+![efak04](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak04.png)         
 
 **org.smartloli.kafka.eagle.common.constant.KSqlParser#parseNode()**      
 ```java
@@ -334,22 +334,22 @@ private static void parseNode(SqlNode sqlNode, TopicPartitionSchema tps) {
 #### 6.2.1 抽象语法树的概念
 如前文所述，语法解析的最终结果是一棵抽象语法树，那么什么是抽象语法树呢？在计算机科学 中，抽象语法树是代码 结构的一种抽象表示。它以树状的形式表现出 语法结构，树上的每个节点都表示源码中的一种结构。
 图6-2展示了抽象语法树的一个简单示例。我们如果给计算机输入的指令是“(1+2)*3”，那么经过语法解析以后就会生成抽象语法树，其中圆形节点表示叶子节点，一般是参数，方形节点表示非叶子节点，一般是操作符。当然，实际生成的抽象语法树要复杂得多，每个节点会存储许多必要的信息。抽象语法树将纯文本转换为一棵树，其中每个节点对应代码中的一种结构，例如上述的表达式转换为源码中的结构会变成图6-2（b）所示的形式。          
-![efak05](images/efak05.png)    
+![efak05](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak05.png)    
 
 同理，我们输入的一条SQL语句也会生成一棵抽象语法树，例如`select id from table where id > 1`。图6-3展示了该SQL语句生成的抽象语法树。      
-![efak06](images/efak06.png)      
+![efak06](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak06.png)      
 
 图6-3中，这棵树的每个节点仅仅是对语法的抽象，并未对应到相应的源码结构当中。因此为了能够匹配每个节点相应的源码结构，Calcite构建了它的SqlNode体系来完成这项任务。       
 
 #### 6.2.2 SqlNode体系
 SqlNode是负责封装语义信息的基础类，是Calcite中非常重要的概念，不只是解析阶段，也和后续的校验、优化息息相关，它是所有解析节点的父类。在Calcite中SqlNode的实现类有40多个，每个类都代表一个节点到源码结构的映射，其大致可以分为3类，即`SqlLiteral`、`SqlIdentifier`、`SqlCall`。图6-4展示了SqlNode及其子类体系。本小节将主要对SqlNode比较重要的几个实现类进行介绍。          
 
-![efak07](images/efak07.png)   
+![efak07](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak07.png)   
 
 ##### 1．SqlLiteral
 SqlLiteral类主要封装输入的常量，也被称作字面量。它和它的子类一般用来封装具体的变量值，同样我们也可以通过调用getValue方法返回我们所需要的值。为了实现其通用性，Calcite支持了很多数据类型，表6-1展示了当前版本SqlLiteral可以表示的常量类型        
  
-![efak08](images/efak08.png)      
+![efak08](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak08.png)      
 
 ##### 2．SqlIdentifier
 SqlIdentifier代表我们输入的标识符，例如在一条SQL语句中表的名称、字段名称，都可以封装成一个SqlIdentifier对象。      
@@ -358,7 +358,7 @@ SqlIdentifier代表我们输入的标识符，例如在一条SQL语句中表的�
 图6-5展示了SqlCall及其子类的继承结构。每一个操作都可以对应一个SqlCall，如查询是SqlSelect，插入是SqlInsert。     
 为了更加细粒度地介绍Calcite是如何使用SqlCall的子类来封装操作的，我们以负责查询的SqlSelect为例，介绍SqlCall内部具体是如何封装操作的。具体的实现方式如代码清单6-1所示       
 
-![efak09](images/efak09.png)    
+![efak09](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak09.png)    
 
 **代码清单6-1　SqlSelect中包含的属性以及常量**      
 ```java
@@ -413,18 +413,18 @@ id > 1
 ```   
 
 Calcite的SqlNode规范化，最终形成SqlNode树。图6-6展示了经过规约的SqlNode数据结构。       
-![efak10](images/efak10.png)   
+![efak10](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak10.png)   
 
 有了`Calcite的 SqlNode`体系的了解，再回看`KSqlParser#parseNode()`方法里面很多 class 就显得并不陌生，例如`SqlBasicCall`、`SqlSelect`、`SqlKind`。    
 
 `KSqlParser#parseNode()`方法是学习解析 SqlNode的模板。         
 
 ## KafkaConsumerAdapter.executor() 查询数据       
-![efak13](images/efak13.png)        
+![efak13](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak13.png)        
 
 有了 `KafkaSqlInfo kafkaSql`对象，它包含 topic、partition、broker，这些信息已足够我们查询 Kafka 数据，`KafkaConsumerAdapter.executor()`方法其本身就是调用`kafka-client` API 构造 consumer，它可指定分区以及 offset进行读取消息, 将这部分数据存储到`List<JSONArray> dataSets`对象中。    
 
-![efak14](images/efak14.png)  
+![efak14](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak14.png)  
 
 注意：该部分如果不熟悉的话，可写一些查询 demo，例如 指定分区消费，指定 offset 消费，如何查询消息的最新位点等功能。(如果这块有什么问题，可留言告诉我)     
 
@@ -483,7 +483,7 @@ public static JSONObject query(JSONObject tabSchema, String tableName, List<JSON
 ```  
 
 我们来看下`KSqlUtils#query()`方法的入参,如下图：   
-![efak15](images/efak15.png)     
+![efak15](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak15.png)     
 
 * JSONObject tabSchema:      
 partition:integer   
@@ -543,7 +543,7 @@ schemas:
 >我们可以看出，在这两个配置文件中，重点在Schema的定义上，在此之前先要了解Schema的分类。Calcite定义了3种类型，即MAP、JDBC、CUSTOM，虽然在实现上它们都有统一的接口，但具体的属性有些差别，可以参考Calcite源码org.apache.calcite.model包下的实现类。                 
 
 下面对 KSQL 的自定义元数据实现进行介绍：      
-![efak17](images/efak17.png)   
+![efak17](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak17.png)   
 
 ### JSqlSchemaFactory.java  
 实现`SchemaFactory`接口，主要作用是基于`String model = createTempJson()`的JSON 传来的参数，构造 Schema 对象，也就是创建`JSqlSchema`实例。这里的处理与《Calcite 数据管理实战》中的`MysqlSchema` 不一样，它是需要连接 mysql查询后得到的结果，而 KSQL是经过`JSqlMapData.loadSchema(tabSchema, tableName, list);`处理后存储在`JSqlMapData#MAP`静态变量中。所以JSqlSchema构造方法传入 dbname 就知道 schema 信息。                  
@@ -716,7 +716,7 @@ public class JSqlTable extends AbstractTable implements ScannableTable {
 ```
 
 2.将`List<JSONArray> dataSets` 转成 `List<List<String>> list`对象。   
-![efak16](images/efak16.png)        
+![efak16](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak16.png)        
 
 3.loadSchema()方法 将 list 集合构建成一个符合 db 结构的数据集。   
 ```java
@@ -787,7 +787,7 @@ ResultSet result = st.executeQuery(UnicodeUtils.encodeForUnicode(sql));
 ```
 
 ### 小结  
-![efak19](images/efak19.png)    
+![efak19](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak19.png)    
 
 KSQL 首先解析 SQL，获取 topic 相关信息，然后构造 Kafka Consumer 读取kafka 消息，将数据缓存起来，利用 Calcite 自定义表元数据，通过 Calcite SQL 查询数据出来。 在返回给页面。         
 
@@ -809,7 +809,7 @@ private KafkaSqlInfo segments(String clusterAlias, String sql) {
 
 ## 总结   
 下面展示了方法间整体调用关系，其重点是 SQL解析 以及自定义表元数据、函数，对数据集进行查询，从而达到数据检索的过程。不过每次查询也确实会消耗较多内存空间。         
-![efak18](images/efak18.png)      
+![efak18](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak18.png)      
 
 refer   
 1.https://docs.kafka-eagle.org/3.quickstart/7.ksql    
