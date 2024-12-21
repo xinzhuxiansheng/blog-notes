@@ -5,11 +5,16 @@
 ## 背景  
 
 ## 配置 JDBC Catalog   
+
+### 1.添加依赖   
 参考官网文档 https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/connectors/table/jdbc/#dependencies，在`lib/`目录下添加相关依赖。我配置的是 MySQL，我添加的依赖如下：   
 ```bash
 flink-connector-jdbc-3.1.2-1.17.jar
 mysql-connector-j-8.0.33.jar
 ```
+
+### 2.   
+
 
 
 https://nightlies.apache.org/flink/flink-docs-release-1.17/docs/connectors/table/jdbc/#dependencies    
