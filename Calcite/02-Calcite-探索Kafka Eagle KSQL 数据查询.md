@@ -3,16 +3,14 @@
 >Kafka Eagle version: v3.0.1   
 
 ## 背景       
-LONG LONG AGO，我在开发 Kafka Cluster 管理平台时候，有个开源产品`Kafka Eagle`,它也提供了 Kafka Cluster 管理的功能，但在我心中`yahoo/CMAK`仍然是 top1, 但`Kafka Eagle`有个功能让我有些意外是`KSQL`,注意这并非`confluent ksql`。      
+LONG LONG AGO，我在开发 Kafka Cluster 管理平台时候，有个开源产品`Kafka Eagle`,它也提供了 Kafka Cluster 管理的功能，但在我心中`yahoo/CMAK`仍然是 top1, 但`Kafka Eagle`有个功能让我有些意外是`KSQL`,注意这并非`confluent ksql`。谈到`Kafka Eagle KSQL`，是因为它的 SQL 解析，扩展是由`Calcite`实现的。对于`Flink SQL`原理，博主也正在探索中，KSQL 相对于 Flink SQL相比，还是比较容易实现和理解的，这对于我们积累对`Calcite`了解再好不过了。       
 
->注意：无特殊说明情况下，`KSQL` 代表的是 Kafka Eagle KSQL 功能，不是 confluent ksql。     
+>注意：无特殊说明情况下，`KSQL` 代表的是`Kafka Eagle KSQL`功能，不是 confluent ksql。     
 
-下面是我基于`v3.0.1`版本搭建的 Kafka Eagle `KSQL`功能的交互截图：        
+下面是我基于`v3.0.1`版本搭建的`Kafka Eagle KSQL`功能的交互截图：        
 ![efak01](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak01.png)     
 
-如果大家想要更好的了解 KSQL,可访问`Kafka Eagle`官网 `https://docs.kafka-eagle.org/3.quickstart/7.ksql`。             
-
-开头引入`Kafka Eagle KSQL`，是因为它是由`Calcite`实现的。对于`Flink SQL`原理，博主也正在探索中，KSQL 相对于 Flink SQL相比，还是比较容易实现和理解的，这对于我们积累对`Calcite`了解再好不过了。            
+如果大家想要更多的了解 KSQL,可访问`Kafka Eagle`官网 `https://docs.kafka-eagle.org/3.quickstart/7.ksql`。                      
 
 >注意：该篇 Blog 并不会介绍`Kafka Eagle 服务搭建`，这块要是有任何问题，欢迎给我留言一起讨论。     
 
@@ -20,7 +18,6 @@ LONG LONG AGO，我在开发 Kafka Cluster 管理平台时候，有个开源产�
 让我们先从这张图开始：      
 ![efak02](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak02.png)        
 
-## 了解支持输入的查询语句  
 首先通过 KSQL 文档`https://docs.kafka-eagle.org/3.quickstart/7.ksql`，了解到它支持查询：       
 * SELECT * ....   
 
@@ -28,7 +25,16 @@ LONG LONG AGO，我在开发 Kafka Cluster 管理平台时候，有个开源产�
 
 * Filter Query [where ... and]    
 
-## KSQL 处理逻辑 
+那我的测试 SQL 如下：        
+```sql
+select * from yzhoutpjson01 where `partition` in (0) limit 10 
+测试数据：my name is yzhou
+
+select JSON(msg,'name') from yzhoutpjson02 where `partition` in (0) limit 10
+测试数据：{"id":123,"name":"smartloli001"}      
+```
+
+## 探索 KSQL 处理逻辑 
 浏览器 F12 查看 KSQL 的查询请求接口 `/topic/logical/commit` GET (http://192.168.0.201:8048/topic/logical/commit/?sql=select * from yzhoutpjson01 where `partition` in (0) limit 10&jobId=job_id_1734760020607)：          
 ![efak03](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak03.png)       
 
@@ -86,11 +92,18 @@ public static String execute(String clusterAlias, String sql) {
     }
     return status.toJSONString();
 }
-```
+```   
+
+`KafkaSqlParser#execute()`方法其核心的方法如下：            
+＊　KafkaSqlInfo kafkaSql = kafkaService.parseSql(clusterAlias, sql);                
+＊　List<JSONArray> dataSets = KafkaConsumerAdapter.executor(kafkaSql);         
+＊　JSONObject object = KSqlUtils.query(kafkaSql.getSchema(), kafkaSql.getTableName(), dataSets, kafkaSql.getSql());　　　　　
+
+下面会重点介绍上述这些方法。    
 
 ### kafkaService.parseSql() 解析 SQL   
 下面是解析 SQL 的方法调用链路图：     
-![](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak11.png)   
+![efak11](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak11.png)   
 
 `kafkaService.parseSql()`方法其内部调用`KafkaServiceImpl#segments()`方法，使用 Calcite的 SqlParser类将 SQL 解析成 SqlNode，内部嵌套递归调用，将不同的 SQL 部分解析后赋值给 `TopicPartitionSchema tps`对象。 
 
@@ -125,7 +138,7 @@ public static TopicPartitionSchema parserTopic(String sql) {
 </dependency>
 ```
 
-* 
+* UseJavaCCParserSQL.java
 ```java
 package com.javamain.calcite.playground;
 
@@ -195,14 +208,14 @@ Calcite 将 SQL 解析成几个重要部分，`SEELCT`、`FROM`、`WHERE`、`FET
 
 有了上面的理解，我们再回到`KSqlParser#parserTopic()`方法中来，它调用的是`sqlParser.parseStmt()`, 而不是 Demo 中的`parser.parseQuery()`，**我想这部分调用过 JAVA JDBC API 的同学并不陌生**，parserQuery()是专门用于解析 SQL查询语句（即 SEELCT 语句），而 parseStmt() 是用于解析一个 SQL 语句的通用方法，不光支持 SELECT，还可以 INSERT、UPDATE 等操作。    
 
-在`KSqlParser#parserTopic()`的父方法栈`KafkaServiceImpl#segments()`中，已经对 SQL 语句做了 SELECT 判断，代码如下:            
+在`KSqlParser#parserTopic()`的父方法栈`KafkaServiceImpl#segments()`中，已经对 SQL 语句做了 SELECT 判断，所以非SELECT 语句并不会执行下去,代码如下:            
 ```java    
-省略部分代码...
+省略部分代码...  
 if (!sql.startsWith("select") && !sql.startsWith("SELECT")) {
     kafkaSql.setStatus(false);
     return kafkaSql;
 }
-省略部分代码...
+省略部分代码...    
 ```
 
 我们再来看`KSqlParser#parserTopic()`方法的返回值`TopicPartitionSchema tps`,它在`KafkaServiceImpl#segments()`方法中，将解析SQL 后得到的值赋值给`KafkaSqlInfo kafkaSql`, 代码如下：     
@@ -217,10 +230,10 @@ if (tps != null && !"".equals(tps.getTopic())) {
 }
 ```
 * tps.getTopic()    
-* tps.getPartitions()  
+* tps.getPartitions()    
 * tps.getLimit()   
 
-知道了 SQL 解析需要得到的值，那么在继续看`KSqlParser#parserTopic()`方法是如何解析抽象语法树 AST。        
+知道了 SQL 解析需要得到的值，那么再继续看`KSqlParser#parserTopic()`方法是如何解析抽象语法树 AST。        
 ![efak04](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak04.png)         
 
 **org.smartloli.kafka.eagle.common.constant.KSqlParser#parseNode()**      
@@ -323,7 +336,7 @@ private static void parseNode(SqlNode sqlNode, TopicPartitionSchema tps) {
 ```      
 
 >如何解析？    
-`org.smartloli.kafka.eagle.common.constant.KSqlParser#parseNode()`方法并没有较复杂的处理逻辑，并且`case JOIN`、`case UNION`并不在 KSQL 的语法说明里，暂时不讨论这两个 case。下面给大家介绍`Calcite中的解析体系`。    
+`KSqlParser#parseNode()`方法并没有较复杂的处理逻辑，并且`case JOIN`、`case UNION`并不在 KSQL 的语法说明里，暂时不讨论这两个 case。下面给大家介绍`Calcite中的解析体系`。    
 
 ## 《Calcite 数据管理实战》 6.2 章节     
 >关于这部分介绍，博主直接粘贴`Calcite 数据管理实战`的`Calcite中的解析体系`章节，这样也能避免因为我的失误，误导大家。        
@@ -486,26 +499,26 @@ public static JSONObject query(JSONObject tabSchema, String tableName, List<JSON
 ![efak15](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak15.png)     
 
 * JSONObject tabSchema:      
+```bash
 partition:integer   
 offset:bigint  
 msg:varchar  
 timespan:varchar 
 date:varchar    
+```
 
-* String tableName: 
-topic 名称  
+* String tableName: topic 名称  
 
-* List<JSONArray> dataSets:   
-消费 kafka 的数据集   
+* List<JSONArray> dataSets: 消费 kafka 的数据集   
 
-* String sql:  
-查询 SQL     
+* String sql: 需要查询的 SQL     
 
 >我们刚了解了入参，为了避免下面内容对于概念不太了解的同学，建议可阅读`《Calcite 数据管理实战》 7.2 章节 元数据` 和 `adapter`(https://calcite.apache.org/docs/adapter.html)。我们需要提前了解`数据模型定义`、`自定义表元数据实现`, 不过很庆幸的是《Calcite 数据管理实战》都有说明。       
 
 开始之前，必须知晓 KSQL 使用了 自定义表元数据实现 & 函数定义 两个特性。接下来，我们就开始深入了解。       
 
-1.String model = createTempJson(); 定义数据模型，JSON 如下：    
+### 1.String model = createTempJson(); 定义数据模型    
+JSON 如下：    
 ```json
 {
   "defaultSchema": "db",
@@ -521,7 +534,7 @@ topic 名称
 ```   
 
 >摘自《Calcite 数据管理实战》 7.2 章节 元数据
->#### 7.2.2 数据模型定义
+>### 7.2.2 数据模型定义
 >在Calcite中，定义数据模型默认采用配置文件的方式，我们只需要准备一个JSON或者YAML（Yet Another Markup Language，仍是一种标记语言）文件。由于JSON和YAML都可以完成参数配置的工作，因此它们之间可以互相转换。        
 我们采用以下JSON文件，将其命名为“model.json”。其中定义了3个配置信息，即表示版本号的“version”、表示Schema默认名称的“defaultSchema”以及表示具体数据模式的“schemas”，如代码清单7-1所示。         
 **代码清单7-1　数据模型用JSON文件方式定义的结构**    
@@ -713,12 +726,14 @@ public class JSqlTable extends AbstractTable implements ScannableTable {
     }
 
 }
-```
+```  
 
-2.将`List<JSONArray> dataSets` 转成 `List<List<String>> list`对象。   
+这里还涉及到其他相关类，就不再列举。    
+
+### 2.将`List<JSONArray> dataSets` 转成 `List<List<String>> list`对象       
 ![efak16](http://img.xinzhuxiansheng.com/blogimgs/calcite/efak16.png)        
 
-3.loadSchema()方法 将 list 集合构建成一个符合 db 结构的数据集。   
+### 3.loadSchema()方法 将 list 集合构建成一个符合 db 结构的数据集      
 ```java
 public static void loadSchema(JSONObject cols, String tableName, List<List<String>> datas) {
     Database db = new Database();
@@ -753,7 +768,7 @@ public static class Column {
 
 有了对`JSqlSchema#getTableMap()`的了解，loadSchema()方法将`List<List<String>> list`构建成所有表映射关系。        
 
-4.构造查询过程  
+### 4.构造查询过程  
 ```java
 Class.forName(JConstants.KAFKA_DRIVER);
 Properties info = new Properties();
@@ -817,4 +832,3 @@ refer
 3.《Calcite 数据管理实战》 6.2 章节 SqlNode 体系                   
 4.《Calcite 数据管理实战》 7.2 章节 元数据      
 5.https://calcite.apache.org/docs/adapter.html      
-
