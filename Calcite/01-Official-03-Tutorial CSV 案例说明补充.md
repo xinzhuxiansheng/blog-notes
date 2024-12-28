@@ -10,13 +10,13 @@
 
 ## 简单回顾 sqlline 使用    
 如下图所示，首先加载`model.json`文件，以及一些配置项，例如`operand#directory`指定 csv 文件路径，其次执行查看元数据或者查询数据，例如 `!tables`、`SELECT * ...`。    
-![csv01](images/csv01.png)    
+![csv01](http://img.xinzhuxiansheng.com/blogimgs/calcite/csv01.png)    
 
 有了对 sqlline 了解，接下来如何在`main()`方法中执行。      
 
 ## 添加 main() 方法入口    
 代码结构如下图所示：   
-![csv02](images/csv02.png)         
+![csv02](http://img.xinzhuxiansheng.com/blogimgs/calcite/csv02.png)         
 
 在`calcite\example\csv\src\test\java\org\apache\calcite\test\`目录下，添加`YzhouCsvTest.java`,代码如下： 
 ```java
@@ -88,7 +88,7 @@ operand 参数含义是指从配置文件传来的配置信息，对应前述的
 
 ## 目录结构对比   
 我们看`EFAK KSQL`和`calcite example\csv` 类名后缀差不多，它们都使用了`自定义表元数据实现`     
-![csv03](images/csv03.png)    
+![csv03](http://img.xinzhuxiansheng.com/blogimgs/calcite/csv03.png)    
 
 接下来，回到`tutorial`文档中（https://calcite.apache.org/docs/tutorial.html）      
 
@@ -97,18 +97,17 @@ operand 参数含义是指从配置文件传来的配置信息，对应前述的
 
 发现`Schema`, 在`main()`中加载`model.json`文件信息，由于json中的`factory`参数指向了 `CsvSchemaFactory`类，并将 operand参数以 map形式传递给它，CsvSchemaFactory 实现`SchemaFactory接口`，实现了`create()`方法创建 `CsvSchema`对象，而`CsvSchema`继承 `AbstractSchema`类，重写`getTableMap()`方法，必须在该方法中完成`org.apache.calcite.schema.Table`集合准备，例如`Map<String, Table>`类型的集合。  
 
-![csv04](images/csv04.png)     
+![csv04](http://img.xinzhuxiansheng.com/blogimgs/calcite/csv04.png)     
 
-![csv05](images/csv05.png)  
+![csv05](http://img.xinzhuxiansheng.com/blogimgs/calcite/csv05.png)  
 
 >`EFAK KSQL JSqlSchema `和`calcite example\csv CsvSchema` 同样如此。     
-
 
 ## Custom tables
 >https://calcite.apache.org/docs/tutorial.html#custom-tables     
 
 `calcite example\csv` 比 `EFAK kSQL` 针对自定义表多了一些了，例如`CsvTableFactory implements TableFactory<CsvTable>`。            
-![csv06](images/csv06.png)    
+![csv06](http://img.xinzhuxiansheng.com/blogimgs/calcite/csv06.png)    
 
 >这的确是一个捉摸不透的类，它的作用摘自`ChatGPT`：   
 >已经有了 `CsvTable` 类，并且这个类继承自 `AbstractTable`，你并不一定需要再实现 `CsvTableFactory`，除非你想在像 Apache Calcite 这样的框架中动态地注册和创建这个表。    
@@ -199,6 +198,10 @@ operand 参数含义是指从配置文件传来的配置信息，对应前述的
 - `CsvEnumerator` 是负责读取 CSV 文件并将每一行转换成对象数组的组件。
 
 通过这种方式，`CsvScannableTable` 实现了 Calcite 框架中表的数据源扫描，能够让你像查询数据库表一样使用 CSV 文件数据。               
+
+
+## 总结 
+有了`YzhouCsvTest#main()`入口方法，调试起来也变得简单多了。        
 
 >温故而知新 ：）......    
 
