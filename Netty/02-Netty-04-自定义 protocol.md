@@ -241,4 +241,4 @@ public interface SerializerAlogrithm {
 }
 ```   
 
-到这里，自定义 protocol就介绍完了。它就像我们写 API 接口时定义的字段名称和字段类型。    
+到这里，自定义 protocol就介绍完了。它就像我们写 API 接口时定义的字段名称和字段类型。      
