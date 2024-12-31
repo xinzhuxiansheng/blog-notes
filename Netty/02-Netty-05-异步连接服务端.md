@@ -172,7 +172,7 @@ public class NettyClient {
 //            }
 //        });
 
-
+        connect(bootstrap, HOST, PORT, MAX_RETRY);
     }
 
     private static void connect(Bootstrap bootstrap, String host, int port, int retry) {
@@ -268,8 +268,44 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
 这部分重点是 ` else if (packet instanceof MessageRequestPacket)`, 它负责处理类型为`MessageRequestPacket`的逻辑，并且再返回`MessageResponsePacket`类型的消息，此处就不过多介绍啦。                    
 
+## PacketCodeC 改造       
+注意`PacketCodeC`的构造方法,当我们新增消息指令时，packetTypeMap集合添加新增的实体类。                  
+```java
+private PacketCodeC() {
+    packetTypeMap = new HashMap<>();
+    packetTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
+    packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class); 
+    packetTypeMap.put(MESSAGE_REQUEST, MessageRequestPacket.class);  // 新增
+    packetTypeMap.put(MESSAGE_RESPONSE, MessageResponsePacket.class);  // 新增  
+
+    serializerMap = new HashMap<>();
+    Serializer serializer = new JSONSerializer();
+    serializerMap.put(serializer.getSerializerAlogrithm(), serializer);
+}
+```     
+
+## 运行结果         
+
+### Server  
+```bash
+Tue Dec 31 17:00:58 CST 2024: 收到客户端登录请求……
+Tue Dec 31 17:00:58 CST 2024: 登录成功!
+Tue Dec 31 17:01:08 CST 2024: 收到客户端消息: 你好
+```
+
+### Client
+```bash
+Tue Dec 31 17:00:58 CST 2024: 连接成功，启动控制台线程……
+Tue Dec 31 17:00:58 CST 2024: 客户端开始登录
+Tue Dec 31 17:00:58 CST 2024: 客户端登录成功
+输入消息发送至服务端: 
+你好
+输入消息发送至服务端: 
+Tue Dec 31 17:01:08 CST 2024: 收到服务端的消息: 服务端回复【你好】
+```
+
 ## 总结 
 该篇 blog 介绍 channel attr的赋值和取值以及异步连接后的回调函数可以帮助我们处理连接后的相关逻辑。     
 
->估计看到这里，你可能也会存在担忧，每个指令的消息，如果都使用 if else, 那这个方法会变得无比臃肿。   
-
+>估计看到这里，你可能也会存在担忧，每个指令的消息，如果都使用 if else, 那这个方法会变得无比臃肿。       
+在 Netty 开发网络应用时，大多数都会引入`消息总线`来优化这里。    
