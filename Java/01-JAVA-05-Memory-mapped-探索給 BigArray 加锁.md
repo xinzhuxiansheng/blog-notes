@@ -54,7 +54,7 @@ RocketMQ 与 Kafka 关于 Lock 有一半的不同，它定义了一个`PutMessag
 
 * PutMessageReentrantLock 使用 `ReentrantLock`, 这部分与 Kafka的`AbstractIndex` 是一样的，并且都是非公平锁。   
 * PutMessageSpinLock 使用 `AtomicBoolean` 实现自旋锁。  
-![bigarrayaddlock01](images/bigarrayaddlock01.png)      
+![bigarrayaddlock01](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock01.png)      
 
 >对于选哪种锁可参考下面是官网的一段介绍：from `https://rocketmq.io/learning/explore/rocketmq_learning-gvr7dx_awbbpb_dd4p22sg52gbcg6g/`      
 ```bash
@@ -198,14 +198,14 @@ public long append(byte[] data) throws IOException {
 看来，`ReentrantLock` 是它们的首选，`ReentrantLock`默认是非公平锁，相较于公平锁 `new ReentrantLock(true)` 来说，其优点是执行效率高，谁先获取到锁，锁就属于谁，不会按线程先后顺序执行，它的缺点是资源分配随机性强，可能会出现线程饿死的情况。  
 
 ## Lock 的作用域        
-在 bigqueue 项目，`BigArrayImpl#append()`方法写入3个 File MappedByteBuffer，分别是 `Data MappedByteBuffer`,`Index MappedByteBuffer`,`Meta_data MappedByteBuffer`。如下图所示，`appendLock.lock()` 将3个写入封装在一个锁的作用域中,保证了数据写入的完整性。 可 Kafka，RocketMQ也是这样么？  `这部分值得深思!!!` RocketMQ 与 Kafka 的架构有较大的不同，它有一个`Dispatch`组件，负责消息的分发， TODO yzhou  
-![bigarrayaddlock03](images/bigarrayaddlock03.png)    
+在 bigqueue 项目，`BigArrayImpl#append()`方法写入3个 File MappedByteBuffer，分别是 `Data MappedByteBuffer`,`Index MappedByteBuffer`,`Meta_data MappedByteBuffer`。如下图所示，`appendLock.lock()` 将3个写入封装在一个锁的作用域中,保证了数据写入的完整性。 可 Kafka，RocketMQ也是这样么？  `这部分值得深思!!!` RocketMQ 与 Kafka 的架构有较大的不同，它有一个`Dispatch`组件，负责消息再分发。
+![bigarrayaddlock03](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock03.png)    
 
 ### 思考 Kafka Lock 作用域    
 `LogSegment#append()`方法通过`@nonthreadsafe`标记该方法不是线程安全的，需要调用方来保证线程安全，这部分代码看似简单，但其实考验大伙对`index file`是否了解。`val appendedBytes = log.append(records)` 方法通过`FileChannel`写入数据后，但 `offsetIndex`,`timeIndex`是否追加索引数据，并不是每次都插入，它的判断条件`if (bytesSinceLastIndexEntry > indexIntervalBytes) `，如果当前累计追加的数据字节数超过阈值则记录索引，这里有个背景：Kafka 并不会每条消息建立索引，而是通过`稀疏索引`的策略间隔大小的字节数来构建索引，配置项是`log.index.interval.bytes 或者 index.interval.bytes`（默认值是 4096 = 4kb）注意，该参数在 Broker，Topic 两个 config 都支持配置, 关于`log.index.interval.bytes`参数可参考下图：        
-![bigarrayaddlock04](images/bigarrayaddlock04.png)    
+![bigarrayaddlock04](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock04.png)    
 
-当数据累计写入字节大小达到4kb,才会在`index file`追加一个 entry，。若某个 Topic 的消息数偏大 > 4kb，可以适当调节 `index.interval.bytes`参数，减少 `index file`写入次数。 下面是`LogSegment#append()`的代码逻辑：         
+当数据累计写入字节大小达到4kb,才会在`index file`追加一个 entry, 若某个 Topic 的消息数偏大 > 4kb，可以适当调节 `index.interval.bytes`参数，减少 `index file`写入次数。 下面是`LogSegment#append()`的代码逻辑：         
 
 **kafka.log.LogSegment#append()**   
 ```java
@@ -246,7 +246,7 @@ RocketMQ 的 `consumequeue file`,`index file`的数据写入与`commitlog file`�
 
 `index file`是为了提供可以根据 `key` 进行消息查询所构造的索引文件，那如果 Producer 发送的消息不包含 `key`，则不会写入。参考下图查看 index 的Dispatch,在 `org.apache.rocketmq.store.index.IndexService#buildIndex()`方法中判断 keys是否非空并且长度需大于0，才会写入索引数据。   
 
-![bigarrayaddlock05](images/bigarrayaddlock05.png)   
+![bigarrayaddlock05](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock05.png)   
 
 **org.apache.rocketmq.store.index.IndexService#buildIndex()**
 ```java
@@ -266,19 +266,19 @@ if (keys != null && keys.length() > 0) {
 ```
 
 以上探讨中涉及到的 Kafka，RocketMQ `存储模型`是真很值得学习, `But` 如果出现下图所示的情况怎么办？   
-![bigarrayaddlock06](images/bigarrayaddlock06.png)  
+![bigarrayaddlock06](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock06.png)  
 
 目前我们探索的范围还不是`Cluster Wide`,仅是一个单节点，可能你也会说这种情况毕竟少见，但是在`机器宕机`或者`kill -9`情况下多个文件写入进度不协调是真实存在的。那又该怎么办呢？   
 
 大家要是用过`Elasticsearch`，它有个`分片索引重建`功能，按照这个思路继续推演，例如 bigqueue 中 `data file` 能重新推导出 `index file`,`meta_data file`，那是不是就可以不太担心上述极端异常情况。      
-![bigarrayaddlock07](images/bigarrayaddlock07.png) 
+![bigarrayaddlock07](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock07.png) 
 
 但极端异常的处理逻辑总不能每次 broker 启动都触发重新构建吧？ Kafka，RocketMQ 对极端异常情况也都做了处理，下面就简单介绍下，该篇 Blog 暂不过多做补充，后面 Blog 会详细补充实现细节。       
 
 **Kafka**  
 Kafka Broker 启动时，会对 LogManager 进行初始化，在过程中会完成相关的恢复操作和 Log 加载，首先调用`LogManager#createAndValidateLogDirs()`方法保证 `${log.dir}`目录下的 log 都存在并且可读，之后会调用 `LogManager#loadLogs()` 方法加载 log 目录下的所有 Log。 整个过程中会检查 Broker 上次是否是正常关闭，并设置 Broker 的状态。在Broker正常关闭时，会创建一个`.kafka_cleanshutdown` 的文件，这里就是通过此文件进行判断的。   
 
-![bigarrayaddlock08](images/bigarrayaddlock08.png)    
+![bigarrayaddlock08](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock08.png)    
 
 ```bash
 [root@vm01 consumequeue]# find  / -name  .kafka_cleanshutdown
@@ -300,10 +300,10 @@ RocketMQ 与 Kafka 处理逻辑也有几分相似 ，RocketMQ 中的`abort file`
 下面，我们接着分析进程外的，大家可别发散到磁盘矩阵这些，代码范畴即可。     
 
 ## FileLock    
-![bigarrayaddlock02](images/bigarrayaddlock02.png)  
+![bigarrayaddlock02](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock02.png)  
 
 关于 `FileLock` 在我之前的 Blog `Flink SQL - SQL Client - 探索 CLI 的实现逻辑 - 读取 SQL`中的`启动 Embedded Gateway,第一个 create()`章节中有介绍它的作用，在`Append-only files`场景下，`ReentrantLock`保障了每次写入时，只能有一个线程成功写入，而其他则阻塞等待。 那`FileLock`可以保障某些目录不能同时被多个 JVM 进程写入，下面以 RocketMQ为示例：         
-![bigarrayaddlock09](images/bigarrayaddlock09.png)   
+![bigarrayaddlock09](http://img.xinzhuxiansheng.com/blogimgs/java/bigarrayaddlock09.png)   
 
 **org.apache.rocketmq.store.DefaultMessageStore#start()**  
 ```java
@@ -327,11 +327,10 @@ public void start() throws Exception {
 
 
 ## 总结     
-`数据`总是脆弱的，经过上面探索分析，我们需要`ReentrantLock 加锁`,`WAL机制 可推导修复其他 files`，`FileLock 保证跨进程之间的数据占用`。 
+`数据`总是脆弱的，经过上面探索分析，我们需要`ReentrantLock 加锁`,`WAL机制 可推导修复其他 files`，`FileLock 保证跨进程之间的数据占用` 等等。 
 
 refer     
 1.https://github.com/bulldog2011/bigqueue       
 2.https://github.com/apache/rocketmq/issues/3948    
-3.https://rocketmq.io/learning/explore/rocketmq_learning-gvr7dx_awbbpb_dd4p22sg52gbcg6g/           
-4.https://www.cnblogs.com/xjwhaha/p/15772846.html       
-
+3.https://rocketmq.io/learning/explore/rocketmq_learning-gvr7dx_awbbpb_dd4p22sg52gbcg6g/            
+4.https://www.cnblogs.com/xjwhaha/p/15772846.html        
