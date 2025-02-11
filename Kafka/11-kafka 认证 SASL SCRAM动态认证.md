@@ -49,7 +49,10 @@ ZooKeeper version:3.5.9, 针对集群提供SASL/SCRAM认证机制，并且用户
 
 * 给zoo.cfg 添加SASL认证,新添加的两行，用来支持SASL认证 
 ```shell
-
+注意： 在Broker的server.log日志中启动日志中，有一条ZooKeeper错误信息：
+[2021-09-29 20:41:19,154] WARN SASL configuration failed: javax.security.auth.login.LoginException: No JAAS configuration section named 'Client' was found in specified JAAS configuration file: '/data/installDirs/kafka_2.13-2.7.1/kafka_server_jaas.conf'. Will continue connection to Zookeeper server without SASL authentication, if Zookeeper server allows it. (org.apache.zookeeper.ClientCnxn)
+[2021-09-29 20:41:19,155] INFO Opening socket connection to server 192.168.70.34/192.168.70.34:2181 (org.apache.zookeeper.ClientCnxn)
+[2021-09-29 20:41:19,155] ERROR [ZooKeeperClient ACL authorizer] Auth failed. (kafka.zookeeper.ZooKeeperClient)
 ```
 
 ### 2.2 kafka集群配置
