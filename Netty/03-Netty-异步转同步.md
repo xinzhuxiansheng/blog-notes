@@ -236,7 +236,6 @@ public RemotingCommand waitResponse(final long timeoutMillis) throws Interrupted
 }
 ``` 
 
-
 ```java
 public RemotingCommand invokeSyncImpl(final Channel channel, final RemotingCommand request,
     final long timeoutMillis)
