@@ -94,11 +94,11 @@ git clone https://github.com/apache/flink.git
 
 ### 3）源码编译 & 打包      
 ```shell
-mvn clean install -DskipTests  
+mvn clean install -DskipTests -Drat.skip=true
 ```
 
 ### 4）Success 后，确认产物         
-Flink 源码编译后得到的产物是文件夹，路径为：`项目根目录下 flink-dist\target\flink-1.17-SNAPSHOT-bin\flink-1.17-SNAPSHOT`文件夹。        
+Flink 源码编译后得到的产物是文件夹，路径为：`项目根目录下 flink-dist\target\flink-1.17-SNAPSHOT-bin\flink-1.17-SNAPSHOT`文件夹。
 
 ```bash
 # 省略部分 ...... 
@@ -247,7 +247,7 @@ Windows 无法创建 这样的路径 C:\Users\yzhou\AppData\Local\Temp\tm_localh
 Taskmanager 启动 OK ！！！      
 
 ## 访问 Flink Web UI
-JobManager，TaskManager 启动完成后，访问 `http://127.0.0.1:8081` ,查看 `Task Managers` 菜单，若看到名为 `tm_yzhou` 的 taskmanager，则表示注册成功。    	
+JobManager，TaskManager 启动完成后，访问 `http://127.0.0.1:8081` ,查看 `Task Managers` 菜单，若看到名为 `tm_yzhou` 的 taskmanager，则表示注册成功。    	   
 
 ![standalonedebug08](http://img.xinzhuxiansheng.com/blogimgs/flink/standalonedebug08.png)               
 
