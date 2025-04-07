@@ -10,7 +10,7 @@ JournalNode     JournalNode   JournalNode
 DataNode        DataNode      DataNode
 ZK
                 ResourceManager ResourceManager
-NodeManager	    NodeManager	  NodeManager
+NodeManager	    NodeManager	  NodeManagerw
 ```
 
 ## 修改 hostname 

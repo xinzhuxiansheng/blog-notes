@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-04-11T19:58:46.789Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.1.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="-pUvJ92j6ENLLVkouyG1" version="24.1.0" type="device" pages="2">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2" pages="3">
   <diagram name="Cluster Mode 作业提交" id="pZrtif1T7AlgdI-n30Bs">
     <mxGraphModel dx="3086" dy="405" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -99,6 +99,44 @@
         </mxCell>
         <mxCell id="ZarxvyxtcrY4zUGe8Qxa-12" value="Start submit job, job id: 830892155647033345, with plugin jar [file:/root/yzhou/seatunnel/apache-seatunnel-2.3.4/connectors/connector-jdbc-2.3.4.jar, file:/root/yzhou/seatunnel/apache-seatunnel-2.3.4/connectors/connector-console-2.3.4.jar]" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Comic Sans MS;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="-170" y="250" width="850" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="aHdQyJi3QFVlvi1CtOUC" name="第 3 页">
+    <mxGraphModel dx="2234" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="I0TGORLR1Xnx5Ehxflcv-5" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;fontFamily=Helvetica;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="420" y="130" as="sourcePoint" />
+            <mxPoint x="420" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="I0TGORLR1Xnx5Ehxflcv-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;fontFamily=Helvetica;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-40" y="240" as="targetPoint" />
+            <mxPoint x="-40" y="190" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="I0TGORLR1Xnx5Ehxflcv-6" value="seatunnel" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="130" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I0TGORLR1Xnx5Ehxflcv-7" value="&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;APP_MAIN&lt;/span&gt;=&lt;span style=&quot;color: rgb(6, 125, 23);&quot;&gt;&quot;org.apache.seatunnel.core.starter.flink.FlinkStarter&quot;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="-277.5" y="250" width="475" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I0TGORLR1Xnx5Ehxflcv-9" value="&lt;div data-lark-html-role=&quot;root&quot;&gt;&lt;span class=&quot;text-only&quot; data-eleid=&quot;3&quot; style=&quot;white-space: pre;&quot;&gt;./flink run -c org.apache.seatunnel.core.starter.flink.SeaTunnelFlink /opt/soft/apache-seatunnel-2.3.5/starter/seatunnel-flink-15-starter.jar&lt;/span&gt;&lt;/div&gt;&lt;div data-lark-html-role=&quot;root&quot;&gt;&lt;span class=&quot;text-only&quot; data-eleid=&quot;3&quot; style=&quot;white-space: pre;&quot;&gt; --config /tmp/dolphinscheduler/exec/process/zhouyang_w/10986792794592/15091555245440_170/277225/2166696/seatunnel_277225_2166696.conf &lt;/span&gt;&lt;/div&gt;&lt;div data-lark-html-role=&quot;root&quot;&gt;&lt;span class=&quot;text-only&quot; data-eleid=&quot;3&quot; style=&quot;white-space: pre;&quot;&gt;--name SeaTunnel&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="-465" y="420" width="850" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="I0TGORLR1Xnx5Ehxflcv-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;fontFamily=Helvetica;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-40" y="400" as="targetPoint" />
+            <mxPoint x="-40" y="320" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="I0TGORLR1Xnx5Ehxflcv-11" value="&lt;div&gt;&lt;div&gt;&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;&lt;div&gt;&lt;span style=&quot;color:#000000;&quot;&gt;CMD&lt;/span&gt;=&lt;span style=&quot;color:#0033b3;&quot;&gt;$&lt;/span&gt;&lt;span style=&quot;color:#0073bf;&quot;&gt;(java &lt;/span&gt;&lt;span style=&quot;color:#0033b3;&quot;&gt;$&lt;/span&gt;{JAVA_OPTS} -cp &lt;span style=&quot;color:#0033b3;&quot;&gt;$&lt;/span&gt;{CLASS_PATH} &lt;span style=&quot;color:#0033b3;&quot;&gt;$&lt;/span&gt;{APP_MAIN} &lt;span style=&quot;color:#0033b3;&quot;&gt;$&lt;/span&gt;{args}&lt;span style=&quot;color:#0073bf;&quot;&gt;) &lt;/span&gt;&lt;span style=&quot;color:#0033b3;&quot;&gt;&amp;amp;&amp;amp; &lt;/span&gt;&lt;span style=&quot;color:#000000;&quot;&gt;EXIT_CODE&lt;/span&gt;=&lt;span style=&quot;color:#000000;&quot;&gt;$? &lt;/span&gt;&lt;span style=&quot;color:#0033b3;&quot;&gt;|| &lt;/span&gt;&lt;span style=&quot;color:#000000;&quot;&gt;EXIT_CODE&lt;/span&gt;=&lt;span style=&quot;color:#000000;&quot;&gt;$?&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="340" width="660" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
