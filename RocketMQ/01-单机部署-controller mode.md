@@ -33,7 +33,7 @@ controllerStorePath=/rocketmq/controller/store
 EOF
 
 # 启动 Controller（新增 -a 参数指定角色）
-nohup sh /bin/mqcontroller -c controller.conf &
+nohup sh bin/mqcontroller -c controller.conf &
 
 
 controllerType = jRaft

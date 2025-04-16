@@ -24,10 +24,10 @@ echo "/nfs/data/ *(insecure,rw,sync,no_root_squash)" > /etc/exports
 $ mkdir -p /nfs/data
 
 # 在Master k8s01 执行
-$ systemctl enable rpcbind
-$ systemctl enable nfs-server
-$ systemctl start rpcbind
-$ systemctl start nfs-server
+systemctl enable rpcbind
+systemctl enable nfs-server
+systemctl start rpcbind
+systemctl start nfs-server
 
 # 使配置生效
 $ exportfs -r
@@ -38,11 +38,9 @@ $ exportfs
 
 ### 配置NFS  Client，在k8s02~k8s06执行
 ```shell
-$ showmount -e k8s01
-
-$ mkdir -p /nfs/data
-
-$ mount -t nfs k8s01:/nfs/data /nfs/data
+showmount -e k8s01
+mkdir -p /nfs/data
+mount -t nfs k8s01:/nfs/data /nfs/data
 ```
 
 ### 安装 StorageClass (nfs-subdir-external-provisioner)

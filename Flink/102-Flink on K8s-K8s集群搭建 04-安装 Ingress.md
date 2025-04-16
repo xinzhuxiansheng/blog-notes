@@ -21,10 +21,10 @@ Ingress是一个k8s的资源类型，用于实现用域名的方式访问k8s内�
         imagePullPolicy: IfNotPresent
 [root@k8s01 cloud]# 
 ``` 
-ingress 相关在 http://registry.k8s.io 域名中，由于国内的网络问题，拉取不到该仓库的镜像。 幸好 https://dockerproxy.com/docs提供了镜像代理，按照文档的说明，我们需要把registry.k8s.io地址改为k8s.dockerproxy.com即可。    
+ingress 相关在 http://registry.k8s.io 域名中，由于国内的网络问题，拉取不到该仓库的镜像。 幸好 https://dockerproxy.com/docs 提供了镜像代理，按照文档的说明，我们需要把registry.k8s.io地址改为k8s.dockerproxy.com即可。    
 
 ```shell
-:%s/registry.k8s.io/k8s.dockerproxy.com/g 
+:%s/registry.k8s.io/dockerproxy.net/g 
 ```
 
 ### 安装 deploy.yaml 
@@ -61,5 +61,3 @@ ingress-nginx-admission-patch-h7npv         0/1     Completed   2          9m9s 
 ingress-nginx-controller-65c995b75d-rhpmk   1/1     Running     0          9m9s   192.166.89.129    k8s06   <none>           <none>
 [root@k8s01 cloud]# 
 ```
-
-
