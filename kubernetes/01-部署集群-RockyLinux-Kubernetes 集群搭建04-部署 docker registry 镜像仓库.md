@@ -62,6 +62,14 @@ health:
     threshold: 3
 ```
 
+## 配置 docker 参数  
+```shell
+vim /etc/docker/daemon.json 
+
+# 添加以下内容 
+"insecure-registries":["IP:5000"]
+```
+
 ## 测试 
 
 ```shell

@@ -50,7 +50,7 @@ DELETE FILE <FILE NAME>;
 >注意：对于最新的 ANTLR java 11 或更高版本是必需的。如果您愿意，也可以使用最新版本。            
 完成所有步骤后。这是执行的 antlr4 别名的样子。      
 
-packages
+packages   
 ```
 
 ```
