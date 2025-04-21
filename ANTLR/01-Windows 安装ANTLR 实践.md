@@ -72,13 +72,12 @@ D:\Software\Dev\antlr\install>grun Hello r -tokens
 # 第二步，输入 hello parrt 字符  
 hello parrt
 
-# 第三部，输入终止符，需要回车， ^D 在 Unix 上表示 control-D 并表示“输入结束”；^Z在 Windows 上使用
+# 第三部，输入终止符，需要回车，在类UNIX系统上的输入方法是Ctrl+D，在Windows上的方法是Ctrl+Z
 ^Z
 ```   
 
 示例截图：  
 ![windowsinstall05](images/windowsinstall05.png)
-
 
 #### `-tree` 
 ```shell
@@ -88,7 +87,7 @@ D:\Software\Dev\antlr\install>grun Hello r -tree
 # 第二步，输入 hello parrt 字符  
 hello parrt
 
-# 第三步，输入终止符，需要回车， ^D 在 Unix 上表示 control-D 并表示“输入结束”；^Z在 Windows 上使用
+# 第三步，输入终止符，需要回车，在类UNIX系统上的输入方法是Ctrl+D，在Windows上的方法是Ctrl+Z
 ^Z
 ```   
 
@@ -102,7 +101,7 @@ D:\Software\Dev\antlr\install>grun Hello r -gui
 # 第二步，输入 hello parrt 字符  
 hello parrt
 
-# 第三步，输入终止符，需要回车， ^D 在 Unix 上表示 control-D 并表示“输入结束”；^Z在 Windows 上使用
+# 第三步，输入终止符，需要回车，在类UNIX系统上的输入方法是Ctrl+D，在Windows上的方法是Ctrl+Z
 ^Z
 ```   
 
@@ -110,4 +109,3 @@ hello parrt
 
 refer   
 1.《ANTLR 4 权威指南》  
-2.https://github.com/kun-song/the-definitive-antlr4-reference/blob/master/chapter1/Install-ANTLR.md    
