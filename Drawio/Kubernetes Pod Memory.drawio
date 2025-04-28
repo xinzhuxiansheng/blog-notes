@@ -1,0 +1,119 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram name="第 1 页" id="569Inuaeqda9TXCmlZMP">
+    <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-1" target="v6rnYJ-v_dX6Dy4K9gPh-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="230" />
+              <mxPoint x="540" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-1" target="v6rnYJ-v_dX6Dy4K9gPh-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="230" />
+              <mxPoint x="960" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-1" value="容器真实使用的内存量&lt;div&gt;container_memory_working_set_bytes&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="150" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-2" target="v6rnYJ-v_dX6Dy4K9gPh-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="350" />
+              <mxPoint x="820" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-2" target="v6rnYJ-v_dX6Dy4K9gPh-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-2" target="v6rnYJ-v_dX6Dy4K9gPh-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="350" />
+              <mxPoint x="35" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-2" value="container_memory_usage_bytes" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="270" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-3" value="不活跃的缓存页&lt;br&gt;total_inactive_file" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="860" y="270" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-5" value="-" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="730" y="270" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-9" target="v6rnYJ-v_dX6Dy4K9gPh-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-9" target="v6rnYJ-v_dX6Dy4K9gPh-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-9" value="页面缓存&lt;br&gt;container_memory_cache" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="390" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-10" value="kernel memory" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="390" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-13" target="v6rnYJ-v_dX6Dy4K9gPh-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="35" y="470" />
+              <mxPoint x="-155" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-13" target="v6rnYJ-v_dX6Dy4K9gPh-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-13" target="v6rnYJ-v_dX6Dy4K9gPh-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-13" value="进程实际使用的物理内存&lt;br&gt;container_memory_rss" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="390" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-14" value="JVM内存（堆栈元空间）" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="510" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-15" value="直接内存" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="510" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-16" value="其他（文件描述符，GC 消耗等等）" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="510" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-21" value="活跃的缓存页&lt;div&gt;total_active_file&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="510" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-22" value="不活跃的缓存页&lt;div&gt;container_memory_cache&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="510" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-25" target="v6rnYJ-v_dX6Dy4K9gPh-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-25" target="v6rnYJ-v_dX6Dy4K9gPh-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-25" target="v6rnYJ-v_dX6Dy4K9gPh-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="v6rnYJ-v_dX6Dy4K9gPh-25" target="v6rnYJ-v_dX6Dy4K9gPh-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-25" value="预留内存" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="670" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="v6rnYJ-v_dX6Dy4K9gPh-30" value="&lt;div tabindex=&quot;0&quot; style=&quot;tab-size: 4;&quot;&gt;&lt;code data-lang=&quot;bash&quot; class=&quot;language-bash&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;&lt;span style=&quot;display:flex;&quot;&gt;&lt;span style=&quot;font-style: italic;&quot;&gt;计算公式&lt;br&gt;container_memory_working_set_bytes&lt;/span&gt;&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;display:flex;&quot;&gt;    &lt;span style=&quot;&quot;&gt;=&lt;/span&gt; container_memory_usage_bytes - &lt;span style=&quot;font-style: italic;&quot;&gt;total_inactive_file&lt;/span&gt;&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;display:flex;&quot;&gt;    &lt;span style=&quot;&quot;&gt;=&lt;/span&gt; container_memory_rss + container_memory_cache + kernel memory - &lt;span style=&quot;font-style: italic;&quot;&gt;total_inactive_file&lt;/span&gt;&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;display:flex;&quot;&gt;    &lt;span style=&quot;&quot;&gt;=&lt;/span&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: normal;&quot;&gt;&amp;nbsp;container_memory_rss + total_active_file + container_memory_cache + kernel memory - total_inactive_file&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/font&gt;&lt;/code&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fontFamily=Verdana;fontColor=default;labelBackgroundColor=none;align=left;" vertex="1" parent="1">
+          <mxGeometry x="-100" y="750" width="750" height="170" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
