@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
   <diagram name="Page-1" id="GA8qclIgnD5epNWV-Qlr">
-    <mxGraphModel dx="2033" dy="1241" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="3675" dy="1602" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -88,8 +88,116 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="VKCgRyMsW_sbwXQrN_D4-24" value="&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;mav&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=none;" vertex="1" parent="1">
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-24" value="maven runner 是1.8" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=none;" vertex="1" parent="1">
           <mxGeometry x="-95" y="210" width="110" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-25" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="-240" y="1258.12" width="870" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-26" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-175" y="1328.12" width="410" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-27" value="开发笔记本电脑" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-220" y="1218.12" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-28" value="笔记本配置的 JDK 是 JVM 1.8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-175" y="1678.12" width="470" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-29" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="1388.12" width="340" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-30" value="Idea project" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-140" y="1358.12" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-31" value="Project JDK 是 1.8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="1528.12" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-34" value="&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;&lt;div&gt;compiler JDK 是 1.8&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="1438.12" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-35" value="ModuleA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-110" y="1408.12" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-36" value="&lt;span style=&quot;color: rgb(8, 8, 8); font-size: 11px;&quot;&gt;compiler JDK 是 11&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1438.12" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-37" value="ModuleB" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="50" y="1408.12" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-42" value="Idea Maven" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-175" y="1298.12" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-45" value="maven runner 是1.8" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-85" y="1298.12" width="110" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-46" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="340" y="1444.68" width="260" height="185.32" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-47" value="Maven" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="340" y="1414.68" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-48" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="1478.12" width="210" height="131.88" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-51" value="conf/toolchains.xml" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="370" y="1450" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-52" value="配置 jdk 1.8 安装文件路径" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="385" y="1500" width="175" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-53" value="配置 jdk 11 安装文件路径" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="385" y="1550" width="175" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-54" value="maen-toolchins-plugin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1485.24" width="130" height="32.88" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-55" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;strokeWidth=3;" edge="1" parent="1" source="VKCgRyMsW_sbwXQrN_D4-54" target="VKCgRyMsW_sbwXQrN_D4-53">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="910" y="1440" as="sourcePoint" />
+            <mxPoint x="960" y="1390" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="1530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-56" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="-1270" y="450" width="590" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-57" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-1205" y="520" width="410" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-58" value="开发笔记本电脑" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-1250" y="410" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-59" value="笔记本配置的 JDK 是 JVM 1.8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-1205" y="870" width="470" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-60" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-1170" y="580" width="340" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-61" value="Idea project" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-1170" y="550" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-62" value="Project JDK 是 1.8" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-1140" y="720" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-63" value="&lt;div style=&quot;color: rgb(8, 8, 8);&quot;&gt;&lt;div&gt;compiler JDK 是 1.8&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fillColor=#dae8fc;strokeColor=#6c8ebf;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-1140" y="630" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-64" value="ModuleA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-1140" y="600" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-65" value="&lt;span style=&quot;color: rgb(8, 8, 8); font-size: 11px;&quot;&gt;compiler JDK 是 11&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-980" y="630" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-66" value="ModuleB" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-980" y="600" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-67" value="Idea Maven" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-1205" y="490" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VKCgRyMsW_sbwXQrN_D4-68" value="maven runner 是 11" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fillColor=#a20025;strokeColor=#6F0000;labelBackgroundColor=none;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="-1115" y="490" width="110" height="53" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
