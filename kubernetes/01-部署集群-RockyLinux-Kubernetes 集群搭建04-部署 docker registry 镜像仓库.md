@@ -71,40 +71,39 @@ vim /etc/docker/daemon.json
 ```
 
 ## 测试 
-
 ```shell
-docker pull nginx  
-
-docker tag nginx 192.168.0.134:5000/test:v1
-
-docker push 192.168.0.134:5000/test:v1  
+docker pull flink:1.17.2-java11 
+docker tag flink:1.17.2-java11 192.168.0.134:5000/flink:1.17.2-java11
+docker push 192.168.0.134:5000/flink:1.17.2-java11
 ```
 
 访问 `192.168.0.134:8080` 浏览 WEB。   
 
+## 配置自动化脚本    
+创建 `push_images.sh` 脚本，将上面测试的 shell 命令放在脚本中， 将 `flink:1.17.2-java11` 做成参数，后面只需执行 `./push_image.sh 1.17.2-java11s` 实现自动化上报。  
 
-
-
-
-## 部署 docker registry 
+**push_images.sh**
 ```shell
-docker run -d \
-  -p 5000:5000 \
-  --restart always \
-  --name registry-new \
-  -v /root/dockerregistry/data:/var/lib/registry \
-  registry:2
-```
+#!/bin/bash
 
-## 部署 docker registry web  
-```shell
-docker run \
---name registry-browser \
--p 8080:8080 \
---restart=always \ 
---link registry \
--e DOCKER_REGISTRY_URL=http://registry:5000/v2 \
--d klausmeyer/docker-registry-browser  
+# 检查是否传入了镜像标签
+if [ -z "$1" ]; then
+  echo "用法: $0 <image_tag>"
+  echo "示例: $0 nginx:v1.8"
+  exit 1
+fi
+
+IMAGE_TAG=$1
+REGISTRY=192.168.0.134:5000
+
+# 拉取镜像
+docker pull $IMAGE_TAG
+
+# 打标签
+docker tag $IMAGE_TAG $REGISTRY/$IMAGE_TAG
+
+# 推送到私有仓库
+docker push $REGISTRY/$IMAGE_TAG
 ```
 
 refer   

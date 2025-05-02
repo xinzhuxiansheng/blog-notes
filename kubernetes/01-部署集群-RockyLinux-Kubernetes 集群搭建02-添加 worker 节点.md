@@ -290,3 +290,9 @@ NAME           STATUS     ROLES    AGE     VERSION
 worker01   NotReady   <none>   2m35s   v1.28.0
 worker02   NotReady   <none>   2m9s    v1.28.0
 ```
+
+## 5. 安装 nfs-utils 
+```shell
+yum install -y nfs-utils   
+```
+
