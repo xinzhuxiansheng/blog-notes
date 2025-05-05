@@ -1003,6 +1003,7 @@ KUBE_APISERVER_OPTS="--enable-admission-plugins=NamespaceLifecycle,NodeRestricti
   --kubelet-client-key=/etc/kubernetes/ssl/kube-apiserver-key.pem \
   --service-account-key-file=/etc/kubernetes/ssl/ca-key.pem \
   --service-account-signing-key-file=/etc/kubernetes/ssl/ca-key.pem \
+  --enable-aggregator-routing=true \
   --service-account-issuer=api \
   --etcd-cafile=/etc/etcd/ssl/ca.pem \
   --etcd-certfile=/etc/etcd/ssl/etcd.pem \
@@ -1284,7 +1285,7 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kube
 2025/04/14 21:11:12 [INFO] signed certificate with serial number 622812441503832403115528021568376678529495717198
 ```
 
-#### 创建kube-controller-manager的config文件  
+#### 创建 kube-controller-manager 的 config 文件  
 ```shell
 kubectl config set-cluster kubernetes --certificate-authority=ca.pem --embed-certs=true --server=https://192.168.0.137:6443 --kubeconfig=kube-controller-manager.kubeconfig
 ``` 
@@ -1301,7 +1302,7 @@ kubectl config set-context system:kube-controller-manager --cluster=kubernetes -
 kubectl config use-context system:kube-controller-manager --kubeconfig=kube-controller-manager.kubeconfig
 ```  
 
-#### 创建kube-controller-manager服务配置文件    
+#### 创建 kube-controller-manager 服务配置文件    
 ```shell
 cat > /etc/kubernetes/kube-controller-manager.conf << "EOF"
 KUBE_CONTROLLER_MANAGER_OPTS=" \
@@ -1326,7 +1327,7 @@ KUBE_CONTROLLER_MANAGER_OPTS=" \
 EOF
 ```  
 
-#### 创建kube-controller-manager服务启动配置文件  
+#### 创建 kube-controller-manager 服务启动配置文件  
 ```shell
 cat > /usr/lib/systemd/system/kube-controller-manager.service << "EOF"
 [Unit]
@@ -1369,7 +1370,7 @@ scp kube-controller-manager.kubeconfig master03:/etc/kubernetes/
 openssl x509 -in /etc/kubernetes/ssl/kube-controller-manager.pem -noout -text
 ```
 
-#### 启动kube-controller-manager服务  
+#### 启动 kube-controller-manager 服务  
 ```shell
 systemctl daemon-reload 
 systemctl enable --now kube-controller-manager
@@ -1699,7 +1700,7 @@ EOF
 如果使用的是containerd，则--container-runtime-endpoint设置为：unix:///run/containerd/containerd.sock
 
 
-#### 分布CA证书及kubelet-bootstrap.kubeconfig文件  
+#### 分布CA证书及 kubelet-bootstrap.kubeconfig 文件  
 
 ```shell
 scp kubelet-bootstrap.kubeconfig worker02:/etc/kubernetes
@@ -1841,7 +1842,7 @@ systemctl enable --now kube-proxy
 systemctl status kube-proxy
 ```
 
-## 9. K8S集群网络插件 Calico部署  
+## 9. K8S集群网络插件 Calico 部署  
 使用calico部署集群网络   
 安装参考网址：https://projectcalico.docs.tigera.io/about/about-calico   
 
@@ -1853,7 +1854,7 @@ kubectl create -f /root/tigera-operator.yaml
 
 ```shell
 cd /root/
-wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/custom-resources.yaml
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/custom-resources.yaml 
 ```
 
 ```shell
@@ -2149,6 +2150,9 @@ kubectl get pods -o wide
 kubectl get svc    
 
 curl http://10.244.69.196  
+
+## 安装 Metrics-server 
+
 
 
 ## 设置 docker 代理  

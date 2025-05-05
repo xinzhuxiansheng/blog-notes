@@ -1,0 +1,37 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram name="第 1 页" id="PtaLLK4o9bbqP13X-p8V">
+    <mxGraphModel dx="1818" dy="838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-1" value="interface InputSplit" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-90" y="200" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-2" value="GenericInputSplit" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-107.5" y="300" width="115" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-3" value="ExecutionVertex#getNextInputSplit()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="740" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-4" value="Execution#getNextInputSplit()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="630" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-5" value="ExecutionGraphHandler#requestNextInputSplit()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="530" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-6" value="SchedulerBase#requestNextInputSplit()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="410" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-7" value="JobMaster#requestNextInputSplit()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="310" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-8" value="RpcInputSplitProvider#getNextInputSplit()" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="210" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="HRzMtLleUdxRLiFQgjo0-9" value="&lt;div&gt;DataSourceTask#getInputSplits()&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="90" width="200" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

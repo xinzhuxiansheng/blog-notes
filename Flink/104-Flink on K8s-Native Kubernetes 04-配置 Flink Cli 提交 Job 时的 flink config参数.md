@@ -7,3 +7,5 @@
 
 ```
 
+## 参数  
+-Dtaskmanager.numberOfTaskSlots=4   

@@ -56,5 +56,12 @@ docker pull swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/calico/csi:v3.27.
 docker tag swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/calico/csi:v3.27.2 docker.io/calico/csi:v3.27.2
 ```
 
+`registry.k8s.io/metrics-server/metrics-server:v0.7.2` 
+```shell
+docker pull swr.cn-north-4.myhuaweicloud.com/ddn-k8s/registry.k8s.io/metrics-server/metrics-server:v0.7.2
+docker tag swr.cn-north-4.myhuaweicloud.com/ddn-k8s/registry.k8s.io/metrics-server/metrics-server:v0.7.2 registry.k8s.io/metrics-server/metrics-server:v0.7.2
+```
+
+
 refer 
 1.https://docker.aityp.com/   

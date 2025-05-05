@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2" pages="6">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2" pages="6">
   <diagram id="msM698S95czXevLw2znh" name="Kubernetes架构图">
     <mxGraphModel dx="2852" dy="1214" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -336,7 +336,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="9c8n8FNkYOq7JeDZe1FU" name="二进制部署架构图">
-    <mxGraphModel dx="2068" dy="1602" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1418" dy="1238" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -394,7 +394,7 @@
         <mxCell id="HfswVkhS-bLcHgyiXkoH-17" value="kube-proxy" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="460" y="-240" width="170" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="HfswVkhS-bLcHgyiXkoH-18" value="kubectl" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="HfswVkhS-bLcHgyiXkoH-18" value="kubelet" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="460" y="-170" width="170" height="50" as="geometry" />
         </mxCell>
         <mxCell id="HfswVkhS-bLcHgyiXkoH-19" value="cri-dockerd" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -420,7 +420,7 @@
         <mxCell id="HfswVkhS-bLcHgyiXkoH-22" value="kube-proxy" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="850" y="-240" width="170" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="HfswVkhS-bLcHgyiXkoH-23" value="kubectl" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="HfswVkhS-bLcHgyiXkoH-23" value="kubelet" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="850" y="-170" width="170" height="50" as="geometry" />
         </mxCell>
         <mxCell id="HfswVkhS-bLcHgyiXkoH-24" value="cri-dockerd" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -443,7 +443,7 @@
         <mxCell id="HfswVkhS-bLcHgyiXkoH-27" value="kube-proxy" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1240" y="-240" width="170" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="HfswVkhS-bLcHgyiXkoH-28" value="kubectl" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="HfswVkhS-bLcHgyiXkoH-28" value="kubelet" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1240" y="-170" width="170" height="50" as="geometry" />
         </mxCell>
         <mxCell id="HfswVkhS-bLcHgyiXkoH-29" value="cri-dockerd" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
