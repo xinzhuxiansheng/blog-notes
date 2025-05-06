@@ -1,5 +1,6 @@
 # RockyLinux - Kubernetes 集群搭建 - 部署 Metrics Server   
 
+在二进制 k8s 环境中，特意添加了  `hostNetwork` 参数。 不加不行。 
 ```yaml
   template:
     metadata:
