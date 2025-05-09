@@ -27,6 +27,24 @@ s3.secret-key: minio123
 s3.path.style.access: true
 s3.endpoint: http://192.168.0.135:9000
 fs.allowed-fallback-filesystems: s3
+
+#==============================================================================
+# ......HistoryServer......
+#==============================================================================
+# 指定由JobManager归档的作业信息所存放的目录，这里使用的是HDFS
+jobmanager.archive.fs.dir: s3://flink-15-state/completed-jobs/
+# History Server所绑定的ip
+# historyserver.web.address: xxxx
+# 指定History Server所监听的端口号（默认8082）
+historyserver.web.port: 8082
+# 指定History Server扫描哪些归档目录，多个目录使用逗号分隔
+historyserver.archive.fs.dir: s3://flink-15-state/completed-jobs/
+# 指定History Server间隔多少毫秒扫描一次归档目录
+historyserver.archive.fs.refresh-interval: 2000
+#查找到的归档文件会下载并缓存到本地存储路径，默认/tmp目录下面，默认路径为System.getProperty("java.io.tmpdir") + File.separator + "flink-web-history-" + UUID.randomUUID()
+historyserver.web.tmpdir: /data/flink/history
+# 历史记录保留个数
+historyserver.archive.retained-jobs: 200
 ```
 
 ### 注意  
