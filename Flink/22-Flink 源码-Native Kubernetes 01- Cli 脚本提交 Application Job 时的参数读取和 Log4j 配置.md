@@ -1,4 +1,4 @@
-# Flink 源码 - Native Kubernetes - Flink Cli 脚本提交 Application Job 时的参数读取和 Log4j 配置
+# Flink 源码 - Native Kubernetes - 探索 Flink Cli 脚本提交 Application Job 时的参数读取和 Log4j 配置
 
 >Flink version: 1.15.4, Flink Job Model: Native Kubernetes Application, Kubernetes version: 1.30.8      
 
@@ -6,7 +6,7 @@
 在 Flink Job 开发中，我并不是全部都在使用像 `StreamPark` 或者自研的实时计算平台管理 Job，我经常在测试 Flink Job 参数、修改 Flink 源码和添加 Log 再重新部署，会用到 Flink Cli 脚本手动提交作业，这个过程中使用 K9s工具和将重复的指令编写Shell，它们都帮我提升了不小的效率，如果你使用 `Seatunnel Runs on Flink` 也会遇到 Flink Cli，它是直接调用 Flink Cli 提交作业的。   
 
 这里引出一个疑问点：Flink Cli 提交作业时，参数是如何传递到 Native Kubernetes Application Model Job的 ？若要修改 Log 打印级别该如何修改?（这里并非是动态修改）     
-![clireadconfig01](images/clireadconfig01.jpg)    
+![clireadconfig01](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig01.jpg)    
 
 >下面通过一个 Flink Cli 来介绍这部分。   
 
@@ -36,16 +36,16 @@
 
 ### Flink Deployment 
 查看 Flink Job Deployment，它的 yaml 使用了一个名称 `flink-config-flink-application-test` configmap，并且将它挂载到 Pod 的 `/opt/flink/opt`目录下，此时 Flink Job JobManager Pod, TaskManager Pod 的配置文件并非像 `Flink 官网下载的安装包一样`，如下图所示：  
-![clireadconfig02](images/clireadconfig02.jpg)    
+![clireadconfig02](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig02.jpg)    
 
 当 Job 部署到 Kubernetes 后，JobManager、TaskManager 的 Pod /opt/flink/conf/ 目录只包含 `flink-conf.yaml`, `log4j-console.properties`, `logback-console.xml`。  
-![clireadconfig03](images/clireadconfig03.jpg)    
+![clireadconfig03](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig03.jpg)    
 
 再使用 kubectl 查看 Flink Job deployment YAML 文件内容，你可以看到 deployment 的 YAML 挂载了 `/opt/flink/conf` 路径的 `configmap`, 它定义的内容如下图：   
-![clireadconfig04](images/clireadconfig04.jpg)    
+![clireadconfig04](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig04.jpg)    
 
 通过以上内容了解，可以肯定的是 Native Kubernetes Application Model Job 采用的是 ConfigMap 来配置 Flink Job 的参数和 Log。这样就证实了，参数和 log并不是通过 JobManager 内部对其配置文件进行覆盖操作的。    
-![clireadconfig05](images/clireadconfig05.jpg) 
+![clireadconfig05](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig05.jpg) 
 
 >下面接着探索，Flink Cli 又是如何将配置参数创建成 ConfigMap 的呢？   
 
@@ -59,7 +59,7 @@ kubectl create configmap flink-conf --from-file=flink-conf.yaml=flink-conf.yaml 
 >可以使用 `--from-literal=key=value` 命令，直接定义 kv值。   
 
 第二种：定义 ConfigMap YAML，将配置文件内容放在 YAML 内。 示例如下：  
-![clireadconfig06](images/clireadconfig06.jpg)   
+![clireadconfig06](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig06.jpg)   
 
 上面的示例，是我在 Kubernetes 部署 `Flink History Server` 服务时定义的 ConfigMap，有了上一章节的介绍，你应该可以了解我的目的，毕竟 Flink History Server 不能通过 Flink Cli 提交后部署，所以，我提前手动创建好 ConfigMap。   
 
@@ -68,7 +68,7 @@ kubectl create configmap flink-conf --from-file=flink-conf.yaml=flink-conf.yaml 
 ### 探索 ./flink run 执行流程  
 
 **结构图**  
-![clireadconfig11](images/clireadconfig11.jpg)     
+![clireadconfig11](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig11.jpg)     
 
 通过 `./flink run` 执行时，脚本中会先调用 bin/config.sh, 它会将执行命令目录拼接 `conf/`字符串，设置成 `FLINK_CONF_DIR`。  
 ```bash
@@ -87,7 +87,7 @@ kubectl create configmap flink-conf --from-file=flink-conf.yaml=flink-conf.yaml 
 ```
 
 `bin/config.sh 设置 FLINK_CONF_DIR 环境变量`   
-![clireadconfig07](images/clireadconfig07.jpg)
+![clireadconfig07](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig07.jpg)
 
 有了前面环境变量的设置，`CliFrontend#main()` 会通过环境变量设置的 conf/ 路径，读取`flink-conf.yaml`参数。 main() 方法也会解析上面 ./flink run 后面的参数。并将这两部分最后封装成 `Configuration effectiveConfiguration` 和 `ApplicationConfiguration applicationConfiguration`。 这部分的处理逻辑可参考 `CliFrontend#runApplication()`方法。   
 ```java
@@ -122,19 +122,19 @@ public static void main(final String[] args) {
 }
 ```
 
-![clireadconfig08](images/clireadconfig08.jpg)        
+![clireadconfig08](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig08.jpg)        
 
 准备好配置参数， 调用 `ApplicationClusterDeployer#run()` 开始提交 Flink Job 部署。`KubernetesJobManagerFactory#buildKubernetesJobManagerSpecification()` 方法负责构建 Kubernetes Job 所需所有资源，如下图所示，`FlinkConfMountDecorator` 对象负责构建 Job 的配置参数 & Log ConfigMap 的定义。    
 
-![clireadconfig09](images/clireadconfig09.jpg)      
+![clireadconfig09](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig09.jpg)      
 
 Cli 刚运行时，读取 flink-conf.yaml, 关于 log 配置文件读取，可参考 `FlinkConfMountDecorator#getLocalLogConfFiles()`方法，它读取 `log4j-console.properties`, `logback-console.xml` 内容。  
 
 `FlinkConfMountDecorator#buildAccompanyingKubernetesResources()`  
-![clireadconfig10](images/clireadconfig10.jpg)   
+![clireadconfig10](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig10.jpg)   
 
 到这里，ConfigMap 所需的3个 file，已经全部读取了。 我们也弄清楚了 JobManager, TaskManager Pod 中 conf/ 的由来。  
-![clireadconfig12](images/clireadconfig12.jpg)    
+![clireadconfig12](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig12.jpg)    
 
 修改 Job 参数和 Log 级别，只需要修改本地 conf/ 文件即可。   
 
@@ -232,12 +232,12 @@ select * from yzhou_test02 where id between 5 and 6
 ```   
 
 通过上面形式以此来达到并发读取。 看到这里，不知道你是否跟我有差不多的疑问，上面的 Flink Jar，编译打包好后，部署在 Kubernetes中，Job 包含 JobManager，TaskManager，如下图：     
-![clireadconfig01](images/clireadconfig01.jpg) 
+![clireadconfig01](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig01.jpg) 
 
 当读取 MySQL 的SQL 被拆分成上述多条 SQL 执行时，是谁（JobManager,TaskManager）再分发 SQL，分发逻辑是什么？ 如果是我自己写一个 MySQL 读取，那我该如何处理 `并行`，如果是我自己写，我可能还会对不同的场景下监听分发后执行结果，若结果是异常，是否需要重新分发？         
 
 **2.** 在被其他组件调用时，会采用 Flink Cli 触发 Job 部署操作。特别典型的场景是 `Seatunnel Runs On Flink`，Seatunnel 是使用 Flink Cli 脚本触发 Job 部署 如下图：   
-![clireadconfig02](images/clireadconfig02.jpg)  
+![clireadconfig02](http://img.xinzhuxiansheng.com/blogimgs/flink/clireadconfig02.jpg)  
  
 `Seatunnel 打印的启动脚本示例：`  
 ```bash
