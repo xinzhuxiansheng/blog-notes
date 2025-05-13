@@ -1,9 +1,12 @@
-# Flink on Kubernetes - History Server - 在 Kubernetes 中部署 History Server  
+# Flink - History Server - 在 Kubernetes 中部署 History Server  
 
->Flink version: 1.15.4, Kubernetes version: 1.30.8，minio version: RELEASE.2025-04-08T15-41-24Z
+>Flink version: 1.15.4, Kubernetes version: 1.30.8，minio version: RELEASE.2025-04-08T15-41-24Z    
+
+## 引文   
+Flink History Server 二进制部署方法可参考官网 `https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/advanced/historyserver/` 地址， 
 
 ## 创建 configmap   
-创建 `flink-15-configmap.yaml`, 文件内容如下：  
+创建 `flink-15-configmap.yaml`, 文件内容如下：   
 
 ```yaml
 ---
@@ -208,4 +211,8 @@ spec:
 
 ## 执行部署  
 
-http://192.168.0.143:30001/#/overview  
+http://192.168.0.143:30001/#/overview     
+
+refer 
+1.https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/advanced/historyserver/        
+2.https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/advanced/logging/   
