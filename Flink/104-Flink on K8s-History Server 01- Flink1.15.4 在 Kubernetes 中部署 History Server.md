@@ -1,13 +1,60 @@
-# Flink - History Server - 在 Kubernetes 中部署 History Server  
+# Flink on K8s - History Server - 在 Kubernetes 中部署 History Server  
 
 >Flink version: 1.15.4, Kubernetes version: 1.30.8，minio version: RELEASE.2025-04-08T15-41-24Z    
 
-## 引文   
-Flink History Server 二进制部署方法可参考官网 `https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/advanced/historyserver/` 地址， 
+## 背景    
+Flink History Server 对于判断 `有界数据源` 作业的状态特别重要。你可以通过访问介绍 History Server 官网地址(https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/advanced/historyserver/) 了解它，但是 doc 并没有介绍 History Server on Kubernetes 细节。    
 
-## 创建 configmap   
-创建 `flink-15-configmap.yaml`, 文件内容如下：   
+该篇 Blog 的核心是介绍如何在 Kubernetes 部署 Flink History Server。    
 
+## 前置知识    
+1.Flink History Server 的安装包与 Flink 的安装包是同一个，当执行 `bin/historyserver.sh (start|start-foreground|stop)` 命令，可以完成对 History Server 的启停操作， 所以将它部署在 Kubernetes 时，使用镜像也是 Flink 镜像。       
+
+>有了安装包部署的经验，它与 Flink 是公用同一个配置文件，flink-conf.yaml 或者 config.yaml (博主已经在工作中使用到 1.19.2 version， `Flink conf/下只存在 config.yaml`) ，如果你看过我前面两篇公众号文章，你可能已经会意识到，我们的手动创建 History Server 的 ConfigMap，毕竟它不能像 Flink Cli 创建 Flink Job 那样，可以自动创建。 `下面是公众号文章链接`                
+* https://mp.weixin.qq.com/s/_xUN4DD4le3YhAi_IlbK6g   
+* https://mp.weixin.qq.com/s/DH81Xto6l6pm8NP7sbkxYA   
+
+2.因为 History Server 和 Flink Job 使用同一个 Flink 镜像，又如何在 YAML 中启动 History Server？以 Flink Docker image 1.19.2 为例：    
+![historyserveronk8s01](http://img.xinzhuxiansheng.com/blogimgs/flink/historyserveronk8s01.jpg)    
+
+`ENTRYPOINT`是设置启动的脚本，`CMD` 设置默认参数, 在 `docker-entrypoint.sh` 定义了多个参数，包括 history server。    
+![historyserveronk8s02](http://img.xinzhuxiansheng.com/blogimgs/flink/historyserveronk8s02.jpg)  
+
+我们可以在 YAML 中设置 args 参数为 `history-server`,就代表启动的是 history server 服务。   
+```yaml
+    spec:
+      imagePullSecrets:
+        - name: default-secret
+      containers:
+        - name: flink-history
+          image: 192.168.0.134:5000/flink:1.15.4-java11
+          imagePullPolicy: Always
+          args: ["history-server"]
+```
+
+3.Flink Job 和 History 需要配置 `归档地址`   
+* Flink Job 配置的参数如下： 
+```bash
+jobmanager.archive.fs.dir: s3://flink-15-state/completed-jobs/
+```
+
+* History Server 配置参数如下：   
+```bash
+historyserver.web.port: 8082
+historyserver.archive.fs.dir: s3://flink-15-state/completed-jobs/
+historyserver.archive.fs.refresh-interval: 2000
+historyserver.web.tmpdir: /data/flink/history
+historyserver.archive.retained-jobs: 200
+```
+
+4.History Server 会将 S3归档目录中的 JSON 数据，转成多个 Http API 接口数据 json，如果 `historyserver.archive.retained-jobs` 设置过大，随着任务增加，若不设置 PVC 存储 解析后的目录数据，那 History Server 服务启动时将会重新读取 S3的归档 JSON数据，导致启动慢显现。   
+
+>作业多的情况下，建议设置 PVC 挂载到 `historyserver.web.tmpdir` 参数设置的目录。     
+
+## 部署步骤    
+
+### 创建 configmap       
+创建 `flink-15-configmap.yaml` 文件, 文件内容如下：   
 ```yaml
 ---
 apiVersion: v1
@@ -59,19 +106,11 @@ data:
     #==============================================================================
     # ......HistoryServer......
     #==============================================================================
-    # 指定由JobManager归档的作业信息所存放的目录，这里使用的是HDFS
     jobmanager.archive.fs.dir: s3://flink-15-state/completed-jobs/
-    # History Server所绑定的ip
-    # historyserver.web.address: xxxx
-    # 指定History Server所监听的端口号（默认8082）
     historyserver.web.port: 8082
-    # 指定History Server扫描哪些归档目录，多个目录使用逗号分隔
     historyserver.archive.fs.dir: s3://flink-15-state/completed-jobs/
-    # 指定History Server间隔多少毫秒扫描一次归档目录
     historyserver.archive.fs.refresh-interval: 2000
-    #查找到的归档文件会下载并缓存到本地存储路径，默认/tmp目录下面，默认路径为System.getProperty("java.io.tmpdir") + File.separator + "flink-web-history-" + UUID.randomUUID()
     historyserver.web.tmpdir: /data/flink/history
-    # 历史记录保留个数
     historyserver.archive.retained-jobs: 200
 
   log4j-console.properties: |+
@@ -171,6 +210,7 @@ spec:
             - mountPath: /opt/flink/lib
               name: flink-15-lib
             - mountPath: /opt/flink/conf
+
               name: flink-15-history-config-volume
             - mountPath: /data/flink/history
               name: persistent-storage
@@ -209,9 +249,14 @@ spec:
   type: NodePort
 ```  
 
-## 执行部署  
+## 执行部署    
+```shell
+kubectl apply -f flink-15-history-pvc.yaml -n 
+kubectl apply -f flink-15-history-statefulset.yaml -n 
+```
 
-http://192.168.0.143:30001/#/overview     
+访问 NodeIp + NodePort 端口即可。   
+http://192.168.0.143:30001/#/overview         
 
 refer 
 1.https://nightlies.apache.org/flink/flink-docs-release-1.15/docs/deployment/advanced/historyserver/        
