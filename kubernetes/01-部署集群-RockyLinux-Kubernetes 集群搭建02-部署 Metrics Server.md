@@ -23,3 +23,5 @@
           failureThreshold: 3
 
 ```
+
+安装完成后，通过 `kubectl get apiservice` 命令查看

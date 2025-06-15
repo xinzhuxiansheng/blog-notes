@@ -26,16 +26,15 @@ services:
     container_name: docker-registry-browser
     environment:
       - TZ=Asia/Shanghai
-      - DOCKER_REGISTRY_URL=http://docker-registry:5000/v2
+      - DOCKER_REGISTRY_URL=http://192.168.0.134:5000/v2
       - ENABLE_DELETE_IMAGES=true
-      - SECRET_KEY_BASE=81277d52e70d468e31e08b1191dd7f8d21b6b55373d7eaada4fcb9a65fd6385ec58d3c1d19bd4297390c1bd08354767052702a4b9fd293da735e35879b79b10e
+      - SECRET_KEY_BASE=58f0203dca74818c270ba572f113cfc39397b99d3bfa96e3040e7808e76a32c272dfa95c66a6fe2d9c3a6845280184b8bd974ebfdd6a08c0009eb0a2dad6c051
     ports:
       - 8080:8080
     restart: unless-stopped
     logging:
       options:
         max-size: "10m"
-
 ```
 
 ## config.yml 配置     
@@ -62,9 +61,9 @@ health:
     threshold: 3
 ```
 
-## 配置 docker 参数  
+## 当前 Docker 配置参数   
 ```shell
-vim /etc/docker/daemon.json 
+vim /etc/docker/daemon.json  
 
 # 添加以下内容 
 "insecure-registries":["IP:5000"]
@@ -80,7 +79,7 @@ docker push 192.168.0.134:5000/flink:1.17.2-java11
 访问 `192.168.0.134:8080` 浏览 WEB。   
 
 ## 配置自动化脚本    
-创建 `push_images.sh` 脚本，将上面测试的 shell 命令放在脚本中， 将 `flink:1.17.2-java11` 做成参数，后面只需执行 `./push_image.sh 1.17.2-java11s` 实现自动化上报。  
+创建 `push_images.sh` 脚本，将上面测试的 shell 命令放在脚本中， 将 `flink:1.17.2-java11` 做成参数，后面只需执行 `./push_image.sh flink:1.17.2-java11` 实现自动化上报。  
 
 **push_images.sh**
 ```shell
