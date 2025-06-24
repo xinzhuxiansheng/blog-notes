@@ -9,11 +9,15 @@ mvn clean install -DskipTests -Dfast -Pskip-webui-build -T 1C
 mvn clean package -DskipTests -Dfast
 ```
 
+## 选择 profile 
+![compiler01](images/compiler01.jpg)  
+
 ## 修改代码后 编译  
 -Dcheckstyle.skip=true
 
 ```shell
-mvn clean install -DskipTests -Dfast -Dscala-2.12 -Dcheckstyle.skip=true -Dspotless.check.skip=true # 使用该命令  
+mvn clean install -DskipTests -Dcheckstyle.skip=true -Dspotless.check.skip=true -Pfast -Pscala-2.12 -Puse-alibaba-mirror #使用该命令
+mvn clean install -DskipTests -Pfast -Pscala-2.12 -Dcheckstyle.skip=true -Dspotless.check.skip=true -Dnpm.proxy=https://registry.npmmirror.com 
 ```  
 
 ```shell

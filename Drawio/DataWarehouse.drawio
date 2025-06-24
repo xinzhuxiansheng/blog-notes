@@ -1,0 +1,181 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram name="第 1 页" id="8rUQB08ghnEdtaq1rvVv">
+    <mxGraphModel dx="1834" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="12" y="80" width="588" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="35" y="130" width="305" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-3" value="Alluxio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="295" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-4" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="100" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-5" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="220" as="sourcePoint" />
+            <mxPoint x="-285.5" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-6" value="HW OBS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="460" width="1190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-7" value="Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-380" y="70" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-8" value="MySQL (alluxio://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-345" y="170" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-9" value="metastore01" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-345" y="140" width="85" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-10" value="Hue" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-151" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-11" value="Spark" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-39" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;strokeWidth=2;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="30" as="sourcePoint" />
+            <mxPoint x="-285.5" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-13" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="-105" as="sourcePoint" />
+            <mxPoint x="-285.5" y="-45" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-14" value="MySQL (s3://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="169" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-15" value="metastore02" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="139" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-16" value="hive catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-17" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-8" target="Rbgh4GhVApIcBlavj4Tr-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-160" y="240" as="sourcePoint" />
+            <mxPoint x="-110" y="190" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-110" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-18" value="同步 hive metastore&lt;br&gt;将 alluxio 转成 s3" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="191" width="156" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;strokeWidth=2;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-21" target="Rbgh4GhVApIcBlavj4Tr-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d80073;strokeColor=#A50040;strokeWidth=2;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-21" target="Rbgh4GhVApIcBlavj4Tr-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-21" value="StarRocks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="36.25" y="-120" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-22" value="internal catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="130" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d80073;strokeColor=#A50040;strokeWidth=2;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-24" value="paimon catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-25" value="external catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="35" y="100" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-26" value="internal catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-27" value="StarRocks Catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="13" y="50" width="138" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-28" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.308;exitY=0.967;exitDx=0;exitDy=0;exitPerimeter=0;fillColor=#008a00;strokeColor=#005700;strokeWidth=2;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="87" y="240" as="sourcePoint" />
+            <mxPoint x="88" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-29" value="1.查询 Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="36.25" y="-30" width="93.75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-30" value="2.查询 Paimon 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="213.13" y="-30" width="126.87" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="87.5" y="-130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-32" value="MySQL Client" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="41.5" y="-250" width="92" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-33" value="查询 hive 、 Paimon 表时，通过 hive-catalog.database.tablename&amp;nbsp; 或者 parimon-catalog.database.tablename" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="-190" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#6a00ff;strokeColor=#3700CC;strokeWidth=2;" edge="1" parent="1" source="Rbgh4GhVApIcBlavj4Tr-35" target="Rbgh4GhVApIcBlavj4Tr-37">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="335" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-35" value="Flink" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-120" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-36" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285" y="350" as="sourcePoint" />
+            <mxPoint x="-285" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-37" value="Paimon" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="210" y="310" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-38" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-257" y="-1" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-39" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="130" y="-79" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-40" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="732" y="-80" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-41" value="Paimon Catalog on S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="290" y="467.5" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-42" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" target="Rbgh4GhVApIcBlavj4Tr-41">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="360" as="sourcePoint" />
+            <mxPoint x="510" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="350" y="390" />
+              <mxPoint x="360" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-43" value="paimon 自己的 catalog 会在 S3 上存储" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="290" y="390" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-44" value="3.查询 Paimon 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="632.3199999999999" y="-34" width="126.87" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Rbgh4GhVApIcBlavj4Tr-45" value="4.查询 Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-330.8700000000001" y="36" width="126.87" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

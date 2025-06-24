@@ -1,0 +1,635 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2" pages="4">
+  <diagram name="第 1 页" id="06b-ck1VWAmCJXOX8VXE">
+    <mxGraphModel dx="1434" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-2" value="Alluxio" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="235" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-4" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="40" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-5" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="160" as="sourcePoint" />
+            <mxPoint x="210" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-6" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="220" as="sourcePoint" />
+            <mxPoint x="300" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-7" value="HW OBS" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="350" width="1190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-9" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="290" as="sourcePoint" />
+            <mxPoint x="209.5" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-10" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="299.5" y="340" as="sourcePoint" />
+            <mxPoint x="299.5" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-12" value="Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="160" y="10" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-13" value="MySQL (alluxio://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="195" y="110" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-14" value="Paimon" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="10" width="105" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="r6kW0xcbRdSpRTyWJCZe-15" target="r6kW0xcbRdSpRTyWJCZe-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-15" value="StarRocks" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="470" y="-90" width="105" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-18" value="Knox" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="420" y="240" width="790" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-19" value="metastore" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="195" y="80" width="65" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-21" value="MySQL (s3://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="440" y="110" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-23" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="r6kW0xcbRdSpRTyWJCZe-13" target="r6kW0xcbRdSpRTyWJCZe-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="124.5" as="sourcePoint" />
+            <mxPoint x="420" y="125" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-24" value="同步" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="350" y="110" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-27" value="Hue" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="-190" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-28" value="Spark" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="-80" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-35" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="r6kW0xcbRdSpRTyWJCZe-15" target="r6kW0xcbRdSpRTyWJCZe-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="550" y="-70" as="sourcePoint" />
+            <mxPoint x="750" y="-130" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="620" y="-20" />
+              <mxPoint x="610" y="80" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-36" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="254.5" y="-30" as="sourcePoint" />
+            <mxPoint x="254.5" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-37" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="254.5" y="-150" as="sourcePoint" />
+            <mxPoint x="254.5" y="-90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-38" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="165" as="sourcePoint" />
+            <mxPoint x="460" y="345" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-39" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="340" as="sourcePoint" />
+            <mxPoint x="520" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-40" value="Flink" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="105" width="105" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-43" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="672" y="167.5" as="sourcePoint" />
+            <mxPoint x="672" y="347.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-44" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="732" y="342.5" as="sourcePoint" />
+            <mxPoint x="732" y="162.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.956;entryY=-0.009;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="1" source="r6kW0xcbRdSpRTyWJCZe-15" target="r6kW0xcbRdSpRTyWJCZe-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-48" value="MySQL Client" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="-190" width="105" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.595;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="r6kW0xcbRdSpRTyWJCZe-48" target="r6kW0xcbRdSpRTyWJCZe-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.378;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="r6kW0xcbRdSpRTyWJCZe-14" target="r6kW0xcbRdSpRTyWJCZe-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r6kW0xcbRdSpRTyWJCZe-51" value="Paimon Catalog" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="360" width="130" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="eC4HKFPlBpvRvDtu2Yli" name="第 2 页">
+    <mxGraphModel dx="1434" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WJUk42xe7qeKRLY18ERc-44" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="50" width="320" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-1" value="Alluxio" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="235" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-2" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="40" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-3" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="160" as="sourcePoint" />
+            <mxPoint x="210" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-4" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="220" as="sourcePoint" />
+            <mxPoint x="300" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-5" value="HW OBS" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="350" width="1190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-6" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="290" as="sourcePoint" />
+            <mxPoint x="209.5" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-7" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="299.5" y="340" as="sourcePoint" />
+            <mxPoint x="299.5" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-8" value="Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="160" y="10" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-9" value="MySQL (alluxio://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="195" y="110" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-14" value="metastore01" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="195" y="80" width="85" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-18" value="Hue" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="-190" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-19" value="Spark" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="-78" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-21" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="254.5" y="-30" as="sourcePoint" />
+            <mxPoint x="254.5" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-22" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="254.5" y="-144" as="sourcePoint" />
+            <mxPoint x="254.5" y="-84" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-32" value="Paimon Catalog" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="360" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-33" value="MySQL (s3://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="590" y="109" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-34" value="metastore02" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="590" y="79" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-35" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;labelPosition=left;verticalLabelPosition=middle;align=right;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="705" y="65" width="20" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-36" value="default catalog" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="79" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-37" value="hive catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="730" y="119" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-38" value="paimon catalog" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="730" y="155" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-42" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="WJUk42xe7qeKRLY18ERc-9" target="WJUk42xe7qeKRLY18ERc-37">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="180" as="sourcePoint" />
+            <mxPoint x="430" y="130" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="430" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-43" value="同步 hive metastore&lt;br&gt;将 alluxio 转成 s3" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="360" y="131" width="156" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="daAESlEcA_690-wbgoVB-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="603.75" y="38" as="targetPoint" />
+            <mxPoint x="603.8" y="-102" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WJUk42xe7qeKRLY18ERc-45" value="StarRocks" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="-160" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="daAESlEcA_690-wbgoVB-2" value="创建外部，通过 metastore02 来存储 default catalog、parimon catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="521.88" y="-78" width="216.25" height="58" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="GhJJRsdy5yc7cPnNsNey" name="第 3 页">
+    <mxGraphModel dx="1834" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-36" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="12" y="80" width="588" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-29" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="35" y="130" width="305" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-2" value="Alluxio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="295" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-3" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="100" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-4" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="220" as="sourcePoint" />
+            <mxPoint x="-285.5" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-6" value="HW OBS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="460" width="1190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-9" value="Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-380" y="70" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-10" value="MySQL (alluxio://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-345" y="170" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-11" value="metastore01" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-345" y="140" width="85" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-12" value="Hue" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-151" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-13" value="Spark" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-39" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;strokeWidth=2;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="30" as="sourcePoint" />
+            <mxPoint x="-285.5" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-15" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="-105" as="sourcePoint" />
+            <mxPoint x="-285.5" y="-45" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-17" value="MySQL (s3://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="169" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-18" value="metastore02" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="139" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-21" value="hive catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-23" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-10" target="_1WDM5V-I1wVElnQIDEk-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-160" y="240" as="sourcePoint" />
+            <mxPoint x="-110" y="190" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-110" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-24" value="同步 hive metastore&lt;br&gt;将 alluxio 转成 s3" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="191" width="156" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;strokeWidth=2;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-26" target="_1WDM5V-I1wVElnQIDEk-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d80073;strokeColor=#A50040;strokeWidth=2;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-26" target="_1WDM5V-I1wVElnQIDEk-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-26" value="StarRocks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="36.25" y="-120" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-28" value="internal catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="130" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d80073;strokeColor=#A50040;strokeWidth=2;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-30">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-30" value="paimon catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-31" value="external catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="35" y="100" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-35" value="internal catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-37" value="StarRocks Catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="13" y="50" width="138" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-39" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.308;exitY=0.967;exitDx=0;exitDy=0;exitPerimeter=0;fillColor=#008a00;strokeColor=#005700;strokeWidth=2;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-21">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="87" y="240" as="sourcePoint" />
+            <mxPoint x="88" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-41" value="1.查询 Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="36.25" y="-30" width="93.75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-43" value="2.查询 Paimon 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="213.13" y="-30" width="126.87" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-47">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="87.5" y="-130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-47" value="MySQL Client" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="41.5" y="-250" width="92" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-49" value="查询 hive 、 Paimon 表时，通过 hive-catalog.database.tablename&amp;nbsp; 或者 parimon-catalog.database.tablename" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="-190" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#6a00ff;strokeColor=#3700CC;strokeWidth=2;" edge="1" parent="1" source="_1WDM5V-I1wVElnQIDEk-50" target="_1WDM5V-I1wVElnQIDEk-54">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="335" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-50" value="Flink" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-120" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-51" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285" y="350" as="sourcePoint" />
+            <mxPoint x="-285" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-54" value="Paimon" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="210" y="310" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-55" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-257" y="-1" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-56" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="130" y="-79" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-57" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="732" y="-80" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-59" value="Paimon Catalog on S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="290" y="467.5" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-60" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" target="_1WDM5V-I1wVElnQIDEk-59">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="360" as="sourcePoint" />
+            <mxPoint x="510" y="370" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="350" y="390" />
+              <mxPoint x="360" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-61" value="paimon 自己的 catalog 会在 S3 上存储" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="290" y="390" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-62" value="3.查询 Paimon 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="632.3199999999999" y="-34" width="126.87" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="_1WDM5V-I1wVElnQIDEk-63" value="4.查询 Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-330.8700000000001" y="36" width="126.87" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="dXXOJ8QoYPIwb817x27H" name="第 4 页">
+    <mxGraphModel dx="1834" dy="1254" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xxbxVtSUHJM994_trnMM-46" value="knox" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="400" width="810" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-1" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="12" y="80" width="588" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="35" y="130" width="305" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-3" value="Alluxio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="295" width="210" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-4" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-380" y="100" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-5" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="220" as="sourcePoint" />
+            <mxPoint x="-285.5" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-6" value="HW OBS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="1">
+          <mxGeometry x="-390" y="520" width="1190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-7" value="Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-380" y="70" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-8" value="MySQL (alluxio://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-345" y="170" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-9" value="metastore01" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-345" y="140" width="85" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-10" value="Hue" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-151" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-11" value="Spark" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="-330" y="-39" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fillColor=#1ba1e2;strokeColor=#006EAF;strokeWidth=2;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="30" as="sourcePoint" />
+            <mxPoint x="-285.5" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-13" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285.5" y="-105" as="sourcePoint" />
+            <mxPoint x="-285.5" y="-45" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-14" value="MySQL (s3://)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="169" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-15" value="metastore02" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="139" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-16" value="hive catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="50" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-17" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-8" target="xxbxVtSUHJM994_trnMM-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-160" y="240" as="sourcePoint" />
+            <mxPoint x="-110" y="190" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-110" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-18" value="同步 hive metastore&lt;br&gt;将 alluxio 转成 s3" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="191" width="156" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#60a917;strokeColor=#2D7600;strokeWidth=2;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-21" target="xxbxVtSUHJM994_trnMM-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d80073;strokeColor=#A50040;strokeWidth=2;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-21" target="xxbxVtSUHJM994_trnMM-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-21" value="StarRocks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="36.25" y="-120" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-22" value="internal catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="380" y="130" width="180" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d80073;strokeColor=#A50040;strokeWidth=2;entryX=0.42;entryY=0.075;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-24" target="xxbxVtSUHJM994_trnMM-46">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-24" value="paimon catalog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-25" value="external catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="35" y="100" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-26" value="internal catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-27" value="StarRocks Catalog" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="13" y="50" width="138" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-28" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.308;exitY=0.967;exitDx=0;exitDy=0;exitPerimeter=0;fillColor=#008a00;strokeColor=#005700;strokeWidth=2;entryX=0.207;entryY=-0.05;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-16" target="xxbxVtSUHJM994_trnMM-46">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="87" y="240" as="sourcePoint" />
+            <mxPoint x="87" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-29" value="1.查询 Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="36.25" y="-30" width="93.75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-30" value="2.查询 Paimon 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="213.13" y="-30" width="126.87" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="87.5" y="-130" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-32" value="MySQL Client" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="41.5" y="-250" width="92" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-33" value="查询 hive 、 Paimon 表时，通过 hive-catalog.database.tablename&amp;nbsp; 或者 parimon-catalog.database.tablename" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-60" y="-190" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fillColor=#6a00ff;strokeColor=#3700CC;strokeWidth=2;" edge="1" parent="1" source="xxbxVtSUHJM994_trnMM-35" target="xxbxVtSUHJM994_trnMM-37">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="335" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-35" value="Flink" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="640" y="-120" width="107.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-36" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-285" y="350" as="sourcePoint" />
+            <mxPoint x="-285" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-37" value="Paimon" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="210" y="310" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-38" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="-250" y="10" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-39" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="130" y="-70" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-40" value="查询引擎" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="740" y="-80" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-41" value="Paimon Catalog on S3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="290" y="527.5" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-42" value="" style="curved=1;endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="1" target="xxbxVtSUHJM994_trnMM-41" source="xxbxVtSUHJM994_trnMM-37">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="420" as="sourcePoint" />
+            <mxPoint x="510" y="430" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="390" y="370" />
+              <mxPoint x="380" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-43" value="paimon 自己的 catalog 会在 S3 上存储" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="290" y="470" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-44" value="3.查询 Paimon 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="630.3199999999999" width="126.87" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-45" value="4.查询 Hive 表" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-306.8700000000001" y="40" width="126.87" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-47" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="87" y="450" as="sourcePoint" />
+            <mxPoint x="87" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xxbxVtSUHJM994_trnMM-48" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="450" as="sourcePoint" />
+            <mxPoint x="259.5" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
