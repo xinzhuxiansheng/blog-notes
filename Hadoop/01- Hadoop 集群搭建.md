@@ -1,16 +1,16 @@
 # Hadoop 集群安装  
 
->hadoop version: 3.1.3 
+>hadoop version: 3.2.0 
 
 ## Hadoop 高可用集群规划
 ```bash
-vm01           vm02         vm03
-NameNode	      NameNode
-JournalNode     JournalNode   JournalNode
-DataNode        DataNode      DataNode
+vm01            vm02              vm03
+NameNode	    NameNode
+JournalNode     JournalNode       JournalNode
+DataNode        DataNode          DataNode
 ZK
-                ResourceManager ResourceManager
-NodeManager	    NodeManager	  NodeManagerw
+                ResourceManager   ResourceManager
+NodeManager	    NodeManager	      NodeManager
 ```
 
 ## 修改 hostname 

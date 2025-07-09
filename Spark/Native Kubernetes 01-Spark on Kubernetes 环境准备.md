@@ -172,5 +172,8 @@ subjects:
  3000
 ``` 
 
+`查看 driver pod log`  
+![sparkonk8s01](images/sparkonk8s01.jpg)    
+
 refer   
 1.https://spark.apache.org/docs/3.5.5/running-on-kubernetes.html   
