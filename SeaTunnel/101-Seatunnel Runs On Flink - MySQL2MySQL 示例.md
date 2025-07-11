@@ -1,5 +1,0 @@
-
-
-
-
-mvn spotless:apply   

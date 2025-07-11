@@ -216,7 +216,7 @@ try {
 }
 ```
 
-我们需要小结一下：    
+我们需要小结一下：     
 1.模板类 InputFormatSourceFunction 方法只会在 TaskManager 运行    
 2.InputFormatSourceFunction 中的 迭代器对象 `Iterator<InputSplit> splitIterator` ，它返回的是拆分后 Source 集合ids 下标号，TaskManager 是主动向 JobManager 申请任务，而不是 JobManager 主动下发的。 每个 JdbcInputFormat 都保存了一份完整的 拆分 Ids 集合。     
 ![jdbcsourcesplit28](images/jdbcsourcesplit28.jpg)  
