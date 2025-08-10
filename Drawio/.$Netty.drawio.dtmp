@@ -25,6 +25,9 @@
         <mxCell id="VVpLCt9KorB8fuezb8u7-7" value="使用&amp;nbsp;&lt;span style=&quot;font-family: &amp;quot;Courier New&amp;quot;; font-size: 8.04pt; background-color: initial;&quot;&gt;Socket API 实现&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="460" y="135" width="130" height="35" as="geometry" />
         </mxCell>
+        <mxCell id="VVpLCt9KorB8fuezb8u7-8" value="ServerSocket" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="220" width="110" height="40" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

@@ -1,0 +1,58 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2">
+  <diagram name="第 1 页" id="S5ZMWfs7ZevYlqEpTiWN">
+    <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="I7S3F9Pbeyeezbey60o_-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="I7S3F9Pbeyeezbey60o_-1" target="I7S3F9Pbeyeezbey60o_-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-1" value="Pod 服务的 log 标注输出（Stdout）" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="200" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="I7S3F9Pbeyeezbey60o_-2" target="I7S3F9Pbeyeezbey60o_-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-2" value="Alloy&lt;div&gt;Promtail&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="200" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="I7S3F9Pbeyeezbey60o_-4" target="I7S3F9Pbeyeezbey60o_-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-4" value="日志聚合系统&lt;div&gt;Loki&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="200" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="I7S3F9Pbeyeezbey60o_-5" target="I7S3F9Pbeyeezbey60o_-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="I7S3F9Pbeyeezbey60o_-5" target="I7S3F9Pbeyeezbey60o_-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-5" value="S3 (minio)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="200" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-7" value="检索/存储" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="590" y="195" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-8" value="日志格式&lt;div&gt;index,chunk&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="590" y="240" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-10" value="Grafana" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="350" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.562;entryY=1.06;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="I7S3F9Pbeyeezbey60o_-10" target="I7S3F9Pbeyeezbey60o_-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-12" value="发送查询 LogQL" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-14" value="index file" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="150" width="80" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="I7S3F9Pbeyeezbey60o_-15" value="chunk file" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="920" y="250" width="80" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

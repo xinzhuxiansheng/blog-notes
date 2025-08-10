@@ -79,7 +79,7 @@ docker push 192.168.0.134:5000/flink:1.17.2-java11
 访问 `192.168.0.134:8080` 浏览 WEB。   
 
 ## 配置自动化脚本    
-创建 `push_images.sh` 脚本，将上面测试的 shell 命令放在脚本中， 将 `flink:1.17.2-java11` 做成参数，后面只需执行 `./push_image.sh flink:1.17.2-java11` 实现自动化上报。  
+创建 `push_images.sh` 脚本，将上面测试的 shell 命令放在脚本中， 将 `flink:1.17.2-java11` 做成参数，后面只需执行 `./push_images.sh flink:1.17.2-java11` 实现自动化上报。  
 
 **push_images.sh**
 ```shell
