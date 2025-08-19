@@ -1,4 +1,4 @@
-# Flink 源码 - Connector JDBC - 了解 JdbcInputFormat 到 自定义实现 InputFormat  
+# Flink 源码 - Connector JDBC - 探索 JdbcInputFormat 到 自定义实现 InputFormat  
 
 >Flink version: 1.15.4，Flink Job Model: Native Kubernetes Application, Kubernetes version: 1.30.8         
 
