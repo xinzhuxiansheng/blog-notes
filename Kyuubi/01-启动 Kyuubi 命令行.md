@@ -1,4 +1,9 @@
-# Kyuubi - 启动 Kyuubi 临时 Seesion 
+# Kyuubi - 启动 Kyuubi 命令行
+
+## 启动 Kyuubi 服务
+```bash
+bin/kyuubi start 
+```
 
 ## 创建 Kyuubi Engine 
 执行 beeline 命令   
@@ -22,4 +27,4 @@ Beeline version 1.10.2 by Apache Kyuubi
 kyuubi.session.idle.timeout.ms=1800000 若需要修改 engine 存活时间，可修改 Kyuubi 配置文件 `kyuubi-defaults.conf`  
 
 
->kyuubi 默认是内存元数据模式。
+>kyuubi 默认是内存元数据模式。   
