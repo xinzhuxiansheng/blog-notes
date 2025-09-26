@@ -1,6 +1,6 @@
 # Kyuubi - Kyuubi 集成 Hive Metastore  
 
->Kyuubi version: 1
+>Kyuubi version: 1.10.2, Spark version: 3.5.5 
 
 ## 引言  
 Kyuubi 默认引擎是 Spark SQL，默认元数据模式是内存模式。我们也可以给 Kyuubi 引擎指定 Hive Metastore 地址。    
