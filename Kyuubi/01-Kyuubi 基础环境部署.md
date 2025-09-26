@@ -58,7 +58,10 @@ bin/kyuubi start
 ```
 
 输出结果如下：  
-![getstarted01](images/getstarted01.png)
+![getstarted01](images/getstarted01.png)  
+
+此时，可以浏览器访问 `http://bigdata04:10099` 打开 Kyyuubi Web UI：  
+![getstarted02](images/getstarted02.png)      
 
 ## 创建 Kyuubi Engine 
 执行 beeline 命令   
