@@ -7,7 +7,7 @@
 
 `下面列举了一个 Hive Table 的 lineage 示例图：`     
 
-![hiveons301](images/hiveons301.jpg)    
+![hiveons301](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons301.jpg)    
 
 >对于 “环境” ，我仍然需要优化。     
 
@@ -75,10 +75,11 @@ sh start.sh
 
 浏览器访问 `192.168.0.135:9001` ，登录 Minio Web UI。 用户名和密码分别是 minio，minio123 。   
 
-![hiveons302](images/hiveons302.jpg)   
+![hiveons302](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons302.jpg)   
 
 ### 5）创建名为 hive 的 Bucket  
-如下所示, 创建名为 hive 的Bucket。在 hive bucket 创建名为 `warehouse` path，用于存放 Hive Data。    
+如下所示, 创建名为 hive 的Bucket。在 hive bucket 创建名为 `warehouse` path，用于存放 Hive Data。      
+![hiveons303](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons303.jpg)   
 
 此时，minio standalone 已经部署完毕。   
 
@@ -134,7 +135,7 @@ hdfs dfs -ls s3a://[bucket]/
 ```
 
 示例操作 如下所示：  
-![hiveons304](images/hiveons304.jpg)
+![hiveons304](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons304.jpg)
 
 
 >注意：此时的 hdfs 命令仍然可以查看 hdfs 的路径，如下所示：  
@@ -198,10 +199,10 @@ create database yzhou_db location  "s3a://hive/warehouse/yzhou_db";
 ```
 
 输出结果如下：   
-![hiveons305](images/hiveons305.jpg)
+![hiveons305](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons305.jpg)
 
 创建成功后，访问 Minio Web UI (http://192.168.0.135:9001/) 查看目录信息, 如下图所示，在 /hive/warehouse 目录下多了一个 `yzhou_db` 文件夹。   
-![hiveons306](images/hiveons306.jpg)  
+![hiveons306](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons306.jpg)  
 
 #### 创建名为 dim_base_province table 
 ```bash
@@ -218,10 +219,10 @@ LOCATION 's3a://hive/warehouse/yzhou_db/dim_base_province';
 ``` 
 
 输出结果：   
-![hiveons307](images/hiveons307.jpg)   
+![hiveons307](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons307.jpg)   
 
 创建成功后，访问 Minio Web UI (http://192.168.0.135:9001/) 查看目录信息, 如下图所示，在 /hive/warehouse/yzhou_db 目录下多了一个 `dim_base_province` 文件夹。   
-![hiveons308](images/hiveons308.jpg)     
+![hiveons308](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons308.jpg)     
 
 
 #### 上传数据
@@ -264,10 +265,10 @@ LOCATION 's3a://hive/warehouse/yzhou_db/dim_base_province';
 ```
 
 再将该文件通过 Minio Web UI 上传到 `dim_base_province` 文件夹下。   
-![hiveons309](images/hiveons309.jpg)   
+![hiveons309](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons309.jpg)   
 
 此时，我们继续在 Hive Cli 执行 `select * from yzhou_db.dim_base_province;` 语句查询 dim_base_province 表数据。     
-![hiveons310](images/hiveons310.jpg)    
+![hiveons310](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons310.jpg)    
 
 此时，Hive 集成 S3 也已完成。  
 
@@ -326,7 +327,7 @@ show databases;
 select * from yzhou_db.dim_base_province;
 ```
 
-![hiveons311](images/hiveons311.jpg)            
+![hiveons311](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons311.jpg)            
 
 到这里，Spark on Yarn 也查询到 S3 Hive 表了。   
 
@@ -386,10 +387,10 @@ bin/kyuubi start
 ```
 
 输出结果如下：  
-![hiveons312](images/hiveons312.jpg)  
+![hiveons312](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons312.jpg)  
 
 此时，可以浏览器访问 `http://bigdata04:10099` 打开 Kyyuubi Web UI：  
-![hiveons313](images/hiveons313.jpg)      
+![hiveons313](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons313.jpg)      
 
 ### 创建 Kyuubi Engine 
 执行 beeline 命令   
@@ -411,16 +412,16 @@ Beeline version 1.10.2 by Apache Kyuubi
 ```
 
 输出结果：  
-![hiveons314](images/hiveons314.jpg)    
+![hiveons314](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons314.jpg)    
 
-![hiveons315](images/hiveons315.jpg)   
+![hiveons315](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons315.jpg)   
 
 此时，我们可以在 Kyuubi Web UI 上看到 Session，Engine 信息。     
 `Seesion:`   
-![hiveons316](images/hiveons316.jpg)   
+![hiveons316](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons316.jpg)   
 
 `Engine:`  
-![hiveons317](images/hiveons317.jpg)  
+![hiveons317](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons317.jpg)  
 
 注意：当 Cli 终端结束后，Seesion 会立马结束，但是 engine 还会再运行一段时间（默认会存活 30分钟）。      
 若需要修改 engine 存活时间，可修改 Kyuubi 配置文件 `kyuubi-defaults.conf`  
@@ -429,14 +430,14 @@ kyuubi.session.idle.timeout.ms=1800000
 ```  
 
 在 Yarn Web UI (http://bigdata02:8088/cluster/apps) 可以看到 Spark Application 正在运行。  
-![hiveons318](images/hiveons318.jpg)  
+![hiveons318](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons318.jpg)  
 
 ### 使用 Kyuubi 提交 Spark SQL  
 执行 `show databases;`  
-![hiveons319](images/hiveons319.jpg)     
+![hiveons319](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons319.jpg)     
 
 执行 `select * from yzhou_db.dim_base_province;` 
-![hiveons320](images/hiveons320.jpg)   
+![hiveons320](http://img.xinzhuxiansheng.com/blogimgs/kyuubi/hiveons320.jpg)   
 
 到这里，该篇介绍的内容就结束了，博主循循渐进的操作完了各种组件可查询 S3 Hive 表。 估计你也可能会想到，后续我们会在改变它们，因为我们不需要 Yarn，不需要 二进制部署。  
 
