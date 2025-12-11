@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2" pages="9">
+=======
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2" pages="9">
+>>>>>>> 5609928c4abe683cbe267641040dd114219985ff
   <diagram name="第 1 页" id="L6LR1fwa6pHO7NQinEbo">
     <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -795,6 +799,7 @@
       </root>
     </mxGraphModel>
   </diagram>
+<<<<<<< HEAD
   <diagram id="p3hoPvta-3MNgPeAmcvR" name="Page-9">
     <mxGraphModel dx="1828" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -929,6 +934,36 @@
         </mxCell>
         <mxCell id="4_TyhbB46Nxw51DvPxwF-41" value="这两者有什么关联？" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
           <mxGeometry x="229" y="1370" width="134" height="46" as="geometry" />
+=======
+  <diagram id="0LAVGnbEPE7zHN-28HtV" name="第 9 页">
+    <mxGraphModel dx="1434" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="JgnOU1FK4Ow-1xaNqa4F-1" value="SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="20" y="210" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="JgnOU1FK4Ow-1xaNqa4F-2" value="&lt;span style=&quot;text-align: left;&quot;&gt;Algebra builder&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="245" y="210" width="100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="JgnOU1FK4Ow-1xaNqa4F-4" value="&lt;span style=&quot;text-align: left;&quot;&gt;Relation Algebra&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="125" y="337" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JgnOU1FK4Ow-1xaNqa4F-5" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="270" as="sourcePoint" />
+            <mxPoint x="150" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JgnOU1FK4Ow-1xaNqa4F-6" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="270" as="sourcePoint" />
+            <mxPoint x="220" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JgnOU1FK4Ow-1xaNqa4F-10" value="" style="sketch=0;outlineConnect=0;fillColor=#a20025;strokeColor=#6F0000;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.question;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="168" y="377" width="41" height="78" as="geometry" />
+>>>>>>> 5609928c4abe683cbe267641040dd114219985ff
         </mxCell>
       </root>
     </mxGraphModel>
