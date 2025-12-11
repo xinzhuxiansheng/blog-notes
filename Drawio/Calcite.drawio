@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/25.0.2 Chrome/128.0.6613.186 Electron/32.2.5 Safari/537.36" version="25.0.2" pages="8">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2" pages="9">
   <diagram name="第 1 页" id="L6LR1fwa6pHO7NQinEbo">
     <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -791,6 +791,144 @@
         </mxCell>
         <mxCell id="ip82y0bRJDMUKjbx7NDx-17" value="不匹配" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-40" y="700" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="p3hoPvta-3MNgPeAmcvR" name="Page-9">
+    <mxGraphModel dx="1828" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-2" value="SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-3" value="&lt;span style=&quot;text-align: left;&quot;&gt;RelBuilder&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="220" y="220" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-5" value="&lt;span style=&quot;text-align: left;&quot;&gt;Relation Algebra&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="96" y="360" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-9" value="" style="sketch=0;outlineConnect=0;fontColor=#ffffff;fillColor=#a20025;strokeColor=#6F0000;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.question;" vertex="1" parent="1">
+          <mxGeometry x="140" y="400" width="41" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-10" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="60" y="280" as="sourcePoint" />
+            <mxPoint x="120" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-11" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="240" y="280" as="sourcePoint" />
+            <mxPoint x="190" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-12" value="转换" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-13" value="转换" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="206" y="300" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-14" value="什么是 Relation Algebra ?" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="230" y="370" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-15" value="&lt;b&gt;&lt;font style=&quot;font-size: 16px; color: rgb(0, 102, 51);&quot;&gt;Planner rules&lt;/font&gt;&lt;/b&gt; &lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b style=&quot;&quot;&gt;&lt;font style=&quot;color: rgb(204, 0, 0);&quot;&gt;transform&lt;/font&gt;&lt;/b&gt; &lt;/font&gt;&lt;font style=&quot;font-size: 18px; color: rgb(102, 102, 0);&quot;&gt;&lt;b style=&quot;&quot;&gt;expression trees&lt;/b&gt;&lt;/font&gt; &lt;font style=&quot;font-size: 15px; color: rgb(204, 0, 0);&quot;&gt;&lt;b&gt;using &lt;/b&gt;&lt;/font&gt;&lt;font style=&quot;font-size: 19px; color: rgb(102, 0, 102);&quot;&gt;&lt;b style=&quot;&quot;&gt;mathematical identities&lt;/b&gt;&lt;/font&gt; &lt;font style=&quot;color: rgb(0, 0, 0); font-size: 14px;&quot;&gt;that &lt;/font&gt;preserve semantics." style="text;whiteSpace=wrap;html=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="-160" y="620" width="750" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-16" value="For example, it is valid to &lt;font style=&quot;font-size: 14px; color: rgb(204, 0, 0);&quot;&gt;&lt;b&gt;push a filter into&lt;/b&gt;&lt;/font&gt; &lt;b&gt;&lt;font style=&quot;color: rgb(0, 102, 51);&quot;&gt;an &lt;/font&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(0, 102, 51);&quot;&gt;input&lt;/font&gt;&lt;/b&gt; &lt;/font&gt;of an inner join if the filter&lt;b&gt;&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px; color: rgb(204, 0, 0);&quot;&gt; &lt;font&gt;does not reference&lt;/font&gt;&lt;/font&gt; &lt;/font&gt;&lt;/b&gt;columns from &lt;font&gt;&lt;font style=&quot;color: rgb(0, 102, 51);&quot;&gt;&lt;b style=&quot;&quot;&gt;the other &lt;font style=&quot;font-size: 16px;&quot;&gt;input&lt;/font&gt;&lt;/b&gt;&lt;/font&gt;&lt;font color=&quot;#006633&quot;&gt;.&lt;/font&gt;&lt;/font&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-160" y="720" width="800" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-18" value="&lt;font style=&quot;font-size: 16px; color: rgb(102, 0, 102);&quot;&gt;&lt;b style=&quot;&quot;&gt;Calcite optimizes queries&lt;/b&gt;&lt;/font&gt; &lt;font style=&quot;font-size: 19px; color: rgb(204, 0, 0);&quot;&gt;&lt;b&gt;by&lt;/b&gt;&lt;/font&gt; &lt;b&gt;&lt;font style=&quot;font-size: 16px; color: rgb(204, 0, 0);&quot;&gt;repeatedly applying planner rules&lt;/font&gt;&lt;/b&gt; to&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt; &lt;/font&gt;&lt;font style=&quot;font-size: 16px; color: rgb(0, 102, 51);&quot;&gt;a relational expression&lt;/font&gt;&lt;/b&gt;.&lt;b&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt; A cost model&lt;/font&gt;&lt;/b&gt; guides the process, and &lt;font style=&quot;font-size: 16px; color: rgb(102, 102, 0);&quot;&gt;&lt;b&gt;the planner engine&lt;/b&gt;&lt;/font&gt; generates an alternative expression that has the same semantics as the original but a lower cost." style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-160" y="810" width="810" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-19" value="The planning process is extensible. You can add your own relational &lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;operators&lt;/b&gt;&lt;/font&gt;, &lt;font style=&quot;font-size: 16px; color: rgb(0, 102, 51);&quot;&gt;&lt;b&gt;planner rules&lt;/b&gt;&lt;/font&gt;, &lt;font style=&quot;font-size: 18px; color: rgb(102, 102, 0);&quot;&gt;&lt;b&gt;cost model&lt;/b&gt;&lt;/font&gt;, and &lt;font style=&quot;font-size: 20px; color: rgb(204, 0, 0);&quot;&gt;&lt;b&gt;statistics&lt;/b&gt;&lt;/font&gt;." style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-160" y="930" width="810" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-22" value="SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="1090" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-23" value="&lt;span style=&quot;text-align: left;&quot;&gt;RelBuilder&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="170" y="1090" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-24" value="&lt;span style=&quot;text-align: left;&quot;&gt;Relation Algebra&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="46" y="1230" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-25" value="" style="sketch=0;outlineConnect=0;fontColor=#ffffff;fillColor=#a20025;strokeColor=#6F0000;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.question;" vertex="1" parent="1">
+          <mxGeometry x="90" y="1270" width="41" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-26" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="10" y="1150" as="sourcePoint" />
+            <mxPoint x="70" y="1220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-27" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="190" y="1150" as="sourcePoint" />
+            <mxPoint x="140" y="1220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-28" value="转换" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-10" y="1170" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-29" value="转换" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="156" y="1170" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-30" value="什么是 Relation Algebra ?" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="180" y="1240" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-31" value="a relational expression" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="430" y="1230" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-32" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="4_TyhbB46Nxw51DvPxwF-24" target="4_TyhbB46Nxw51DvPxwF-31">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="1430" as="sourcePoint" />
+            <mxPoint x="390" y="1380" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="1300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-33" value="这两者有什么关联？" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="229" y="1290" width="134" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-34" value="The planner engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="700" y="1232.5" width="120" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-36" value="" style="curved=1;endArrow=classic;html=1;rounded=0;entryX=0.95;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" edge="1" parent="1" target="4_TyhbB46Nxw51DvPxwF-31">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="1230" as="sourcePoint" />
+            <mxPoint x="600" y="1140" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="690" y="1170" />
+              <mxPoint x="580" y="1170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-37" value="反复应用 planner rules" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="650" y="1150" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-38" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="1290" as="sourcePoint" />
+            <mxPoint x="560" y="1330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-39" value="产物：相同语义 &amp;amp; 低成本&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;expression&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="500" y="1336" width="160" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-40" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="4_TyhbB46Nxw51DvPxwF-39">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="166" y="1290" as="sourcePoint" />
+            <mxPoint x="430" y="1360" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="1380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4_TyhbB46Nxw51DvPxwF-41" value="这两者有什么关联？" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="229" y="1370" width="134" height="46" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
