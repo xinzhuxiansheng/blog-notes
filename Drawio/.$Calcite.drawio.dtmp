@@ -981,7 +981,7 @@
         <mxCell id="c3L6sV21yP0wEUpmNVVM-15" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeWidth=4;strokeColor=#CC0000;" vertex="1" parent="1">
           <mxGeometry x="163" y="1790" width="277" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="c3L6sV21yP0wEUpmNVVM-16" value="将 filter 下推到数据读取部分，此时就不需要读取100条，而是 51条数据&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;如果读取 100 rows 是成本，那过滤后只需读取51 rows，那就是减少成本和提效&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="c3L6sV21yP0wEUpmNVVM-16" value="将 filter 下推到数据读取部分，此时就不需要读取100条，而是 51条数据&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;如果读取 100 rows 是成本，那过滤后只需读取51 rows，那就是减少磁盘IO和网络IO成本&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="64" y="1890" width="266" height="90" as="geometry" />
         </mxCell>
       </root>
