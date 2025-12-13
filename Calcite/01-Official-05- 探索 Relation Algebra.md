@@ -19,7 +19,7 @@ try (Statement statement = connection.createStatement();
 ## “一头雾水” （Calcite 的 Algebra 文档）    
 
 **图01**     
-![algebra01](images/algebra01.png)           
+![algebra01](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra01.png)           
 
 ```bash
 Algebra
@@ -35,12 +35,12 @@ The planning process is extensible. You can add your own relational operators, p
 ### 开头1
 博主在刚开始学习 Apache Calcite 时，对这篇 `Algebra` 文档的理解有些“犯难”，正文如 `图01` 所示，首先文档介绍 `Relational algebra`是 Calcite 的核心概念，任何查询都可以表示为 `a tree of relational operators`, 它告诉我们可以通过 SQL 语句转成 `relational algebra`,也可以通过 `RelBuilder` 构建它。      
 
-![algebra03](images/algebra03.png)   
+![algebra03](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra03.png)   
 
 >PS: 为啥是 `RelBuilder`，在该篇文档中的 `Algebra builder`章节告诉我们了，查看 `图02`。    
 
 **引入 RelBuilder 图02**        
-![algebra02](images/algebra02.png)    
+![algebra02](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra02.png)    
 
 ### 段落2  
 段落2首句话翻译过来是：`Planner rules` 使用保持语义的 "数学恒等式" 来转换 "表达式树"; 一句非常简单的描述，它的确让我提出了很多问题，下面我用不同颜色标记出来名词和动词，如图04所示：  
@@ -50,7 +50,7 @@ The planning process is extensible. You can add your own relational operators, p
 3.转换成 `expression tree`, 那之前的形式是什么？ 转换后 `expression tree` 又是什么？ 转换的目的是什么？         
 
 **图4**           
-![algebra04](images/algebra04.png)     
+![algebra04](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra04.png)     
 
 段落2第二句话翻译过来是：例如，如果过滤条件不引用另一个输入中的列，则可以将过滤条件推入内连接的输入中；     
 
@@ -60,7 +60,7 @@ The planning process is extensible. You can add your own relational operators, p
 1.an input / the other input 它指代什么？ “输入” ?     
 
 **图05**          
-![algebra05](images/algebra05.png)  
+![algebra05](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra05.png)  
 
 ### 段落3 
 段落3原文翻译：Calcite 通过反复对关系表达式应用规划器规则来优化查询。成本模型指导这一过程，规划器引擎生成一个与原始表达式具有相同语义但成本更低的替代表达式。              
@@ -74,7 +74,7 @@ The planning process is extensible. You can add your own relational operators, p
 4.它介绍说 but a lower cost，说成本更低，我的先知道成本是什么？     
 
 **图06**        
-![algebra06](images/algebra06.png)        
+![algebra06](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra06.png)        
 
 ### 段落4 
 段落4原文翻译：规划过程是可扩展的。你可以添加自己的关系运算符、规划规则、成本模型和统计信息。 
@@ -82,12 +82,12 @@ The planning process is extensible. You can add your own relational operators, p
 这句话告诉我，很多它的学习方向：自定义 operators，自定义 planner rules，自定义 cost model，自定义 statistics。  
 
 **图07**          
-![algebra07](images/algebra07.png)             
+![algebra07](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra07.png)             
 
 
 ### 小结     
 这几段介绍，虽然句子不长，但提供的信息量还是比较大。对于博主来说，提出了很多需要弄明白的问题。        
-![algebra08](images/algebra08.png)              
+![algebra08](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra08.png)              
 
 接下来，开始探索吧！           
 
@@ -95,7 +95,7 @@ The planning process is extensible. You can add your own relational operators, p
 `Relational Algebra` 相关知识大家可以从两本书中获取，下面将这部分的内容从书中 `摘要`出来。   
 
 ### Database System Concepts Seventh Edition (2.6 章节)     
-![algebra09](images/algebra09.png)   
+![algebra09](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra09.png)   
 
 #### The Relational Algebra   
 The relational algebra consists of a set of operations that take one or two relations as
@@ -109,7 +109,7 @@ are, therefore, called binary operations.
 （PS：了解到，这些操作可以根据对 `relation`的个数区分成 一元操作 / 二元操作。 
 
 你可以访问 https://dbis-uibk.github.io/relax/help，它对 operate 做了详细归类： 
-![algebra57](images/algebra57.png)    
+![algebra57](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra57.png)    
 ）  
 
 Although the relational algebra operations form the basis for the widely used SQL
@@ -126,10 +126,10 @@ under the link titled Laboratory Material, provides pointers to a few such imple
 这部分我会在后面实践中，告诉大家 calculator 如何使用。        
 
 **db-book.com**         
-![algebra11](images/algebra11.png)   
+![algebra11](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra11.png)   
 
 **关系代数计算器**   
-![algebra10](images/algebra10.png)    
+![algebra10](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra10.png)    
 ）
 
 It is worth recalling at this point that since a relation is a set of tuples, relations
@@ -142,10 +142,10 @@ duplicates.
 **1.** 首先访问 `https://db-book.com/` 页面，点击 `Sample tables`，获取示例的 DDL `DDL.sql` 和 DML `largeRelationsInsertFile.sql` 语句，下载好它们。     
 
 **Sample tables**             
-![algebra12](images/algebra12.png)         
+![algebra12](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra12.png)         
 
 **下载 DDL，DML**           
-![algebra13](images/algebra13.png)       
+![algebra13](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra13.png)       
 
 **2.** 导入 DataSet  
 在 `RelaX - relational algebra calculator` 网站中并没有 `Database System Concepts Seventh Edition` 示例数据集，所以需要将下载 DDL & DML 整理成一个符合 `Relax Dataset` 语法规范的数据文件。可以先通过访问 `https://dbis-uibk.github.io/relax/help#tutorial-maintainer-create-dataset` 了解一下。 (PS: 看 doc 介绍那么多，但格式很简单，AI 帮忙搞定)       
@@ -189,7 +189,7 @@ department = {
 ```
 
 **3.** 使用 AI工具将 DDL SQL 和 DML SQL 拼接处 `Relax Dataset` 格式数据文件，再将该文件上传到 gist（`https://gist.github.com`）,示例如下，创建了名为 `sql-relax.txt` 内容。     
-![algebra14](images/algebra14.png)    
+![algebra14](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra14.png)    
 
 **“Create public gist” 与 “Create secret gist” 的区别**       
 | 项目 | Public Gist | Secret Gist |
@@ -202,64 +202,64 @@ department = {
 | **安全性级别** | 公共，可被任何人 fork | 相对保密，但注意不是完全私有仓库（有链接就能访问） |
 
 如果你已经准备好,像 `sql-relax.txt`的数据文件，那接下来就可以打开 Relax Calculator 网站，加载 gist 中的数据文件，并开始使用。         
-![algebra15](images/algebra15.png)   
+![algebra15](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra15.png)   
 
 将你的 gist 文件对应的 URL中的 gist id 拷贝表单中，点击 `load`即可。这里还需特别注意： gist 的文件内容，尽量少一些，避免出现一些稀奇古怪的语法异常。    
-![algebra16](images/algebra16.png)   
+![algebra16](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra16.png)   
 
 导入成功后，可以在 Calculator 左侧栏看到导入的 DDL结构。如下图所示：  
-![algebra17](images/algebra17.png)    
+![algebra17](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra17.png)    
 
 到这里，实操 `Relational Algebra` 运算的环境就已经准备好了。  
 
 >需要特别，书中的 `Relational Algebra` 示例，`"` 在 `Relax Calculator`会报错，改用 `'`就行；另外查询返回的数据与你上传的 dataset 中数据息息相关，与书中不符的话，没必要纠结!                 
-![algebra19](images/algebra19.png)          
+![algebra19](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra19.png)          
 
 #### The Select Operation
 The select operation selects tuples that satisfy a given predicate. We use the lowercase Greek letter sigma (σ) to denote selection. The predicate appears as a subscript to σ.The argument relation is in parentheses after the σ. Thus, to select those tuples of the instructor relation where the instructor is in the “Physics” department, we write:    
-![algebra18](images/algebra18.png)     
+![algebra18](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra18.png)     
 
 **输出结果如下：图20**               
-![algebra20](images/algebra20.png)            
+![algebra20](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra20.png)            
 
 If the instructor relation is as shown in Figure 20, then the relation that results from the preceding query is as shown in Figure 2.10. We can find all instructors with salary greater than $90,000 by writing:         
-![algebra21](images/algebra21.png)     
+![algebra21](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra21.png)     
 
 **输出结果如下：图22**     
-![algebra22](images/algebra22.png)            
+![algebra22](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra22.png)            
 
 In general, we allow comparisons using =, ≠, <, ≤, >, and ≥ in the selection predicate. Furthermore, we can combine several predicates into a larger predicate by using the connectives and (∧), or (∨), and not (¬). Thus, to find the instructors in Physics with a salary greater than $90,000, we write:        
-![algebra23](images/algebra23.png)
+![algebra23](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra23.png)
 
 **输出结果如下：图24**      
-![algebra24](images/algebra24.png)        
+![algebra24](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra24.png)        
 
 The selection predicate may include comparisons between two attributes. To illustrate, consider the relation department. To find all departments whose name is the same
 as their building name, we can write: 
 （PS: 选择`谓词`也可以包含两个属性的比较，在 Table 将字段称为属性有点怪怪的， 在 `department` 表中，dept_name 与 building 字段相等的数据， 这里需要注意的是 Relax 公式中的 building 后面需要加上`空格`，不然 Calculator 会提示报错）             
-![algebra25](images/algebra25.png)    
+![algebra25](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra25.png)    
 
 #### The Project Operation
 Suppose we want to list all instructors' ID, name, and salary, but we do not care about the dept name. The project operation allws us to produce this relation. The project operation is a unary operation that returns its argument relation, with certain attributes left out. Since a relation is a set, any duplicate rows are eliminated. Projection is denoted by the uppercase Greek letter pi (Π). We list those attributes that we wish to appear in the result as a subscript to Π. The argument relation follows in parentheses. We write the query to produce such a list as:      
-![algebra26](images/algebra26.png)            
+![algebra26](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra26.png)            
 
 **输出结果如下：图27**    
-![algebra27](images/algebra27.png)               
+![algebra27](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra27.png)               
 
 The basic version of the project operator ΠL(E) allows only attribute names to be present in the list L. A generalized version of the operator allows expressions involving attributes to appear in the list L. For example, we could use:           
 (PS: 文中提到 `基础版的 project operator`，它仅允许属性/字段 出现在 L,在 `广义版本中 project operator` 是允许允许属性/字段包含计算表达式的， 下面的示例是计算每个老师的月薪。     
 
 在 `Relax Calculator` 中,提示 salary/12 是不合法，可以得到 Relax Calculator 支持基础版本。    
 )             
-![algebra28](images/algebra28.png)        
+![algebra28](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra28.png)        
 to get the monthly salary of each instructor.         
 
 #### Composition of Relational Operations           
 The fact that the result of a relational operation is itself a relation is important. Consider the more complicated query “Find the names of all instructors in the Physics department.” We write:      
-![algebra29](images/algebra29.png)         
+![algebra29](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra29.png)         
 
 **输出结果如下：图30**        
-![algebra30](images/algebra30.png)          
+![algebra30](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra30.png)          
 
 Notice that, instead of giving the name of a relation as the argument of the projection operation, we give an expression that evaluates to a relation. In general, since the result of a relational-algebra operation is of the same type (relation) as its inputs, relational-algebra operations can be composed together into a relational-algebra expression. Composing relational-algebra operations into relationalalgebra expressions is just like composing arithmetic operations (such as +, −, ∗, and ÷) into arithmetic expressions.     
 （PS：这里特别重要，首次提到 `relation`,`relational-algebra operation`， 再次提到 `input`。            
@@ -271,26 +271,26 @@ FROM section AS s
 INNER JOIN course AS c ON s.course_id = c.course_id
 WHERE s.semester = 'Fall'      
 ```   
-![algebra33](images/algebra33.png)      
+![algebra33](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra33.png)      
 
 文档中也提到的 an input / the other input，现在我们再去理解，它就像子查询，查询出来的结果集 `relation`,作为下次运算的输入。       
 
 将示例 SQL 放入 Relax Calculator 查看它的 `expression tree`，哈哈，在上面关系代数表达式示例中，在返回结果集的图片，我们看到像 tree 结构，那代表的是 `expression tree`,在上面 Calcite Algebra 文档也有`expression tree` 名词出现。             
 **输出结果如下：图31**          
-![algebra31](images/algebra31.png)      
+![algebra31](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra31.png)      
 
 我们看到 WHERE 的过滤条件，它只针对 section 一个 input 作用，对 course input 不起任何作用, 我们将过滤逻辑下推到 section input 中， 这个过程其实就是 `Planner rules`优化的过程。 如下图所示：         
-![algebra32](images/algebra32.png)          
+![algebra32](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra32.png)          
 
 关于 `relational-algebra operation`的定义：将关系代数运算组合成关系代数表达式，就像将算术运算（如+、−、∗和÷）组合成算术表达式一样。             
 ）  
 
 #### The Cartesian-Product Operation
 The Cartesian-product operation, denoted by a cross (×), allows us to combine information from any two relations. We write the Cartesian product of relations r1 and r2 as r1 × r2.       
-![algebra34](images/algebra34.png)   
+![algebra34](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra34.png)   
 
 **输出结果如下：图35**      
-![algebra35](images/algebra35.png)      
+![algebra35](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra35.png)      
 
 A Cartesian product of database relations differs in its definition slightly from the mathematical definition of a Cartesian product of sets. Instead of r1 × r2 producing  pairs (t1, t2) of tuples from r1 and r2, the  relational algebra concatenates t1 and t2 into  a single tuple, as shown in Figure 35.    
 
@@ -303,11 +303,11 @@ teaches.ID, teaches.course_id, teaches.sec_id, teaches.semester, teaches.year)
 
 With this schema, we can distinguish instructor.ID from teaches.ID. For those attributes that appear in only one of the two schemas, we shall usually drop the relation-name prefix. This simplification does not lead to any ambiguity. We can then write the relation schema for r as:        
 (PS: 可以在首个字段添加 schama，后续的 fields 就可以代表查询的是哪个 schama)            
-![algebra36](images/algebra36.png)      
+![algebra36](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra36.png)      
 
 This naming convention requires that the relations that are the arguments of the  Cartesian-product operation have distinct names. This requirement causes problems in some cases, such as when the Cartesian product of a relation with itself is desired. A similar problem arises if we use the result of a relational-algebra expression in a Cartesian product, since we shall need a name for the relation so that we can refer to the  relation’s attributes. In Section 2.6.8, we see how to avoid these problems by using the rename operation.      
 (PS: 但上面的方式也会存在问题，当 某个 relation 对自己进行笛卡尔积，那就会出现像下图这样的报错信息，无法识别唯一列， 但这种问题，可以通过 `rename operation` 解决)                       
-![algebra37](images/algebra37.png)        
+![algebra37](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra37.png)        
 
 Now that we know the relation schema for r = instructor × teaches, what tuples appear in r? As you may suspect, we construct a tuple of r out of each possible pair of tuples: one from the instructor relation (Figure 2.1) and one from the teaches relation . Thus, r is a large relation, as you can see from Figure 35, which includes only a portion of the tuples that make up r.       
 
@@ -320,10 +320,10 @@ R2.
 Suppose we want to find the information about all instructors together with the course id of all courses they have taught. We need the information in both the instructor relation and the teaches relation to compute the required result. The Cartesian product of instructor and teaches does bring together information from both these relations, but unfortunately the Cartesian product associates every instructor with every course that was taught, regardless of whether that instructor taught that course.         
 
 Since the Cartesian-product operation associates every tuple of instructor with every tuple of teaches, we know that if an instructor has taught a course (as recorded in the teaches relation), then there is some tuple in instructor × teaches that contains her name and satisfies instructor.ID = teaches.ID. So, if we write:               
-![algebra38](images/algebra38.png)     
+![algebra38](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra38.png)     
 
 **输出结果如下：图39**                
-![algebra39](images/algebra39.png)              
+![algebra39](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra39.png)              
 
 we get only those tuples of instructor × teaches that pertain to instructors and the courses that they taught.      
 
@@ -334,26 +334,26 @@ Note that this expression results in the duplication of the instructor’s ID. T
 The join operation allows us to combine a selection and a Cartesian product into a single operation.      
 
 Consider relations r(R) and s(S), and let θ be a predicate on attributes in the schema R ∪ S. The join operation r ⋈θ s is defined as follows:            
-![algebra40](images/algebra40.png)        
+![algebra40](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra40.png)        
 
 Thus, σinstructor.ID=teaches.ID(instructor × teaches) can equivalently be written as instructor ⋈instructor.ID=teaches.ID teaches.       
 （PS： 这两者是等价的）        
-![algebra41](images/algebra41.png)        
-![algebra42](images/algebra42.png)            
+![algebra41](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra41.png)        
+![algebra42](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra42.png)            
 
 #### Set Operations
 Consider a query to find the set of all courses taught in the Fall 2017 semester, the Spring 2018 semester, or both. The information is contained in the section relation. To find the set of all courses taught in the Fall 2017 semester, we write:         
-![algebra43](images/algebra43.png)       
+![algebra43](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra43.png)       
 
 To find the set of all courses taught in the Spring 2018 semester, we write:        
-![algebra44](images/algebra44.png)          
+![algebra44](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra44.png)          
 
 To answer the query, we need the union of these two sets; that is, we need all course ids that appear in either or both of the two relations. We find these data by the binary operation union, denoted, as in set theory, by ∪. So the expression needed is:       
-![algebra45](images/algebra45.png)    
+![algebra45](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra45.png)    
 
 （PS： 我的 gist dataset 中的 `section relation` 没有 2017,2018 的数据，所以结果为空， 此处以实际测试情况为准!）     
 **输出结果如下：图46**          
-![algebra46](images/algebra46.png)      
+![algebra46](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra46.png)      
 
 The result relation for this query appears in Figure 47. Notice that there are eight tuples in the result, even though there are three distinct courses offered in the Fall 2017 semester and six distinct courses offered in the Spring 2018 semester. Since relations are sets, duplicate values such as CS-101, which is offered in both semesters, are replaced by a single occurrence.                      
 
@@ -366,32 +366,32 @@ For example, it would not make sense to take the union of the instructor and sec
 
 The intersection operation, denoted by ∩, allows us to find tuples that are in both the input relations. The expression r ∩ s produces a relation containing those tuples in            
 
-![algebra47](images/algebra47.png)     
-![algebra48](images/algebra48.png)      
+![algebra47](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra47.png)     
+![algebra48](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra48.png)      
 
 r as well as in s. As with the union operation, we must ensure that intersection is done between compatible relations.            
 
 Suppose that we wish to find the set of all courses taught in both the Fall 2017 and the Spring 2018 semesters. Using set intersection, we can write    
-![algebra49](images/algebra49.png)      
+![algebra49](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra49.png)      
 
 The result relation for this query appears in Figure 2.15.        
 The set-difference operation, denoted by −, allows us to find tuples that are in one relation but are not in another. The expression r − s produces a relation containing those tuples in r but not in s.           
 
 We can find all the courses taught in the Fall 2017 semester but not in Spring 2018 semester by writing:     
-![algebra50](images/algebra50.png)      
+![algebra50](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra50.png)      
 
 The result relation for this query appears in Figure 2.16.        
 As with the union operation, we must ensure that set differences are taken between compatible relations.        
 
 #### The Assignment Operation
 It is convenient at times to write a relational-algebra expression by assigning parts of it to temporary relation variables. The assignment operation, denoted by ←, works like assignment in a programming language. To illustrate this operation, consider the query to find courses that run in Fall 2017 as well as Spring 2018, which we saw earlier. We could write it as:              
-![algebra51](images/algebra51.png)          
+![algebra51](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra51.png)          
 
 （PS:书中 Assignment Operation 使用 ←， 但我使用的是 `=`）  
-![algebra52](images/algebra52.png)        
+![algebra52](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra52.png)        
 
 **输出结果如下：图53**      
-![algebra53](images/algebra53.png)      
+![algebra53](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra53.png)      
 
 The final line above displays the query result. The preceding two lines assign the query result to a temporary relation. The evaluation of an assignment does not result in any relation being displayed to the user. Rather, the result of the expression to the right of the ← is assigned to the relation variable on the left of the ←. This relation variable may be used in subsequent expressions.         
 
@@ -416,18 +416,18 @@ To illustrate renaming a relation, we consider the query “Find the ID and name
 There are several strategies for writing this query, but to illustrate the rename operation, our strategy is to compare the salary of each instructor with the salary of the      
 
 instructor with ID 12121. The difficulty here is that we need to reference the instructor relation once to get the salary of each instructor and then a second time to get the salary of instructor 12121; and we want to do all this in one expression. The rename operator allows us to do this using different names for each referencing of the instructor relation. In this example, we shall use the name i to refer to our scan of the instructor relation in which we are seeking those that will be part of the answer, and w to refer to the scan of the instructor relation to obtain the salary of instructor 12121:          
-![algebra54](images/algebra54.png)    
+![algebra54](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra54.png)    
 
 The rename operation is not strictly required, since it is possible to use a positional notation for attributes. We can name attributes of a relation implicitly by using a positional notation, where $1, $2, … refer to the first attribute, the second attribute, and so on. The positional notation can also be used to refer to attributes of the results of relational-algebra operations. However, the positional notation is inconvenient for humans, since the position of the attribute is a number, rather than an easy-to-remember attribute name. Hence, we do not use the positional notation in this textbook.             
 
 #### Equivalent Queries
 Note that there is often more than one way to write a query in relational algebra. Consider the following query, which finds information about courses taught by instructors in the Physics department:           
 
-![algebra55](images/algebra55.png)   
+![algebra55](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra55.png)   
 
 Now consider an alternative query:        
 
-![algebra56](images/algebra56.png)        
+![algebra56](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra56.png)        
 
 Note the subtle difference between the two queries: in the first query, the selection that restricts dept name to Physics is applied after the join of instructor and teaches has been computed, whereas in the second query, the selection that restricts dept name to Physics is applied to instructor, and the join operation is applied subsequently.           
 
@@ -478,7 +478,7 @@ see in Chapter 16.
 ## 小结 
 通过阅读关系代数，我们对 Calcite Algebra 文档内容有了新的认识。它给我们继续探索 Calcite optimizes queries，提供了宝贵的理论知识。上面的内容，我们提到 `规划器引擎生成一个与原始表达式具有相同语义但成本更低的替代表达式`,建议大家继续阅读 `Database System Concepts Seventh Edition` 第16章节，它告诉我们什么是等价或相同语义？  
 
-![algebra58](images/algebra58.png)     
+![algebra58](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra58.png)     
 
 refer:        
 1.Algebra https://calcite.apache.org/docs/algebra.html         
