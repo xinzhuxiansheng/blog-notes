@@ -5,7 +5,7 @@
 ## 引言  
  (https://mp.weixin.qq.com/s/SgOAByvcS2W6p6UcQCoSjQ) 
 
-在上一篇 `Calcite - 实践 动态 DDL，Calcite SqlParser，SqlValidator，自定义 UDF` 公众号文章内容中的 `YzhouCsvTest_withoutjson.java` 示例代码，我们直接执行 SQL 语句，对数据集进行查询操作。部分代码如下所示，但是在 Apache Calcite 中也提供了另一种方式来构建查询，但需注意：它们本质是一样的, `转换成` Relation Algebra 。       
+在上一篇 `Calcite - 实践 动态 DDL，Calcite SqlParser，SqlValidator，自定义 UDF` 公众号文章内容中的 `YzhouCsvTest_withoutjson.java` 示例代码，我们直接执行 SQL 语句，对数据集进行查询操作。部分代码如下所示，但是在 Apache Calcite 中也提供了另一种方式来构建查询，但需注意：它们本质是一样的, 都是`转换成` Relation Algebra，但 `Algebra builder`更容易接近`Relational Algebra` 语义 。但该篇更像是实践前的理论知识补充。                   
 ```java
 String sql = "select deptno,name from depts";
 try (Statement statement = connection.createStatement();
@@ -14,7 +14,7 @@ try (Statement statement = connection.createStatement();
 }
 ```  
 
-接下来，我们开始探索 `Relation Algebra`。       
+接下来，我们开始探索 `Relation Algebra`， 它很重要！！！      
 
 ## “一头雾水” （Calcite 的 Algebra 文档）    
 
@@ -49,6 +49,9 @@ The planning process is extensible. You can add your own relational operators, p
 2.告诉我们用保持语义的 `mathematical identities`，那数学恒等式是什么？ 它用了复数形式 `ties` 那有哪些恒等式，我们又如何理解它？       
 3.转换成 `expression tree`, 那之前的形式是什么？ 转换后 `expression tree` 又是什么？ 转换的目的是什么？         
 
+>Tip：  
+提出问题，是为了更好思考，搁置问题，仅代表暂时它没有答案，但体系知识的形成也不是一头走到黑。 `学会搁置问题是很重要的学习方法！`                      
+
 **图4**           
 ![algebra04](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra04.png)     
 
@@ -56,22 +59,21 @@ The planning process is extensible. You can add your own relational operators, p
 
 >这句话你完全可以用 AI 帮你解释，并且它可以给出示例，告诉你怎么回事，但我们又如何理解，这的确是另外一件事，在这个交互过程，博主仍然有些焦虑感，往往用 AI 给出的定义或者名词解释，我很难在不懂的领域来佐证它是否正确，同时我也无法将它作为结论转述给其他人。这是因为它给出答案的 `不确定性`，这里需要与 Code 做一些区分，AI 给出 Code 好坏，大多时候可以通过运行结果来判定它是否正确；     
 
-第二句话我也用不同的颜色标记处动词和名词，如图05 所示：   
-1.an input / the other input 它指代什么？ “输入” ?     
+第二句话我也用不同的颜色标记处动词和名词，如图05 所示，这里多了一个 `懵逼的 input`,它指代什么?                 
 
 **图05**          
 ![algebra05](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra05.png)  
 
 ### 段落3 
-段落3原文翻译：Calcite 通过反复对关系表达式应用规划器规则来优化查询。成本模型指导这一过程，规划器引擎生成一个与原始表达式具有相同语义但成本更低的替代表达式。              
+段落3原文翻译：Calcite 通过反复对关系表达式应用规划器规则来优化查询。成本模型指导这一过程，`The planner engine` 生成一个与原始表达式具有`相同语义但成本更低`的替代表达式。              
 
 >这句子看着特别别扭。如果表述成：`The planner engine` 根据 `a cost model` 算法反复对 `a relational expression` 使用 `planner rules` 来优化查询。其目标是生成一个与原始表达式具有相同语义但成本更低的 `alternative expression`;     
 
-这里又收获了，超多的问题：  
+我又同样对内容做了颜色的区分，如图06 所示，这里又收获了超多的问题：                     
 1.`a cost model` 是什么？       
-2.反复对`a relational expression` 使用`planner rules`，它告诉我们是 `optimizes queries` 行为，这种行为依据是什么？              
-3.`the planner engine` 生成的 `alternative expression` 在上面的段落介绍中，也提到过 `relational expression`;     
-4.它介绍说 but a lower cost，说成本更低，我的先知道成本是什么？     
+2.反复对 `a relational expression` 使用 `planner rules`，它告诉我们是 `optimizes queries` 行为，这种行为依据是什么？              
+3.`the planner engine` 生成的 `alternative expression` 在上面的段落介绍中，也提到过 `relational expression`, 什么是 expression ？        
+4.`but a lower cost`，说成本更低，我得先知道成本是什么？       
 
 **图06**        
 ![algebra06](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra06.png)        
@@ -79,22 +81,26 @@ The planning process is extensible. You can add your own relational operators, p
 ### 段落4 
 段落4原文翻译：规划过程是可扩展的。你可以添加自己的关系运算符、规划规则、成本模型和统计信息。 
 
-这句话告诉我，很多它的学习方向：自定义 operators，自定义 planner rules，自定义 cost model，自定义 statistics。  
+这句话告诉我，很多它的学习方向：自定义 operators，自定义 planner rules，自定义 cost model，自定义 statistics。 博主会在后续的实践中紧扣这些内容。    
 
 **图07**          
 ![algebra07](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra07.png)             
 
-
 ### 小结     
-这几段介绍，虽然句子不长，但提供的信息量还是比较大。对于博主来说，提出了很多需要弄明白的问题。        
+Calicte Algebra 文档的这几段介绍，虽然句子不长，但提供的信息量还是比较大。对于博主来说，提出了很多需要弄明白的问题。                        
 ![algebra08](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra08.png)              
 
-接下来，开始探索吧！           
+接下来，开始探索吧！让我们去击破它们。     
+
+>Tip:    
+理论知识得硬啃，没啥好捷径！            
 
 ## The Relational Algebra（关系代数）    
-`Relational Algebra` 相关知识大家可以从两本书中获取，下面将这部分的内容从书中 `摘要`出来。   
+`Relational Algebra` 相关知识大家可以从两本书中获取，下面将这部分的内容从书中 `摘要`出来。分别是： `    
+1.Database System Concepts Seventh Edition - The Relational Algebra 2.6 章节                
+2.Calcite 数据管理实战 - 关系代数 4.3.1 章节                
 
-### Database System Concepts Seventh Edition (2.6 章节)     
+### Database System Concepts Seventh Edition - Relational Algebra (2.6 章节)     
 ![algebra09](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra09.png)   
 
 #### The Relational Algebra   
@@ -440,15 +446,18 @@ see in Chapter 16.
 
 到这里，Database System Concepts 书中的 第2.6章节就介绍完成了。如果想了解更多，可以访问 `https://dbis-uibk.github.io/relax/help#relalg-reference` 了解关系代数的一般语法。   
 
-### Calcite 数据管理实战 - 关系代数 (4.3.1 章节)         
+### Calcite 数据管理实战 - 关系代数 (4.3.1 章节)           
 关系代数是一种关于数据库查询和数据管理方法的理论模型，以其为核心的关系模型在1970年埃德加·弗兰克·考德（Edgar Frank Codd）发表的论文“A Relational Model of Datafor Shared Data Banks”中出现，并一举奠定了其在之后几十年内在数据库领域的“江湖地位”。现有的很多被广泛使用的关系数据库（例如MySQL、Oracle等）都是在关系模型的基础上发展而来的。          
 
 关系模型主要分为3个部分：关系数据结构、关系运算集合和关系完整性约束。   
 
-关系数据结构就是我们在日常生活当中常见的表格的形式，它是一个横纵结合的表。在关系模型中，每一行的数据被称为一个元组，也被称为一条记录，大量的元组共同汇聚成一个集合，
-即整张表的数据。每一列则表示不同的属性，也被称为字段，它通过表的元数据进行管理，记录了不同属性的名称、数据类型以及其他的描述信息。          
+关系数据结构就是我们在日常生活当中常见的表格的形式，它是一个横纵结合的表。在关系模型中，`每一行的数据被称为一个元组，也被称为一条记录`，大量的元组共同汇聚成一个集合，即整张表的数据。每一列则表示不同的属性，也被称为字段，它通过表的元数据进行管理，记录了不同属性的名称、数据类型以及其他的描述信息。          
 
-关系运算集合指的是对关系模型中的数据进行运算的操作方式。关系运算符主要分为四大类：集合运算符、专门的关系运算符、比较运算符以及逻辑运算符。集合运算符指的是集合的并集、交集、差集以及笛卡儿积等针对集合关系的运算符。专门的关系运算符指的是对于数据集的选择、投影、连接等操作的运算符。比较运算符的原始内涵是指大于、小于、等于这样的对于数值比较结果的真假进行判断的运算符。现在由于数据库函数的介入，比较运算符的外延有了极大的扩展，用户可以通过函数来输出真假的结果，很大程度上使得关系代数的适用范围更加广阔。逻辑运算符则是指与、或、非这样的对条件进行逻辑组织的运算符。表4-1展示了这4种关系运算符的基本内容及其在SQL中的示例。   
+（PS：       
+1.每一行的数据被称为一个元组，也被称为一条记录， 所以在 `Database System Concepts Seventh Edition - Relational Algebra (2.6 章节)` 书中就是使用 `tuples` 来表示 数据）            
+2.提到每一列则表示不同的属性，也被称为字段， 所以在 `Database System Concepts Seventh Edition - Relational Algebra (2.6 章节)` 书中就是使用 `attributes` 来表示 fields）         
+
+关系运算集合指的是对关系模型中的数据进行运算的操作方式。关系运算符主要分为四大类：集合运算符、专门的关系运算符、比较运算符以及逻辑运算符。集合运算符指的是集合的并集、交集、差集以及笛卡儿积等针对集合关系的运算符。专门的关系运算符指的是对于数据集的选择、投影、连接等操作的运算符。比较运算符的原始内涵是指大于、小于、等于这样的对于数值比较结果的真假进行判断的运算符。现在由于数据库函数的介入，比较运算符的外延有了极大的扩展，用户可以通过函数来输出真假的结果，很大程度上使得关系代数的适用范围更加广阔。逻辑运算符则是指与、或、非这样的对条件进行逻辑组织的运算符。下面图表展示了这4种关系运算符的基本内容及其在SQL中的示例。   
 
 | 关系运算符类型 | 关系运算 | 符号表示 | 关系运算的含义 | SQL示例（R集合与S集合，R集合中有x、y两个字段，S集合中有y、z两个字段） |
 |--------------|---------|----------|----------------|---------------------------------------------------------------------|
@@ -476,7 +485,7 @@ see in Chapter 16.
 
 
 ## 小结 
-通过阅读关系代数，我们对 Calcite Algebra 文档内容有了新的认识。它给我们继续探索 Calcite optimizes queries，提供了宝贵的理论知识。上面的内容，我们提到 `规划器引擎生成一个与原始表达式具有相同语义但成本更低的替代表达式`,建议大家继续阅读 `Database System Concepts Seventh Edition` 第16章节，它告诉我们什么是等价或相同语义？  
+通过阅读关系代数，我们对 Calcite Algebra 文档内容有了新的认识。它给我们继续探索 Calcite optimizes queries，提供了宝贵的理论知识。上面的内容，我们提到 `规划器引擎生成一个与原始表达式具有相同语义但成本更低的替代表达式`,建议大家继续阅读 `Database System Concepts Seventh Edition` 第16章节，它告诉我们什么是等价或相同语义？                 
 
 ![algebra58](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra58.png)     
 
