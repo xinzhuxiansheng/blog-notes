@@ -32,7 +32,7 @@ Calcite optimizes queries by repeatedly applying planner rules to a relational e
 The planning process is extensible. You can add your own relational operators, planner rules, cost model, and statistics.
 ```
 
-### 开头1
+### 开头
 博主在刚开始学习 Apache Calcite 时，对这篇 `Algebra` 文档的理解有些“犯难”，正文如 `图01` 所示，首先文档介绍 `Relational algebra`是 Calcite 的核心概念，任何查询都可以表示为 `a tree of relational operators`, 它告诉我们可以通过 SQL 语句转成 `relational algebra`,也可以通过 `RelBuilder` 构建它。      
 
 ![algebra03](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra03.png)   
@@ -104,24 +104,17 @@ Calicte Algebra 文档的这几段介绍，虽然句子不长，但提供的信�
 ![algebra09](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra09.png)   
 
 #### The Relational Algebra   
-The relational algebra consists of a set of operations that take one or two relations as
-input and produce a new relation as their result.     
+The relational algebra consists of a set of operations that take one or two relations as input and produce a new relation as their result.     
 （PS:告诉我们，关系代数是由一组 `operations`组成，这些 `operations` 以一个或两个关系为输入，这里第一次出现 `input`, 在上面的 Calicte 文章中也出现 `input`）            
 
-Some of these operations, such as the select, project, and rename operations, are
-called unary operations because they operate on one relation. The other operations,
-such as union, Cartesian product, and set difference, operate on pairs of relations and
-are, therefore, called binary operations.               
+Some of these operations, such as the select, project, and rename operations, are called unary operations because they operate on one relation. The other operations, such as union, Cartesian product, and set difference, operate on pairs of relations and are, therefore, called binary operations.               
 （PS：了解到，这些操作可以根据对 `relation`的个数区分成 一元操作 / 二元操作。 
 
 你可以访问 https://dbis-uibk.github.io/relax/help，它对 operate 做了详细归类： 
 ![algebra57](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra57.png)    
 ）  
 
-Although the relational algebra operations form the basis for the widely used SQL
-query language, database systems do not allow users to write queries in relational algebra. However, there are implementations of relational algebra that have been built for
-students to practice relational algebra queries. The website of our book, db-book.com,
-under the link titled Laboratory Material, provides pointers to a few such implementations.       
+Although the relational algebra operations form the basis for the widely used SQL query language, database systems do not allow users to write queries in relational algebra. However, there are implementations of relational algebra that have been built for students to practice relational algebra queries. The website of our book, db-book.com, under the link titled Laboratory Material, provides pointers to a few such implementations.              
 （PS：这里面包含一些隐含的说明是 SQL 不单单是一种可以用作数据查询的语言，更重要的是可通过关系代数（Relation Algebra）进行形式化表示，使得计算机理解和处理查询的语义更加方便。             
 
 关系代数是一种简洁的，形式化的语言，同时也是一种过程化语言。它过程
@@ -138,11 +131,7 @@ under the link titled Laboratory Material, provides pointers to a few such imple
 ![algebra10](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra10.png)    
 ）
 
-It is worth recalling at this point that since a relation is a set of tuples, relations
-cannot contain duplicate tuples. In practice, however, tables in database systems are
-permitted to contain duplicates unless a specific constraint prohibits it. But, in discussing the formal relational algebra, we require that duplicates be eliminated, as is
-required by the mathematical definition of a set. In Chapter 3 we discuss how relational algebra can be extended to work on multisets, which are sets that can contain
-duplicates.               
+It is worth recalling at this point that since a relation is a set of tuples, relations cannot contain duplicate tuples. In practice, however, tables in database systems are permitted to contain duplicates unless a specific constraint prohibits it. But, in discussing the formal relational algebra, we require that duplicates be eliminated, as is required by the mathematical definition of a set. In Chapter 3 we discuss how relational algebra can be extended to work on multisets, which are sets that can contain duplicates.               
 
 #### 为实操 `Relational Algebra` 运算做准备  
 **1.** 首先访问 `https://db-book.com/` 页面，点击 `Sample tables`，获取示例的 DDL `DDL.sql` 和 DML `largeRelationsInsertFile.sql` 语句，下载好它们。     
@@ -240,13 +229,12 @@ In general, we allow comparisons using =, ≠, <, ≤, >, and ≥ in the selecti
 **输出结果如下：图24**      
 ![algebra24](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra24.png)        
 
-The selection predicate may include comparisons between two attributes. To illustrate, consider the relation department. To find all departments whose name is the same
-as their building name, we can write: 
+The selection predicate may include comparisons between two attributes. To illustrate, consider the relation department. To find all departments whose name is the same as their building name, we can write: 
 （PS: 选择`谓词`也可以包含两个属性的比较，在 Table 将字段称为属性有点怪怪的， 在 `department` 表中，dept_name 与 building 字段相等的数据， 这里需要注意的是 Relax 公式中的 building 后面需要加上`空格`，不然 Calculator 会提示报错）             
 ![algebra25](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra25.png)    
 
 #### The Project Operation
-Suppose we want to list all instructors' ID, name, and salary, but we do not care about the dept name. The project operation allws us to produce this relation. The project operation is a unary operation that returns its argument relation, with certain attributes left out. Since a relation is a set, any duplicate rows are eliminated. Projection is denoted by the uppercase Greek letter pi (Π). We list those attributes that we wish to appear in the result as a subscript to Π. The argument relation follows in parentheses. We write the query to produce such a list as:      
+Suppose we want to list all instructors' ID, name, and salary, but we do not care about the dept name. The project operation allws us to produce this relation. The project operation is a unary operation that returns its argument relation, with certain attributes left out. Since a relation is a set, any duplicate rows are eliminated. Projection is denoted by the uppercase Greek letter pi (Π). We list those attributes that we wish to appear in the result as a subscript to Π. The argument relation follows in parentheses. We write the query to produce such a list as:                       
 ![algebra26](http://img.xinzhuxiansheng.com/blogimgs/calcite/algebra26.png)            
 
 **输出结果如下：图27**    
