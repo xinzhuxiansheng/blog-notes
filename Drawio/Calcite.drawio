@@ -1,4 +1,4 @@
-<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2" pages="9">
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2" pages="10">
   <diagram name="第 1 页" id="L6LR1fwa6pHO7NQinEbo">
     <mxGraphModel dx="1834" dy="854" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -796,7 +796,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="p3hoPvta-3MNgPeAmcvR" name="Page-9">
-    <mxGraphModel dx="1828" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1508" dy="661" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -981,8 +981,102 @@
         <mxCell id="c3L6sV21yP0wEUpmNVVM-15" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;strokeWidth=4;strokeColor=#CC0000;" vertex="1" parent="1">
           <mxGeometry x="163" y="1790" width="277" height="220" as="geometry" />
         </mxCell>
-        <mxCell id="c3L6sV21yP0wEUpmNVVM-16" value="将 filter 下推到数据读取部分，此时就不需要读取100条，而是 51条数据&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;如果读取 100 rows 是成本，那过滤后只需读取51 rows，那就是减少成本和提效&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+        <mxCell id="c3L6sV21yP0wEUpmNVVM-16" value="将 filter 下推到数据读取部分，此时就不需要读取100条，而是 51条数据&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;如果读取 100 rows 是成本，那过滤后只需读取51 rows，那就是减少磁盘IO和网络IO成本&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="64" y="1890" width="266" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="jIG4Ga7ueZB8b5cM3eXT" name="第 10 页">
+    <mxGraphModel dx="1828" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-2" target="qzvIeUZCyox0LyzMaKUS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-2" value="query" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="150" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-3" target="qzvIeUZCyox0LyzMaKUS-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-3" value="parser and&amp;nbsp;&lt;div&gt;translator&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="122.5" width="100" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-4" target="qzvIeUZCyox0LyzMaKUS-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-4" value="relational-algebra&lt;div&gt;expression&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="135" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-5" target="qzvIeUZCyox0LyzMaKUS-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-5" value="optimizer" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="230" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="150" y="365" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-6" value="execution plan" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="350" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-7" target="qzvIeUZCyox0LyzMaKUS-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-7" value="evaluation engine" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="15" y="322.5" width="130" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-8" value="query output" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-150" y="350" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="410" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="38" y="450" />
+              <mxPoint x="81" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-9" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="15" y="460" width="45" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="410" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="123" y="450" />
+              <mxPoint x="80" y="450" />
+              <mxPoint x="80" y="436" />
+              <mxPoint x="81" y="436" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-10" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="100" y="460" width="45" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="qzvIeUZCyox0LyzMaKUS-11" target="qzvIeUZCyox0LyzMaKUS-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-11" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="400" y="460" width="45" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-15" value="data" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="530" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-16" value="statistics&lt;div&gt;about data&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="392.5" y="530" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qzvIeUZCyox0LyzMaKUS-23" value="Steps in query processing" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="15" y="570" width="200" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
